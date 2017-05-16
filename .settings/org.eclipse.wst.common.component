@@ -7,6 +7,6 @@
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="java-output-path" value="/HMS/build/classes"/>
-        <property name="context-root" value="HMS2"/>
+        <property name="context-root" value="HMS"/>
     </wb-module>
 </project-modules>

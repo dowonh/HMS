@@ -1,11 +1,6 @@
-<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-=======
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
->>>>>>> a003110ec58bf50b4170779f65756d1855a35fa6
-    
+
     <%@ include file="connection.jsp" %>
 
 
@@ -58,9 +53,9 @@ if(rs.next()){
 	else if(type.equals("pharmacist")){
 		response.sendRedirect("pharmacist/pharmacistpanel.jsp");
 	}
-}/*
+}
 else
 {	
 	response.sendRedirect("error.jsp?errorType=invalidUser");
-}*/
+}
 %>

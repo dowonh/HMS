@@ -1,86 +1,107 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-	
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    
-    <title>Hospital Management System</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/jquery-ui.min.css" rel="stylesheet" type="text/css" />
-    <link href="css/bootstrap-dialog.css" rel="stylesheet" />
-    <link href="css/scrolling-nav.css" rel="stylesheet" />
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <link href="css/scrolling-nav.css" rel="stylesheet">
-    <script src="js/jquery-1.11.3.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/bootstrap-dialog.js"></script>
-    <script src="js/jquery.easing.min.js"></script>
-	<script src="js/scrolling-nav.js"></script>
-    <style>
-    	<style>
-	.carousel-inner>.item>a>img, .carousel-inner>.item>img{
-		width:100%;
-		height:600px;
-	}
-	.carousel-inner{
-		top:90px;
-	}
-	.navbar-nav{
-		float:right;
-	}
-	#hmsNav{
-		width: 100%;
-	}
-	
-	.modal-dialog{
-		width: 350px;
-	}
-	
-	
-	.btn-light {
-	    border-radius: 0;
-	    color: #333;
-	    background-color: rgb(255,255,255);
-	}
-	
-	.btn {
-	    display: inline-block;
-	    padding: 6px 12px;
-	    margin-bottom: 0;
-	    font-size: 14px;
-	    font-weight: 400;
-	    line-height: 1.42857143;
-	    text-align: center;
-	    white-space: nowrap;
-	    vertical-align: middle;
-	    -ms-touch-action: manipulation;
-	    touch-action: manipulation;
-	    cursor: pointer;
-	    -webkit-user-select: none;
-	    -moz-user-select: none;
-	    -ms-user-select: none;
-	    user-select: none;
-	    background-image: none;
-	    border: 1px solid transparent;
-	    border-radius: 4px;
-	}
-	
+<meta charset="utf-8">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
+
+<title>Hospital Management System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+<link href="css/bootstrap-dialog.css" rel="stylesheet" />
+<link href="css/scrolling-nav.css" rel="stylesheet" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/scrolling-nav.css" rel="stylesheet">
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-dialog.js"></script>
+<script src="js/jquery.easing.min.js"></script>
+<script src="js/scrolling-nav.js"></script>
+<style>
+<
+style>.carousel-inner>.item>a>img, .carousel-inner>.item>img {
+	width: 100%;
+	height: 600px;
+}
+
+.carousel-inner {
+	top: 90px;
+}
+
+.navbar-nav {
+	float: right;
+}
+
+#hmsNav {
+	width: 100%;
+}
+
+.modal-dialog {
+	width: 350px;
+}
+
+table, td, th, tr {
+	text-align: center;
+	border: 1px solid #FFFFFF;
+	padding: 10px;
+	background-color: #B2CCFF;
+}
+
+td {
+	background-color: #E1E1E1;
+}
+
+.btn-light {
+	border-radius: 0;
+	color: #333;
+	background-color: rgb(255, 255, 255);
+}
+
+.btn {
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;
+}
 </style>
 </head>
 <body id="page-top">
-<!-- <nav class="navbar navbar-default" role=navigation>
+	<!-- <nav class="navbar navbar-default" role=navigation>
 	<div class="navbar-header">
 		<a href="#" class="navbar-brand">Hospital Management System</a>
 	</div>
@@ -93,196 +114,261 @@
 	</ul>
 </nav> -->
 
-<!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand page-scroll" href="#page-top">Hospital Management System</a>
-            </div>
+	<!-- Navigation -->
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+		<div class="navbar-header page-scroll">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target=".navbar-ex1-collapse">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand page-scroll" href="#page-top">Hospital
+				Management System</a>
+		</div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav">
-                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-                    <li class="hidden">
-                        <a class="page-scroll" href="#page-top"></a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#about">About</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#services">Services</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#contact">Contact</a>
-                    </li>
-                    <li><a href="#" data-toggle="modal" data-target="#login-modal">Employee Login</a></li>
-					<li><a href="#" data-toggle="modal" data-target="#signup-modal">Patient Registration</a></li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
-
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-	<ol class="carousel-indicators">
-		<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-		<li data-target="#myCarousel" data-slide-to="1"></li>
-		<li data-target="#myCarousel" data-slide-to="2"></li>
-		<li data-target="#myCarousel" data-slide-to="3"></li>
-		<li data-target="#myCarousel" data-slide-to="4"></li>
-	</ol>
-
-	<div class="carousel-inner" role="listbox">
-		<div class="item active">
-			<img src="img/slide1.jpg" />
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse navbar-ex1-collapse">
+			<ul class="nav navbar-nav">
+				<!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+				<li class="hidden"><a class="page-scroll" href="#page-top"></a>
+				</li>
+				<li><a class="page-scroll" href="#about">About</a></li>
+				<li><a class="page-scroll" href="#services">Services</a></li>
+				<li><a class="page-scroll" href="#contact">Contact</a></li>
+				<li><a href="#" data-toggle="modal" data-target="#login-modal">Employee
+						Login</a></li>
+				<li><a href="#" data-toggle="modal" data-target="#signup-modal">Patient
+						Registration</a></li>
+			</ul>
 		</div>
-		
-		<div class="item">
-			<img src="img/slide2.jpg" />
-		</div>
-		
-		<div class="item">
-			<img src="img/slide3.jpg" />
-		</div>
-		<div class="item">
-			<img src="img/slide4.jpg" />
-		</div>
-		<div class="item">
-			<img src="img/slide5.jpg" />
-		</div>
+		<!-- /.navbar-collapse -->
 	</div>
-</div>
+	<!-- /.container --> </nav>
 
-<!-- About Section -->
-    <section id="about" class="about-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1>About Section</h1>
-                </div>
-            </div>
-        </div>
-    </section>
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+		<ol class="carousel-indicators">
+			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+			<li data-target="#myCarousel" data-slide-to="1"></li>
+			<li data-target="#myCarousel" data-slide-to="2"></li>
+			<li data-target="#myCarousel" data-slide-to="3"></li>
+			<li data-target="#myCarousel" data-slide-to="4"></li>
+		</ol>
 
-    <!-- Services Section -->
-    <section id="services" class="services bg-primary">
-        <div class="container">
-            <div class="row text-center">
-                <div class="col-lg-10 col-lg-offset-1">
-                    <h2>예약 및 조회</h2>
-                    <hr class="small">
-                    <div class="row">
-                        <div class="col-md-3 col-sm-6">
-                            <div class="service-item">
-                                <span class="glyphicon glyphicon-calendar">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-cloud fa-stack-1x text-primary"></i>
-                            </span>
-                                <h4>
-                                    <strong>예약 안내</strong>
-                                </h4>
-                                <a href="register.html" class="btn btn-light">Learn More</a>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="service-item">
-                                <span class="glyphicon glyphicon-folder-open fa-4x">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-compass fa-stack-1x text-primary"></i>
-                            </span>
-                                <h4>
-                                    <strong>예약 조회</strong>
-                                </h4>
-                                <a href="#" class="btn btn-light">Learn More</a>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="service-item">
-                                <span class="glyphicon glyphicon-hourglass fa-4x">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-flask fa-stack-1x text-primary"></i>
-                            </span>
-                                <h4>
-                                    <strong>결과 조회</strong>
-                                </h4>
-                                <a href="#" class="btn btn-light">Learn More</a>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="service-item">
-                                <span class="glyphicon glyphicon-print fa-4x">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-shield fa-stack-1x text-primary"></i>
-                            </span>
-                                <h4>
-                                    <strong>증명서 발급</strong>
-                                </h4>
-                               <a href="#" class="btn btn-light">Learn More</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.row (nested) -->
-                </div>
-                <!-- /.col-lg-10 -->
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container -->
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1>Contact Section</h1>
-                </div>
-            </div>
-        </div>
-    </section>
-
-<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-  	  <div class="modal-dialog">
-		<div class="loginmodal-container">
-			<h1>Login to Your Account</h1><br>
-		  <form method="POST" action="login.jsp">
-			<input type="text" name="user" placeholder="Username" required>
-			<input type="password" name="pass" placeholder="Password" required>
-			<input type="submit" name="login" class="login loginmodal-submit" value="Login">
-		  </form>
-		</div>
-	</div>
-</div>
-
-<div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-  	  <div class="modal-dialog">
-		<div class="signupmodal-container">
-			<h1>Patient Registration</h1><br>
-		  <form id="signupform" method="POST" action="Process?action=addPatient">
-			<input type="text" name="fullname" placeholder="Full Name" required>
-			<label>Select Category</label>
-			<select name="catid"></select>
-			<input type="text" name="dob" placeholder="Date of Birth" readonly class="dob" />
-			<div class="radio">
-				<label><input type="radio" name="gender" value="male" required/> Male</label>
-				<label><input type="radio" name="gender" value="female"/> Female</label>
+		<div class="carousel-inner" role="listbox">
+			<div class="item active">
+				<img src="img/slide1.jpg" />
 			</div>
-			<input type="submit" name="signup" class="signup signupmodal-submit" value="Register">
-		  </form>
+
+			<div class="item">
+				<img src="img/slide2.jpg" />
+			</div>
+
+			<div class="item">
+				<img src="img/slide3.jpg" />
+			</div>
+			<div class="item">
+				<img src="img/slide4.jpg" />
+			</div>
+			<div class="item">
+				<img src="img/slide5.jpg" />
+			</div>
 		</div>
 	</div>
-</div>
+
+	<!-- 의료진 소개 -->
+	<section id="about" class="about-section">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1>의료진 소개</h1>
+				<br>
+				<!--                    <h2 class="section-heading"> **병원 </h2>
+                    <h3 class="section-subheading text-muted"> **병원 </h3>
+-->
+			</div>
+		</div>
+		<div class="row text-center">
+			<div class="col-md-4">
+				<span class="fa-stack fa-4x"> <img
+					src="https://search.pstatic.net/common?type=o&size=120x150&quality=95&direct=true&src=http%3A%2F%2Fsstatic.naver.net%2Fpeople%2Fportrait%2F201512%2F20151215162434651.jpg"
+					alt="">
+				</span>
+				<h4 class="service-heading">이정현</h4>
+				</h4>
+				</h4>
+				<p class="text-muted">병원장</p>
+				<h6>
+					전북대학교 의과대학 졸업 <br> 전북대학교 의과대학 대학원 의학석사 및 의학박사<br> 예수병원
+					정형외과 전공의과정 수료<br> 미국(얼바인)UCI 연구교수<br> 서울삼성병원 전임의<br>
+					국군광주병원 정형외과 과장<br> 대자인병원 정형외과 전문의<br>
+				</h6>
+			</div>
+			<div class="col-md-4">
+				<span class="fa-stack fa-4x"> <img
+					src="https://search.pstatic.net/common?type=o&size=120x150&quality=95&direct=true&src=http%3A%2F%2Fsstatic.naver.net%2Fpeople%2Fportrait%2F201608%2F20160811111632473.jpg"
+					alt="">
+
+				</span>
+				<h4 class="service-heading">정나영</h4>
+				<p class="text-muted">부원장</p>
+				<h6>
+					인제대학교 의과대학 졸업<br> 울산대학교 의과대학 대학원 의학 석사<br> 서울 아산병원 인턴 수료<br>
+					서울 아산병원 마취통증의학과 전공의 과정 수료<br> 서울 아산병원 마취통증의학과 전문의 취득<br>
+					서울아산병원 통증 고위자과정 수료 및 전임의 역임<br> 대한 마취통증의학회 정회원<br>
+				</h6>
+			</div>
+			<div class="col-md-4">
+				<span class="fa-stack fa-4x"> <img
+					src="https://search.pstatic.net/common?type=o&size=120x150&quality=95&direct=true&src=http%3A%2F%2Fsstatic.naver.net%2Fpeople%2Fportrait%2F201602%2F20160218190236477-4829744.jpg"
+					alt="">
+				</span>
+				<h4 class="service-heading">허도원</h4>
+				<p class="text-muted">정형외과 전문의</p>
+				<h6>
+					전북대학교 의과대학 졸업 <br> 전북대학병원 인턴과정 수료<br> 전북대학병원 정형외과 전공의 과정
+					수료<br> 전북대학병원 정형외과 전문의 취득<br> 전북대학병원 정형외과 미세수부전임의 수료<br>
+					전북대학병원 정형외과 견관절, 주관절 전임의<br> 전북대학교 의과전문대학원 석사<br>
+				</h6>
+			</div>
+			<!--
+                <div class="row">
+				  <div class="col-sm-6 col-md-4">
+				    <div class="thumbnail">
+				      <img src="https://search.pstatic.net/common?type=o&size=120x150&quality=95&direct=true&src=http%3A%2F%2Fsstatic.naver.net%2Fpeople%2Fportrait%2F201512%2F20151215162434651.jpg" alt="">
+				      <div class="caption">
+				        <h3>허도원</h3>
+				        <p class="text-muted">부원장</p>
+				        <p>...</p>
+				        <p><a href="#" class="btn btn-primary" role="button">자세히보기</a></p>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+  		-->
+		</div>
+	</div>
+	</section>
+
+	<!-- Services Section -->
+	<section id="services" class="services bg-primary">
+	<div class="container">
+		<div class="row text-center">
+			<div class="col-lg-10 col-lg-offset-1">
+				<h2>예약 및 조회</h2>
+				<hr class="small">
+				<div class="row">
+					<div class="col-md-3 col-sm-6">
+						<div class="service-item">
+							<span class="glyphicon glyphicon-calendar"> <i
+								class="fa fa-circle fa-stack-2x"></i> <i
+								class="fa fa-cloud fa-stack-1x text-primary"></i>
+							</span>
+							<h4>
+								<strong>예약 안내</strong>
+							</h4>
+							<a href="register.html" class="btn btn-light">Learn More</a>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-6">
+						<div class="service-item">
+							<span class="glyphicon glyphicon-folder-open fa-4x"> <i
+								class="fa fa-circle fa-stack-2x"></i> <i
+								class="fa fa-compass fa-stack-1x text-primary"></i>
+							</span>
+							<h4>
+								<strong>예약 조회</strong>
+							</h4>
+							<a href="#" class="btn btn-light">Learn More</a>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-6">
+						<div class="service-item">
+							<span class="glyphicon glyphicon-hourglass fa-4x"> <i
+								class="fa fa-circle fa-stack-2x"></i> <i
+								class="fa fa-flask fa-stack-1x text-primary"></i>
+							</span>
+							<h4>
+								<strong>결과 조회</strong>
+							</h4>
+							<a href="#" class="btn btn-light">Learn More</a>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-6">
+						<div class="service-item">
+							<span class="glyphicon glyphicon-print fa-4x"> <i
+								class="fa fa-circle fa-stack-2x"></i> <i
+								class="fa fa-shield fa-stack-1x text-primary"></i>
+							</span>
+							<h4>
+								<strong>증명서 발급</strong>
+							</h4>
+							<a href="#" class="btn btn-light">Learn More</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Contact Section -->
+	<section id="contact" class="contact-section">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1>Contact Section</h1>
+
+			</div>
+		</div>
+	</div>
+	</section>
+
+	<div class="modal fade" id="login-modal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true"
+		style="display: none;">
+		<div class="modal-dialog">
+			<div class="loginmodal-container">
+				<h1>Login to Your Account</h1>
+				<br>
+				<form method="POST" action="login.jsp">
+					<input type="text" name="user" placeholder="Username" required>
+					<input type="password" name="pass" placeholder="Password" required>
+					<input type="submit" name="login" class="login loginmodal-submit"
+						value="Login">
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="signup-modal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true"
+		style="display: none;">
+		<div class="modal-dialog">
+			<div class="signupmodal-container">
+				<h1>Patient Registration</h1>
+				<br>
+				<form id="signupform" method="POST"
+					action="Process?action=addPatient">
+					<input type="text" name="fullname" placeholder="Full Name" required>
+					<label>Select Category</label> <select name="catid"></select> <input
+						type="text" name="dob" placeholder="Date of Birth" readonly
+						class="dob" />
+					<div class="radio">
+						<label><input type="radio" name="gender" value="male"
+							required /> Male</label> <label><input type="radio"
+							name="gender" value="female" /> Female</label>
+					</div>
+					<input type="submit" name="signup"
+						class="signup signupmodal-submit" value="Register">
+				</form>
+			</div>
+		</div>
+	</div>
 
 
-<script src="js/script.js">
-</script>
+	<script src="js/script.js">
+		
+	</script>
 </body>
 </html>

@@ -133,6 +133,16 @@
 	border: 1px solid transparent;
 	border-radius: 4px;
 }
+	table, td, th, tr{
+	text-align: center;
+	border:1px solid #FFFFFF;
+	padding:10px;
+	background-color: #B2CCFF;
+	}
+	td{
+	background-color: #E1E1E1;
+	}
+	
 </style>
 </head>
 <body id="page-top">
@@ -220,9 +230,8 @@
 				<h1>의료진 소개</h1>
 				<br>
 				<!--    <h2 class="section-heading"> **병원 </h2>
->>>>>>> a003110ec58bf50b4170779f65756d1855a35fa6
                     <h3 class="section-subheading text-muted"> **병원 </h3>
--->
+				-->
 			</div>
 		</div>
 		<div class="row text-center">
@@ -286,7 +295,113 @@
 		</div>
 	</div>
 	</section>
-
+ 	
+ 	<!-- Services Section -->
+    <section id="services" class="services-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Time Table</h1>
+						<table align="center" border="0" cellspacing="0" cellpadding="0" class="time_table">
+							<tbody>
+							<colgroup>
+							<col>
+							<col style="background-color:#999999">
+							</colgroup>
+								<tr>
+									<th width="140px" style="font-size:16px">정형외과</th>
+									<th width="95px">월</th>
+									<th width="95px">화</th>
+									<th width="95px">수</th>
+									<th width="95px">목</th>
+									<th width="95px">금</th>
+									<th width="95px">토</th>
+				
+								</tr>
+								<tr>
+									<td rowspan="6" class="division">정형외과 오전<br>( 09:00: ~ 12:30 )</td>
+									<td>이정현</td>
+									<td class="piano">이정현</td>
+									<td>이정현</td>
+									<td class="piano">장선웅</td>
+									<td>이정현</td>
+									<td class="piano" style="border-right:1px solid #cacaca">송광훈</td>
+								</tr>
+								<tr>
+									<td>김호세</td>
+									<td class="piano">장선웅</td>
+									<td>김호세</td>
+									<td class="piano">송광훈</td>
+									<td>김호세</td>
+									<td class="piano" style="border-right:1px solid #cacaca">장선웅</td>
+								</tr>
+								<tr>
+									<td>허도원</td>
+									<td class="piano">봉황세</td>
+									<td>봉황세</td>
+									<td class="piano">허도원</td>
+									<td>허도원</td>
+									<td class="piano" style="border-right:1px solid #cacaca">허도원</td>
+								</tr>
+								<tr>
+									<td>정나영</td>
+									<td class="piano">정나영</td>
+									<td>정나영</td>
+									<td class="piano"></td>
+									<td>정나영</td>
+									<td class="piano" style="border-right:1px solid #cacaca">봉황세</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td class="piano"></td>
+									<td></td>
+									<td class="piano"></td>
+									<td></td>
+									<td class="piano" style="border-right:1px solid #cacaca">김호세</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td class="piano"></td>
+									<td></td>
+									<td class="piano"></td>
+									<td></td>
+									<td class="piano" style="border-right:1px solid #cacaca">정나영</td>
+								</tr>
+								<tr>
+									<td colspan="7" class="">점심시간 ( 13:30 ~ 14:30 )</td>
+								</tr>
+								<tr>
+									<td rowspan="4" class="division">정형외과 오후<br>( 13:30 ~ 18:00 )</td>
+									<td>장선웅</td>
+									<td class="piano">김호세</td>
+									<td>장선웅</td>
+									<td class="piano">김호세</td>
+									<td>장선웅</td>
+									<td class="piano" style="border-right:1px solid #cacaca"></td>
+								</tr>
+								<tr>
+									<td>송광훈</td>
+									<td class="piano">송광훈</td>
+									<td>허도원</td>
+									<td class="piano">봉황세</td>
+									<td>송광훈</td>
+									<td class="piano" style="border-right:1px solid #cacaca"></td>
+								</tr>
+								<tr>
+									<td>봉황세</td>
+									<td class="piano">허도원</td>
+									<td>정나영</td>
+									<td class="piano">정나영</td>
+									<td>봉황세</td>
+									<td class="piano" style="border-right:1px solid #cacaca"></td>
+								</tr>
+							</tbody>
+						</table>
+                </div>
+            </div>
+        </div>
+    </section>
+    
 	<!-- Services Section -->
 	<section id="services" class="services bg-primary">
 	<div class="container">

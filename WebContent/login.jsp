@@ -32,14 +32,14 @@ stmt.setString(2, pass);
 //out.print(stmt);
  ResultSet rs = stmt.executeQuery();
 if(rs.next()){
-//	String type = rs.getString("type");
-//	int uid = rs.getInt("uid");
-	String type = "doctor";
+	String type = rs.getString("type");
+	int uid = rs.getInt("uid");
+	//String type = "doctor";
 	System.out.println(user+" "+pass+" "+type);
 	
 	session.setAttribute("user", user);
 	session.setAttribute("type",type);
-	//session.setAttribute("uid",uid);
+	session.setAttribute("uid",uid);
 	
 	if(type.equals("admin")){
 		response.sendRedirect("admin/adminpanel.jsp");

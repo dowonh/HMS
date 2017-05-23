@@ -11,8 +11,8 @@ $(function(){
 				var index = $("#tblRooms").dataTable().fnAddData([
 				                                                  room.rid,
 				                                                  room.totalbeds,
-				                                                  (parseInt(room.totalbeds) - parseInt(room.availablebeds)),
-				                                                  room.availablebeds
+				                                                  room.availablebeds,
+				                                                  (parseInt(room.totalbeds) - parseInt(room.availablebeds))
 				                                                  ]);
 				var row = $("#tblRooms").dataTable().fnGetNodes(index);
 				$(row).attr("id",room.rid);

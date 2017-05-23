@@ -4,34 +4,31 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Nurse</title>
 </head>
 <body>
-<div id="rooms" class="tab-pane fade in active">
-	<h3>Room Infomation</h3>
-	<table class="table table-hover table-bordered" id="tblRooms">
+<div id="medicine" class="tab-pane fade in">
+	<h3>약 재고 관리</h3>
+	<table class="table table-hover table-bordered" id="tblmedicine">
 		<thead>
 			<tr>
 				<th>
-					Room No
+					Medicine No
 				</th>
 				<th>
-					Total Beds
+					Medicine Name
 				</th>
 				<th>
-					Available Beds
+					Type
 				</th>
 				<th>
-					No of Patients
-				</th>
-				<th>
-					SHOW ROOM
+					Ordering
 				</th>
 			</tr>
 		</thead>
-		<tbody id="roomBody"> </tbody>
+		<tbody id="medicineBody"> </tbody>
 	</table>
-	<div class="roomMsg"></div>
+	<div class="medicineMsg"></div>
 </div>
 </body>
 </html>

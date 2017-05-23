@@ -144,8 +144,11 @@ table, td, th, tr {
 td {
 	background-color: #E1E1E1;
 }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 73f32ab1c30d4a4639211dfb25580a9f78ce7a0a
 </style>
 </head>
 <body id="page-top">
@@ -650,7 +653,7 @@ td {
 				</form>
 			</div>
 		</div>
-
+	</div>
 		<div class="modal fade" id="signup-modal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true"
 			style="display: none;">
@@ -671,15 +674,19 @@ td {
 						</div>
 						<input type="submit" name="signup"
 							class="signup signupmodal-submit" value="Register">
-
-						<h1>Contact Section</h1>
+					</form>
+					<h1>Contact Section</h1>
 				</div>
 			</div>
 		</div>
+<<<<<<< HEAD
 
 		</section>
 
+=======
+ 
+>>>>>>> 73f32ab1c30d4a4639211dfb25580a9f78ce7a0a
 		<script src="js/script.js"></script>
-		</script>
+ 
 </body>
 </html>

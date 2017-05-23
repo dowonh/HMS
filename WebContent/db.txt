@@ -1,0 +1,102 @@
+CREATE TABLE user(
+	uid		INT(20)		NOT NULL,
+	username	VARCHAR(50),
+	passwd		VARCHAR(50),
+	type		VARCHAR(50),
+	PRIMARY KEY(uid)
+)
+
+CREATE TABLE employee(
+	eid		INT(20)		NOT NULL,
+	firstname	VARCHAR(30),
+	lastname	VARCHAR(50),
+	gender		enum('남자', '여자'),
+	dob		INT(10),
+	phone		VARCHAR(50),
+	salary		VARCHAR(20),
+	uid		INT(20)		NOT NULL,
+	PRIMARY KEY(eid),
+	FOREIGN KEY(uid) REFERENCES user(uid)
+)
+
+CREATE TABLE doctor(
+	did		INT(20)		NOT NULL,
+	eid		INT(20)		NOT NULL,
+	catid		INT(20)		NOT NULL,
+	PRIMARY KEY(did),
+	FOREIGN KEY(eid) REFERENCES user(eid),
+	FOREIGN KEY(catid) REFERENCES category(catid)
+)
+
+CREATE TABLE nurse(
+	nid		INT(20)		NOT NULL,
+	experience	INT(20)		NOT NULL,
+	eid		INT(20)		NOT NULL,
+	PRIMARY KEY(nid),
+	FOREIGN KEY(eid) REFERENCES employee(eid)
+)
+
+CREATE TABLE patient(
+	pid		INT(20)		NOT NULL,
+	firstname	VARCHAR(30),
+	lastname	VARCHAR(50),
+	gender		enum('남자', '여자'),
+	dob		INT(10),
+	type		VARCHAR(50)
+	catid		INT(20)
+	PRIMARY KEY(pid),
+	FOREIGN KEY(did) REFERENCES doctor(did)
+	FOREIGN KEY(catid) REFERENCES category(catid)
+)
+
+CREATE TABLE category(
+	catid		INT(20)		NOT NULL,
+	name		VARCHAR(30)	NOT NULL,
+	PRIMARY KEY(catid),
+)
+
+CREATE TABLE room(
+	rid		INT(20)		NOT NULL,
+	totalbeds	INT(20)		
+	availablebeds	INT(20)
+	nid		INT(20)		NOT NULL,
+	PRIMARY KEY(rid),
+	FOREIGN KEY(nid) REFERENCES nurse(nid)
+)
+
+CREATE TABLE medicine(
+	mid		INT(20)		NOT NULL,
+	name		VARCHAR(50),
+	price		INT(20),
+	count		INT(20),
+	mcntid		INT(20),
+	PRIMARY KEY(mid),
+	FOREIGN KEY(mcntid) REFERENCES inventory(mcntid)
+)
+
+CREATE TABLE doctornote( /기록
+	ntid		INT(20)		NOT NULL,
+	note		VARCHAR(200), 		/소견
+	disease		VARCHAR(30),
+	type		VAR,
+	PRIMARY KEY(ntid)
+)
+
+CREATE TABLE prescription(
+	prid		INT(20)		NOT NULL,
+	mname		VARCHAR(50),		/약이름
+	day		INT(100)		/몇일분
+	number		INT(100)		/몇개
+	ntid		INT(20)		NOT NULL,
+	PRIMARY KEY(prid),
+	FOREIGN KEY(ntid) REFERENCES doctornote(ntid)
+)
+
+CREATE TABLE inventory(
+	mcntid 		INT(20)		NOT NULL,
+	type		VARCHAR(20),
+	name		VARCHAR(20),
+	PRIMARY KEY(mcntid),
+)
+
+* doctornote type 정하기

@@ -52,8 +52,13 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<h1 class="page-header">
-							예약 안내 <small>예약 및 조회</small>
+							예약 조회 <small>예약 및 조회</small>
 						</h1>
+						<ol class="breadcrumb">
+                            <li class="active">
+                                <i class="fa fa-dashboard"></i>예약한 내역과 일정을 볼 수 있습니다.
+                            </li>
+                        </ol>
 					</div>
 				</div>
 				<!-- /.row -->

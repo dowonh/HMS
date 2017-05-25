@@ -61,48 +61,9 @@
                         </ol>
 					</div>
 				</div>
-				<!-- /.row -->
-				<div class="container">
-					처음 오신 분 빠른 예약
-					<ul>
-						<li>전화번호를 남시기면, 상담원이 예약을 도와드립니다.</li>
-						<li>상담시간 평일 08:30 ~ 17:30 토요일 08:30 ~ 12:30 (공휴일 제외)</li>
-					</ul>
-					인터넷 예약
-					<ul>
-						<li>진료과, 질병명으로 예약을 하실 수 있습니다. <!-- Button trigger modal -->
-							<button type="button" class="btn btn-primary" data-toggle="modal"
-								data-target="#registerModal">진료 예약</button>
-						</li>
-						<li>회원 / 비회원 예약이 가능합니다.</li>
-					</ul>
-					전화 예약
-					<ul>
-						<li>1111-1004 (365일 24시간 예약 가능)</li>
-					</ul>
-					전화 예약
-					<ul>
-						<li>병원에 내원하셔서 예약하실 수 있습니다.</li>
-					</ul>
-				</div>
-
-
+				
 				<div class="row">
-					<div class="col-lg-12">
-						<div class="alert alert-info alert-dismissable">
-							<button type="button" class="close" data-dismiss="alert"
-								aria-hidden="true">&times;</button>
-							<i class="fa fa-info-circle"></i> <strong>Like SB Admin?</strong>
-							Try out <a
-								href="https://startbootstrap.com/template-overviews/sb-admin-2"
-								class="alert-link">SB Admin 2</a> for additional features!
-						</div>
-					</div>
-				</div>
-				<!-- /.row -->
-
-				<div class="row">
-					<div class="col-lg-3 col-md-6">
+					<div class="col-lg-6 col-md-6">
 						<div class="panel panel-primary">
 							<div class="panel-heading">
 								<div class="row">
@@ -117,7 +78,7 @@
 							</div>
 							<a href="#">
 								<div class="panel-footer">
-									<span class="pull-left">View Details</span> <span
+									<span class="pull-left">진료예약 조회</span> <span
 										class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 									<div class="clearfix"></div>
 								</div>
@@ -126,17 +87,6 @@
 					</div>
 					<div class="col-lg-3 col-md-6">
 						<div class="panel panel-green">
-							<div class="panel-heading">
-								<div class="row">
-									<div class="col-xs-3">
-										<i class="fa fa-tasks fa-5x"></i>
-									</div>
-									<div class="col-xs-9 text-right">
-										<div class="huge">12</div>
-										<div>New Tasks!</div>
-									</div>
-								</div>
-							</div>
 							<a href="#">
 								<div class="panel-footer">
 									<span class="pull-left">View Details</span> <span

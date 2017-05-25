@@ -81,7 +81,7 @@
 }
 
 .modal-dialog {
-	width: 350px;
+	width: 650px;
 }
 
 .road table th {
@@ -240,6 +240,7 @@ td {
 				-->
 			</div>
 		</div>
+		
 		<div class="row text-center">
 			<div class="col-md-4">
 				<span class="fa-stack fa-4x"> <img
@@ -248,105 +249,45 @@ td {
 				</span>
 				<h4 class="service-heading">정형외과</h4>
 
-				<p class="text-muted">병원장</p>
+				<p class="text-muted"> orthopedics </p>
 
-				<button type="button" class="btn btn-primary" data-toggle="modal"
-					data-target="#registerModal">자세히보기</button>
-				<div class="modal fade bd-example-modal-lg" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
-					<div class="modal-dialog modal-lg" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLabel">자세히보기</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="modal-body">
-								<ul>
-									<li>전북대학교 의과대학 졸업</li>
-									<li>전북대학교 의과대학 대학원 의학석사 및 의학박사</li>
-									<li>예수병원 정형외과 전공의과정 수료</li>
-									<li>전북대학교 정형외과 수부 및 미세현미경수술 연수</li>
-									<li>예수병원 정형외과 수부 및 미세현미경수술 과장역임</li>
-									<li>홍콩 중문의대 손목, 팔꿈치 관절경 연수</li>
-									<li>현 전북대학교 의과대학 외래교수</li>
-									<li>현 서남대학교 의과대학 외래교수</li>
-									<li>현 서울대학교병원 임상자문의</li>
-									<li>현 대한 미세수술학회 이사</li>
-									<li>대한 정형외과 학회 정회원</li>
-									<li>대한 수부학회 정회원 / 대한 미세수술학회 정회원</li>
-									<li>대한 골절학회 평생회원</li>
-									<li>세계 수부학회 정회원 / 세계 미세수술학회 정회원</li><br>
-									[대표논문]
-									<li>원위 수지 재접합술 뒤 간헐적 실혈요법</li>
-									<li>2013년 대한미세수술학회 우수 논문상
-								</ul>
-								전북대학교 의과대학 졸업 <br> 전북대학교 의과대학 대학원 의학석사 및 의학박사<br> 예수병원
-								정형외과 전공의과정 수료<br> 미국(얼바인)UCI 연구교수<br> 서울삼성병원 전임의<br>
-								국군광주병원 정형외과 과장<br> 대자인병원 정형외과 전문의<br>
-								<div class="container">
-									
-									<!--
-									<form>
-										
-						    <div class="form-group row">
-							  <label for="example-date-input" class="col-2 col-form-label">예약일/시 선택</label>
-							  <div class="col-10">
-							    <input class="form-control" type="date" value="2017-05-16" id="example-date-input">
-							  </div>
-							</div>
-							<div class="form-group row">
-							  <label for="example-time-input" class="col-2 col-form-label">Time</label>
-							  <div class="col-10">
-							    <input class="form-control" type="time" value="13:45:00" id="example-time-input">
-							  </div>
-							</div>
-							
-						    <fieldset class="form-group row">
-						      <legend class="col-form-legend col-sm-2">Radios</legend>
-						      <div class="col-sm-10">
-						        <div class="form-check">
-						          <label class="form-check-label">
-						            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-						            Option one is this and that&mdash;be sure to include why it's great
-						          </label>
-						        </div>
-						        <div class="form-check">
-						          <label class="form-check-label">
-						            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-						            Option two can be something else and selecting it will deselect option one
-						          </label>
-						        </div>
-						        <div class="form-check disabled">
-						          <label class="form-check-label">
-						            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
-						            Option three is disabled
-						          </label>
-						        </div>
-						      </div>
-						    </fieldset>
-						    
-						    <div class="form-group row">
-						      <div class="col-sm-10">
-						        
-						      </div>
-						    </div>
-						    <div class="form-group row">
-						       
-						    </div>
-						    
-									</form>
-									-->
-								</div>
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">Close</button>
-						</div>
-					</div>
-				</div>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#o_Modal">자세히보기 </button>
 
+<!-- Modal -->
+<div class="modal fade bd-example-modal-lg" id="o_Modal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel"> 정형외과(orthopedics) </h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+				<img src="http://www.freeiconspng.com/uploads/face-head-man-person-profile-user-icon--30.png"
+					alt="" width="150" height="170" align="left">
+					
+								<h4>이정현</h4>
+								* 전북대학교 의과대학 졸업 <br>
+								* 전북대학교 의과대학 대학원 의학석사 및 의학박사
+								<br><br><br><br><br><br><br><br>
+
+								<img
+									src="http://www.freeiconspng.com/uploads/face-head-woman-female-icon-0.png"
+									alt="" width="150" height="170" align="left">
+									<h4>홍길동</h4>
+									* 전북대학교 의과대학 졸업 <br>
+									* 전북대학교 의과대학 대학원 의학석사 및 의학박사
+      <div class="container">
+
+	</div>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 
 			</div>
 
@@ -357,16 +298,16 @@ td {
 
 				</span>
 				<h4 class="service-heading">흉부외과</h4>
-				<p class="text-muted">부원장</p>
+				<p class="text-muted"> thoracic and cardiovascular surgery </p>
 				
 			</div>
 			<div class="col-md-4">
 				<span class="fa-stack fa-4x"> <img
 					src="https://cdn2.iconfinder.com/data/icons/medical-emergency-and-cure/500/Medical-29-512.png"
-					alt=""width="200" height="180">
+					alt=""width="200" height="200">
 				</span>
 				<h4 class="service-heading">영상의학과</h4>
-				<p class="text-muted">정형외과 전문의</p>
+				<p class="text-muted"> radiology </p>
 			
 			</div>
 			<!--

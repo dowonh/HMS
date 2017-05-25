@@ -144,11 +144,7 @@ table, td, th, tr {
 td {
 	background-color: #E1E1E1;
 }
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 73f32ab1c30d4a4639211dfb25580a9f78ce7a0a
 </style>
 </head>
 <body id="page-top">
@@ -608,13 +604,10 @@ td {
 				</div>
 			</div>
 		</div>
-<<<<<<< HEAD
+
 
 		</section>
 
-=======
- 
->>>>>>> 73f32ab1c30d4a4639211dfb25580a9f78ce7a0a
 		<script src="js/script.js"></script>
  
 </body>

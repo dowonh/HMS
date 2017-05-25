@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%
-	    String username = (String)session.getAttribute("user");
+	  /*  String username = (String)session.getAttribute("user");
 		String userType = (String)session.getAttribute("type");
 		if(!(username!=null && userType.equals("doctor")))
 			response.sendRedirect("../index.jsp");	
-			
+		*/	
     %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -66,7 +66,7 @@
 	            <div class="container-fluid">
 	                <div class="row">
 	                    <div class="col-lg-12">
-	                        <h1>Welcome Dr. <%= username %>.</h1>
+	                       <!--  <h1>Welcome Dr.   </h1> -->
 	                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><<</a>
 	                    </div>
 	                </div>

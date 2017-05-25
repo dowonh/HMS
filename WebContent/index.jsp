@@ -243,17 +243,13 @@ td {
 		<div class="row text-center">
 			<div class="col-md-4">
 				<span class="fa-stack fa-4x"> <img
-					src="https://search.pstatic.net/common?type=o&size=120x150&quality=95&direct=true&src=http%3A%2F%2Fsstatic.naver.net%2Fpeople%2Fportrait%2F201512%2F20151215162434651.jpg"
-					alt="">
+					src="http://www.graybill.org/wp-content/uploads/2015/04/orthopedics-icon.png"
+					alt="" width="200" height="200">
 				</span>
-				<h4 class="service-heading">이정현</h4>
+				<h4 class="service-heading">정형외과</h4>
 
 				<p class="text-muted">병원장</p>
-				<h6>
-					전북대학교 의과대학 졸업 <br> 전북대학교 의과대학 대학원 의학석사 및 의학박사<br> 예수병원
-					정형외과 전공의과정 수료<br> 미국(얼바인)UCI 연구교수<br> 서울삼성병원 전임의<br>
-					국군광주병원 정형외과 과장<br> 대자인병원 정형외과 전문의<br>
-				</h6>
+
 				<button type="button" class="btn btn-primary" data-toggle="modal"
 					data-target="#registerModal">자세히보기</button>
 				<div class="modal fade bd-example-modal-lg" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
@@ -356,30 +352,22 @@ td {
 
 			<div class="col-md-4">
 				<span class="fa-stack fa-4x"> <img
-					src="https://search.pstatic.net/common?type=o&size=120x150&quality=95&direct=true&src=http%3A%2F%2Fsstatic.naver.net%2Fpeople%2Fportrait%2F201608%2F20160811111632473.jpg"
-					alt="">
+					src="https://cdn4.iconfinder.com/data/icons/medical-icons-normal/1000/modules_radiology.png"
+					alt="" width="200" height="200">
 
 				</span>
-				<h4 class="service-heading">정나영</h4>
+				<h4 class="service-heading">흉부외과</h4>
 				<p class="text-muted">부원장</p>
-				<h6>
-					인제대학교 의과대학 졸업<br> 울산대학교 의과대학 대학원 의학 석사<br> 서울 아산병원 인턴 수료<br>
-					서울 아산병원 마취통증의학과 전공의 과정 수료<br> 서울 아산병원 마취통증의학과 전문의 취득<br>
-					서울아산병원 통증 고위자과정 수료 및 전임의 역임<br> 대한 마취통증의학회 정회원<br>
-				</h6>
+				
 			</div>
 			<div class="col-md-4">
 				<span class="fa-stack fa-4x"> <img
-					src="https://search.pstatic.net/common?type=o&size=120x150&quality=95&direct=true&src=http%3A%2F%2Fsstatic.naver.net%2Fpeople%2Fportrait%2F201602%2F20160218190236477-4829744.jpg"
-					alt="">
+					src="https://cdn2.iconfinder.com/data/icons/medical-emergency-and-cure/500/Medical-29-512.png"
+					alt=""width="200" height="180">
 				</span>
-				<h4 class="service-heading">허도원</h4>
+				<h4 class="service-heading">영상의학과</h4>
 				<p class="text-muted">정형외과 전문의</p>
-				<h6>
-					전북대학교 의과대학 졸업 <br> 전북대학병원 인턴과정 수료<br> 전북대학병원 정형외과 전공의 과정
-					수료<br> 전북대학병원 정형외과 전문의 취득<br> 전북대학병원 정형외과 미세수부전임의 수료<br>
-					전북대학병원 정형외과 견관절, 주관절 전임의<br> 전북대학교 의과전문대학원 석사<br>
-				</h6>
+			
 			</div>
 			<!--
                 <div class="row">

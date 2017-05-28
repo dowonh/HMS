@@ -240,7 +240,7 @@ td {
 		<div class="row text-center">
 			<div class="col-md-4">
 				<span class="fa-stack fa-4x"> <img
-					src="http://www.graybill.org/wp-content/uploads/2015/04/orthopedics-icon.png"
+					src="http://activeorthoweb.com/wp-content/uploads/knee-icon2.png"
 					alt="" width="200" height="200">
 				</span>
 				<h4 class="service-heading">정형외과</h4>
@@ -250,7 +250,7 @@ td {
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#o_Modal">자세히보기 </button>
 
 <!-- Modal -->
-<div class="modal fade bd-example-modal-lg" id="o_Modal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg" id="o_Modal" tabindex="-1" role="dialog" aria-labelledby="o_ModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -260,20 +260,27 @@ td {
         </button>
       </div>
       <div class="modal-body">
-				<img src="http://www.freeiconspng.com/uploads/face-head-man-person-profile-user-icon--30.png"
-					alt="" width="150" height="170" align="left">
+				<img src="http://www.soo119.co.kr/common/images/content/sub01/doctor_01.jpg"
+					alt="" width="130" height="170" align="left">
 					
 								<h4>이정현</h4>
-								* 전북대학교 의과대학 졸업 <br>
-								* 전북대학교 의과대학 대학원 의학석사 및 의학박사
-								<br><br><br><br><br><br><br><br>
+								 전북대학교 의과대학 졸업 <br>
+								 전북대학교 의과대학 대학원 의학석사 및 의학박사<br>
+								 국립중앙의료원 인턴 수료<br>
+								 국립중앙의료원 정형외과 전공의 수료<br>
+								 국립중앙의료원 정형외과 전문의 취득<br>
+								 인제의대 상계백병원 전임의 역임<br>
+																<br><br>
 
 								<img
-									src="http://www.freeiconspng.com/uploads/face-head-woman-female-icon-0.png"
-									alt="" width="150" height="170" align="left">
+									src="http://www.soo119.co.kr/common/images/content/sub01/doctor_19.jpg"
+									alt="" width="130" height="170" align="left">
 									<h4>홍길동</h4>
-									* 전북대학교 의과대학 졸업 <br>
-									* 전북대학교 의과대학 대학원 의학석사 및 의학박사
+									 전북대학교 의과대학 졸업 <br>
+									 전북대학교 의과대학 대학원 의학석사 및 의학박사<br>
+									 전북대학병원 정형외과 전공의 과정 수료<br>
+									 전북대학병원 정형외과 전문의 취득<br>
+									 전북대학병원 정형외과 미세수부전임의 수료<br>
       <div class="container">
 
 	</div>
@@ -289,22 +296,107 @@ td {
 
 			<div class="col-md-4">
 				<span class="fa-stack fa-4x"> <img
-					src="https://cdn4.iconfinder.com/data/icons/medical-icons-normal/1000/modules_radiology.png"
+					src="http://icons.iconarchive.com/icons/graphicloads/medical-health/256/heart-beat-icon.png"
 					alt="" width="200" height="200">
 
 				</span>
 				<h4 class="service-heading">흉부외과</h4>
 				<p class="text-muted"> thoracic and cardiovascular surgery </p>
-				
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#t_Modal">자세히보기 </button>
+
+<!-- Modal -->
+<div class="modal fade bd-example-modal-lg" id="t_Modal" tabindex="-1" role="dialog" aria-labelledby="t_ModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel"> 흉부외과(thoracic and cardiovascular surgery) </h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+				<img src="http://www.soo119.co.kr/common/images/content/sub01/doctor_03.jpg"
+					alt="" width="130" height="170" align="left">
+					
+								<h4>이정현</h4>
+								 전북대학교 의과대학 졸업 <br>
+								 전북대학교 의과대학 대학원 의학석사 및 의학박사<br>
+								 국립중앙의료원 인턴 수료<br>
+								 국립중앙의료원 정형외과 전공의 수료<br>
+								 국립중앙의료원 정형외과 전문의 취득<br>
+								 인제의대 상계백병원 전임의 역임<br>
+																<br><br>
+
+								<img
+									src="http://www.soo119.co.kr/common/images/content/sub01/doctor_05.jpg"
+									alt="" width="130" height="170" align="left">
+									<h4>홍길동</h4>
+									 전북대학교 의과대학 졸업 <br>
+									 전북대학교 의과대학 대학원 의학석사 및 의학박사<br>
+									 전북대학병원 정형외과 전공의 과정 수료<br>
+									 전북대학병원 정형외과 전문의 취득<br>
+									 전북대학병원 정형외과 미세수부전임의 수료<br>
+      <div class="container">
+
+	</div>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 			</div>
 			<div class="col-md-4">
 				<span class="fa-stack fa-4x"> <img
-					src="https://cdn2.iconfinder.com/data/icons/medical-emergency-and-cure/500/Medical-29-512.png"
+					src="http://www.sevenhillsdiagnostics.com/images/services/radiology.png"
 					alt=""width="200" height="200">
 				</span>
 				<h4 class="service-heading">영상의학과</h4>
 				<p class="text-muted"> radiology </p>
-			
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#h_Modal">자세히보기 </button>
+
+<!-- Modal -->
+<div class="modal fade bd-example-modal-lg" id="h_Modal" tabindex="-1" role="dialog" aria-labelledby="h_ModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel"> 영상의학과(radiology) </h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" > &times;</span>
+        </button> </div>
+      <div class="modal-body">
+				<img src="http://www.soo119.co.kr/common/images/content/sub01/doctor_03.jpg"
+					alt="" width="130" height="170" align="left">
+					
+								<h4>이정현</h4>
+								 전북대학교 의과대학 졸업 <br>
+								 전북대학교 의과대학 대학원 의학석사 및 의학박사<br>
+								 국립중앙의료원 인턴 수료<br>
+								 국립중앙의료원 정형외과 전공의 수료<br>
+								 국립중앙의료원 정형외과 전문의 취득<br>
+								 인제의대 상계백병원 전임의 역임<br>
+																<br><br>
+
+								<img
+									src="http://www.soo119.co.kr/common/images/content/sub01/doctor_05.jpg"
+									alt="" width="130" height="170" align="left">
+									<h4>홍길동</h4>
+									 전북대학교 의과대학 졸업 <br>
+									 전북대학교 의과대학 대학원 의학석사 및 의학박사<br>
+									 전북대학병원 정형외과 전공의 과정 수료<br>
+									 전북대학병원 정형외과 전문의 취득<br>
+									 전북대학병원 정형외과 미세수부전임의 수료<br>
+      <div class="container">
+
+	</div>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 			</div>
 			<!--
                 <div class="row">

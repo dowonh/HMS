@@ -28,7 +28,7 @@
 <script src="js/nyjs.js"></script>
 
 <!-- Custom Fonts -->
-<link href="font-awesome-4.1.0/css/font-awesome.min.css"
+<link href="fn/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

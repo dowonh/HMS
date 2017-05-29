@@ -28,7 +28,7 @@
 <script src="js/nyjs.js"></script>
 
 <!-- Custom Fonts -->
-<link href="font-awesome-4.1.0/css/font-awesome.min.css"
+<link href="fn/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -56,7 +56,7 @@
 						</h1>
 						<ol class="breadcrumb">
                             <li class="active">
-                                <i class="fa fa-dashboard"></i>예약한 내역과 일정을 볼 수 있습니다.
+                                	예약한 내역과 일정을 볼 수 있습니다.
                             </li>
                         </ol>
 					</div>
@@ -68,11 +68,10 @@
 							<div class="panel-heading">
 								<div class="row">
 									<div class="col-xs-3">
-										<i class="fa fa-comments fa-5x"></i>
+										<i class="fa fa-calendar-check-o fa-5x"></i>
 									</div>
 									<div class="col-xs-9 text-right">
-										<div class="huge">26</div>
-										<div>New Comments!</div>
+										<div>진료예약 조회 : 본인진료예약 및 대리예약 조회가능</div>
 									</div>
 								</div>
 							</div>

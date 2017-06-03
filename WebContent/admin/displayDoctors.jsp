@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     <%@ page import="hmsModels.*"  %>
      <%@ page import="hmsControllers.*"  %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -14,37 +14,31 @@
 </style>
 </head>
 <body>
-<div id="employees" class="tab-pane fade in">
+<div id="doctors" class="tab-pane fade in active">
 				<h3>Doctors' Record</h3>
 				<table class="table table-hover table-bordered" id="displayDoctors">
 					<thead>
 						<tr>
 							<th>
-								First Name
-							</th>
-							<th>
-								Last Name
-							</th>
-							<th>
-								Username
+								Name(ID)
 							</th>
 							<th>
 								Password
 							</th>
-							<th>
-								Specialization
-							</th>
-							<th>
-								Date of Birth
-							</th>
-							<th>
+						 	<th>
 								Gender
+							</th>
+							<th>
+								Birth
+							</th>
+							<th>
+								Phone No
 							</th>
 							<th>
 								Salary
 							</th>
 							<th>
-								Phone No
+								Specialization
 							</th>
 							<th>
 								Action

@@ -45,6 +45,15 @@ public class HmsFactory {
 		
 		return g.toJson(medList);
 	}
+	//어드민 페이지 부분
+	public String getDoctorsJson(){
+		ArrayList<Employee> docList = hms.getDoctorList();
+		return g.toJson(docList);
+	}
+	public String getCategoriesJson() throws SQLException {
+		
+		return g.toJson(hms.getCategories());
+	}
 	
 	  /*public ArrayList<Room> getRooms(){
 		return hms.getRoomList();
@@ -64,10 +73,7 @@ public class HmsFactory {
 	public ArrayList<Indoor> getIndoors(){
 		return hms.getIndoorList();
 	}
-	public String getDoctorsJson(){
-		ArrayList<doctornote> docList = hms.getDoctorList();
-		return g.toJson(docList);
-	}
+
 	
 	public String getNursesJson(){
 		ArrayList<Nurse> nurseList = hms.getNurseList();
@@ -245,10 +251,7 @@ public class HmsFactory {
 		hms.removeMedicine(mid);
 	}
 
-	public String getCategoriesJson() throws SQLException {
-		
-		return g.toJson(hms.getCategories());
-	}
+
 
 	public String addCategory(Category cat) throws SQLException {
 		

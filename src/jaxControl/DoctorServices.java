@@ -24,15 +24,15 @@ public class DoctorServices {
 	}
 	
 	
-	@GET
-	@Path("doctor/{did}")
-	@Produces("application/json")
-	public String getDoctorJson(@PathParam("did") int did){
-		try {
-			return hms.getDoctorJson(did);
-		} catch (SQLException e) {
-			Response.serverError();
-			return e.getMessage();
-		}
-	}
+//	@GET
+//	@Path("doctor/{did}")
+//	@Produces("application/json")
+//	public String getDoctorJson(@PathParam("did") int did){
+//		try {
+//			return hms.getDoctorJson(did);
+//		} catch (SQLException e) {
+//			Response.serverError();
+//			return e.getMessage();
+//		}
+//	}
 }

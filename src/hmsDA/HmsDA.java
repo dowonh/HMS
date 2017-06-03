@@ -55,8 +55,8 @@ public class HmsDA {
 			}
 		}
 	}
-	// room 정보 - 이정현
 	
+	// 간호사 부분
 	public ArrayList<Room> getRoomList(){
 		connect();
 		ArrayList<Room> roomList = new ArrayList<Room>();
@@ -130,6 +130,81 @@ public class HmsDA {
 		return medGoodList;
 	}
 	
+	//어드민 페이지 부분
+	public ArrayList<Employee> getDoctorList(){
+		
+		connect();
+		ArrayList<Employee> docList = new ArrayList<Employee>();
+		
+		try{
+
+			stmt = con.createStatement();
+			ResultSet set = stmt.executeQuery("SELECT * FROM employee where type = 'doctor'");
+ 
+			while(set.next()){
+				Employee doc = new Employee();  
+				doc.setEid(set.getInt("eid"));
+				doc.setName(set.getString("name"));
+				doc.setPasswd(set.getString("passwd"));
+				doc.setGender(set.getString("gender"));
+				if(set.getString("birth") == null ){
+					 doc.setBirth("");
+				}else{
+					doc.setBirth(set.getString("birth"));
+				}
+				doc.setPhone(set.getString("phone"));
+				doc.setSalary(set.getInt("salary"));
+ 
+				doc.setCategory(getCategory(set.getInt("category_catid")));
+				docList.add(doc);
+			} 
+		} catch(SQLException e){
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		
+		return docList;
+	}
+	
+	public Category getCategory(int catid) throws SQLException{
+		//connect();
+		Category cat = new Category();
+		try{
+			Statement stmtCate = con.createStatement();
+			ResultSet setCate = stmtCate.executeQuery("SELECT * FROM category WHERE catid="+catid);
+			if(!setCate.next()) return null;
+			
+			cat.setCatid(catid);
+			cat.setName(setCate.getString("name"));
+		} catch(SQLException e){
+			e.printStackTrace();
+		} finally {
+			//disconnect();
+		}
+		
+		return cat;
+	}
+	public ArrayList<Category> getCategories() throws SQLException {
+		
+		PreparedStatement stmt = con.prepareStatement("SELECT * FROM category");
+		ResultSet set = stmt.executeQuery();
+		
+		return getCategoryListFromSet(set);
+		
+	}
+	public ArrayList<Category> getCategoryListFromSet(ResultSet set) throws SQLException{
+		ArrayList<Category> catList = new ArrayList<Category>();
+		
+		while(set.next()){
+			Category cat = new Category();
+			cat.setCatid(set.getInt("catid"));
+			cat.setName(set.getString("name"));
+			catList.add(cat);
+		}
+		
+		return catList;
+	}
 	/*
 	public Employee getEmployee(int eid){
 		Employee emp = new Employee();
@@ -154,17 +229,7 @@ public class HmsDA {
 		return emp;
 	}
 	
-	public Category getCategory(int catid) throws SQLException{
-		Category cat = new Category();
 
-		Statement stmt4 = con.createStatement();
-		ResultSet set4 = stmt4.executeQuery("SELECT * FROM category WHERE catid="+catid);
-		if(!set4.next()) return null;
-		
-		cat.setCatid(catid);
-			cat.setName(set4.getString("name"));
-		return cat;
-	}
 	
 	public Category getCategory(String name){
 		Category cat = new Category();
@@ -247,37 +312,7 @@ public class HmsDA {
 		return nurse;
 	}
 	
-	public ArrayList<doctornote> getDoctorList(){
-		
-		ArrayList<doctornote> docList = new ArrayList<doctornote>();
-		/*Doctor doc = new Doctor();
-		Employee emp = new Employee();
-		Category cat = new Category();
-		Statement stmt;
-		
-		try{
-			stmt = con.createStatement();
-			ResultSet set = stmt.executeQuery("SELECT * FROM doctor");
-			while(set.next()){
-				doctornote doc = new doctornote();
-				int did = set.getInt("did");
-				int catid = set.getInt("catid");
-				int eid = set.getInt("eid");
-				
-				doc.setDid(did);
-				doc.setCatid(catid);
-				doc.setEid(eid);
-				doc.setEmployee(getEmployee(eid));
-				doc.setCategory(getCategory(catid));
-				docList.add(doc);
-			}
-		}
-		catch(SQLException e){
-			e.printStackTrace();
-		}
-		
-		return docList;
-	}
+	
 	
 	public ArrayList<Patient> getPatientList(){
 		
@@ -877,27 +912,9 @@ public class HmsDA {
 		
 	}
 
-	public ArrayList<Category> getCategories() throws SQLException {
-		
-		PreparedStatement stmt = con.prepareStatement("SELECT * FROM category");
-		ResultSet set = stmt.executeQuery();
-		
-		return getCategoryListFromSet(set);
-		
-	}
+
 	
-	public ArrayList<Category> getCategoryListFromSet(ResultSet set) throws SQLException{
-		ArrayList<Category> catList = new ArrayList<Category>();
-		
-		while(set.next()){
-			Category cat = new Category();
-			cat.setCatid(set.getInt("catid"));
-			cat.setName(set.getString("name"));
-			catList.add(cat);
-		}
-		
-		return catList;
-	}
+
 
 	public Category addCategory(Category cat) throws SQLException {
 		

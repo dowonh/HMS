@@ -15,8 +15,16 @@ public class Employee implements Serializable {
 	private int salary;
 	private String type;
 	private int catid;
- 
+	private Category category;
 	
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
 	public Employee(){}
 	
 	public String toJson(){

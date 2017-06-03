@@ -38,11 +38,40 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+
+
+<script type="text/javascript">
+function getList(val) {
+	  if(val=="1") {
+	   num = new Array("----의사 선택----", "의사1","의사2","의사3");
+	   vnum = new Array("----의사 선택----", "1","2","3");
+	  }
+	  else if(val=="2") {
+		   num = new Array("----의사 선택----", "의사4","의사5","의사6");
+		   vnum = new Array("----의사 선택----", "4","5","6");
+		}
+	  else if(val=="3") {
+		   num = new Array("----의사 선택----", "의사7","의사8","의사9");
+		   vnum = new Array("----의사 선택----", "7","8","9");
+		  }
+	  //두번째에 들은 셀렉트 박스 초기화
+	  for(i=0; i<form.doctor.length; i++) {
+	   form.doctor.options[i] = null;
+	  }
+	
+	   //두번째값 넣어주기(Option함수 이용)
+	   for(i=0; i<num.length; i++) {
+	   form.doctor.options[i] = new Option(num[i],vnum[i]);
+	  }
+	 }
+</script>
+
+
 </head>
 
 <body>
 
-	<jsp:include page="registerMenu.jsp"></jsp:include>
+	<jsp:include page="reservationMenu.jsp"></jsp:include>
 
 		<div id="page-wrapper">
 
@@ -67,7 +96,8 @@
 					<ul>
 						<li>진료과, 질병명으로 예약을 하실 수 있습니다. <!-- Button trigger modal -->
 							<button type="button" class="btn btn-primary" data-toggle="modal"
-								data-target="#registerModal">진료 예약</button>
+								data-target="#registerModal">진료 예약 <i
+										class="fa fa-arrow-circle-right"></i></button>
 						</li>
 						<li>회원 / 비회원 예약이 가능합니다.</li>
 					</ul>
@@ -107,37 +137,61 @@
 
 				<div class="modal-body">
 					<div class="container">
-						<form>
+						<form method="post" action="ProcessReservation.jsp" name='form'>
 							<div class="form-group row">
-								<label for="inputEmail3" class="col-sm-2 col-form-label">의사
+								<label for="example-date-input" class="col-2 col-form-label">이름</label>
+								<div class="col-6">
+									<input class="form-control" type="text"
+										id="register-input" name="name">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="example-date-input" class="col-2 col-form-label">전화번호 ('-' 없이 입력해 주세요.)</label>
+								<div class="col-6">
+									<input class="form-control" type="text"
+										id="register-input" name="phone">
+								</div>
+							</div>
+							<br>
+							<div class="form-group row">
+								<label for="inputEmail3" class="col-2 col-form-label">진료과 선택</label>
+								<div class="col-10">
+									<select name="department" id="department" onchange="getList(value)">
+									<option value="default">----진료과 선택----</option>
+									<% for(int i=1; i<=3; i++){%>
+										<option value="<%=i%>">진료과<%=i%></option>
+									<% } %>
+									</select>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="inputEmail3" class="col-2 col-form-label">의사
 									선택</label>
-								<div class="col-sm-10">
-									<select>
-										<option>이정현</option>
-										<option>정나영</option>
-										<option>허도원</option>
+								<div class="col-10">
+									<select name="doctor" id="doctor">
+										<option value="default">----의사 선택----</option>
 									</select>
 								</div>
 							</div>
 							<div class="form-group row">
 								<label for="example-date-input" class="col-2 col-form-label">예약
 									날짜 선택</label>
-								<div class="col-10">
+								<div class="col-6">
 									<input class="form-control" type="date" value="2017-05-16"
-										id="example-date-input">
+										id="register-input" name="reservation_date">
 								</div>
 							</div>
 							<div class="form-group row">
 								<label for="example-time-input" class="col-2 col-form-label">예약
 									시간 선택</label>
-								<div class="col-10">
+								<div class="col-6">
 									<input class="form-control" type="time" value="13:45:00"
-										id="example-time-input">
+										id="register-input" name="reservation_time">
 								</div>
 							</div>
 
 							<div class="form-group row">
-								<div class="offset-sm-2 col-sm-10">
+								<div class="offset-sm-2 col-sm-10" style="margin-left:auto;">
 									<button type="submit" class="btn btn-primary">예약하기</button>
 								</div>
 							</div>
@@ -147,8 +201,7 @@
 				
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Save changes</button>
+						data-dismiss="modal">닫기</button>
 				</div>
 			</div>
 		</div>

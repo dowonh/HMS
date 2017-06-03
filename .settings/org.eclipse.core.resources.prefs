@@ -1,5 +1,5 @@
 eclipse.preferences.version=1
 encoding//WebContent/index.jsp=UTF-8
-encoding//WebContent/register.jsp=UTF-8
-encoding//WebContent/registerCheck.jsp=UTF-8
-encoding//WebContent/registerMenu.jsp=UTF-8
+encoding//WebContent/reservation.jsp=UTF-8
+encoding//WebContent/reservationCheck.jsp=UTF-8
+encoding//WebContent/reservationMenu.jsp=UTF-8

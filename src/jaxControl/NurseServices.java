@@ -16,7 +16,7 @@ public class NurseServices {
 
 	
 	HmsFactory hms = new HmsFactory();
-	
+	/*
 	@GET
 	@Path("nurse/all")
 	@Produces("application/json")
@@ -34,5 +34,5 @@ public class NurseServices {
 			Response.serverError();
 			return e.getMessage();
 		}
-	}
+	}*/
 }

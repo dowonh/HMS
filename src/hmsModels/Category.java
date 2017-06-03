@@ -9,12 +9,11 @@ public class Category implements Serializable {
 	private int catid;
 	private String name;
 	
+	public Category(){}
 	
 	public String toJson(){
 		return HmsFactory.toJson(this);
 	}
-	
-	public Category(){}
 	
 	public void setCatid(int catid){
 		this.catid = catid;

@@ -8,21 +8,21 @@
 </head>
 <body>
 <div id="medicine" class="tab-pane fade in">
-	<h3>약 재고 관리</h3>
+	<h3>의료 물품</h3>
 	<table class="table table-hover table-bordered" id="tblmedicine">
 		<thead>
 			<tr>
 				<th>
-					Medicine No
+					No
 				</th>
 				<th>
-					Medicine Name
+					Name
 				</th>
 				<th>
-					Type
+					Price
 				</th>
 				<th>
-					Ordering
+					Count
 				</th>
 			</tr>
 		</thead>

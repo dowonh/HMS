@@ -7,84 +7,102 @@ import java.io.Serializable;
 public class Patient implements Serializable {
 
 	private int pid;
-	private int did;
-	private int catid;
 	private String name;
 	private String gender;
-	private String dob;
-	private String type;
-	private Category category;
-	private Doctor doctor;
-	
+	private String phone;
+	private String birth;
+	private String reservation_day;
+	private String reservation_time;
+	private String door;
+	private int eid;
+	private int rid;
+ 
 	public Patient(){}
 	
 	public String toJson(){
 		return HmsFactory.toJson(this);
 	}
-	
-	
-	public void setDoctor(Doctor doctor){
-		this.doctor = doctor;
+
+	public int getPid() {
+		return pid;
 	}
-	public Doctor getDoctor(){
-		return this.doctor;
-	}
-	public void setCategory(Category category){
-		this.category = category;
-	}
-	public Category getCategory(){
-		return this.category;
-	}
-	
-	public void setCatid(int catid){
-		this.catid = catid;
-	}
-	
-	public int getCatid(){
-		return this.catid;
-	}
-	
-	public void setPid(int pid){
+
+	public void setPid(int pid) {
 		this.pid = pid;
 	}
-	public int getPid(){
-		return this.pid;
+
+	public String getName() {
+		return name;
 	}
-	public void setDid(int did){
-		this.did = did;
-	}
-	public int getDid(){
-		return this.did;
-	}
-	
-	
-	public void setName(String name){
+
+	public void setName(String name) {
 		this.name = name;
 	}
-	
-	public String getName(){
-		return this.name;
+
+	public String getGender() {
+		return gender;
 	}
-	
-	public void setGender(String gender){
+
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	
-	public String getGender(){
-		return this.gender;
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getBirth() {
+		return birth;
+	}
+
+	public void setBirth(String birth) {
+		this.birth = birth;
+	}
+
+	public String getReservation_day() {
+		return reservation_day;
+	}
+
+	public void setReservation_day(String reservation_day) {
+		this.reservation_day = reservation_day;
+	}
+
+	public String getReservation_time() {
+		return reservation_time;
+	}
+
+	public void setReservation_time(String reservation_time) {
+		this.reservation_time = reservation_time;
+	}
+
+	public String getDoor() {
+		return door;
+	}
+
+	public void setDoor(String door) {
+		this.door = door;
+	}
+
+	public int getEid() {
+		return eid;
+	}
+
+	public void setEid(int eid) {
+		this.eid = eid;
+	}
+
+	public int getRid() {
+		return rid;
+	}
+
+	public void setRid(int rid) {
+		this.rid = rid;
 	}
 	
-	public void setDob(String dob){
-		this.dob = dob;
-	}
-	public String getDob(){
-		return this.dob;
-	}
-	public void setType(String type){
-		this.type = type;
-	}
-	public String getType(){
-		return this.type;
-	}
+ 
 	
 }

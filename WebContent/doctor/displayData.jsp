@@ -45,13 +45,15 @@
 <div id="page-content-wrapper">
 		<ul class="nav nav-tabs">
 			<li class="active"><a data-toggle="tab" href="#myPatients">View Patients</a></li>
-			<li><a data-toggle="tab" href="#myPrescriptions">My Prescriptions</a></li>
+			<!-- <li><a data-toggle="tab" href="#myPrescriptions">My Prescriptions</a></li>  -->
+		
 		</ul>
 		
 		<div class="tab-content">
 			<%@ include file="displayPatients.jsp" %>
 			<%@ include file="displayPrescriptions.jsp" %>
 		</div>
+		
 </div>
 </body>
 </html>

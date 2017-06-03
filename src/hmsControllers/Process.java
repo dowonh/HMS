@@ -2,12 +2,14 @@ package hmsControllers;
 
 import hmsDA.HmsDA;
 import hmsModels.Category;
-import hmsModels.Doctor;
+import hmsModels.doctornote;
 import hmsModels.Employee;
-import hmsModels.Nurse;
+import hmsModels.Medicine;
+import hmsModels.MedicineInventory;
 import hmsModels.Patient;
+import hmsModels.Prescription;
 import hmsModels.Room;
-import hmsModels.User;
+
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -107,6 +109,15 @@ public class Process extends HttpServlet {
 		}
 	}
 	
+	public void getRoom(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
+		int rid = Integer.parseInt(request.getParameter("id"));
+		
+		Room room = hms.getRoom(rid);
+		
+		response.setContentType("application/json");
+		response.getWriter().print(room.toJson());
+		
+	}
 	
 	
 	public void updateNurse(HttpServletRequest request, HttpServletResponse response) throws IOException, NumberFormatException, SQLException{
@@ -146,7 +157,7 @@ public class Process extends HttpServlet {
 
 		int catid = Integer.parseInt(request.getParameter("catid"));
 		
-		Doctor doctor = hms.getDoctor(Integer.parseInt(request.getParameter("id")));
+		doctornote doctor = hms.getDoctor(Integer.parseInt(request.getParameter("id")));
 		Employee employee = doctor.getEmployee();
 		User user = employee.getUser();
 		
@@ -180,7 +191,7 @@ public class Process extends HttpServlet {
 	public void getDoc(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
 		int did = Integer.parseInt(request.getParameter("id"));
 		
-		Doctor doc = hms.getDoctor(did);
+		doctornote doc = hms.getDoctor(did);
 		
 		response.setContentType("application/json");
 		response.getWriter().print(doc.toJson());
@@ -188,15 +199,7 @@ public class Process extends HttpServlet {
 		
 	}
 	
-	public void getRoom(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
-		int rid = Integer.parseInt(request.getParameter("id"));
-		
-		Room room = hms.getRoom(rid);
-		
-		response.setContentType("application/json");
-		response.getWriter().print(room.toJson());
-		
-	}
+	
 	
 	public void getNurse(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
 		
@@ -334,7 +337,7 @@ public void updateRoom(HttpServletRequest request, HttpServletResponse response)
 		employee.setUser(docUser);
 		//hms.addEmployee(employee);
 		
-		Doctor doctor = new Doctor();
+		doctornote doctor = new doctornote();
 		doctor.setCatid(catid);
 		//doctor.setEid(employee.getEid());
 		doctor.setEmployee(employee);

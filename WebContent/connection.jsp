@@ -4,5 +4,6 @@
 
 <%
 Class.forName("com.mysql.jdbc.Driver");
-Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test","root","test");
+Connection con = DriverManager.getConnection("jdbc:mysql://loveljhs2.iptime.org:3306/hms","root","test");
+ 
 %>

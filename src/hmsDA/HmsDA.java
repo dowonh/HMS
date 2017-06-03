@@ -29,8 +29,8 @@ public class HmsDA {
 	public HmsDA(){
 		
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test","root","test");
+			Class.forName("org.git.mm.mysql.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://loveljhs2.iptime.org:3306/hms","root","test");
 			
 		} catch (ClassNotFoundException | SQLException e) {
 			

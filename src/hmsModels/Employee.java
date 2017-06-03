@@ -6,75 +6,94 @@ import java.io.Serializable;
 
 public class Employee implements Serializable {
 	
-	private String firstname;
-	private String lastname;
+	private int eid;
+	private String name;
+	private String passwd;
 	private String gender;
-	private String dob;
+	private String birth;
 	private String phone;
 	private int salary;
-	private int uid;
-	private int eid;
-	private User user;
-	
+	private String type;
+	private int catid;
+ 
 	
 	public Employee(){}
 	
 	public String toJson(){
 		return HmsFactory.toJson(this);
 	}
-	
-	public void setFirstname(String firstname){
-		this.firstname = firstname;
-	}
-	public String getFirstname(){
-		return this.firstname;
-	}
-	public void setLastname(String lastname){
-		this.lastname = lastname;
-	}
-	public String getLastname(){
-		return this.lastname;
-	}
-	public void setGender(String gender){
-		this.gender = gender;
-	}
-	public String getGender(){
-		return this.gender;
-	}
-	public void setDob(String dob){
-		this.dob = dob;
-	}
-	public String getDob(){
-		return this.dob;
-	}
-	public void setPhone(String phone){
-		this.phone = phone;
-	}
-	public String getPhone(){
-		return this.phone;
-	}
-	public void setSalary(int salary){
-		this.salary = salary;
-	}
-	public int getSalary(){
-		return this.salary;
-	}
-	public int getUid(){
-		return this.uid;
-	}
-	public void setUid(int uid){
-		this.uid = uid;
-	}
-	public int getEid(){
+
+	public int getEid() {
 		return eid;
 	}
-	public void setEid(int eid){
+
+	public void setEid(int eid) {
 		this.eid = eid;
 	}
-	public void setUser(User u){
-		this.user = u;
+
+	public String getName() {
+		return name;
 	}
-	public User getUser(){
-		return this.user;
+
+	public void setName(String name) {
+		this.name = name;
 	}
+
+	public String getPasswd() {
+		return passwd;
+	}
+
+	public void setPasswd(String passwd) {
+		this.passwd = passwd;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getBirth() {
+		return birth;
+	}
+
+	public void setBirth(String birth) {
+		this.birth = birth;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public int getSalary() {
+		return salary;
+	}
+
+	public void setSalary(int salary) {
+		this.salary = salary;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public int getCatid() {
+		return catid;
+	}
+
+	public void setCatid(int catid) {
+		this.catid = catid;
+	}
+	
+ 
 }

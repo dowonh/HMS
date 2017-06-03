@@ -20,18 +20,19 @@
 	}
 </style>
 </head>
-<body id="<%= session.getAttribute("uid") %>">
+<body id="<%= session.getAttribute("pid") %>">
 <div id="page-content-wrapper">
 		<ul class="nav nav-tabs">
-			<li class="active"><a data-toggle="tab" href="#rooms">Rooms</a></li>
+			<li class="active"><a data-toggle="tab" href="#rooms">입원실 관리</a></li>
+			<li><a data-toggle="tab" href="#medicine">의료물품 관리</a></li>
 			<li><a data-toggle="tab" href="#myPatients">My Patients</a></li>
-			<li><a data-toggle="tab" href="#medicine">약 재고 관리</a></li>
 		</ul>
 		
 		<div class="tab-content">
 			<%@ include file="displayRooms.jsp" %>
-			<%@ include file="displayPatients.jsp" %>
+
 			<%@ include file="displayMedicine.jsp" %>
+			<%@ include file="displayPatients.jsp" %>
 		</div>
 </div>
 </body>

@@ -1,19 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
-
 <html>
-
 <head>
-
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="">
-
-<title>μμ•½ λ° μ΅°ν</title>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>ΏΉΎΰ ΉΧ Α¶ΘΈ</title>
 
 <!-- Bootstrap Core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -30,7 +21,6 @@
 <!-- Custom Fonts -->
 <link href="fn/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css">
-
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -52,55 +42,68 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<h1 class="page-header">
-							κ²°κ³Ό μ΅°ν <small>μμ•½ λ° μ΅°ν</small>
+							ΑυΈνΌ­ Ήί±ή
 						</h1>
 						<ol class="breadcrumb">
                             <li class="active">
-                                	λ‚΄μ›μΌμμ™€ μ•½μ²λ°© κΈ°λ΅μ„ μ κ³µν•©λ‹λ‹¤.
+                                	°ΆΑΎ ΑυΈνΌ­Έ¦ Ήί±ήΉήΐ» Όφ ΐΦ½ΐ΄Ο΄Ω.
                             </li>
                         </ol>
 					</div>
 				</div>
 				<!-- /.row -->
 				
-
 				<div class="row">
-					<div class="col-lg-4">
+					<div class="col-lg-3">
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h3 class="panel-title">
-									λ‚΄μ›μΌμ μ΅°ν
+									ΐΤΕπΏψ ΑυΈνΌ­ Ήί±ή
 								</h3>
 							</div>
 							<div class="panel-body">
-								λ‚΄μ›ν•μ…¨λ κΈ°λ΅μ„ μ κ³µν•©λ‹λ‹¤.
+								ΐΤΕπΏψΘ®ΐΞΌ­
 								<div class="text-right">
-									<a href="indoorCheck.jsp">λ‚΄μ›μΌμ μ΅°ν <i
+									<a href="indoorCheck.jsp">ΐΤΕπΏψ ΑυΈνΌ­ Ήί±ή <i
 										class="fa fa-arrow-circle-right"></i></a>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-4">
+					<div class="col-lg-4 offset-lg-1">
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h3 class="panel-title">
-									μ•½μ²λ°©
+									³³ΐΤΑυΈνΌ­ Ήί±ή
 								</h3>
 							</div>
 							<div class="panel-body">
-								μ§„λ£μ‹ λ°›μ€ μ•½μ²λ°© κΈ°λ΅μ„ μ κ³µν•©λ‹λ‹¤.
+								Αψ·αΊρ ³³ΐΤΑυΈνΌ­
 								<div class="text-right">
-									<a href="medicineCheck.jsp">μ•½μ²λ°© μ΅°ν <i
+									<a href="medicineCheck.jsp">³³ΐΤΑυΈνΌ­ Ήί±ή <i
 										class="fa fa-arrow-circle-right"></i></a>
 								</div>
 							</div>
 						</div>
 					</div>
-					
+					<div class="col-lg-3">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">
+									Αψ΄άΌ­ Ήί±ή
+								</h3>
+							</div>
+							<div class="panel-body">
+								Αψ΄άΌ­
+								<div class="text-right">
+									<a href="medicineCheck.jsp">Αψ΄άΌ­ Ήί±ή <i
+										class="fa fa-arrow-circle-right"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>		
 				</div>
 				<!-- /.row -->
-
 			</div>
 			<!-- /.container-fluid -->
 
@@ -109,6 +112,7 @@
 
 	</div>
 	<!-- /#wrapper -->
+
 
 
 	<!-- jQuery -->

@@ -1,5 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<style>
+	.container-fluid{
+		height: 2000px;
+	}
+	
+	input#register-input.form-control{
+		width: 500px;
+	}
+	
+</style>
+
 <div id="wrapper">
 	<!-- Navigation -->
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -13,7 +24,7 @@
 			</button>
 			<a class="navbar-brand" href="index.jsp">HMS</a>
 		</div>
-		<!-- Top Menu Items -->
+		<!-- Top Menu Items 
 		<ul class="nav navbar-right top-nav">
 			<li class="dropdown"><a href="#" class="dropdown-toggle"
 				data-toggle="dropdown"><i class="fa fa-envelope"></i> <b
@@ -103,16 +114,18 @@
 							Out</a></li>
 				</ul></li>
 		</ul>
+		-->
+		
 		<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav side-nav">
-				<li class="active"><a href="register.jsp"><i
+				<li class="active"><a href="reservation.jsp"><i
 						class="fa fa-fw fa-dashboard"></i>예약 안내</a></li>
-				<li><a href="registerCheck.jsp"><i
+				<li><a href="reservationCheck.jsp"><i
 						class="fa fa-fw fa-bar-chart-o"></i>예약 조회</a></li>
 				<li><a href="resultCheck.jsp"><i class="fa fa-fw fa-table"></i>결과
 						조회</a></li>
-				<li><a href="certifiIssue.jsp"><i class="fa fa-fw fa-edit"></i>증명서
+				<li><a href="certificateIssue.jsp"><i class="fa fa-fw fa-edit"></i>증명서
 						발급</a></li>
 
 				<li><a href="javascript:;" data-toggle="collapse"

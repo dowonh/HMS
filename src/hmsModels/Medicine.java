@@ -9,32 +9,36 @@ public class Medicine implements Serializable {
 	
 	private int mid;
 	private String name;
-	private int price;
+	private String type;
 	
 	public Medicine(){}
 	
 	public String toJson(){
 		return HmsFactory.toJson(this);
 	}
-	
-	
-	
-	public void setMid(int mid){
+
+	public int getMid() {
+		return mid;
+	}
+
+	public void setMid(int mid) {
 		this.mid = mid;
 	}
-	public int getMid(){
-		return this.mid;
+
+	public String getName() {
+		return name;
 	}
-	public void setName(String name){
+
+	public void setName(String name) {
 		this.name = name;
 	}
-	public String getName(){
-		return this.name;
+
+	public String getType() {
+		return type;
 	}
-	public void setPrice(int price){
-		this.price = price;
+
+	public void setType(String type) {
+		this.type = type;
 	}
-	public int getPrice(){
-		return this.price;
-	}
+ 
 }

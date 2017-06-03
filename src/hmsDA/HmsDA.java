@@ -1,43 +1,136 @@
 package hmsDA;
 
 import hmsModels.Category;
-import hmsModels.Doctor;
+import hmsModels.doctornote;
 import hmsModels.Employee;
-import hmsModels.Indoor;
 import hmsModels.Medicine;
-import hmsModels.Nurse;
+import hmsModels.MedicineGoods;
 import hmsModels.Patient;
 import hmsModels.Prescription;
 import hmsModels.Room;
-import hmsModels.User;
 
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
-
 import com.google.gson.JsonElement;
 
+
 public class HmsDA {
-	
-	Connection con;
+	private static final String JDBC_DRIVER = "org.gjt.mm.mysql.Driver";
+	private static final String JDBC_URL = "jdbc:mysql://loveljhs2.iptime.org:3306/hms";
+	private static final String USER = "root";
+	private static final String PASSWD = "test";
+	private Connection con = null;
+	private Statement stmt = null;
 	
 	public HmsDA(){
-		
 		try {
-			Class.forName("org.git.mm.mysql.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://loveljhs2.iptime.org:3306/hms","root","test");
-			
-		} catch (ClassNotFoundException | SQLException e) {
-			
+			Class.forName(JDBC_DRIVER);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+	}
+	
+	public void connect() {
+		try {
+			//디비연결
+			con = DriverManager.getConnection(JDBC_URL, USER, PASSWD);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
+	public void disconnect() {
+		if(stmt != null) {
+			try {
+				stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} 
+		if(con != null) {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	// room 정보 - 이정현
+	
+	public ArrayList<Room> getRoomList(){
+		connect();
+		ArrayList<Room> roomList = new ArrayList<Room>();
+
+		try{
+			Statement stmt = con.createStatement();
+			
+			ResultSet result = stmt.executeQuery("SELECT * FROM room");
+ 
+			while(result.next()){
+				
+				Room room = new Room();
+				room.setRid(result.getInt("rid"));
+				room.setRoom_number(result.getInt("room_number"));
+				room.setTotalbeds(result.getInt("totalbeds"));
+				room.setAvailablebeds(result.getInt("availablebeds"));
+				
+				roomList.add(room);
+			}
+		} catch(SQLException e){
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		
+		return roomList;
+	}
+
+
+	public Room getRoom(int rid) throws SQLException{
+		connect();
+		Room room = new Room();
+		
+		try{
+			ResultSet result = con.createStatement().executeQuery("SELECT * FROM room = "+rid);
+			System.out.println(result);
+			if(!result.next()) return null;
+			room.setRid(result.getInt("rid"));
+			room.setRoom_number(result.getInt("room_number"));
+			room.setTotalbeds(result.getInt("totalbeds"));
+			room.setAvailablebeds(result.getInt("availablebeds"));
+		} catch(SQLException e){
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return room;
+	}
+	
+	public ArrayList<MedicineGoods> getMedicineGoodsList() throws SQLException{
+		connect();
+		ArrayList<MedicineGoods> medGoodList = new ArrayList<MedicineGoods>();
+		try{
+			PreparedStatement stmt = con.prepareStatement("SELECT * FROM medicine_goods");
+	 		ResultSet set = stmt.executeQuery();
+			
+			while(set.next()){
+				MedicineGoods med = new MedicineGoods();
+				med.setId(set.getInt("id"));
+				med.setName(set.getString("name"));
+				med.setPrice(set.getInt("price"));
+				med.setCount(set.getInt("count"));
+				medGoodList.add(med);
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+
+		return medGoodList;
+	}
+	
+	/*
 	public Employee getEmployee(int eid){
 		Employee emp = new Employee();
 		try{
@@ -61,23 +154,6 @@ public class HmsDA {
 		return emp;
 	}
 	
-	public User getUser(int uid){
-		User u = new User();
-		try{
-			Statement stmt3 = con.createStatement();
-			ResultSet set3 = stmt3.executeQuery("SELECT * FROM users WHERE uid="+uid);
-			if(!set3.next()) return null;
-			
-			u.setUsername(set3.getString("username"));
-			u.setPassword(set3.getString("password"));
-			u.setUid(set3.getInt("uid"));
-			u.setType(set3.getString("type"));
-		}
-		catch(SQLException e){
-			e.printStackTrace();
-		}
-		return u;
-	}
 	public Category getCategory(int catid) throws SQLException{
 		Category cat = new Category();
 
@@ -106,8 +182,8 @@ public class HmsDA {
 		return cat;
 	}
 	
-	public Doctor getDoctor(int did) throws SQLException{
-		Doctor doc = new Doctor();
+	public doctornote getDoctor(int did) throws SQLException{
+		doctornote doc = new doctornote();
 
 		Statement stmt3 = con.createStatement();
 		ResultSet set3 = stmt3.executeQuery("SELECT * FROM doctor WHERE did="+did);
@@ -171,19 +247,19 @@ public class HmsDA {
 		return nurse;
 	}
 	
-	public ArrayList<Doctor> getDoctorList(){
+	public ArrayList<doctornote> getDoctorList(){
 		
-		ArrayList<Doctor> docList = new ArrayList<Doctor>();
+		ArrayList<doctornote> docList = new ArrayList<doctornote>();
 		/*Doctor doc = new Doctor();
 		Employee emp = new Employee();
-		Category cat = new Category();*/
+		Category cat = new Category();
 		Statement stmt;
 		
 		try{
 			stmt = con.createStatement();
 			ResultSet set = stmt.executeQuery("SELECT * FROM doctor");
 			while(set.next()){
-				Doctor doc = new Doctor();
+				doctornote doc = new doctornote();
 				int did = set.getInt("did");
 				int catid = set.getInt("catid");
 				int eid = set.getInt("eid");
@@ -277,30 +353,7 @@ public class HmsDA {
 		return NurseList;
 	}
 	
-	public ArrayList<Room> getRoomList(){
-		ArrayList<Room> roomList = new ArrayList<Room>();
-		
-		try{
-			Statement stmt = con.createStatement();
-			ResultSet set = stmt.executeQuery("SELECT * FROM room");
-			
-			while(set.next()){
-				Room room = new Room();
-				room.setRid(set.getInt("rid"));
-				room.setNid(set.getInt("nid"));
-				room.setTotalBeds(set.getInt("totalbeds"));
-				room.setAvailableBeds(set.getInt("availablebeds"));
-				room.setNurse(getNurse(room.getNid()));
-				
-				roomList.add(room);
-			}
-		}
-		catch(SQLException e){
-			e.printStackTrace();
-		}
-		
-		return roomList;
-	}
+
 	
 	public ArrayList<Indoor> getIndoorList(){
 		ArrayList<Indoor> indoorList = new ArrayList<Indoor>();
@@ -336,24 +389,7 @@ public class HmsDA {
 		return indoorList;
 	}
 	
-	public ArrayList<Medicine> getMedicineList() throws SQLException{
-		
-		ArrayList<Medicine> medList = new ArrayList<Medicine>();
-		PreparedStatement stmt = con.prepareStatement("SELECT * FROM medicine");
-		ResultSet set = stmt.executeQuery();
-		
-		while(set.next()){
-			Medicine med = new Medicine();
-			med.setMid(set.getInt("mid"));
-			med.setName(set.getString("name"));
-			med.setPrice(set.getInt("price"));
-			
-			medList.add(med);
-		}
-		
-		return medList;
-		
-	}
+
 	
 	public ArrayList<Prescription> getPrescriptionList() throws SQLException{
 		
@@ -480,68 +516,8 @@ public class HmsDA {
 		
 	}
 	
-	//well don't worry this one's easy you just have to brainstorm a little bit :P
-	public ArrayList<Indoor> getNursePatients(int uid) throws SQLException{
-		
-		ArrayList<Indoor> indoorList = new ArrayList<Indoor>();
-		
-		PreparedStatement stmt = con.prepareStatement("SELECT * FROM indoor");
-		ResultSet set = stmt.executeQuery();
-		
-		while(set.next()){
-			int rid = set.getInt("rid");
-			if(rid==0) continue;
-			PreparedStatement stmt2 = con.prepareStatement("SELECT * FROM room WHERE rid=?");
-			stmt2.setInt(1, rid);
-			ResultSet set2 = stmt2.executeQuery();
-			if(!set2.next()) continue;
-			
-			int nid2 = set2.getInt("nid");
-			int eid = getEidByUid(uid);
-			PreparedStatement stmt3 = con.prepareStatement("SELECT * FROM nurse WHERE eid=?");
-			stmt3.setInt(1, eid);
-			ResultSet set3 = stmt3.executeQuery();
-			if(!set3.next()) return null;
-			int nid = set3.getInt("nid");
-			if(nid==nid2){
-				Indoor in = new Indoor();
-				in.setRid(rid);
-				in.setDisease(set.getString("Disease"));
-				in.setIpid(set.getInt("ipid"));
-				in.setPid(set.getInt("pid"));
-				in.setPatient(getPatient(in.getPid()));
-				in.setRoom(getRoom(in.getRid()));
-				in.setStatus(set.getString("status"));
-				
-				indoorList.add(in);
-			}
-		}
-		
-		return indoorList;
-		
-	}
 	
-	public Indoor getIndoor(int ipid) throws SQLException{
-		
-		PreparedStatement stmt = con.prepareStatement("SELECT * FROM indoor WHERE ipid=?");
-		stmt.setInt(1, ipid);
-		ResultSet set = stmt.executeQuery();
-		
-		if(!set.next()) return null;
-		
-		Indoor indoor = new Indoor();
-		indoor.setIpid(ipid);
-		indoor.setDisease(set.getString("disease"));
-		indoor.setPid(set.getInt("pid"));
-		indoor.setRid(set.getInt("rid"));
-		indoor.setStatus(set.getString("status"));
-		indoor.setRoom(getRoom(indoor.getRid()));
-		indoor.setPatient(getPatient(indoor.getPid()));
-		
-		return indoor;
-	}
-	
-	public int addDoctor(Doctor doctor)throws SQLException{
+	public int addDoctor(doctornote doctor)throws SQLException{
 		
 		doctor.setEid(addEmployee(doctor.getEmployee()));
 		
@@ -697,7 +673,7 @@ public class HmsDA {
 		stmt.setInt(7, emp.getEid());
 		stmt.execute();
 	}
-	public void updateDoctor(Doctor doc) throws SQLException{
+	public void updateDoctor(doctornote doc) throws SQLException{
 		
 		updateEmployee(doc.getEmployee());
 		
@@ -967,5 +943,5 @@ public class HmsDA {
 		stmt.setInt(2, rid);
 		stmt.execute();
 		
-	}
+	} */
 }

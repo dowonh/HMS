@@ -9,6 +9,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
+
 @Path("")
 public class RoomServices {
 
@@ -20,6 +21,7 @@ public class RoomServices {
 	public String getRoomsJson(){
 		return hms.getRoomsJson();
 	}
+	
 	@GET
 	@Path("room/{rid}")
 	@Produces("application/json")
@@ -32,6 +34,7 @@ public class RoomServices {
 		}
 	}
 	
+	/*
 	@GET
 	@Path("room/nurse/{uid}")
 	@Produces("application/json")
@@ -42,5 +45,5 @@ public class RoomServices {
 			Response.serverError();
 			return e.getMessage();
 		}
-	}
+	}*/
 }

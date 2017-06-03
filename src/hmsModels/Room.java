@@ -7,46 +7,48 @@ import java.io.Serializable;
 public class Room implements Serializable {
 
 	private int rid;
+	private int room_number;
 	private int totalbeds;
-	private int nid;
 	private int availablebeds;
-	private Nurse nurse;
-	
+ 
 	public Room (){}
 	
 	public String toJson(){
 		return HmsFactory.toJson(this);
 	}
-	
-	public void setAvailableBeds(int availablebeds){
-		this.availablebeds = availablebeds;
+
+	public int getRid() {
+		return rid;
 	}
-	public int getAvailableBeds(){
-		return this.availablebeds;
-	}
-	
-	public void setRid(int rid){
+
+	public void setRid(int rid) {
 		this.rid = rid;
 	}
-	public int getRid(){
-		return this.rid;
+
+	public int getRoom_number() {
+		return room_number;
 	}
-	public void setTotalBeds(int totalbeds){
+
+	public void setRoom_number(int room_number) {
+		this.room_number = room_number;
+	}
+
+	public int getTotalbeds() {
+		return totalbeds;
+	}
+
+	public void setTotalbeds(int totalbeds) {
 		this.totalbeds = totalbeds;
 	}
-	public int getTotalbeds(){
-		return this.totalbeds;
+
+	public int getAvailablebeds() {
+		return availablebeds;
 	}
-	public void setNid(int nid){
-		this.nid = nid;
+
+	public void setAvailablebeds(int availablebeds) {
+		this.availablebeds = availablebeds;
 	}
-	public int getNid(){
-		return this.nid;
-	}
-	public void setNurse(Nurse nurse){
-		this.nurse = nurse;
-	}
-	public Nurse getNurse(){
-		return this.nurse;
-	}
+ 
+ 
+ 
 }

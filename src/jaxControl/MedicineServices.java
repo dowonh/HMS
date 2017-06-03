@@ -24,7 +24,7 @@ public class MedicineServices {
 	@Produces("application/json")
 	public String getMedicinesJson(){
 		try {
-			return hms.getMedicinesJson();
+			return hms.getMedicinesGoodsJson();
 		} catch (SQLException e) {
 			Response.serverError();
 			return e.getMessage();
@@ -32,7 +32,7 @@ public class MedicineServices {
 	}
 
 	
-	@POST
+	/*@POST
 	@Path("medicine")
 	@Produces("application/json")
 	public String addMedicne(@FormParam("medName") String name, @FormParam("price") int price){
@@ -99,5 +99,5 @@ public class MedicineServices {
 			e.printStackTrace();
 			return e.getMessage();
 		}
-	}
+	}*/
 }

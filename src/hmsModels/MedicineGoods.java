@@ -4,7 +4,7 @@ import hmsControllers.HmsFactory;
 
 import java.io.Serializable;
 
-public class MedicineInventory implements Serializable {
+public class MedicineGoods implements Serializable {
 
 	
 	private int id;
@@ -12,7 +12,7 @@ public class MedicineInventory implements Serializable {
 	private int price;
 	private int count;
 	
-	public MedicineInventory(){}
+	public MedicineGoods(){}
 	
 	public String toJson(){
 		return HmsFactory.toJson(this);

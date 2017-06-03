@@ -9,7 +9,7 @@ $(function(){
 			if(data.length!=0) $("#roomBody .dataTables_empty").remove();
 			data.forEach(function(room){
 				var index = $("#tblRooms").dataTable().fnAddData([
-				                                                  room.roomnumber,
+				                                                  room.room_number,
 				                                                  room.totalbeds,
 				                                                  room.availablebeds,
 				                                                  (parseInt(room.totalbeds) - parseInt(room.availablebeds)),

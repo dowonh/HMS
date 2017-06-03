@@ -4,7 +4,7 @@ import hmsModels.Category;
 import hmsModels.doctornote;
 import hmsModels.Employee;
 import hmsModels.Medicine;
-import hmsModels.MedicineInventory;
+import hmsModels.MedicineGoods;
 import hmsModels.Patient;
 import hmsModels.Prescription;
 import hmsModels.Room;
@@ -70,7 +70,7 @@ public class HmsDA {
 				
 				Room room = new Room();
 				room.setRid(result.getInt("rid"));
-				room.setRoomnumber(result.getInt("roomnumber"));
+				room.setRoom_number(result.getInt("room_number"));
 				room.setTotalbeds(result.getInt("totalbeds"));
 				room.setAvailablebeds(result.getInt("availablebeds"));
 				
@@ -95,7 +95,7 @@ public class HmsDA {
 			System.out.println(result);
 			if(!result.next()) return null;
 			room.setRid(result.getInt("rid"));
-			room.setRoomnumber(result.getInt("roomnumber"));
+			room.setRoom_number(result.getInt("room_number"));
 			room.setTotalbeds(result.getInt("totalbeds"));
 			room.setAvailablebeds(result.getInt("availablebeds"));
 		} catch(SQLException e){
@@ -106,20 +106,20 @@ public class HmsDA {
 		return room;
 	}
 	
-	public ArrayList<MedicineInventory> getMedicineInvenList() throws SQLException{
+	public ArrayList<MedicineGoods> getMedicineGoodsList() throws SQLException{
 		connect();
-		ArrayList<MedicineInventory> medInvenList = new ArrayList<MedicineInventory>();
+		ArrayList<MedicineGoods> medGoodList = new ArrayList<MedicineGoods>();
 		try{
-			PreparedStatement stmt = con.prepareStatement("SELECT * FROM medicine_inventory");
-			ResultSet set = stmt.executeQuery();
+			PreparedStatement stmt = con.prepareStatement("SELECT * FROM medicine_goods");
+	 		ResultSet set = stmt.executeQuery();
 			
 			while(set.next()){
-				MedicineInventory med = new MedicineInventory();
+				MedicineGoods med = new MedicineGoods();
 				med.setId(set.getInt("id"));
 				med.setName(set.getString("name"));
 				med.setPrice(set.getInt("price"));
 				med.setCount(set.getInt("count"));
-				medInvenList.add(med);
+				medGoodList.add(med);
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -127,7 +127,7 @@ public class HmsDA {
 			disconnect();
 		}
 
-		return medInvenList;
+		return medGoodList;
 	}
 	
 	/*

@@ -24,7 +24,7 @@ public class MedicineServices {
 	@Produces("application/json")
 	public String getMedicinesJson(){
 		try {
-			return hms.getMedicinesInvenJson();
+			return hms.getMedicinesGoodsJson();
 		} catch (SQLException e) {
 			Response.serverError();
 			return e.getMessage();

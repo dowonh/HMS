@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class Room implements Serializable {
 
 	private int rid;
-	private int roomnumber;
+	private int room_number;
 	private int totalbeds;
 	private int availablebeds;
  
@@ -25,12 +25,12 @@ public class Room implements Serializable {
 		this.rid = rid;
 	}
 
-	public int getRoomnumber() {
-		return roomnumber;
+	public int getRoom_number() {
+		return room_number;
 	}
 
-	public void setRoomnumber(int roomnumber) {
-		this.roomnumber = roomnumber;
+	public void setRoom_number(int room_number) {
+		this.room_number = room_number;
 	}
 
 	public int getTotalbeds() {
@@ -48,5 +48,7 @@ public class Room implements Serializable {
 	public void setAvailablebeds(int availablebeds) {
 		this.availablebeds = availablebeds;
 	}
+ 
+ 
  
 }

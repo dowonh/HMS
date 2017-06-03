@@ -5,7 +5,7 @@ import hmsModels.Category;
 import hmsModels.doctornote;
 import hmsModels.Employee;
 import hmsModels.Medicine;
-import hmsModels.MedicineInventory;
+import hmsModels.MedicineGoods;
 import hmsModels.Patient;
 import hmsModels.Prescription;
 import hmsModels.Room;

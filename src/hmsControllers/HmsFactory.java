@@ -10,7 +10,7 @@ import hmsModels.Category;
 import hmsModels.doctornote;
 import hmsModels.Employee;
 import hmsModels.Medicine;
-import hmsModels.MedicineInventory;
+import hmsModels.MedicineGoods;
 import hmsModels.Patient;
 import hmsModels.Prescription;
 import hmsModels.Room;
@@ -25,7 +25,7 @@ public class HmsFactory {
 		return g.toJson(obj);
 	}
 	
-	// room정보 - 이정현
+	// 간호사 부분 - 이정현
 	public String getRoomsJson(){
 		ArrayList<Room> roomList = hms.getRoomList();
 		
@@ -40,8 +40,8 @@ public class HmsFactory {
 		return g.toJson(room);
 	}
 	
-	public String getMedicinesInvenJson() throws SQLException{
-		ArrayList<MedicineInventory> medList = hms.getMedicineInvenList();
+	public String getMedicinesGoodsJson() throws SQLException{
+		ArrayList<MedicineGoods> medList = hms.getMedicineGoodsList();
 		
 		return g.toJson(medList);
 	}

@@ -82,15 +82,21 @@
 	                    <div class="col-lg-12">
 	                        <h1>List of Patients</h1>
 	                        <%@ include file="displayData.jsp" %>
+	                       
 	                    </div>
+	                    
 	                </div>
+	                
 	            </div>
+	            
 	        </div>
+	        
+	        
         <% } %>
         <!-- /#page-content-wrapper -->
-
+	
     </div>
-
+	
     <!-- Menu Toggle Script -->
     <script>
     $("#menu-toggle").click(function(e) {

@@ -44,8 +44,71 @@
 							</th>
 						</tr>
 					</thead>
-					<tbody id="patientBody"></tbody>
+					<tbody id="patientBody"> </tbody>
 				</table>
+				 <h3> Patient Note</h3>
+				 
+					<form method="POST" action="displayData.jsp" id="NoteForm">
+				    <!-- Modal content-->
+				    
+						  <div class="form-group">
+						  
+						  		<div class="col-lg-6">
+						  		Patient Type
+						  		<select name="patType" class="form-control">
+							 	 		<option value="indoor">Indoor</option>
+							 	 		<option value="outdoor">Outdoor</option>
+						 	 		</select>
+						 	 	</div>
+						 	 	
+						 	 	
+						 	 	Patient Note
+						 	 	<div class="col-lg-6"><input type="text" class="form-control" name="disease" placeholder="Note" required/></div>
+						 	 	
+						  </div>
+				      
+					</form>
+				  
+				 <br><br><br><br>
+				  <h3> Prescriptions</h3>
+				  <form method="POST" action="displayData.jsp" id="presSubmitForm">
+				  <div class="container col-lg-12">
+								<div class="form-group">
+							    <label for="medicineselect">Medicine</label>
+							    
+							    <select class="form-control" id="typeselect" >
+							  	<option value="typeselect">Medicine Type</option>
+							      <option>감기</option>
+							      <option>항생</option>
+							      <option>수면</option>
+
+							    </select>
+							    
+							    <select class="form-control" id="nameselect">
+							  <option value="nameselect">Medicine Name</option>
+							      <option>aaaaaa</option>
+							      <option>bbbbb</option>
+							      <option>ccccc</option>
+
+							    </select>
+							     <br>
+							    <label for="content">Content</label>
+							    <select multiple class="form-control" id="content">
+							  <option value="medicineselect">Medicine Name</option>
+							      <option>aaaaaa</option>
+							      <option>bbbbb</option>
+							      <option>ccccc</option>
+
+							    </select> 
+							  </div>
+							  <br>
+							  <label for="pres">Opinion</label>
+				  <p> <textarea id="pres" cols="155" rows="5"> </textarea></p>
+							  </div>
+							  </form>
+				  
+				<p align=right>
+				<button type="submit" class="btn btn-success">Add Prescription</button>
 				<div class="patientMsg"></div>
 			</div>
 			

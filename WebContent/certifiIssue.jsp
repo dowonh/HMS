@@ -52,7 +52,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<h1 class="page-header">
-							예약 조회 <small>예약 및 조회</small>
+							DOCTOR<small>예약 및 조회</small>
 						</h1>
 						<ol class="breadcrumb">
                             <li class="active">
@@ -61,6 +61,30 @@
                         </ol>
 					</div>
 				</div>
+				<div class="container">
+  <h3>Vertical Pills</h3>
+  <div class="row">
+    <div class="col-md-3">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </div>
+    <div class="col-md-3"> 
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <div class="col-md-3"> 
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+    </div>
+    <div class="col-md-3">
+      <ul class="nav nav-pills nav-stacked">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">Menu 1</a></li>
+        <li><a href="#">Menu 2</a></li>
+        <li><a href="#">Menu 3</a></li>
+      </ul>
+    </div>
+    <div class="clearfix visible-lg"></div>
+  </div>
+</div>
+				
 				<!-- /.row -->
 				<div class="container">
 					처음 오신 분 빠른 예약

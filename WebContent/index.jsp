@@ -186,8 +186,10 @@ td {
 				<li><a class="page-scroll" href="#contact">Contact</a></li>
 				<li><a href="#" data-toggle="modal" data-target="#login-modal">Employee
 						Login</a></li>
+				<!--
 				<li><a href="#" data-toggle="modal" data-target="#signup-modal">Patient
 						Registration</a></li>
+						-->
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->
@@ -230,6 +232,7 @@ td {
 		<div class="row">
 			<div class="col-lg-12">
 				<h1>의료진 소개</h1>
+				
 				<br>
 				<!--    <h2 class="section-heading"> **병원 </h2>
                     <h3 class="section-subheading text-muted"> **병원 </h3>
@@ -315,27 +318,27 @@ td {
         </button>
       </div>
       <div class="modal-body">
-				<img src="http://www.soo119.co.kr/common/images/content/sub01/doctor_03.jpg"
+				<img src="http://www.soo119.co.kr/common/images/content/sub01/doctor_06.jpg"
 					alt="" width="130" height="170" align="left">
 					
-								<h4>이정현</h4>
-								 전북대학교 의과대학 졸업 <br>
-								 전북대학교 의과대학 대학원 의학석사 및 의학박사<br>
+								<h4>김동현</h4>
+								 서울대학교 의과대학 졸업 <br>
+								 서울대학교 의과대학 대학원 의학석사 및 의학박사<br>
 								 국립중앙의료원 인턴 수료<br>
-								 국립중앙의료원 정형외과 전공의 수료<br>
-								 국립중앙의료원 정형외과 전문의 취득<br>
-								 인제의대 상계백병원 전임의 역임<br>
+								 영국 세인트마크 병원 연수<br>
+								 대한 외과학회 정회원<br>
+								  전 군산항도외과 원장 역임<br>
 																<br><br>
 
 								<img
-									src="http://www.soo119.co.kr/common/images/content/sub01/doctor_05.jpg"
+									src="http://www.soo119.co.kr/common/images/content/sub01/doctor_21.jpg"
 									alt="" width="130" height="170" align="left">
-									<h4>홍길동</h4>
-									 전북대학교 의과대학 졸업 <br>
-									 전북대학교 의과대학 대학원 의학석사 및 의학박사<br>
-									 전북대학병원 정형외과 전공의 과정 수료<br>
-									 전북대학병원 정형외과 전문의 취득<br>
-									 전북대학병원 정형외과 미세수부전임의 수료<br>
+									<h4>황민호</h4>
+									 서울카톨릭대 성모병원 수련의 <br>
+									 서울원자력병원 내과 전공의 수료 및 외과 전문의 취득<br>
+									 전북대학병원 흉부외과 전공의 과정 수료<br>
+									 전북대학병원 흉부외과 전문의 취득<br>
+									 전북대학병원 흉부외과 미세수부전임의 수료<br>
       <div class="container">
 
 	</div>
@@ -366,27 +369,27 @@ td {
           <span aria-hidden="true" > &times;</span>
         </button> </div>
       <div class="modal-body">
-				<img src="http://www.soo119.co.kr/common/images/content/sub01/doctor_03.jpg"
+				<img src="http://www.soo119.co.kr/common/images/content/sub01/doctor_17.jpg"
 					alt="" width="130" height="170" align="left">
 					
-								<h4>이정현</h4>
+								<h4>최상용</h4>
 								 전북대학교 의과대학 졸업 <br>
-								 전북대학교 의과대학 대학원 의학석사 및 의학박사<br>
-								 국립중앙의료원 인턴 수료<br>
-								 국립중앙의료원 정형외과 전공의 수료<br>
-								 국립중앙의료원 정형외과 전문의 취득<br>
-								 인제의대 상계백병원 전임의 역임<br>
+								 영상의학과 전문의 자격증 취득<br>
+								 전북대학교병원 영상의학과 전공의 수료<br>
+								 전북대학교 의과대학 전임강사<br>
+								대한근골격영상의학회 고시이사<br>
+								 대한근골격영상의학회 수련이사<br>
 																<br><br>
 
 								<img
-									src="http://www.soo119.co.kr/common/images/content/sub01/doctor_05.jpg"
+									src="http://www.soo119.co.kr/common/images/content/sub01/doctor_15.jpg"
 									alt="" width="130" height="170" align="left">
-									<h4>홍길동</h4>
-									 전북대학교 의과대학 졸업 <br>
-									 전북대학교 의과대학 대학원 의학석사 및 의학박사<br>
-									 전북대학병원 정형외과 전공의 과정 수료<br>
-									 전북대학병원 정형외과 전문의 취득<br>
-									 전북대학병원 정형외과 미세수부전임의 수료<br>
+									<h4>강창식</h4>
+									 전남대학교 의과대학 졸업 <br>
+									 전남대학교 의과대학 대학원 의학석사 및 의학박사<br>
+									 대한영상의학회 기획위원<br>
+									 대한초음파영상의학회 편집위원<br>
+									대한영상의학회 편집위원<br>
       <div class="container">
 
 	</div>
@@ -418,6 +421,7 @@ td {
 	</section>
 
 	<!-- Services Section -->
+	<!--
 	<section id="services" class="services-section">
 	<div class="container">
 		<div class="row">
@@ -527,9 +531,9 @@ td {
 		</div>
 	</div>
 	</section>
-
+	-->
 	<!-- Services Section -->
-	<section id="services" class="services bg-primary">
+	<section id="services" class="services-section">
 	<div class="container">
 		<div class="row text-center">
 			<div class="col-lg-10 col-lg-offset-1">
@@ -545,7 +549,7 @@ td {
 							<h4>
 								<strong>예약 안내</strong>
 							</h4>
-							<a href="register.html" class="btn btn-light">Learn More</a>
+							<a href="register.html" class="btn btn-primary">Learn More</a>
 						</div>
 					</div>
 					<div class="col-md-3 col-sm-6">
@@ -557,7 +561,7 @@ td {
 							<h4>
 								<strong>예약 조회</strong>
 							</h4>
-							<a href="#" class="btn btn-light">Learn More</a>
+							<a href="#" class="btn btn-primary">Learn More</a>
 						</div>
 					</div>
 					<div class="col-md-3 col-sm-6">
@@ -569,7 +573,7 @@ td {
 							<h4>
 								<strong>결과 조회</strong>
 							</h4>
-							<a href="#" class="btn btn-light">Learn More</a>
+							<a href="#" class="btn btn-primary">Learn More</a>
 						</div>
 					</div>
 					<div class="col-md-3 col-sm-6">
@@ -581,7 +585,7 @@ td {
 							<h4>
 								<strong>증명서 발급</strong>
 							</h4>
-							<a href="#" class="btn btn-light">Learn More</a>
+							<a href="#" class="btn btn-primary">Learn More</a>
 						</div>
 					</div>
 				</div>
@@ -671,6 +675,7 @@ td {
 			</div>
 		</div>
 	</div>
+	 <!-- 
 		<div class="modal fade" id="signup-modal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true"
 			style="display: none;">
@@ -689,13 +694,15 @@ td {
 								required /> Male</label> <label><input type="radio"
 								name="gender" value="female" /> Female</label>
 						</div>
+						-->
 						<input type="submit" name="signup"
 							class="signup signupmodal-submit" value="Register">
 					</form>
-					<h1>Contact Section</h1>
+					
 				</div>
 			</div>
 		</div>
+		 -->
 
 
 		</section>

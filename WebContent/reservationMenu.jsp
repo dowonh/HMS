@@ -119,15 +119,13 @@
 		<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav side-nav">
-				<li class="active"><a href="reservation.jsp"><i
-						class="fa fa-fw fa-dashboard"></i>예약 안내</a></li>
-				<li><a href="reservationCheck.jsp"><i
-						class="fa fa-fw fa-bar-chart-o"></i>예약 조회</a></li>
-				<li><a href="resultCheck.jsp"><i class="fa fa-fw fa-table"></i>결과
+				<li class="active"><a href="reservation.jsp"><i class="fa fa-glide-g" aria-hidden="true"></i> 예약 안내</a></li>
+				<li><a href="reservationCheck.jsp"><i class="fa fa-list-alt" aria-hidden="true"></i> 예약 조회</a></li>
+				<li><a href="resultCheck.jsp"><i class="fa fa-paperclip" aria-hidden="true"></i> 결과
 						조회</a></li>
-				<li><a href="certificateIssue.jsp"><i class="fa fa-fw fa-edit"></i>증명서
+				<li><a href="certificateIssue.jsp"><i class="fa fa-print" aria-hidden="true"></i> 증명서
 						발급</a></li>
-
+				<!-- 
 				<li><a href="javascript:;" data-toggle="collapse"
 					data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i>
 						Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
@@ -137,6 +135,9 @@
 					</ul></li>
 				<li><a href="blank-page.html"><i class="fa fa-fw fa-file"></i>
 						Blank Page</a></li>
+						
+				-->
+				
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->

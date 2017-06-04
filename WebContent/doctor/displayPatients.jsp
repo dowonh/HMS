@@ -94,10 +94,10 @@
 							     <br>
 							    <label for="content">Content</label>
 							    <select multiple class="form-control" id="content">
-							  <option value="medicineselect">Medicine Name</option>
-							      <option>aaaaaa</option>
-							      <option>bbbbb</option>
-							      <option>ccccc</option>
+							  <option value="medicineselect" align="center"><  Select Medicine  ></option>
+							  							      <option>ccccc</option>
+							  
+							      
 
 							    </select> 
 							  </div>

@@ -26,7 +26,7 @@ public class HmsFactory {
 		return g.toJson(obj);
 	}
 	
-	// ��ȣ�� �κ� - ������
+	//간호사가 사용
 	public String getRoomsJson(){
 		ArrayList<Room> roomList = hms.getRoomList();
 		
@@ -46,7 +46,7 @@ public class HmsFactory {
 		
 		return g.toJson(medList);
 	}
-	//���� ������ �κ�
+	//어드민페이지
 	public String getDoctorsJson(){
 		ArrayList<Employee> docList = hms.getDoctorList();
 		return g.toJson(docList);
@@ -56,7 +56,28 @@ public class HmsFactory {
 		
 		return g.toJson(hms.getCategories());
 	}
-	
+	//간호사 관련 가져오기
+	public String getNursesJson(){
+		ArrayList<Employee> nurseList = hms.getNurseList();
+		
+		return g.toJson(nurseList);
+	}
+	// 카테고리 관련부분
+	public String addCategory(Category cat) throws SQLException {
+		
+		return hms.addCategory(cat).toJson();
+	}
+	public String updateCategory(Category cat) throws SQLException {
+		return hms.updateCategory(cat).toJson();
+	}	
+//	public String getCategory(int catid) throws SQLException {
+//		return hms.getCategory(catid).toJson();
+//	}
+	public void deleteCategory(int catid) throws SQLException {
+		hms.deleteCategory(catid);
+	}
+
+
 	  /*public ArrayList<Room> getRooms(){
 		return hms.getRoomList();
 	}
@@ -77,11 +98,7 @@ public class HmsFactory {
 	}
 
 	
-	public String getNursesJson(){
-		ArrayList<Nurse> nurseList = hms.getNurseList();
-		
-		return g.toJson(nurseList);
-	}
+
 	
 	public String getDoctorJson(int did) throws SQLException{
 		
@@ -252,23 +269,16 @@ public class HmsFactory {
 		
 		hms.removeMedicine(mid);
 	}
-
+ 
 	public String addCategory(Category cat) throws SQLException {
 		
 		return hms.addCategory(cat).toJson();
 	}
+ 
 
-	public String getCategory(int catid) throws SQLException {
-		return hms.getCategory(catid).toJson();
-	}
 
-	public String updateCategory(Category cat) throws SQLException {
-		return hms.updateCategory(cat).toJson();
-	}
 
-	public void deleteCategory(int catid) throws SQLException {
-		hms.deleteCategory(catid);
-	}
+
 
 	public String addPatient(Patient patient) throws SQLException {
 		return hms.addPatient(patient).toJson();

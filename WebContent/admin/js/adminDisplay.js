@@ -1,6 +1,8 @@
 $(function(){
 	
-	
+	//---------------------------
+	// 어드민 의사부분
+	//---------------------------
 	$.ajax({
 		url: "../services/category/all",
 		type: "GET",
@@ -11,8 +13,7 @@ $(function(){
 			});
 		}
 	});
-	
-	//Display Doctors
+
 	$.ajax({
 		url: "../services/doctor/all",
 		type: "GET",
@@ -40,62 +41,130 @@ $(function(){
 		}
 	});
 	
+	$.ajax({
+		url: "../services/nurse/all",
+		type: "GET",
+		success: function(data){
+			data.forEach(function(nurse){
+				var index = $("#displayNurses").dataTable().fnAddData([
+					nurse.username,
+					nurse.passwd,
+					nurse.name,
+					nurse.gender,
+					nurse.birth,
+					nurse.phone,
+					nurse.salary,
+					"<a onClick='empDelete("+nurse.eid+",1)' href='#'  >Delete</a> / <a href='#' onclick='editNurse("+nurse.eid+")'>Edit</a>"
+								                                          ]);
+				
+				var row = $("#displayNurses").dataTable().fnGetNodes(index);
+				$(row).attr("id",nurse.eid);
+				
+			});
+		},
+		error: function(data){
+			
+		}
+	});
+	//---------------------------
+	// 어드민 방 정보 부분
+	//---------------------------
+	$.ajax({
+		url: "../services/room/all",
+		type: "GET",
+		success: function(data){
+			data.forEach(function(room){
+				var index = $("#displayRooms").dataTable().fnAddData([
+							                                          room.room_number,
+							                                          room.totalbeds,
+							                                          room.availablebeds,
+							                                          "<a onClick='roomDelete("+room.rid+")' href='#'  >Delete</a> / <a href='#' onclick='editRoom("+room.rid+")'>Edit</a>"
+							                                          ]);
+				
+				var row = $("#displayRooms").dataTable().fnGetNodes(index);
+				$(row).attr("id",room.rid);
+				
+				$("#assignRoomForm select[name=rid]").append("<option value="+room.rid+">"+room.rid+"</option>");
+			
+			});
+		},
+		error: function(data){
+			
+		}
+	});
+	//---------------------------
+	// 어드민 카테고리관련
+	//---------------------------
+	$.ajax({
+		url: "../services/category/all",
+		type: "GET",
+		success: function(categories){
+			categories.forEach(function(category){
+				addCategoryToTable(category);
+			});
+		},
+		error: function(error){
+			console.log(error.responseText);
+		}
+	});
+	//Add Category Form Submission
+	$("#addCategoryForm").submit(function(e){
+		e.preventDefault();
+		
+		$.ajax({
+			url: $(this).attr("action"),
+			type: $(this).attr("method"),
+			data: $(this).serialize(),
+			success: function(category){
+				BootstrapDialog.show({
+					title: "Success!",
+					message: "category added successfully!"
+				});
+				
+				addCategoryToTable(category);
+			},
+			error: function(err){
+				BootstrapDialog.show({
+					type: BootstrapDialog.TYPE_DANGER,
+					title: "Error!",
+					message: err.responseText
+				});
+			}
+		});
+		
+		$("#addCategoryModal").modal("toggle");
+	});
+	//Update Category Form Submission
+	$("#updateCategoryForm").submit(function(e){
+		e.preventDefault();
+		
+		$.ajax({
+			url: $(this).attr("action"),
+			type: $(this).attr("method"),
+			data: $(this).serialize(),
+			success: function(category){
+				BootstrapDialog.show({
+					title: "Success!",
+					message: "category updated successfully!"
+				});
+				
+				$("#tblCategories").DataTable().row($("#catBody #"+category.catid)).remove().draw();
+				addCategoryToTable(category);
+			},
+			error: function(err){
+				BootstrapDialog.show({
+					type: BootstrapDialog.TYPE_DANGER,
+					title: "Error!",
+					message: err.responseText
+				});
+			}
+		});
+		
+		$("#updateCategoryModal").modal("toggle");
+	});
 //	//For Nurses
-//	$.ajax({
-//		url: "../services/nurse/all",
-//		type: "GET",
-//		success: function(data){
-//			data.forEach(function(nurse){
-//				var index = $("#displayNurses").dataTable().fnAddData([
-//								                                          nurse.employee.firstname,
-//								                                          nurse.employee.lastname,
-//								                                          nurse.employee.user.username,
-//								                                          nurse.employee.user.password,
-//								                                          nurse.employee.dob,
-//								                                          nurse.experience,
-//								                                          nurse.employee.salary,
-//								                                          nurse.employee.phone,
-//								                                          "<a onClick='empDelete("+nurse.employee.user.uid+",1)' href='#'  >Delete</a> / <a href='#' onclick='editNurse("+nurse.nid+")'>Edit</a>"
-//								                                          ]);
-//				
-//				var row = $("#displayNurses").dataTable().fnGetNodes(index);
-//				$(row).attr("id",nurse.employee.user.uid);
-//				
-//			});
-//		},
-//		error: function(data){
-//			
-//		}
-//	});
-//	
-//	
-//	
-//	//For Room
-//	$.ajax({
-//		url: "../services/room/all",
-//		type: "GET",
-//		success: function(data){
-//			data.forEach(function(room){
-//				var index = $("#displayRooms").dataTable().fnAddData([
-//							                                          room.rid,
-//							                                          room.totalbeds,
-//							                                          room.nurse.employee.firstname+" "+room.nurse.employee.lastname,
-//							                                          room.nurse.employee.phone,
-//							                                          "<a onClick='roomDelete("+room.rid+")' href='#'  >Delete</a> / <a href='#' onclick='editRoom("+room.rid+")'>Edit</a>"
-//							                                          ]);
-//				
-//				var row = $("#displayRooms").dataTable().fnGetNodes(index);
-//				$(row).attr("id",room.rid);
-//				
-//				$("#assignRoomForm select[name=rid]").append("<option value="+room.rid+">"+room.rid+"</option>");
-//			
-//			});
-//		},
-//		error: function(data){
-//			
-//		}
-//	});
-//	
+
+ 
 //	
 //	//For Indoors
 //	$.ajax({
@@ -148,80 +217,7 @@ $(function(){
 //		}
 //	});
 //	
-//	
-//	//For displaying Categories
-//	$.ajax({
-//		url: "../services/category/all",
-//		type: "GET",
-//		success: function(categories){
-//			categories.forEach(function(category){
-//				addCategoryToTable(category);
-//			});
-//		},
-//		error: function(error){
-//			console.log(error.responseText);
-//		}
-//	});
-//	
-	//Add Category Form Submission
-//	$("#addCategoryForm").submit(function(e){
-//		e.preventDefault();
-//		
-//		$.ajax({
-//			url: $(this).attr("action"),
-//			type: $(this).attr("method"),
-//			data: $(this).serialize(),
-//			success: function(category){
-//				BootstrapDialog.show({
-//					title: "Success!",
-//					message: "category added successfully!"
-//				});
-//				
-//				addCategoryToTable(category);
-//			},
-//			error: function(err){
-//				BootstrapDialog.show({
-//					type: BootstrapDialog.TYPE_DANGER,
-//					title: "Error!",
-//					message: err.responseText
-//				});
-//			}
-//		});
-//		
-//		$("#addCategoryModal").modal("toggle");
-//	})
-//	
-//	
-//	//Update Category Form Submission
-//	$("#updateCategoryForm").submit(function(e){
-//		e.preventDefault();
-//		
-//		$.ajax({
-//			url: $(this).attr("action"),
-//			type: $(this).attr("method"),
-//			data: $(this).serialize(),
-//			success: function(category){
-//				BootstrapDialog.show({
-//					title: "Success!",
-//					message: "category updated successfully!"
-//				});
-//				
-//				$("#tblCategories").DataTable().row($("#catBody #"+category.catid)).remove().draw();
-//				addCategoryToTable(category);
-//			},
-//			error: function(err){
-//				BootstrapDialog.show({
-//					type: BootstrapDialog.TYPE_DANGER,
-//					title: "Error!",
-//					message: err.responseText
-//				});
-//			}
-//		});
-//		
-//		$("#updateCategoryModal").modal("toggle");
-//	})
-//	
-//	
+ 
 //	$("table").dataTable();
 //	
 //	
@@ -274,43 +270,7 @@ $(function(){
 //		}
 //	});
 
-}) 
-
-function editDoc(eid){
-	$.ajax({
-		type: "GET",
-		url: "../Process?action=getDoc&id="+eid,
-		//contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-		success: function(data){ 
-			alert(eid);
-			editDocForm(eid, data);
-		},
-		error: function(err){
-			console.log("editDoc errer" + err);
-		}
-	});
-}
-
-function editDocForm(eid,docObj){
-
-	$("#editDocModal form").attr("action","../Process?action=editDoc&id="+eid);
-	
-	$("#editDocModal form input[name=name]").val(docObj.name);
-	$("#editDocModal form input[name=username]").val(docObj.username);
-	$("#editDocModal form input[name=password]").val(docObj.password);
-	$("#editDocModal form select[name=catid]").val(docObj.catid);
-	$("#editDocModal form input[name=birth]").val(docObj.birth);
-	$("#editDocModal form input[name=salary]").val(docObj.salary);
-	$("#editDocModal form input[name=phone]").val(docObj.phone);
-	if(docObj.gender=="male")
-		$("#editDocModal form input[value=male]").prop("checked", true);
-	else
-		$("#editDocModal form input[value=female]").prop("checked",true);
-	
-	$("#editDocModal").modal("toggle");
-}
-
-
+})  
 
 function assignRoom(ipid){
 	$("#assignRoomModal").modal("toggle");
@@ -332,8 +292,6 @@ function addIndoorToTable(indoor){
 	
 	if(indoor.room) nurseName  = indoor.room.nurse.employee.firstname;
 	
-	
-	
 	var index = $("#displayIndoors").dataTable().fnAddData([
 					                                          indoor.patient.name,
 					                                          indoor.patient.gender,
@@ -349,57 +307,3 @@ function addIndoorToTable(indoor){
 	//$(".deleteMe").remove();
 }
 
-function addCategoryToTable(category){
-	var index = $("#tblCategories").dataTable().fnAddData([
-	                                                       category.catid,
-	                                                       category.name,
-	                                                       "<a href='#' onclick='updateCategory("+category.catid+")'>Update</a> / <a href='#' onclick='deleteCategory("+category.catid+")'>Delete</a> "
-	                                                       ]);
-	var row = $("#tblCategories").dataTable().fnGetNodes(index);
-	$(row).attr("id",category.catid);
-}
-
-function updateCategory(catid){
-	
-	$("#updateCategoryForm").attr("action","../services/category/"+catid);
-	
-	$.ajax({
-		url: "../services/category/"+catid,
-		type: "GET",
-		success: function(category){
-			$("#updateCategoryForm input[name=catName]").val(category.name);
-		},
-		error: function(err){
-			console.log(err.responseText);
-		}
-	})
-	
-	$("#updateCategoryModal").modal("toggle");
-}
-
-
-function deleteCategory(catid){
-	bootbox.confirm("Are you sure?",function(sure){
-		if(sure){
-			$.ajax({
-				url: "../services/category/"+catid,
-				type: "DELETE",
-				success: function(result){
-					BootstrapDialog.show({
-						title: "Success!",
-						message: "Category deleted successfully!"
-					});
-					
-					$("#tblCategories").DataTable().row($("#catBody #"+catid)).remove().draw();
-				},
-				error: function(data){
-					BootstrapDialog.show({
-						type: BootstrapDialog.TYPE_DANGER,
-						title: "Error!",
-						message: data.responseText,
-					});
-				}
-			});
-		}
-	}).find(".modal-body").css("height","50px");
-}

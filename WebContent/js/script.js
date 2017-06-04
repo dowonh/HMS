@@ -257,28 +257,6 @@ function addDocToTable(doctor){
 	location.reload(true);
 }
 
-
-function addNurseToTable(nurse){ 
-	var index = $("#displayNurses").dataTable().fnAddData([
-					                                          nurse.employee.firstname,
-					                                          nurse.employee.lastname,
-					                                          nurse.employee.user.username,
-					                                          nurse.employee.user.password,
-					                                          nurse.employee.dob,
-					                                          nurse.experience,
-					                                          nurse.employee.salary,
-					                                          nurse.employee.phone,
-					                                          "<a onClick='empDelete("+nurse.employee.user.uid+",1)' href='#'  >Delete</a> / <a href='#' onclick='editNurse("+nurse.nid+")'>Edit</a>"
-					                                          ]);
-	
-	var row = $("#displayNurses").dataTable().fnGetNodes(index);
-	$(row).attr("id",nurse.employee.user.uid);
-	//$(".deleteMe").remove();
-}
-
-
-
-
 function empDelete(id,type){
 	bootbox.confirm("Are you sure?",function(sure){
 		if(sure)
@@ -304,6 +282,29 @@ function empDeleteConfirm(id,type){
 		}
 	});
 }
+
+function addNurseToTable(nurse){ 
+	var index = $("#displayNurses").dataTable().fnAddData([
+					                                          nurse.employee.firstname,
+					                                          nurse.employee.lastname,
+					                                          nurse.employee.user.username,
+					                                          nurse.employee.user.password,
+					                                          nurse.employee.dob,
+					                                          nurse.experience,
+					                                          nurse.employee.salary,
+					                                          nurse.employee.phone,
+					                                          "<a onClick='empDelete("+nurse.employee.user.uid+",1)' href='#'  >Delete</a> / <a href='#' onclick='editNurse("+nurse.nid+")'>Edit</a>"
+					                                          ]);
+	
+	var row = $("#displayNurses").dataTable().fnGetNodes(index);
+	$(row).attr("id",nurse.employee.user.uid);
+	//$(".deleteMe").remove();
+}
+
+
+
+
+
 
 function  roomDelete(rid){
 	bootbox.confirm("Are you sure?",function(sure){

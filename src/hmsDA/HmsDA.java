@@ -290,6 +290,20 @@ public class HmsDA {
 		return emp;
 	}
 	
+	public void deleteEmployee(int eid) throws SQLException{
+		
+		connect();
+		try{ 
+			PreparedStatement stmt = con.prepareStatement("DELETE FROM employee WHERE eid=?");
+			stmt.setInt(1, eid);
+			stmt.execute();
+		} catch(SQLException e){
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return;
+	}
 	/*
 	public Employee getEmployee(int eid){
 		Employee emp = new Employee();
@@ -697,13 +711,7 @@ public class HmsDA {
 		
 	}
 	
-	public void deleteEmployee(int uid) throws SQLException{
-		
-		
-		PreparedStatement stmt = con.prepareStatement("DELETE FROM users WHERE uid=?");
-		stmt.setInt(1, uid);
-		stmt.execute();
-	}
+
 	
 	
 	public int addRoom(Room room) throws SQLException{

@@ -61,8 +61,7 @@ public class Process extends HttpServlet {
 //					addPatient(request,response);
 				else if(request.getParameter("id")!=null){
 //					
-//					else if(request.getParameter("action").equals("deleteEmp"))
-//						deleteEmployee(request,response);
+
 //					else if(request.getParameter("action").equals("deleteRoom"))
 //						deleteRoom(request,response);
 //					else if(request.getParameter("action").equals("deletePatient"))
@@ -72,6 +71,8 @@ public class Process extends HttpServlet {
 						getDoc(request,response);
 					else if(request.getParameter("action").equals("editDoc"))
 						updateDoc(request,response);
+					else if(request.getParameter("action").equals("deleteEmp"))
+						deleteEmployee(request,response);
 //					else if(request.getParameter("action").equals("getNurse"))
 //						getNurse(request,response);
 //					else if(request.getParameter("action").equals("editNurse"))
@@ -103,7 +104,7 @@ public class Process extends HttpServlet {
 			ex.printStackTrace();
 		}
 	}
-	//의사 추가하는 부분 - 관리자 페이지
+	//�쓽�궗 異붽��븯�뒗 遺�遺� - 愿�由ъ옄 �럹�씠吏�
 	private void addDoc(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
 		
 		int catid = Integer.parseInt(request.getParameter("catid"));
@@ -161,6 +162,12 @@ public class Process extends HttpServlet {
 	    response.setCharacterEncoding("UTF8"); // this line solves the problem
 		response.getWriter().print(emp.toJson());
 	}
+	public void deleteEmployee(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
+	
+		int eid = Integer.parseInt(request.getParameter("id"));
+		hms.deleteEmployee(eid);
+	}
+	
 //	public void getRoom(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
 //		int rid = Integer.parseInt(request.getParameter("id"));
 //		
@@ -250,11 +257,7 @@ public class Process extends HttpServlet {
 //		
 //	}
 //	
-//	public void deleteEmployee(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
-//		
-//		int uid = Integer.parseInt(request.getParameter("id"));
-//		hms.deleteEmployee(uid);
-//	}
+
 //	
 //public void updateRoom(HttpServletRequest request, HttpServletResponse response) throws IOException, NumberFormatException, SQLException{
 //		

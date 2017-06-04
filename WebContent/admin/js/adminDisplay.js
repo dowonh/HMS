@@ -1,6 +1,6 @@
 $(function(){
 	
-	
+	//의사관련
 	$.ajax({
 		url: "../services/category/all",
 		type: "GET",
@@ -11,7 +11,7 @@ $(function(){
 			});
 		}
 	});
-	
+
 	//Display Doctors
 	$.ajax({
 		url: "../services/doctor/all",
@@ -39,7 +39,75 @@ $(function(){
 			
 		}
 	});
-	
+	//카테고리 관련 
+	//For displaying Categories
+	$.ajax({
+		url: "../services/category/all",
+		type: "GET",
+		success: function(categories){
+			categories.forEach(function(category){
+				addCategoryToTable(category);
+			});
+		},
+		error: function(error){
+			console.log(error.responseText);
+		}
+	});
+	//Add Category Form Submission
+	$("#addCategoryForm").submit(function(e){
+		e.preventDefault();
+		
+		$.ajax({
+			url: $(this).attr("action"),
+			type: $(this).attr("method"),
+			data: $(this).serialize(),
+			success: function(category){
+				BootstrapDialog.show({
+					title: "Success!",
+					message: "category added successfully!"
+				});
+				
+				addCategoryToTable(category);
+			},
+			error: function(err){
+				BootstrapDialog.show({
+					type: BootstrapDialog.TYPE_DANGER,
+					title: "Error!",
+					message: err.responseText
+				});
+			}
+		});
+		
+		$("#addCategoryModal").modal("toggle");
+	})
+	//Update Category Form Submission
+	$("#updateCategoryForm").submit(function(e){
+		e.preventDefault();
+		
+		$.ajax({
+			url: $(this).attr("action"),
+			type: $(this).attr("method"),
+			data: $(this).serialize(),
+			success: function(category){
+				BootstrapDialog.show({
+					title: "Success!",
+					message: "category updated successfully!"
+				});
+				
+				$("#tblCategories").DataTable().row($("#catBody #"+category.catid)).remove().draw();
+				addCategoryToTable(category);
+			},
+			error: function(err){
+				BootstrapDialog.show({
+					type: BootstrapDialog.TYPE_DANGER,
+					title: "Error!",
+					message: err.responseText
+				});
+			}
+		});
+		
+		$("#updateCategoryModal").modal("toggle");
+	})
 //	//For Nurses
 //	$.ajax({
 //		url: "../services/nurse/all",
@@ -149,77 +217,12 @@ $(function(){
 //	});
 //	
 //	
-//	//For displaying Categories
-//	$.ajax({
-//		url: "../services/category/all",
-//		type: "GET",
-//		success: function(categories){
-//			categories.forEach(function(category){
-//				addCategoryToTable(category);
-//			});
-//		},
-//		error: function(error){
-//			console.log(error.responseText);
-//		}
-//	});
+
 //	
-	//Add Category Form Submission
-//	$("#addCategoryForm").submit(function(e){
-//		e.preventDefault();
-//		
-//		$.ajax({
-//			url: $(this).attr("action"),
-//			type: $(this).attr("method"),
-//			data: $(this).serialize(),
-//			success: function(category){
-//				BootstrapDialog.show({
-//					title: "Success!",
-//					message: "category added successfully!"
-//				});
-//				
-//				addCategoryToTable(category);
-//			},
-//			error: function(err){
-//				BootstrapDialog.show({
-//					type: BootstrapDialog.TYPE_DANGER,
-//					title: "Error!",
-//					message: err.responseText
-//				});
-//			}
-//		});
-//		
-//		$("#addCategoryModal").modal("toggle");
-//	})
+
 //	
 //	
-//	//Update Category Form Submission
-//	$("#updateCategoryForm").submit(function(e){
-//		e.preventDefault();
-//		
-//		$.ajax({
-//			url: $(this).attr("action"),
-//			type: $(this).attr("method"),
-//			data: $(this).serialize(),
-//			success: function(category){
-//				BootstrapDialog.show({
-//					title: "Success!",
-//					message: "category updated successfully!"
-//				});
-//				
-//				$("#tblCategories").DataTable().row($("#catBody #"+category.catid)).remove().draw();
-//				addCategoryToTable(category);
-//			},
-//			error: function(err){
-//				BootstrapDialog.show({
-//					type: BootstrapDialog.TYPE_DANGER,
-//					title: "Error!",
-//					message: err.responseText
-//				});
-//			}
-//		});
-//		
-//		$("#updateCategoryModal").modal("toggle");
-//	})
+
 //	
 //	
 //	$("table").dataTable();
@@ -348,7 +351,9 @@ function addIndoorToTable(indoor){
 	$(row).attr("id",indoor.pid);
 	//$(".deleteMe").remove();
 }
-
+/////////////////////////////////////
+// 카테고리 관련 부분
+//////////////////////////////////////
 function addCategoryToTable(category){
 	var index = $("#tblCategories").dataTable().fnAddData([
 	                                                       category.catid,
@@ -365,7 +370,8 @@ function updateCategory(catid){
 	
 	$.ajax({
 		url: "../services/category/"+catid,
-		type: "GET",
+		type: "PUT",
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		success: function(category){
 			$("#updateCategoryForm input[name=catName]").val(category.name);
 		},

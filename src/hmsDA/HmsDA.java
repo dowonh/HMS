@@ -25,40 +25,41 @@ public class HmsDA {
 	public HmsDA(){
 		try {
 			Class.forName(JDBC_DRIVER);
+			con = DriverManager.getConnection(JDBC_URL, USER, PASSWD);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
 	}
 	 
-	public void connect() {
-		try {
-			//��񿬰�
-			con = DriverManager.getConnection(JDBC_URL, USER, PASSWD);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void disconnect() {
-		if(stmt != null) {
-			try {
-				stmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		} 
-		if(con != null) {
-			try {
-				con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-	}
+//	public void connect() {
+//		try {
+//			//��񿬰�
+//			con = DriverManager.getConnection(JDBC_URL, USER, PASSWD);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
+//	
+//	public void disconnect() {
+//		if(stmt != null) {
+//			try {
+//				stmt.close();
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+//		} 
+//		if(con != null) {
+//			try {
+//				con.close();
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//	}
 	
 	// 간호사부분
 	public ArrayList<Room> getRoomList(){
-		connect();
+		//connect();
 		ArrayList<Room> roomList = new ArrayList<Room>();
 
 		try{
@@ -79,7 +80,7 @@ public class HmsDA {
 		} catch(SQLException e){
 			e.printStackTrace();
 		} finally {
-			disconnect();
+		//	disconnect();
 		}
 		
 		return roomList;
@@ -87,7 +88,7 @@ public class HmsDA {
 
 
 	public Room getRoom(int rid) throws SQLException{
-		connect();
+		//connect();
 		Room room = new Room();
 		
 		try{
@@ -101,13 +102,13 @@ public class HmsDA {
 		} catch(SQLException e){
 			e.printStackTrace();
 		} finally {
-			disconnect();
+			//disconnect();
 		}
 		return room;
 	}
 	
 	public ArrayList<MedicineGoods> getMedicineGoodsList() throws SQLException{
-		connect();
+		//connect();
 		ArrayList<MedicineGoods> medGoodList = new ArrayList<MedicineGoods>();
 		try{
 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM medicine_goods");
@@ -124,7 +125,7 @@ public class HmsDA {
 		}catch(SQLException e){
 			e.printStackTrace();
 		} finally {
-			disconnect();
+			//disconnect();
 		}
 
 		return medGoodList;
@@ -133,7 +134,7 @@ public class HmsDA {
 	//관리자부분
 	public ArrayList<Employee> getDoctorList(){
 		
-		connect();
+		//connect();
 		ArrayList<Employee> docList = new ArrayList<Employee>();
 		
 		try{
@@ -162,7 +163,7 @@ public class HmsDA {
 		} catch(SQLException e){
 			e.printStackTrace();
 		} finally {
-			disconnect();
+			//disconnect();
 		}
 		
 		return docList;
@@ -188,7 +189,7 @@ public class HmsDA {
 	}
 	
 	public ArrayList<Category> getCategories() throws SQLException {
-		connect();
+		//connect();
 		ArrayList<Category> catList = new ArrayList<Category>();
 		try{
 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM category");
@@ -202,7 +203,7 @@ public class HmsDA {
 		} catch(SQLException e){
 			e.printStackTrace();
 		} finally {
-			disconnect();
+			//disconnect();
 		}
 		return catList;
 	}
@@ -211,7 +212,7 @@ public class HmsDA {
 		
 		
 		int did=0;
-		connect();
+		//connect();
 		try{
 		PreparedStatement stmt = con.prepareStatement("INSERT INTO employee(name,username,passwd,gender,birth,phone,salary,type,category_catid) "
 				+ "VALUES(?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
@@ -232,12 +233,12 @@ public class HmsDA {
 		} catch(SQLException e){
 			e.printStackTrace();
 		} finally {
-			disconnect();
+			//disconnect();
 		}
 		return did;
 	}
 	public void updateDoctor(Employee employee) throws SQLException{
-		connect();
+		//connect();
 		try{
 			PreparedStatement stmt = con.prepareStatement("UPDATE employee set name=?, passwd=?, "
 					+ "gender=?, birth=?, phone=?, salary=?, category_catid=? WHERE eid=?");
@@ -255,14 +256,14 @@ public class HmsDA {
 		} catch(SQLException e){
 			e.printStackTrace();
 		} finally {
-			disconnect();
+			//disconnect();
 		}
 		return;
 	} 
 	
 	public Employee getDoctor(int eid) throws SQLException{
 		Employee emp = new Employee();
-		connect();
+		//connect();
 		try{ 
 			Statement stmt = con.createStatement();
 			ResultSet set = stmt.executeQuery("SELECT * FROM employee WHERE eid="+eid);
@@ -285,14 +286,14 @@ public class HmsDA {
 		} catch(SQLException e){
 			e.printStackTrace();
 		} finally {
-			disconnect();
+			//disconnect();
 		}
 		return emp;
 	}
 	
 	public void deleteEmployee(int eid) throws SQLException{
 		
-		connect();
+		//connect();
 		try{ 
 			PreparedStatement stmt = con.prepareStatement("DELETE FROM employee WHERE eid=?");
 			stmt.setInt(1, eid);
@@ -300,9 +301,60 @@ public class HmsDA {
 		} catch(SQLException e){
 			e.printStackTrace();
 		} finally {
-			disconnect();
+			//disconnect();
 		}
 		return;
+	}
+	//어드민 카테고리 부분
+	public Category addCategory(Category cat) throws SQLException {
+		//connect();
+		int catid=0;
+		try{ 
+			PreparedStatement stmt = con.prepareStatement("INSERT INTO category SET name=?",Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, cat.getName());
+			
+			stmt.executeUpdate();
+			ResultSet keys = stmt.getGeneratedKeys();
+			if(keys!=null && keys.next()) catid=keys.getInt(1);
+			
+			cat.setCatid(catid);
+		} catch(SQLException e){
+			e.printStackTrace();
+		} finally {
+		//	disconnect();
+		}
+		return cat;
+	}
+
+	public Category updateCategory(Category cat) throws SQLException {
+		//connect();
+		try{ 
+			PreparedStatement stmt = con.prepareStatement("UPDATE category SET name=? WHERE catid=?");
+			String name;
+			if(cat.getName() == null) name = " ";
+			else name = cat.getName();
+			stmt.setString(1, name);
+			stmt.setInt(2, cat.getCatid());
+			stmt.execute();
+		} catch(SQLException e){
+			e.printStackTrace();
+		} finally {
+		//	disconnect();
+		}
+		return cat;
+	}
+
+	public void deleteCategory(int catid) throws SQLException {
+		try{
+			PreparedStatement stmt = con.prepareStatement("DELETE FROM category WHERE catid=?");
+			stmt.setInt(1, catid);
+			stmt.execute();
+		}catch(SQLException e){
+			e.printStackTrace();
+		} finally {
+		//	disconnect();
+		}
+		
 	}
 	/*
 	public Employee getEmployee(int eid){
@@ -954,33 +1006,8 @@ public class HmsDA {
 	
 
 
-	public Category addCategory(Category cat) throws SQLException {
-		
-		PreparedStatement stmt = con.prepareStatement("INSERT INTO category SET name=?",Statement.RETURN_GENERATED_KEYS);
-		stmt.setString(1, cat.getName());
-		
-		int catid=0;
-		stmt.executeUpdate();
-		ResultSet keys = stmt.getGeneratedKeys();
-		if(keys!=null && keys.next()) catid=keys.getInt(1);
-		
-		cat.setCatid(catid);
-		return cat;
-	}
 
-	public Category updateCategory(Category cat) throws SQLException {
-		PreparedStatement stmt = con.prepareStatement("UPDATE category SET name=? WHERE catid=?");
-		stmt.setString(1, cat.getName());
-		stmt.setInt(2, cat.getCatid());
-		stmt.execute();
-		return cat;
-	}
 
-	public void deleteCategory(int catid) throws SQLException {
-		PreparedStatement stmt = con.prepareStatement("DELETE FROM category WHERE catid=?");
-		stmt.setInt(1, catid);
-		stmt.execute();
-	}
 
 	public void decreaseBed(int rid) throws SQLException {
 		PreparedStatement stmt = con.prepareStatement("SELECT * FROM room WHERE rid=?");

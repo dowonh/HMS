@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-µ¥ÀÌÅÍ!!!!!!!!!!!!!!!!!!!!
+ë°ì´í„°!!!!!!!!!!!!!!!!!!!!
 
 <%
 	request.setCharacterEncoding("euc-kr");
@@ -29,7 +29,7 @@
 <%=time %>
 
 <script type="text/javascript">
-	alert("Áø·á¿¹¾àÀÌ µÇ¾ú½À´Ï´Ù.");
+	alert("ì§„ë£Œì˜ˆì•½ì´ ë˜ì—ˆìŠµë‹ˆë‹¤.");
 </script>
 
 </body>

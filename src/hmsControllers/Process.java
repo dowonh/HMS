@@ -50,302 +50,278 @@ public class Process extends HttpServlet {
 	public void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		try{
 			
-			if(request.getParameter("action")!=null){
-				
-				if(request.getParameter("action").equals("addDoc"))
+			if(request.getParameter("action")!=null) {
+				if(request.getParameter("action").equals("addDoc")){
 					addDoc(request,response);
-				else if(request.getParameter("action").equals("addNurse"))
-					addNurse(request,response);
-				else if(request.getParameter("action").equals("addRoom"))
-					addRoom(request,response);
-				else if(request.getParameter("action").equals("addPatient"))
-					addPatient(request,response);
+				} //else if(request.getParameter("action").equals("addNurse"))
+//					addNurse(request,response);
+//				else if(request.getParameter("action").equals("addRoom"))
+//					addRoom(request,response);
+//				else if(request.getParameter("action").equals("addPatient"))
+//					addPatient(request,response);
 				else if(request.getParameter("id")!=null){
-					if(request.getParameter("action").equals("deleteEmp"))
-						deleteEmployee(request,response);
-					else if(request.getParameter("action").equals("deleteRoom"))
-						deleteRoom(request,response);
-					else if(request.getParameter("action").equals("deletePatient"))
-						deletePatient(request,response);
+//					
+//					else if(request.getParameter("action").equals("deleteEmp"))
+//						deleteEmployee(request,response);
+//					else if(request.getParameter("action").equals("deleteRoom"))
+//						deleteRoom(request,response);
+//					else if(request.getParameter("action").equals("deletePatient"))
+//						deletePatient(request,response);
+//
+					if(request.getParameter("action").equals("getDoc"))
+						getDoc(request,response);
 					else if(request.getParameter("action").equals("editDoc"))
 						updateDoc(request,response);
-					else if(request.getParameter("action").equals("getDoc"))
-						getDoc(request,response);
-					else if(request.getParameter("action").equals("getNurse"))
-						getNurse(request,response);
-					else if(request.getParameter("action").equals("editNurse"))
-						updateNurse(request,response);
-					else if(request.getParameter("action").equals("getRoom"))
-						getRoom(request,response);
-					else if(request.getParameter("action").equals("editRoom"))
-						updateRoom(request,response);
-					else
-						request.getRequestDispatcher("index.jsp").forward(request, response);
-				}
-				else
+//					else if(request.getParameter("action").equals("getNurse"))
+//						getNurse(request,response);
+//					else if(request.getParameter("action").equals("editNurse"))
+//						updateNurse(request,response);
+//					else if(request.getParameter("action").equals("getRoom"))
+//						getRoom(request,response);
+//					else if(request.getParameter("action").equals("editRoom"))
+//						updateRoom(request,response);
+//					else
+//						request.getRequestDispatcher("index.jsp").forward(request, response);
+				}else{
 					request.getRequestDispatcher("index.jsp").forward(request, response);
-			}
-			else
+				}
+			} else{
 				request.getRequestDispatcher("index.jsp").forward(request, response);
-			
-		}
-		catch(SQLException ex){
+			} 
+		} catch(SQLException ex){
 			System.out.print(ex.getMessage());
 			response.setStatus(ex.getErrorCode());
 			response.setContentType("text/plain");
 			response.getWriter().print(ex.getMessage());
 			return;
-		}
-		catch(NumberFormatException e){
+		} catch(NumberFormatException e){
 			response.setContentType("text/plain");
 			response.getWriter().print(e.getMessage());
-		}
-		catch(IOException e){
-			
-			e.printStackTrace();
-		}
-		catch(ServletException ex){
+		} catch(IOException e){
+		 	e.printStackTrace();
+		} catch(ServletException ex){
 			ex.printStackTrace();
 		}
 	}
-	
-	public void getRoom(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
-		int rid = Integer.parseInt(request.getParameter("id"));
-		
-		Room room = hms.getRoom(rid);
-		
-		response.setContentType("application/json");
-		response.getWriter().print(room.toJson());
-		
-	}
-	
-	
-	public void updateNurse(HttpServletRequest request, HttpServletResponse response) throws IOException, NumberFormatException, SQLException{
-		
-		Nurse nurse = hms.getNurse(Integer.parseInt(request.getParameter("id")));
-		Employee employee = nurse.getEmployee();
-		User user = employee.getUser();
-		
-		
-		user.setUsername(request.getParameter("username"));
-		user.setPassword(request.getParameter("password"));
-		user.setType("doctor");
-		//hms.updateUser(user);
-		
-		
-		employee.setFirstname(request.getParameter("firstname"));
-		employee.setLastname(request.getParameter("lastname"));
-		employee.setSalary(Integer.parseInt(request.getParameter("salary")));
-		employee.setPhone(request.getParameter("phone"));
-		employee.setGender(request.getParameter("gender"));
-		employee.setDob(request.getParameter("dob"));
-		employee.setUid(user.getUid());
-		//hms.updateEmployee(employee);
-		
-		
-		nurse.setExperience(request.getParameter("experience"));
-		nurse.setEid(employee.getEid());
-		hms.updateNurse(nurse);
-		
-		response.setContentType("application/json");
-		response.getWriter().print(nurse.toJson());
-		
-	}
-	
-	
-	public void updateDoc(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
-
-		int catid = Integer.parseInt(request.getParameter("catid"));
-		
-		doctornote doctor = hms.getDoctor(Integer.parseInt(request.getParameter("id")));
-		Employee employee = doctor.getEmployee();
-		User user = employee.getUser();
-		
-		
-		user.setUsername(request.getParameter("username"));
-		user.setPassword(request.getParameter("password"));
-		user.setType("doctor");
-		//hms.updateUser(user);
-		
-		
-		employee.setFirstname(request.getParameter("firstname"));
-		employee.setLastname(request.getParameter("lastname"));
-		employee.setSalary(Integer.parseInt(request.getParameter("salary")));
-		employee.setPhone(request.getParameter("phone"));
-		employee.setGender(request.getParameter("gender"));
-		employee.setDob(request.getParameter("dob"));
-		employee.setUid(user.getUid());
-		//hms.updateEmployee(employee);
-		
-		
-		doctor.setCatid(catid);
-		doctor.setEid(employee.getEid());
-		hms.updateDoctor(doctor);
-		
-		response.setContentType("application/json");
-		response.getWriter().print(hms.getDoctor(Integer.parseInt(request.getParameter("id"))).toJson());
-		
-		
-	}
-	
-	public void getDoc(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
-		int did = Integer.parseInt(request.getParameter("id"));
-		
-		doctornote doc = hms.getDoctor(did);
-		
-		response.setContentType("application/json");
-		response.getWriter().print(doc.toJson());
-		
-		
-	}
-	
-	
-	
-	public void getNurse(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
-		
-		int nid = Integer.parseInt(request.getParameter("id"));
-		
-		Nurse nurse = hms.getNurse(nid);
-		
-		response.setContentType("application/json");
-		response.getWriter().print(nurse.toJson());
-		
-	}
-	
-	
-	public void addPatient(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
-		String fullName = request.getParameter("fullname");
-		String gender = request.getParameter("gender");
-		String dob = request.getParameter("dob");
-		int catid = Integer.parseInt(request.getParameter("catid"));
-		
-		Patient p = new Patient();
-		p.setName(fullName);
-		p.setGender(gender);
-		p.setDob(dob);
-		p.setCatid(catid);
-		
-		hms.addPatient(p);
-		
-	}
-	
-	public void deletePatient(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
-		
-		int pid = Integer.parseInt(request.getParameter("id"));
-		hms.deletePatient(pid);
-
-	}
-	
-	public void deleteRoom(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
-		int rid = Integer.parseInt(request.getParameter("id"));
-		hms.deleteRoom(rid);
-		
-	}
-	
-	public void deleteEmployee(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
-		
-		int uid = Integer.parseInt(request.getParameter("id"));
-		hms.deleteEmployee(uid);
-	}
-	
-public void updateRoom(HttpServletRequest request, HttpServletResponse response) throws IOException, NumberFormatException, SQLException{
-		
-		Room room;
-		room = hms.getRoom(Integer.parseInt(request.getParameter("id")));
-		room.setNid(Integer.parseInt(request.getParameter("nurseId")));
-		room.setNurse(hms.getNurse(room.getNid()));
-		room.setTotalBeds(Integer.parseInt(request.getParameter("totalbeds")));
-		
-		hms.updateRoom(room);
-		
-		response.setContentType("application/json");
-		response.getWriter().print(room.toJson());
-		
-		System.out.print("room updated."+room.getRid()+room.getNurse().getEmployee().getFirstname());
-		
-	}
-	
-	public void addRoom(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
-
-		int nid = Integer.parseInt(request.getParameter("nurseId"));
-		int totalbeds = Integer.parseInt(request.getParameter("totalbeds"));
-		
-		Room room = new Room();
-		room.setNid(nid);
-		room.setTotalBeds(totalbeds);
-		Nurse nurse = hms.getNurse(room.getNid());
-		room.setNurse(nurse);
-		room.setRid(hms.addRoom(room));
-		
-		
-		response.setContentType("application/json");
-		response.getWriter().print(room.toJson());
-	}
-	
-	public void addNurse(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
-		
-		User user = new User();
-		user.setUsername(request.getParameter("username"));
-		user.setPassword(request.getParameter("password"));
-		user.setType("nurse");
-		//int uid = hms.addUser(nurseUser);
-		
-		Employee employee = new Employee();
-		employee.setFirstname(request.getParameter("firstname"));
-		employee.setLastname(request.getParameter("lastname"));
-		employee.setSalary(Integer.parseInt(request.getParameter("salary")));
-		employee.setPhone(request.getParameter("phone"));
-		employee.setGender("female");
-		employee.setDob(request.getParameter("dob"));
-		employee.setUser(user);
-		//employee.setUid(uid);
-		//int eid = hms.addEmployee(employee);
-		
-		
-		Nurse nurse = new Nurse();
-		//nurse.setEid(eid);
-		nurse.setExperience(request.getParameter("experience"));
-		nurse.setEmployee(employee);
-		int nid = hms.addNurse(nurse);
-			
-			
-			
-
-			response.setContentType("application/json");
-			response.getWriter().print(nurse.toJson());
-		
-	}
-	
+	//의사 추가하는 부분 - 관리자 페이지
 	private void addDoc(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
 		
 		int catid = Integer.parseInt(request.getParameter("catid"));
-		
-		User docUser = new User();
-		docUser.setUsername(request.getParameter("username"));
-		docUser.setPassword(request.getParameter("password"));
-		docUser.setType("doctor");
-		//hms.addUser(docUser);
-		
+		int salary = Integer.parseInt(request.getParameter("salary"));
+ 
 		Employee employee = new Employee();
-		employee.setFirstname(request.getParameter("firstname"));
-		employee.setLastname(request.getParameter("lastname"));
-		employee.setSalary(Integer.parseInt(request.getParameter("salary")));
-		employee.setPhone(request.getParameter("phone"));
+		employee.setName(request.getParameter("name"));
+		employee.setUsername(request.getParameter("username"));
+		employee.setPasswd(request.getParameter("password"));
 		employee.setGender(request.getParameter("gender"));
-		employee.setDob(request.getParameter("dob"));
-		//employee.setUid(docUser.getUid());
-		employee.setUser(docUser);
-		//hms.addEmployee(employee);
-		
-		doctornote doctor = new doctornote();
-		doctor.setCatid(catid);
-		//doctor.setEid(employee.getEid());
-		doctor.setEmployee(employee);
-		doctor.setCategory(hms.getCategory(doctor.getCatid()));
-		hms.addDoctor(doctor);
-		
+		employee.setBirth(request.getParameter("birth"));
+		employee.setPhone(request.getParameter("phone"));
+		employee.setSalary(salary);
+		employee.setType("doctor");
+		employee.setCatid(catid);
+ 
+		hms.addDoctor(employee);
+	    response.setCharacterEncoding("UTF8"); // this line solves the problem
 		response.setContentType("application/json");
-		response.getWriter().print(doctor.toJson());
+		response.getWriter().print(employee.toJson());
 		
 	}
+	
+	public void updateDoc(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
+		int eid = Integer.parseInt(request.getParameter("id"));
+		int catid = Integer.parseInt(request.getParameter("catid"));
+		
+		int salary = Integer.parseInt(request.getParameter("salary"));
+ 
+		Employee employee = new Employee();
+		employee.setEid(eid);
+		employee.setName(request.getParameter("name"));
+		employee.setUsername(request.getParameter("username"));
+		employee.setPasswd(request.getParameter("password"));
+		employee.setGender(request.getParameter("gender"));
+		employee.setBirth(request.getParameter("birth"));
+		employee.setPhone(request.getParameter("phone"));
+		employee.setSalary(salary);
+		employee.setType("doctor");
+		employee.setCatid(catid);
+		
+		hms.updateDoctor(employee);
+//		response.setCharacterEncoding("UTF8"); // this line solves the problem
+//		response.setContentType("application/json");
+//		response.getWriter().print(employee.toJson());
+	}
+  
+	 
+	public void getDoc(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
+		int eid = Integer.parseInt(request.getParameter("id"));
+
+		Employee emp = hms.getDoctor(eid); 
+		
+		response.setContentType("application/json");
+	    response.setCharacterEncoding("UTF8"); // this line solves the problem
+		response.getWriter().print(emp.toJson());
+	}
+//	public void getRoom(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
+//		int rid = Integer.parseInt(request.getParameter("id"));
+//		
+//		Room room = hms.getRoom(rid);
+//		
+//		response.setContentType("application/json");
+//		response.getWriter().print(room.toJson());
+//		
+//	}
+//	
+//	
+//	public void updateNurse(HttpServletRequest request, HttpServletResponse response) throws IOException, NumberFormatException, SQLException{
+//		
+//		Nurse nurse = hms.getNurse(Integer.parseInt(request.getParameter("id")));
+//		Employee employee = nurse.getEmployee();
+//		User user = employee.getUser();
+//		
+//		
+//		user.setUsername(request.getParameter("username"));
+//		user.setPassword(request.getParameter("password"));
+//		user.setType("doctor");
+//		//hms.updateUser(user);
+//		
+//		
+//		employee.setFirstname(request.getParameter("firstname"));
+//		employee.setLastname(request.getParameter("lastname"));
+//		employee.setSalary(Integer.parseInt(request.getParameter("salary")));
+//		employee.setPhone(request.getParameter("phone"));
+//		employee.setGender(request.getParameter("gender"));
+//		employee.setDob(request.getParameter("dob"));
+//		employee.setUid(user.getUid());
+//		//hms.updateEmployee(employee);
+//		
+//		
+//		nurse.setExperience(request.getParameter("experience"));
+//		nurse.setEid(employee.getEid());
+//		hms.updateNurse(nurse);
+//		
+//		response.setContentType("application/json");
+//		response.getWriter().print(nurse.toJson());
+//		
+//	}
+//	
+//	
+
+//	
+//	
+//	
+//	public void getNurse(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
+//		
+//		int nid = Integer.parseInt(request.getParameter("id"));
+//		
+//		Nurse nurse = hms.getNurse(nid);
+//		
+//		response.setContentType("application/json");
+//		response.getWriter().print(nurse.toJson());
+//		
+//	}
+//	
+//	
+//	public void addPatient(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
+//		String fullName = request.getParameter("fullname");
+//		String gender = request.getParameter("gender");
+//		String dob = request.getParameter("dob");
+//		int catid = Integer.parseInt(request.getParameter("catid"));
+//		
+//		Patient p = new Patient();
+//		p.setName(fullName);
+//		p.setGender(gender);
+//		p.setDob(dob);
+//		p.setCatid(catid);
+//		
+//		hms.addPatient(p);
+//		
+//	}
+//	
+//	public void deletePatient(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
+//		
+//		int pid = Integer.parseInt(request.getParameter("id"));
+//		hms.deletePatient(pid);
+//
+//	}
+//	
+//	public void deleteRoom(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
+//		int rid = Integer.parseInt(request.getParameter("id"));
+//		hms.deleteRoom(rid);
+//		
+//	}
+//	
+//	public void deleteEmployee(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
+//		
+//		int uid = Integer.parseInt(request.getParameter("id"));
+//		hms.deleteEmployee(uid);
+//	}
+//	
+//public void updateRoom(HttpServletRequest request, HttpServletResponse response) throws IOException, NumberFormatException, SQLException{
+//		
+//		Room room;
+//		room = hms.getRoom(Integer.parseInt(request.getParameter("id")));
+//		room.setNid(Integer.parseInt(request.getParameter("nurseId")));
+//		room.setNurse(hms.getNurse(room.getNid()));
+//		room.setTotalBeds(Integer.parseInt(request.getParameter("totalbeds")));
+//		
+//		hms.updateRoom(room);
+//		
+//		response.setContentType("application/json");
+//		response.getWriter().print(room.toJson());
+//		
+//		System.out.print("room updated."+room.getRid()+room.getNurse().getEmployee().getFirstname());
+//		
+//	}
+//	
+//	public void addRoom(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
+//
+//		int nid = Integer.parseInt(request.getParameter("nurseId"));
+//		int totalbeds = Integer.parseInt(request.getParameter("totalbeds"));
+//		
+//		Room room = new Room();
+//		room.setNid(nid);
+//		room.setTotalBeds(totalbeds);
+//		Nurse nurse = hms.getNurse(room.getNid());
+//		room.setNurse(nurse);
+//		room.setRid(hms.addRoom(room));
+//		
+//		
+//		response.setContentType("application/json");
+//		response.getWriter().print(room.toJson());
+//	}
+//	
+//	public void addNurse(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
+//		
+//		User user = new User();
+//		user.setUsername(request.getParameter("username"));
+//		user.setPassword(request.getParameter("password"));
+//		user.setType("nurse");
+//		//int uid = hms.addUser(nurseUser);
+//		
+//		Employee employee = new Employee();
+//		employee.setFirstname(request.getParameter("firstname"));
+//		employee.setLastname(request.getParameter("lastname"));
+//		employee.setSalary(Integer.parseInt(request.getParameter("salary")));
+//		employee.setPhone(request.getParameter("phone"));
+//		employee.setGender("female");
+//		employee.setDob(request.getParameter("dob"));
+//		employee.setUser(user);
+//		//employee.setUid(uid);
+//		//int eid = hms.addEmployee(employee);
+//		
+//		
+//		Nurse nurse = new Nurse();
+//		//nurse.setEid(eid);
+//		nurse.setExperience(request.getParameter("experience"));
+//		nurse.setEmployee(employee);
+//		int nid = hms.addNurse(nurse);
+//			
+//			
+//			
+//
+//			response.setContentType("application/json");
+//			response.getWriter().print(nurse.toJson());
+//		
+//	}
+
 }

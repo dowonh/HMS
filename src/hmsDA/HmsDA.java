@@ -16,7 +16,7 @@ import com.google.gson.JsonElement;
 
 public class HmsDA {
 	private static final String JDBC_DRIVER = "org.gjt.mm.mysql.Driver";
-	private static final String JDBC_URL = "jdbc:mysql://loveljhs2.iptime.org:3306/hms";
+	private static final String JDBC_URL = "jdbc:mysql://loveljhs2.iptime.org:3306/hms?useUnicode=true&characterEncoding=UTF-8";
 	private static final String USER = "root";
 	private static final String PASSWD = "test";
 	private Connection con = null;
@@ -29,10 +29,10 @@ public class HmsDA {
 			e.printStackTrace();
 		}		
 	}
-	
+	 
 	public void connect() {
 		try {
-			//µ∫Òø¨∞·
+			//ÔøΩÔøΩÒø¨∞ÔøΩ
 			con = DriverManager.getConnection(JDBC_URL, USER, PASSWD);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -55,8 +55,8 @@ public class HmsDA {
 			}
 		}
 	}
-	// room ¡§∫∏ - ¿Ã¡§«ˆ
 	
+	// Í∞ÑÌò∏ÏÇ¨Î∂ÄÎ∂Ñ
 	public ArrayList<Room> getRoomList(){
 		connect();
 		ArrayList<Room> roomList = new ArrayList<Room>();
@@ -130,6 +130,166 @@ public class HmsDA {
 		return medGoodList;
 	}
 	
+	//Í¥ÄÎ¶¨ÏûêÎ∂ÄÎ∂Ñ
+	public ArrayList<Employee> getDoctorList(){
+		
+		connect();
+		ArrayList<Employee> docList = new ArrayList<Employee>();
+		
+		try{
+
+			stmt = con.createStatement();
+			ResultSet set = stmt.executeQuery("SELECT * FROM employee where type = 'doctor'");
+ 
+			while(set.next()){
+				Employee doc = new Employee();  
+				doc.setEid(set.getInt("eid"));
+				doc.setName(set.getString("name"));
+				doc.setUsername(set.getString("username"));
+				doc.setPasswd(set.getString("passwd"));
+				doc.setGender(set.getString("gender"));
+				if(set.getString("birth") == null ){
+					 doc.setBirth("");
+				}else{
+					doc.setBirth(set.getString("birth"));
+				}
+				doc.setPhone(set.getString("phone"));
+				doc.setSalary(set.getInt("salary"));
+ 
+				doc.setCategory(getCategory(set.getInt("category_catid")));
+				docList.add(doc);
+			} 
+		} catch(SQLException e){
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		
+		return docList;
+	}
+	
+	public Category getCategory(int catid) throws SQLException{
+		//connect();
+		Category cat = new Category();
+		try{
+			Statement stmtCate = con.createStatement();
+			ResultSet setCate = stmtCate.executeQuery("SELECT * FROM category WHERE catid="+catid);
+			if(!setCate.next()) return null;
+			
+			cat.setCatid(catid);
+			cat.setName(setCate.getString("name"));
+		} catch(SQLException e){
+			e.printStackTrace();
+		} finally {
+			//disconnect();
+		}
+		
+		return cat;
+	}
+	
+	public ArrayList<Category> getCategories() throws SQLException {
+		connect();
+		ArrayList<Category> catList = new ArrayList<Category>();
+		try{
+			PreparedStatement stmt = con.prepareStatement("SELECT * FROM category");
+			ResultSet set = stmt.executeQuery();
+			while(set.next()){
+				Category cat = new Category();
+				cat.setCatid(set.getInt("catid"));
+				cat.setName(set.getString("name"));
+				catList.add(cat);
+			}
+		} catch(SQLException e){
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return catList;
+	}
+	//Í¥ÄÎ¶¨Ïûê ÌéòÏù¥ÏßÄ - ÏùòÏÇ¨ Ï∂îÍ∞Ä
+	public int addDoctor(Employee employee)throws SQLException{
+		
+		
+		int did=0;
+		connect();
+		try{
+		PreparedStatement stmt = con.prepareStatement("INSERT INTO employee(name,username,passwd,gender,birth,phone,salary,type,category_catid) "
+				+ "VALUES(?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, employee.getName());
+			stmt.setString(2, employee.getUsername());
+			stmt.setString(3, employee.getPasswd());
+			stmt.setString(4, employee.getGender());
+			stmt.setString(5, employee.getBirth());
+			stmt.setString(6, employee.getPhone());
+			stmt.setInt(7, employee.getSalary());
+			stmt.setString(8, employee.getType());
+			stmt.setInt(9, employee.getCatid());
+			
+			stmt.executeUpdate();
+			ResultSet keys = stmt.getGeneratedKeys();
+			if(keys!=null && keys.next()) did=keys.getInt(1);
+
+		} catch(SQLException e){
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return did;
+	}
+	public void updateDoctor(Employee employee) throws SQLException{
+		connect();
+		try{
+			PreparedStatement stmt = con.prepareStatement("UPDATE employee set name=?, passwd=?, "
+					+ "gender=?, birth=?, phone=?, salary=?, category_catid=? WHERE eid=?");
+			stmt.setString(1, employee.getName());
+			stmt.setString(2, employee.getPasswd());
+			
+			stmt.setString(3, employee.getGender());
+			stmt.setString(4, employee.getBirth());
+			stmt.setString(5, employee.getPhone());
+			stmt.setInt(6, employee.getSalary());
+			stmt.setInt(7, employee.getCatid());
+			stmt.setInt(8, employee.getEid());
+
+			stmt.execute();
+		} catch(SQLException e){
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return;
+	} 
+	
+	public Employee getDoctor(int eid) throws SQLException{
+		Employee emp = new Employee();
+		connect();
+		try{ 
+			Statement stmt = con.createStatement();
+			ResultSet set = stmt.executeQuery("SELECT * FROM employee WHERE eid="+eid);
+			if(!set.next()) return null; 
+			emp.setEid(set.getInt("eid"));
+			emp.setName(set.getString("name"));
+			emp.setUsername(set.getString("username"));
+			emp.setPasswd(set.getString("passwd"));
+			emp.setGender(set.getString("gender"));
+			if(set.getString("birth") == null ){
+				emp.setBirth("");
+			}else{
+				emp.setBirth(set.getString("birth"));
+			}
+			emp.setPhone(set.getString("phone"));
+			emp.setSalary(set.getInt("salary"));
+			emp.setCatid(set.getInt("category_catid"));
+			emp.setCategory(getCategory(set.getInt("category_catid")));
+ 
+		} catch(SQLException e){
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return emp;
+	}
+	
 	/*
 	public Employee getEmployee(int eid){
 		Employee emp = new Employee();
@@ -154,17 +314,7 @@ public class HmsDA {
 		return emp;
 	}
 	
-	public Category getCategory(int catid) throws SQLException{
-		Category cat = new Category();
 
-		Statement stmt4 = con.createStatement();
-		ResultSet set4 = stmt4.executeQuery("SELECT * FROM category WHERE catid="+catid);
-		if(!set4.next()) return null;
-		
-		cat.setCatid(catid);
-			cat.setName(set4.getString("name"));
-		return cat;
-	}
 	
 	public Category getCategory(String name){
 		Category cat = new Category();
@@ -182,20 +332,7 @@ public class HmsDA {
 		return cat;
 	}
 	
-	public doctornote getDoctor(int did) throws SQLException{
-		doctornote doc = new doctornote();
 
-		Statement stmt3 = con.createStatement();
-		ResultSet set3 = stmt3.executeQuery("SELECT * FROM doctor WHERE did="+did);
-		if(!set3.next()) return null;
-		doc.setDid(set3.getInt("did"));
-		doc.setCatid(set3.getInt("catid"));
-		doc.setEid(set3.getInt("eid"));
-		
-		doc.setCategory(getCategory(doc.getCatid()));
-		doc.setEmployee(getEmployee(doc.getEid()));
-		return doc;
-	}
 	
 	public Patient getPatient(int pid) throws SQLException{
 		Patient patient = null;
@@ -247,37 +384,7 @@ public class HmsDA {
 		return nurse;
 	}
 	
-	public ArrayList<doctornote> getDoctorList(){
-		
-		ArrayList<doctornote> docList = new ArrayList<doctornote>();
-		/*Doctor doc = new Doctor();
-		Employee emp = new Employee();
-		Category cat = new Category();
-		Statement stmt;
-		
-		try{
-			stmt = con.createStatement();
-			ResultSet set = stmt.executeQuery("SELECT * FROM doctor");
-			while(set.next()){
-				doctornote doc = new doctornote();
-				int did = set.getInt("did");
-				int catid = set.getInt("catid");
-				int eid = set.getInt("eid");
-				
-				doc.setDid(did);
-				doc.setCatid(catid);
-				doc.setEid(eid);
-				doc.setEmployee(getEmployee(eid));
-				doc.setCategory(getCategory(catid));
-				docList.add(doc);
-			}
-		}
-		catch(SQLException e){
-			e.printStackTrace();
-		}
-		
-		return docList;
-	}
+	
 	
 	public ArrayList<Patient> getPatientList(){
 		
@@ -517,24 +624,7 @@ public class HmsDA {
 	}
 	
 	
-	public int addDoctor(doctornote doctor)throws SQLException{
-		
-		doctor.setEid(addEmployee(doctor.getEmployee()));
-		
-		int did=0;
-		
-		PreparedStatement stmt = con.prepareStatement("INSERT INTO doctor(catid,eid) VALUES(?,?)", Statement.RETURN_GENERATED_KEYS);
-		stmt.setInt(1, doctor.getCatid());
-		stmt.setInt(2, doctor.getEid());
-		
-		stmt.executeUpdate();
-		ResultSet keys = stmt.getGeneratedKeys();
-		if(keys!=null && keys.next()) did=keys.getInt(1);
-		doctor.setDid(did);
-		return did;
-		
-		
-	}
+
 	
 	public int addNurse(Nurse nurse) throws SQLException{
 		
@@ -657,33 +747,8 @@ public class HmsDA {
 		stmt.setInt(4, user.getUid());
 		stmt.execute();
 	}
-	public void updateEmployee(Employee emp) throws SQLException{
-		
-		updateUser(emp.getUser());
-		
-		
-		PreparedStatement stmt = con.prepareStatement("UPDATE employee set firstname=?, lastname=?, dob=?, salary=?,"
-				+ "gender=?, phone=? WHERE eid=?");
-		stmt.setString(1, emp.getFirstname());
-		stmt.setString(2, emp.getLastname());
-		stmt.setString(3, emp.getDob());
-		stmt.setInt(4, emp.getSalary());
-		stmt.setString(5, emp.getGender());
-		stmt.setString(6, emp.getPhone());
-		stmt.setInt(7, emp.getEid());
-		stmt.execute();
-	}
-	public void updateDoctor(doctornote doc) throws SQLException{
-		
-		updateEmployee(doc.getEmployee());
-		
-		
-		PreparedStatement stmt = con.prepareStatement("UPDATE doctor set catid=? WHERE did=?");
-		stmt.setInt(1, doc.getCatid());
-		stmt.setInt(2, doc.getDid());
-		
-		stmt.execute();
-	}
+
+
 	
 	public void updateNurse(Nurse nurse) throws SQLException{
 		
@@ -877,27 +942,9 @@ public class HmsDA {
 		
 	}
 
-	public ArrayList<Category> getCategories() throws SQLException {
-		
-		PreparedStatement stmt = con.prepareStatement("SELECT * FROM category");
-		ResultSet set = stmt.executeQuery();
-		
-		return getCategoryListFromSet(set);
-		
-	}
+
 	
-	public ArrayList<Category> getCategoryListFromSet(ResultSet set) throws SQLException{
-		ArrayList<Category> catList = new ArrayList<Category>();
-		
-		while(set.next()){
-			Category cat = new Category();
-			cat.setCatid(set.getInt("catid"));
-			cat.setName(set.getString("name"));
-			catList.add(cat);
-		}
-		
-		return catList;
-	}
+
 
 	public Category addCategory(Category cat) throws SQLException {
 		

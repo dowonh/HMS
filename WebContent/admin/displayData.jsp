@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     <%@ page import="hmsControllers.*"  %>
     <%@ page import="hmsModels.*"  %>
     <%@ page import="java.util.*"  %>
@@ -55,18 +55,18 @@
 <body>
 <div id="page-content-wrapper">
 		<ul class="nav nav-tabs">
-			<li class="active"><a data-toggle="tab" href="#patients">Patients</a></li>
-			<li><a data-toggle="tab" href="#employees">Doctors</a></li>
+			<li class="active"><a data-toggle="tab" href="#doctors">Doctors</a></li>
 			<li><a data-toggle="tab" href="#nurses">Nurses</a><li>
+			<li><a data-toggle="tab" href="#patients">Patients</a></li>
 			<li><a data-toggle="tab" href="#rooms">Rooms</a><li>
 			<li><a data-toggle="tab" href="#indoors">Indoor Patients</a><li>
 			<li><a data-toggle="tab" href="#categories">Categories</a><li>
 		</ul>
 		
 		<div class="tab-content">
-			<%@ include file="displayPatients.jsp" %>
 			<%@ include file="displayDoctors.jsp" %>
 			<%@ include file="displayNurses.jsp" %>
+			<%@ include file="displayPatients.jsp" %>
 			<%@ include file="displayRooms.jsp" %>
 			<%@ include file="displayIndoors.jsp" %>
 			<%@ include file="displayCategories.jsp" %>

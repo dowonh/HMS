@@ -14,18 +14,19 @@ import hmsModels.MedicineGoods;
 import hmsModels.Patient;
 import hmsModels.Prescription;
 import hmsModels.Room;
-
+ 
 
 public class HmsFactory {
-
+ 
 	HmsDA hms = new HmsDA();
 	private static Gson g = new Gson();
 	
 	public static String toJson(Object obj){
+		
 		return g.toJson(obj);
 	}
 	
-	// °£È£»ç ºÎºÐ - ÀÌÁ¤Çö
+	// ï¿½ï¿½È£ï¿½ï¿½ ï¿½Îºï¿½ - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public String getRoomsJson(){
 		ArrayList<Room> roomList = hms.getRoomList();
 		
@@ -35,7 +36,7 @@ public class HmsFactory {
 	public String getRoomJson(int rid) throws SQLException{
 		
 		Room room;
-		room = hms.getRoom(rid);
+		room = hms.getRoom(rid); 
 		
 		return g.toJson(room);
 	}
@@ -44,6 +45,16 @@ public class HmsFactory {
 		ArrayList<MedicineGoods> medList = hms.getMedicineGoodsList();
 		
 		return g.toJson(medList);
+	}
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½
+	public String getDoctorsJson(){
+		ArrayList<Employee> docList = hms.getDoctorList();
+		return g.toJson(docList);
+	}
+	
+	public String getCategoriesJson() throws SQLException {
+		
+		return g.toJson(hms.getCategories());
 	}
 	
 	  /*public ArrayList<Room> getRooms(){
@@ -64,10 +75,7 @@ public class HmsFactory {
 	public ArrayList<Indoor> getIndoors(){
 		return hms.getIndoorList();
 	}
-	public String getDoctorsJson(){
-		ArrayList<doctornote> docList = hms.getDoctorList();
-		return g.toJson(docList);
-	}
+
 	
 	public String getNursesJson(){
 		ArrayList<Nurse> nurseList = hms.getNurseList();
@@ -245,10 +253,7 @@ public class HmsFactory {
 		hms.removeMedicine(mid);
 	}
 
-	public String getCategoriesJson() throws SQLException {
-		
-		return g.toJson(hms.getCategories());
-	}
+
 
 	public String addCategory(Category cat) throws SQLException {
 		

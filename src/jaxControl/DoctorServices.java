@@ -11,7 +11,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 
-@Path("")
+@Path("") 
 public class DoctorServices {
 
 	HmsFactory hms = new HmsFactory();
@@ -24,15 +24,15 @@ public class DoctorServices {
 	}
 	
 	
-	@GET
-	@Path("doctor/{did}")
-	@Produces("application/json")
-	public String getDoctorJson(@PathParam("did") int did){
-		try {
-			return hms.getDoctorJson(did);
-		} catch (SQLException e) {
-			Response.serverError();
-			return e.getMessage();
-		}
-	}
+//	@GET
+//	@Path("doctor/{did}")
+//	@Produces("application/json")
+//	public String getDoctorJson(@PathParam("did") int did){
+//		try {
+//			return hms.getDoctorJson(did);
+//		} catch (SQLException e) {
+//			Response.serverError();
+//			return e.getMessage();
+//		}
+//	}
 }

@@ -205,56 +205,60 @@ $(document).ready(function(){
 		$("#editRoomModal").modal("toggle"); //this line is awesome!!
 		
 	});
-	
-	
+
 	$("#docUpdateForm").submit(function(e){
-		//e.preventDefault();
-
-
+		e.preventDefault();
+		alert($(this).serialize());
 		if($("#docUpdateForm .dob").val() == ''){
 			alert('Date of birth cannot be empty');
 			return;
 		}
-		
-		
-		
-		$.ajax({
+
+		$.ajax({ 
 			type: $(this).attr("method"),
 			url: $(this).attr("action"),
 			data: $(this).serialize(),
 			success: function(doctor){
-				console.log(doctor);
 				$(".docMsg").removeClass("alert-danger");
 				$(".docMsg").addClass("alert-success").html("<strong>Success</strong>: Record Updation Success!");
-				
-				//$("#docBody #"+doctor.employee.user.uid).remove();
-				$("#displayDoctors").DataTable().row($("#docBody #"+doctor.employee.user.uid)).remove().draw();
+				$("#displayDoctors").DataTable().row($("#docBody #"+doctor.eid)).remove().draw();
 				addDocToTable(doctor);
 			},
 			error: function(xml,status,errorThrown){
+				alert("error");
 				$(".docMsg").addClass("alert-danger").html("<strong>Error</strong>: "+xml.responseText);
 			}
 			
 		});
 		
-		
-		
 		$("#editDocModal").modal("toggle"); //this line is awesome!!
 		
-		return false;
-		
 	});
-	
+
 	
 });
 
 
+function addDocToTable(doctor){
+	alert("addDocTotable");
+	var index = $("#displayDoctors").dataTable().fnAddData([
+										doctor.username,
+									    doctor.passwd,
+									    doctor.name,
+									    doctor.gender,
+									    doctor.birth,
+									    doctor.phone,
+									    doctor.salary,
+									    doctor.catid,
+									    "<a onClick='empDelete("+doctor.eid+",1)' href='#'  >Delete</a> / <a href='#' onclick='editDoc("+doctor.eid+")'>Edit</a>"
+					                 ]);
+	var row = $("#displayDoctors").dataTable().fnGetNodes(index);
+	$(row).attr("id",doctor.eid);
+	location.reload(true);
+}
 
 
-
-
-
-function addNurseToTable(nurse){
+function addNurseToTable(nurse){ 
 	var index = $("#displayNurses").dataTable().fnAddData([
 					                                          nurse.employee.firstname,
 					                                          nurse.employee.lastname,
@@ -270,26 +274,6 @@ function addNurseToTable(nurse){
 	var row = $("#displayNurses").dataTable().fnGetNodes(index);
 	$(row).attr("id",nurse.employee.user.uid);
 	//$(".deleteMe").remove();
-}
-
-
-function addDocToTable(doctor){
-	var index = $("#displayDoctors").dataTable().fnAddData([
-					                                          doctor.employee.firstname,
-					                                          doctor.employee.lastname,
-					                                          doctor.employee.user.username,
-					                                          doctor.employee.user.password,
-					                                          doctor.category.name,
-					                                          doctor.employee.dob,
-					                                          doctor.employee.gender,
-					                                          doctor.employee.salary,
-					                                          doctor.employee.phone,
-					                                          "<a onClick='empDelete("+doctor.employee.user.uid+",1)' href='#'  >Delete</a> / <a href='#' onclick='editDoc("+doctor.did+")'>Edit</a>"
-					                                          ]);
-					
-					var row = $("#displayDoctors").dataTable().fnGetNodes(index);
-					$(row).attr("id",doctor.employee.uid);
-	
 }
 
 
@@ -372,39 +356,7 @@ function patientDeleteConfirm(pid){
 	});
 }
 
-function editDoc(did){
-	$.ajax({
-		type: "GET",
-		url: "../Process?action=getDoc&id="+did,
-		success: function(data){
-			//var docObj = JSON.parse(data.responseText);
-			editDocForm(did,data);
-		},
-		error: function(data){
-			console.log("Error");
-		}
-	});
-}
 
-function editDocForm(did,docObj){
-	$("#editDocModal form").attr("action","../Process?action=editDoc&id="+did);
-	
-	$("#editDocModal form input[name=firstname]").val(docObj.employee.firstname);
-	$("#editDocModal form input[name=lastname]").val(docObj.employee.lastname);
-	$("#editDocModal form input[name=username]").val(docObj.employee.user.username);
-	$("#editDocModal form input[name=password]").val(docObj.employee.user.password);
-	$("#editDocModal form select[name=catid]").val(docObj.category.catid);
-	$("#editDocModal form input[name=dob]").val(docObj.employee.dob);
-	$("#editDocModal form input[name=salary]").val(docObj.employee.salary);
-	$("#editDocModal form input[name=phone]").val(docObj.employee.phone);
-	if(docObj.employee.gender=="male")
-		$("#editDocModal form input[value=male]").prop("checked", true);
-	else
-		$("#editDocModal form input[value=female]").prop("checked",true);
-	
-	
-	$("#editDocModal").modal("toggle");
-}
 
 
 function editNurse(nid){

@@ -76,7 +76,12 @@ public class HmsFactory {
 	public void deleteCategory(int catid) throws SQLException {
 		hms.deleteCategory(catid);
 	}
-
+	//환자 관련
+	public String getPatientsJson(){
+		ArrayList<Patient> patientList = hms.getPatientList();
+		
+		return g.toJson(patientList);
+	}
 
 	  /*public ArrayList<Room> getRooms(){
 		return hms.getRoomList();
@@ -118,11 +123,7 @@ public class HmsFactory {
 			
 	}
 	
-	public String getPatientsJson(){
-		ArrayList<Patient> patientList = hms.getPatientList();
-		
-		return g.toJson(patientList);
-	}
+
 	
 	public String getPatientJson(int pid) throws SQLException{
 		

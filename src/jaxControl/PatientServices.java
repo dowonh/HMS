@@ -31,12 +31,12 @@ public class PatientServices {
 //		}
 //	}
 	
-//	@GET
-//	@Path("patient/all")
-//	@Produces("application/json")
-//	public String getPatientsJson(){
-//		return hms.getPatientsJson();
-//	}
+	@GET
+	@Path("patient/all")
+	@Produces("application/json")
+	public String getPatientsJson(){
+		return hms.getPatientsJson();
+	}
 //	
 //	@GET
 //	@Path("patient/{pid}")

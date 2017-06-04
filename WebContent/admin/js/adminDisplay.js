@@ -162,8 +162,34 @@ $(function(){
 		
 		$("#updateCategoryModal").modal("toggle");
 	});
-//	//For Nurses
+	
+	//---------------------------
+	// 어드민 환자 관련 
+	//---------------------------
+	$.ajax({
+		url: "../services/patient/all",
+		type: "GET",
+		success: function(data){
+			data.forEach(function(patient){
 
+				var index = $("#displayPatients").dataTable().fnAddData([
+								                                          patient.name,
+								                                          patient.birth,
+								                                          patient.gender,
+								                                          patient.phone,
+								                                          patient.employee.name,
+								                                          patient.reservation_day,
+								                                          patient.reservation_time,
+								                                          ]);
+				
+				var row = $("#displayPatients").dataTable().fnGetNodes(index);
+				$(row).attr("id",patient.pid);
+			});
+		},
+		error: function(data){
+			
+		}
+	});
  
 //	
 //	//For Indoors
@@ -182,40 +208,7 @@ $(function(){
 //	});
 //	
 //	
-//	//For Patients
-//	$.ajax({
-//		url: "../services/patient/all",
-//		type: "GET",
-//		success: function(data){
-//			
-//			data.forEach(function(patient){
-//				var type,docName;
-//				if(patient.type) type = patient.type;
-//				else type="-";
-//				
-//				if(patient.doctor) docName = patient.doctor.employee.firstname;
-//				else docName = "-";
-//				
-//				
-//				var index = $("#displayPatients").dataTable().fnAddData([
-//								                                          patient.name,
-//								                                          patient.dob,
-//								                                          patient.gender,
-//									                                      type,
-//									                                      docName,
-//								                                          "<td><a onClick='patientDelete("+patient.pid+")' href='#'>Remove</a></td>"
-//								                                          ]);
-//				
-//				var row = $("#displayPatients").dataTable().fnGetNodes(index);
-//				$(row).attr("id",patient.pid);
-//				
-//				
-//			});
-//		},
-//		error: function(data){
-//			
-//		}
-//	});
+
 //	
  
 //	$("table").dataTable();

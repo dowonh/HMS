@@ -472,6 +472,38 @@ public class HmsDA {
 		}
 	}
 	//---------------------------
+	// 어드민 환자관련
+	//---------------------------
+	public ArrayList<Patient> getPatientList(){
+		
+		ArrayList<Patient> patientList = new ArrayList<Patient>();
+		
+		try{
+			Statement stmt = con.createStatement();
+			ResultSet set = stmt.executeQuery("SELECT * FROM patient");
+			
+			while(set.next()){
+				Patient patient = new Patient();
+				patient.setPid(set.getInt("pid"));
+				patient.setName(set.getString("name"));
+				patient.setGender(set.getString("gender"));
+				patient.setPhone(set.getString("phone"));
+				patient.setBirth(set.getString("birth"));
+				patient.setReservation_day(set.getString("reservation_day"));
+				patient.setName(set.getString("reservation_time"));
+				patient.setEid(set.getInt("employee_eid"));
+				patient.setEmployee(getDoctor(set.getInt("employee_eid")));
+				
+			 	patientList.add(patient);
+			}
+		}
+		catch(SQLException ex){
+			ex.printStackTrace();
+		}
+		return patientList;
+	}
+ 
+	//---------------------------
 	// 어드민 카테고리부분
 	//---------------------------
 	public Category addCategory(Category cat) throws SQLException {
@@ -595,54 +627,9 @@ public class HmsDA {
 	}
 
 	
-	public ArrayList<Patient> getPatientList(){
-		
-		ArrayList<Patient> patientList = new ArrayList<Patient>();
-		
-		try{
-			Statement stmt = con.createStatement();
-			ResultSet set = stmt.executeQuery("SELECT * FROM patient");
-			
-			patientList = getPatientListFromSet(set);
-		}
-		catch(SQLException ex){
-			ex.printStackTrace();
-		}
-		return patientList;
-	}
+
 	
-	public ArrayList<Patient> getPatientListFromSet(ResultSet set) throws SQLException{
-		
-		ArrayList<Patient> patientList = new ArrayList<Patient>();
-		
-		while(set.next()){
-			Patient patient = new Patient();
-			patient.setPid(set.getInt("pid"));
-			patient.setName(set.getString("name"));
-			patient.setDob(set.getString("dob"));
-			patient.setGender(set.getString("gender"));
-			patient.setType(set.getString("type"));
-			
-			int catid = set.getInt("catid");
-			int did = set.getInt("did");
-			
-			patient.setCatid(catid);
-			patient.setDid(did);
-			
-			patient.setCategory(getCategory(catid));
-			
-			if(did==0)
-				patient.setDoctor(null);
-			else
-			{
-				patient.setDoctor(getDoctor(did));
-			}
-			
-			patientList.add(patient);
-		}
-		
-		return patientList;
-	}
+	
 	
 
 	

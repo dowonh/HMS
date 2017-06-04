@@ -16,13 +16,14 @@ public class NurseServices {
 
 	
 	HmsFactory hms = new HmsFactory();
-	/*
+
 	@GET
 	@Path("nurse/all")
 	@Produces("application/json")
 	public String getNursesJson(){
 		return hms.getNursesJson();
 	}
+	/*
 	@GET
 	@Path("nurse/{nid}")
 	@Produces("application/json")

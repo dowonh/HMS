@@ -45,10 +45,10 @@ $(document).ready(function(){
 	});
 	
 	 
-	//Add new Doctor
+	//---------------------------------
+	// 의사 관련
+	//---------------------------------
 	$("#docForm").submit(function(e){
-
-
 		if($("#docForm .dob").val() == ''){
 			alert('Date of birth cannot be empty');
 			return;
@@ -69,94 +69,12 @@ $(document).ready(function(){
 			
 		});
 		
-		
-		
 		$("#addDocModal").modal("toggle"); //this line is awesome!!
 		
 		return false;
 		
 	});
 	
-	$("#nurseForm").submit(function(e){
-		e.preventDefault();
-
-
-		if($("#nurseForm .dob").val() == ''){
-			alert('Date of birth cannot be empty');
-			return;
-		}
-		
-		
-		
-		$.ajax({
-			type: $(this).attr("method"),
-			url: $(this).attr("action"),
-			data: $(this).serialize(),
-			success: function(nurse){
-				console.log(nurse);
-				addNurseToTable(nurse);
-				$(".nurseMsg").addClass("alert-success").html("<strong>Success</strong>: Record Added!");
-			},
-			error: function(xml,status,errorThrown){
-				$(".nurseMsg").addClass("alert-danger").html("<strong>Error</strong>: "+xml.responseText);
-			}
-			
-		});
-		
-		
-		$("#addNurseModal").modal("toggle"); //this line is awesome!!
-		
-	});
-	
-	
-	
-	$("#nurseUpdateForm").submit(function(e){
-		e.preventDefault();
-
-
-		if($("#nurseUpdateForm .dob").val() == ''){
-			alert('Date of birth cannot be empty');
-			return;
-		}
-		
-		
-		
-		$.ajax({
-			type: $(this).attr("method"),
-			url: $(this).attr("action"),
-			data: $(this).serialize(),
-			success: function(nurse){
-				console.log(nurse);
-				$(".nurseMsg").removeClass("alert-danger").addClass("alert-success").html("<strong>Success</strong>: Record Added!");
-				$("#displayNurses").DataTable().row($("#nurseBody #"+nurse.employee.user.uid)).remove().draw();
-				addNurseToTable(nurse);
-			},
-			error: function(xml,status,errorThrown){
-				$(".nurseMsg").addClass("alert-danger").html("<strong>Error</strong>: "+xml.responseText);
-			}
-			
-		});
-		
-		
-		$("#editNurseModal").modal("toggle"); //this line is awesome!!
-		
-	});
-	
-	
-	
-	$(".dob").datepicker(
-			{
-				dateFormat: 'yy-mm-dd',
-				changeMonth: true,
-				changeYear: true,
-				yearRange: "1960:2015"
-			});
-	
-	
-
-	
-
-	//의사관련
 	$("#docUpdateForm").submit(function(e){
 		e.preventDefault();
 		
@@ -185,6 +103,69 @@ $(document).ready(function(){
 		$("#editDocModal").modal("toggle"); //this line is awesome!!
 		
 	});
+	
+	//---------------------------------
+	// 간호사 관련
+	//---------------------------------
+	$("#nurseForm").submit(function(e){
+		e.preventDefault();
+
+		if($("#nurseForm .dob").val() == ''){
+			alert('Date of birth cannot be empty');
+			return;
+		}
+		
+		$.ajax({
+			type: $(this).attr("method"),
+			url: $(this).attr("action"),
+			data: $(this).serialize(),
+			success: function(nurse){
+				console.log(nurse);
+				addNurseToTable(nurse);
+				$(".nurseMsg").addClass("alert-success").html("<strong>Success</strong>: Record Added!");
+			},
+			error: function(xml,status,errorThrown){
+				$(".nurseMsg").addClass("alert-danger").html("<strong>Error</strong>: "+xml.responseText);
+			}
+			
+		});
+		$("#addNurseModal").modal("toggle"); //this line is awesome!!
+		
+	});
+	
+	$("#nurseUpdateForm").submit(function(e){
+		e.preventDefault();
+
+		if($("#nurseUpdateForm .dob").val() == ''){
+			alert('Date of birth cannot be empty');
+			return;
+		}
+		
+		$.ajax({
+			type: $(this).attr("method"),
+			url: $(this).attr("action"),
+			data: $(this).serialize(),
+			success: function(nurse){
+				console.log(nurse);
+				$(".nurseMsg").removeClass("alert-danger").addClass("alert-success").html("<strong>Success</strong>: Record Added!");
+				$("#displayNurses").DataTable().row($("#nurseBody #"+nurse.eid)).remove().draw();
+				addNurseToTable(nurse);
+			},
+			error: function(xml,status,errorThrown){
+				$(".nurseMsg").addClass("alert-danger").html("<strong>Error</strong>: "+xml.responseText);
+			}
+		});
+		$("#editNurseModal").modal("toggle"); //this line is awesome!!
+		
+	});
+	
+	$(".dob").datepicker({
+		dateFormat: 'yy-mm-dd',
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "1960:2015"
+	});
+
 
 	//---------------------------------
 	// 방관련
@@ -238,7 +219,7 @@ $(document).ready(function(){
 });
 
 function addDocToTable(doctor){
-	
+
 	var index = $("#displayDoctors").dataTable().fnAddData([
 										doctor.username,
 									    doctor.passwd,
@@ -247,7 +228,7 @@ function addDocToTable(doctor){
 									    doctor.birth,
 									    doctor.phone,
 									    doctor.salary,
-									    doctor.catid,
+									    doctor.category.name,
 									    "<a onClick='empDelete("+doctor.eid+",1)' href='#'  >Delete</a> / <a href='#' onclick='editDoc("+doctor.eid+")'>Edit</a>"
 					                 ]);
 	var row = $("#displayDoctors").dataTable().fnGetNodes(index);
@@ -312,53 +293,24 @@ function empDeleteConfirm(id,type){
 		}
 	});
 }
-
+/////////////////////////////////////
+//간호사 관련부분
+//////////////////////////////////////
 function addNurseToTable(nurse){ 
 	var index = $("#displayNurses").dataTable().fnAddData([
-					                                          nurse.employee.firstname,
-					                                          nurse.employee.lastname,
-					                                          nurse.employee.user.username,
-					                                          nurse.employee.user.password,
-					                                          nurse.employee.dob,
-					                                          nurse.experience,
-					                                          nurse.employee.salary,
-					                                          nurse.employee.phone,
-					                                          "<a onClick='empDelete("+nurse.employee.user.uid+",1)' href='#'  >Delete</a> / <a href='#' onclick='editNurse("+nurse.nid+")'>Edit</a>"
-					                                          ]);
+					                                          nurse.username,
+					                                          nurse.passwd,
+					                                          nurse.name,
+					                                          nurse.gender,
+					                                          nurse.birth,
+					                                          nurse.phone,
+					                                          nurse.salary,
+					                                          "<a onClick='empDelete("+nurse.eid+",1)' href='#'  >Delete</a> / <a href='#' onclick='editNurse("+nurse.eid+")'>Edit</a>"				                                          ]);
 	
 	var row = $("#displayNurses").dataTable().fnGetNodes(index);
-	$(row).attr("id",nurse.employee.user.uid);
+	$(row).attr("id",nurse.eid);
 	//$(".deleteMe").remove();
 }
-
-function  patientDelete(pid){
-	bootbox.confirm("Are you sure?",function(sure){
-		if(sure)
-			patientDeleteConfirm(pid);
-	}).find(".modal-body").css({"height": "50px"})
-}
-
-
-function patientDeleteConfirm(pid){
-	$.ajax({
-		type: "GET",
-		url: "../Process?action=deletePatient&id="+pid,
-		success: function(){
-			$(".patientMsg").addClass("alert-success").html("<strong>Success</strong>: Record Deleted Success!");
-			//$("#patientBody #"+pid).remove();
-			$("#displayPatients").DataTable().row($("#patientBody #"+pid)).remove().draw();
-			//$("#indoorBody #"+pid).remove();
-			$("#displayIndoors").DataTable().row($("#indoorBody #"+pid)).remove().draw();
-		},
-		error: function(xml){
-			$(".patientMsg").addClass("alert-danger").html("<strong>Error</strong>: "+xml.responseText);
-		}
-	});
-}
-
-
-
-
 function editNurse(nid){
 	$.ajax({
 		type: "GET",
@@ -374,19 +326,48 @@ function editNurse(nid){
 
 function editNurseForm(nid,nurse){
 	$("#editNurseModal form").attr("action","../Process?action=editNurse&id="+nid);
-	
-	$("#editNurseModal form input[name=firstname]").val(nurse.employee.firstname);
-	$("#editNurseModal form input[name=lastname]").val(nurse.employee.lastname);
-	$("#editNurseModal form input[name=username]").val(nurse.employee.user.username);
-	$("#editNurseModal form input[name=password]").val(nurse.employee.user.password);
-	$("#editNurseModal form input[name=experience]").val(nurse.experience);
-	$("#editNurseModal form input[name=dob]").val(nurse.employee.dob);
-	$("#editNurseModal form input[name=salary]").val(nurse.employee.salary);
-	$("#editNurseModal form input[name=phone]").val(nurse.employee.phone);
-	
+
+	$("#editNurseModal form input[name=name]").val(nurse.name);
+	$("#editNurseModal form input[name=username]").val(nurse.username);
+	$("#editNurseModal form input[name=password]").val(nurse.password);
+	$("#editNurseModal form input[name=birth]").val(nurse.birth);
+	$("#editNurseModal form input[name=salary]").val(nurse.salary);
+	$("#editNurseModal form input[name=phone]").val(nurse.phone);
+	if(nurse.gender=="male")
+		$("#editNurseModal form input[value=male]").prop("checked", true);
+	else
+		$("#editNurseModal form input[value=female]").prop("checked",true);
 	
 	$("#editNurseModal").modal("toggle");
 }
+/////////////////////////////////////
+//환자관련
+//////////////////////////////////////
+//function  patientDelete(pid){
+//	bootbox.confirm("Are you sure?",function(sure){
+//		if(sure)
+//			patientDeleteConfirm(pid);
+//	}).find(".modal-body").css({"height": "50px"})
+//}
+//
+//
+//function patientDeleteConfirm(pid){
+//	$.ajax({
+//		type: "GET",
+//		url: "../Process?action=deletePatient&id="+pid,
+//		success: function(){
+//			$(".patientMsg").addClass("alert-success").html("<strong>Success</strong>: Record Deleted Success!");
+//			//$("#patientBody #"+pid).remove();
+//			$("#displayPatients").DataTable().row($("#patientBody #"+pid)).remove().draw();
+//			//$("#indoorBody #"+pid).remove();
+//			$("#displayIndoors").DataTable().row($("#indoorBody #"+pid)).remove().draw();
+//		},
+//		error: function(xml){
+//			$(".patientMsg").addClass("alert-danger").html("<strong>Error</strong>: "+xml.responseText);
+//		}
+//	});
+//}
+
 
 /////////////////////////////////////
 // 방 관련부분

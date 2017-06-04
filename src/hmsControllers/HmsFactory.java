@@ -56,6 +56,12 @@ public class HmsFactory {
 		
 		return g.toJson(hms.getCategories());
 	}
+	//간호사 관련 가져오기
+	public String getNursesJson(){
+		ArrayList<Employee> nurseList = hms.getNurseList();
+		
+		return g.toJson(nurseList);
+	}
 	// 카테고리 관련부분
 	public String addCategory(Category cat) throws SQLException {
 		
@@ -92,11 +98,7 @@ public class HmsFactory {
 	}
 
 	
-	public String getNursesJson(){
-		ArrayList<Nurse> nurseList = hms.getNurseList();
-		
-		return g.toJson(nurseList);
-	}
+
 	
 	public String getDoctorJson(int did) throws SQLException{
 		

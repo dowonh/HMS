@@ -41,6 +41,31 @@ $(function(){
 		}
 	});
 	
+	$.ajax({
+		url: "../services/nurse/all",
+		type: "GET",
+		success: function(data){
+			data.forEach(function(nurse){
+				var index = $("#displayNurses").dataTable().fnAddData([
+					nurse.username,
+					nurse.passwd,
+					nurse.name,
+					nurse.gender,
+					nurse.birth,
+					nurse.phone,
+					nurse.salary,
+					"<a onClick='empDelete("+nurse.eid+",1)' href='#'  >Delete</a> / <a href='#' onclick='editNurse("+nurse.eid+")'>Edit</a>"
+								                                          ]);
+				
+				var row = $("#displayNurses").dataTable().fnGetNodes(index);
+				$(row).attr("id",nurse.eid);
+				
+			});
+		},
+		error: function(data){
+			
+		}
+	});
 	//---------------------------
 	// 어드민 방 정보 부분
 	//---------------------------
@@ -138,32 +163,7 @@ $(function(){
 		$("#updateCategoryModal").modal("toggle");
 	});
 //	//For Nurses
-//	$.ajax({
-//		url: "../services/nurse/all",
-//		type: "GET",
-//		success: function(data){
-//			data.forEach(function(nurse){
-//				var index = $("#displayNurses").dataTable().fnAddData([
-//								                                          nurse.employee.firstname,
-//								                                          nurse.employee.lastname,
-//								                                          nurse.employee.user.username,
-//								                                          nurse.employee.user.password,
-//								                                          nurse.employee.dob,
-//								                                          nurse.experience,
-//								                                          nurse.employee.salary,
-//								                                          nurse.employee.phone,
-//								                                          "<a onClick='empDelete("+nurse.employee.user.uid+",1)' href='#'  >Delete</a> / <a href='#' onclick='editNurse("+nurse.nid+")'>Edit</a>"
-//								                                          ]);
-//				
-//				var row = $("#displayNurses").dataTable().fnGetNodes(index);
-//				$(row).attr("id",nurse.employee.user.uid);
-//				
-//			});
-//		},
-//		error: function(data){
-//			
-//		}
-//	});
+
  
 //	
 //	//For Indoors

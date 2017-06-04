@@ -40,7 +40,7 @@
 		
 			<ul class="sidebar-nav">
 			 	<li class="sidebar-brand">
-                    <a href="index.jsp">
+                    <a href="../index.jsp">
                         HMS
                     </a>
                 </li>
@@ -120,12 +120,26 @@
 
 				<div class="modal-body">
 					<div class="container">
-						<form method="post" action="./ProcessReservation.jsp" name='form'>
+						<form method="post" action="../Process?action=addPatient" name='form'>
 							<div class="form-group row">
 								<label for="example-date-input" class="col-2 col-form-label">이름</label>
 								<div class="col-6">
 									<input class="form-control" type="text" id="register-input"
 										name="name">
+								</div>
+							</div>
+							<div class="form-group row">
+							<label for="example-date-input" class="col-2 col-form-label">성별</label>
+								<div class="form-check form-check-inline">
+								    <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="male"> 남자
+								  	<input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="female"> 여자
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="example-date-input" class="col-2 col-form-label">생년월일</label>
+								<div class="col-6">
+									<input class="form-control" type="date" value="2017-05-16"
+										id="register-input" name="dob">
 								</div>
 							</div>
 							<div class="form-group row">

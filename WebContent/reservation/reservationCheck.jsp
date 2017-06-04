@@ -42,7 +42,7 @@
 
 			<ul class="sidebar-nav">
 				<li class="sidebar-brand">
-                    <a href="index.jsp">
+                    <a href="../index.jsp">
                         HMS
                     </a>
                 </li>

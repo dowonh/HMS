@@ -32,7 +32,7 @@ public class HmsDA {
 	 
 	public void connect() {
 		try {
-			//��񿬰�
+			//�뜝�룞�삕驛띚욃뜝占�
 			con = DriverManager.getConnection(JDBC_URL, USER, PASSWD);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -56,7 +56,7 @@ public class HmsDA {
 		}
 	}
 	
-	// 간호사부분
+	// 揶쏄쑵�깈占쎄텢�겫占썽겫占�
 	public ArrayList<Room> getRoomList(){
 		connect();
 		ArrayList<Room> roomList = new ArrayList<Room>();
@@ -130,7 +130,7 @@ public class HmsDA {
 		return medGoodList;
 	}
 	
-	//관리자부분
+	//�꽴占썹뵳�딆쁽�겫占썽겫占�
 	public ArrayList<Employee> getDoctorList(){
 		
 		connect();
@@ -206,7 +206,7 @@ public class HmsDA {
 		}
 		return catList;
 	}
-	//관리자 페이지 - 의사 추가
+	//�꽴占썹뵳�딆쁽 占쎈읂占쎌뵠筌욑옙 - 占쎌벥占쎄텢 �빊遺쏙옙
 	public int addDoctor(Employee employee)throws SQLException{
 		
 		
@@ -289,6 +289,38 @@ public class HmsDA {
 		}
 		return emp;
 	}
+	
+	
+	// 나옹나옹
+	
+	public Patient addPatient(Patient p) throws SQLException{
+		connect();
+		try{
+			PreparedStatement stmt = con.prepareStatement("INSERT INTO patient(name,gender,birth,phone,eid,reservation_day,reservation_time) "
+					+ "VALUES(?,?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1,p.getName());
+			stmt.setString(2,p.getGender());
+			stmt.setString(3,p.getBirth());
+			stmt.setString(4,p.getPhone());
+			stmt.setInt(5, p.getEid());
+			stmt.setString(6, p.getReservation_day());
+			stmt.setString(7, p.getReservation_time());
+			stmt.executeUpdate();
+			
+			ResultSet keys = stmt.getGeneratedKeys();
+			int pid = 0;
+			if(keys!=null && keys.next()) pid = keys.getInt(1);
+			p.setPid(pid);
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		
+		return p;
+	}
+	
 	
 	/*
 	public Employee getEmployee(int eid){
@@ -941,9 +973,6 @@ public class HmsDA {
 		stmt.execute();
 		
 	}
-
-
-	
 
 
 	public Category addCategory(Category cat) throws SQLException {

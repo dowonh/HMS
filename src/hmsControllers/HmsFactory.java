@@ -253,8 +253,6 @@ public class HmsFactory {
 		hms.removeMedicine(mid);
 	}
 
-
-
 	public String addCategory(Category cat) throws SQLException {
 		
 		return hms.addCategory(cat).toJson();

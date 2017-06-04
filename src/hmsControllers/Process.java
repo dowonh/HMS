@@ -57,8 +57,8 @@ public class Process extends HttpServlet {
 //					addNurse(request,response);
 //				else if(request.getParameter("action").equals("addRoom"))
 //					addRoom(request,response);
-//				else if(request.getParameter("action").equals("addPatient"))
-//					addPatient(request,response);
+				else if(request.getParameter("action").equals("addPatient"))
+					addPatient(request,response);
 				else if(request.getParameter("id")!=null){
 //					
 //					else if(request.getParameter("action").equals("deleteEmp"))
@@ -103,7 +103,7 @@ public class Process extends HttpServlet {
 			ex.printStackTrace();
 		}
 	}
-	//의사 추가하는 부분 - 관리자 페이지
+	//�쓽�궗 異붽��븯�뒗 遺�遺� - 愿�由ъ옄 �럹�씠吏�
 	private void addDoc(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
 		
 		int catid = Integer.parseInt(request.getParameter("catid"));
@@ -161,6 +161,36 @@ public class Process extends HttpServlet {
 	    response.setCharacterEncoding("UTF8"); // this line solves the problem
 		response.getWriter().print(emp.toJson());
 	}
+	
+	// 나옹나옹
+	
+	public void addPatient(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
+		String name = request.getParameter("name");
+		String gender = request.getParameter("gender");
+		String dob = request.getParameter("dob");
+		String phone = request.getParameter("phone"); 
+		//int eid = Integer.parseInt(request.getParameter("doctor"));
+		int eid = 1;
+		String reservation_date = request.getParameter("reservation_date");
+		String reservation_time = request.getParameter("reservation_time");
+		
+		Patient p = new Patient();
+		p.setName(name);
+		p.setGender(gender);
+		p.setPhone(phone);
+		p.setBirth(dob);
+		p.setEid(eid);
+		p.setReservation_day(reservation_date);
+		p.setReservation_time(reservation_time);
+		
+		hms.addPatient(p);
+	}
+	
+	
+	
+	
+	
+	
 //	public void getRoom(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
 //		int rid = Integer.parseInt(request.getParameter("id"));
 //		

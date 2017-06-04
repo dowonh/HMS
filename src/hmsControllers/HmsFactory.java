@@ -14,18 +14,19 @@ import hmsModels.MedicineGoods;
 import hmsModels.Patient;
 import hmsModels.Prescription;
 import hmsModels.Room;
-
+ 
 
 public class HmsFactory {
-
+ 
 	HmsDA hms = new HmsDA();
 	private static Gson g = new Gson();
 	
 	public static String toJson(Object obj){
+		
 		return g.toJson(obj);
 	}
 	
-	// °£È£»ç ºÎºÐ - ÀÌÁ¤Çö
+	// ï¿½ï¿½È£ï¿½ï¿½ ï¿½Îºï¿½ - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public String getRoomsJson(){
 		ArrayList<Room> roomList = hms.getRoomList();
 		
@@ -35,7 +36,7 @@ public class HmsFactory {
 	public String getRoomJson(int rid) throws SQLException{
 		
 		Room room;
-		room = hms.getRoom(rid);
+		room = hms.getRoom(rid); 
 		
 		return g.toJson(room);
 	}
@@ -45,11 +46,12 @@ public class HmsFactory {
 		
 		return g.toJson(medList);
 	}
-	//¾îµå¹Î ÆäÀÌÁö ºÎºÐ
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½
 	public String getDoctorsJson(){
 		ArrayList<Employee> docList = hms.getDoctorList();
 		return g.toJson(docList);
 	}
+	
 	public String getCategoriesJson() throws SQLException {
 		
 		return g.toJson(hms.getCategories());

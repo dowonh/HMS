@@ -1,16 +1,16 @@
 $(function(){
 	
 	
-//	$.ajax({
-//		url: "../services/category/all",
-//		type: "GET",
-//		success: function(categories){
-//			categories.forEach(function(cat){
-//				$("#docForm select[name=catid]").append("<option value='"+cat.catid+"' >"+cat.name+"</option>");
-//				$("#docUpdateForm select[name=catid]").append("<option value='"+cat.catid+"' >"+cat.name+"</option>");
-//			});
-//		}
-//	});
+	$.ajax({
+		url: "../services/category/all",
+		type: "GET",
+		success: function(categories){
+			categories.forEach(function(cat){
+				$("#docForm select[name=catid]").append("<option value='"+cat.catid+"' >"+cat.name+"</option>");
+				$("#docUpdateForm select[name=catid]").append("<option value='"+cat.catid+"' >"+cat.name+"</option>");
+			});
+		}
+	});
 	
 	//Display Doctors
 	$.ajax({
@@ -19,8 +19,9 @@ $(function(){
 		success: function(data){
 			data.forEach(function(doctor){
 				var index = $("#displayDoctors").dataTable().fnAddData([
-				                                          doctor.name,
+				                                          doctor.username,
 				                                          doctor.passwd,
+				                                          doctor.name,
 				                                          doctor.gender,
 				                                          doctor.birth,
 				                                          doctor.phone,
@@ -162,7 +163,7 @@ $(function(){
 //		}
 //	});
 //	
-//	//Add Category Form Submission
+	//Add Category Form Submission
 //	$("#addCategoryForm").submit(function(e){
 //		e.preventDefault();
 //		
@@ -272,8 +273,43 @@ $(function(){
 //			
 //		}
 //	});
-//	
-})
+
+}) 
+
+function editDoc(eid){
+	$.ajax({
+		type: "GET",
+		url: "../Process?action=getDoc&id="+eid,
+		//contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		success: function(data){ 
+			alert(eid);
+			editDocForm(eid, data);
+		},
+		error: function(err){
+			console.log("editDoc errer" + err);
+		}
+	});
+}
+
+function editDocForm(eid,docObj){
+
+	$("#editDocModal form").attr("action","../Process?action=editDoc&id="+eid);
+	
+	$("#editDocModal form input[name=name]").val(docObj.name);
+	$("#editDocModal form input[name=username]").val(docObj.username);
+	$("#editDocModal form input[name=password]").val(docObj.password);
+	$("#editDocModal form select[name=catid]").val(docObj.catid);
+	$("#editDocModal form input[name=birth]").val(docObj.birth);
+	$("#editDocModal form input[name=salary]").val(docObj.salary);
+	$("#editDocModal form input[name=phone]").val(docObj.phone);
+	if(docObj.gender=="male")
+		$("#editDocModal form input[value=male]").prop("checked", true);
+	else
+		$("#editDocModal form input[value=female]").prop("checked",true);
+	
+	$("#editDocModal").modal("toggle");
+}
+
 
 
 function assignRoom(ipid){

@@ -11,7 +11,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 
-@Path("")
+@Path("") 
 public class DoctorServices {
 
 	HmsFactory hms = new HmsFactory();

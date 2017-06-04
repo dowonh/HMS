@@ -27,7 +27,7 @@ String user = request.getParameter("user");
 String pass = request.getParameter("pass");
  
 try{
-	PreparedStatement stmt = con.prepareStatement("select * from employee where name=? and passwd=?");
+	PreparedStatement stmt = con.prepareStatement("select * from employee where username=? and passwd=?");
 	stmt.setString(1, user);
 	stmt.setString(2, pass);
 	System.out.println(user+" "+pass);

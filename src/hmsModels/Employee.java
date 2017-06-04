@@ -3,11 +3,12 @@ package hmsModels;
 import hmsControllers.HmsFactory;
 
 import java.io.Serializable;
-
+ 
 public class Employee implements Serializable {
 	
 	private int eid;
 	private String name;
+	private String username;
 	private String passwd;
 	private String gender;
 	private String birth;
@@ -15,7 +16,7 @@ public class Employee implements Serializable {
 	private int salary;
 	private String type;
 	private int catid;
- 
+	private Category category;
 	
 	public Employee(){}
 	
@@ -37,6 +38,14 @@ public class Employee implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPasswd() {
@@ -94,6 +103,13 @@ public class Employee implements Serializable {
 	public void setCatid(int catid) {
 		this.catid = catid;
 	}
-	
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
  
 }

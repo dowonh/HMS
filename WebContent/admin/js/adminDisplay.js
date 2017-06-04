@@ -19,20 +19,19 @@ $(function(){
 		success: function(data){
 			data.forEach(function(doctor){
 				var index = $("#displayDoctors").dataTable().fnAddData([
-				                                          doctor.employee.firstname,
-				                                          doctor.employee.lastname,
-				                                          doctor.employee.user.username,
-				                                          doctor.employee.user.password,
+				                                          doctor.username,
+				                                          doctor.passwd,
+				                                          doctor.name,
+				                                          doctor.gender,
+				                                          doctor.birth,
+				                                          doctor.phone,
+				                                          doctor.salary,
 				                                          doctor.category.name,
-				                                          doctor.employee.dob,
-				                                          doctor.employee.gender,
-				                                          doctor.employee.salary,
-				                                          doctor.employee.phone,
-				                                          "<a onClick='empDelete("+doctor.employee.user.uid+",1)' href='#'  >Delete</a> / <a href='#' onclick='editDoc("+doctor.did+")'>Edit</a>"
+				                                          "<a onClick='empDelete("+doctor.eid+",1)' href='#'  >Delete</a> / <a href='#' onclick='editDoc("+doctor.eid+")'>Edit</a>"
 				                                          ]);
 				
 				var row = $("#displayDoctors").dataTable().fnGetNodes(index);
-				$(row).attr("id",doctor.employee.uid);
+				$(row).attr("id",doctor.eid);
 				
 			});
 		},
@@ -41,241 +40,276 @@ $(function(){
 		}
 	});
 	
-	//For Nurses
-	$.ajax({
-		url: "../services/nurse/all",
-		type: "GET",
-		success: function(data){
-			data.forEach(function(nurse){
-				var index = $("#displayNurses").dataTable().fnAddData([
-								                                          nurse.employee.firstname,
-								                                          nurse.employee.lastname,
-								                                          nurse.employee.user.username,
-								                                          nurse.employee.user.password,
-								                                          nurse.employee.dob,
-								                                          nurse.experience,
-								                                          nurse.employee.salary,
-								                                          nurse.employee.phone,
-								                                          "<a onClick='empDelete("+nurse.employee.user.uid+",1)' href='#'  >Delete</a> / <a href='#' onclick='editNurse("+nurse.nid+")'>Edit</a>"
-								                                          ]);
-				
-				var row = $("#displayNurses").dataTable().fnGetNodes(index);
-				$(row).attr("id",nurse.employee.user.uid);
-				
-			});
-		},
-		error: function(data){
-			
-		}
-	});
-	
-	
-	
-	//For Room
-	$.ajax({
-		url: "../services/room/all",
-		type: "GET",
-		success: function(data){
-			data.forEach(function(room){
-				var index = $("#displayRooms").dataTable().fnAddData([
-							                                          room.rid,
-							                                          room.totalbeds,
-							                                          room.nurse.employee.firstname+" "+room.nurse.employee.lastname,
-							                                          room.nurse.employee.phone,
-							                                          "<a onClick='roomDelete("+room.rid+")' href='#'  >Delete</a> / <a href='#' onclick='editRoom("+room.rid+")'>Edit</a>"
-							                                          ]);
-				
-				var row = $("#displayRooms").dataTable().fnGetNodes(index);
-				$(row).attr("id",room.rid);
-				
-				$("#assignRoomForm select[name=rid]").append("<option value="+room.rid+">"+room.rid+"</option>");
-			
-			});
-		},
-		error: function(data){
-			
-		}
-	});
-	
-	
-	//For Indoors
-	$.ajax({
-		url: "../services/indoor/all",
-		type: "GET",
-		success: function(data){
-			data.forEach(function(indoor){
-				
-				addIndoorToTable(indoor);
-			});
-		},
-		error: function(data){
-			
-		}
-	});
-	
-	
-	//For Patients
-	$.ajax({
-		url: "../services/patient/all",
-		type: "GET",
-		success: function(data){
-			
-			data.forEach(function(patient){
-				var type,docName;
-				if(patient.type) type = patient.type;
-				else type="-";
-				
-				if(patient.doctor) docName = patient.doctor.employee.firstname;
-				else docName = "-";
-				
-				
-				var index = $("#displayPatients").dataTable().fnAddData([
-								                                          patient.name,
-								                                          patient.dob,
-								                                          patient.gender,
-									                                      type,
-									                                      docName,
-								                                          "<td><a onClick='patientDelete("+patient.pid+")' href='#'>Remove</a></td>"
-								                                          ]);
-				
-				var row = $("#displayPatients").dataTable().fnGetNodes(index);
-				$(row).attr("id",patient.pid);
-				
-				
-			});
-		},
-		error: function(data){
-			
-		}
-	});
-	
-	
-	//For displaying Categories
-	$.ajax({
-		url: "../services/category/all",
-		type: "GET",
-		success: function(categories){
-			categories.forEach(function(category){
-				addCategoryToTable(category);
-			});
-		},
-		error: function(error){
-			console.log(error.responseText);
-		}
-	});
-	
+//	//For Nurses
+//	$.ajax({
+//		url: "../services/nurse/all",
+//		type: "GET",
+//		success: function(data){
+//			data.forEach(function(nurse){
+//				var index = $("#displayNurses").dataTable().fnAddData([
+//								                                          nurse.employee.firstname,
+//								                                          nurse.employee.lastname,
+//								                                          nurse.employee.user.username,
+//								                                          nurse.employee.user.password,
+//								                                          nurse.employee.dob,
+//								                                          nurse.experience,
+//								                                          nurse.employee.salary,
+//								                                          nurse.employee.phone,
+//								                                          "<a onClick='empDelete("+nurse.employee.user.uid+",1)' href='#'  >Delete</a> / <a href='#' onclick='editNurse("+nurse.nid+")'>Edit</a>"
+//								                                          ]);
+//				
+//				var row = $("#displayNurses").dataTable().fnGetNodes(index);
+//				$(row).attr("id",nurse.employee.user.uid);
+//				
+//			});
+//		},
+//		error: function(data){
+//			
+//		}
+//	});
+//	
+//	
+//	
+//	//For Room
+//	$.ajax({
+//		url: "../services/room/all",
+//		type: "GET",
+//		success: function(data){
+//			data.forEach(function(room){
+//				var index = $("#displayRooms").dataTable().fnAddData([
+//							                                          room.rid,
+//							                                          room.totalbeds,
+//							                                          room.nurse.employee.firstname+" "+room.nurse.employee.lastname,
+//							                                          room.nurse.employee.phone,
+//							                                          "<a onClick='roomDelete("+room.rid+")' href='#'  >Delete</a> / <a href='#' onclick='editRoom("+room.rid+")'>Edit</a>"
+//							                                          ]);
+//				
+//				var row = $("#displayRooms").dataTable().fnGetNodes(index);
+//				$(row).attr("id",room.rid);
+//				
+//				$("#assignRoomForm select[name=rid]").append("<option value="+room.rid+">"+room.rid+"</option>");
+//			
+//			});
+//		},
+//		error: function(data){
+//			
+//		}
+//	});
+//	
+//	
+//	//For Indoors
+//	$.ajax({
+//		url: "../services/indoor/all",
+//		type: "GET",
+//		success: function(data){
+//			data.forEach(function(indoor){
+//				
+//				addIndoorToTable(indoor);
+//			});
+//		},
+//		error: function(data){
+//			
+//		}
+//	});
+//	
+//	
+//	//For Patients
+//	$.ajax({
+//		url: "../services/patient/all",
+//		type: "GET",
+//		success: function(data){
+//			
+//			data.forEach(function(patient){
+//				var type,docName;
+//				if(patient.type) type = patient.type;
+//				else type="-";
+//				
+//				if(patient.doctor) docName = patient.doctor.employee.firstname;
+//				else docName = "-";
+//				
+//				
+//				var index = $("#displayPatients").dataTable().fnAddData([
+//								                                          patient.name,
+//								                                          patient.dob,
+//								                                          patient.gender,
+//									                                      type,
+//									                                      docName,
+//								                                          "<td><a onClick='patientDelete("+patient.pid+")' href='#'>Remove</a></td>"
+//								                                          ]);
+//				
+//				var row = $("#displayPatients").dataTable().fnGetNodes(index);
+//				$(row).attr("id",patient.pid);
+//				
+//				
+//			});
+//		},
+//		error: function(data){
+//			
+//		}
+//	});
+//	
+//	
+//	//For displaying Categories
+//	$.ajax({
+//		url: "../services/category/all",
+//		type: "GET",
+//		success: function(categories){
+//			categories.forEach(function(category){
+//				addCategoryToTable(category);
+//			});
+//		},
+//		error: function(error){
+//			console.log(error.responseText);
+//		}
+//	});
+//	
 	//Add Category Form Submission
-	$("#addCategoryForm").submit(function(e){
-		e.preventDefault();
-		
-		$.ajax({
-			url: $(this).attr("action"),
-			type: $(this).attr("method"),
-			data: $(this).serialize(),
-			success: function(category){
-				BootstrapDialog.show({
-					title: "Success!",
-					message: "category added successfully!"
-				});
-				
-				addCategoryToTable(category);
-			},
-			error: function(err){
-				BootstrapDialog.show({
-					type: BootstrapDialog.TYPE_DANGER,
-					title: "Error!",
-					message: err.responseText
-				});
-			}
-		});
-		
-		$("#addCategoryModal").modal("toggle");
-	})
-	
-	
-	//Update Category Form Submission
-	$("#updateCategoryForm").submit(function(e){
-		e.preventDefault();
-		
-		$.ajax({
-			url: $(this).attr("action"),
-			type: $(this).attr("method"),
-			data: $(this).serialize(),
-			success: function(category){
-				BootstrapDialog.show({
-					title: "Success!",
-					message: "category updated successfully!"
-				});
-				
-				$("#tblCategories").DataTable().row($("#catBody #"+category.catid)).remove().draw();
-				addCategoryToTable(category);
-			},
-			error: function(err){
-				BootstrapDialog.show({
-					type: BootstrapDialog.TYPE_DANGER,
-					title: "Error!",
-					message: err.responseText
-				});
-			}
-		});
-		
-		$("#updateCategoryModal").modal("toggle");
-	})
-	
-	
-	$("table").dataTable();
-	
-	
-	//Room Assignment
-	$("#assignRoomForm").submit(function(e){
-		e.preventDefault();
-		
-		$.ajax({
-			url: $(this).attr("action"),
-			data: $(this).serialize(),
-			type: "PUT",
-			success: function(indoor){
-				BootstrapDialog.show({
-					title: "Success!",
-					message: "room assigned successfully!"
-				});
-				
-				//$("#indoorBody #"+indoor.pid).addClass("deleteMe");
-				$("#displayIndoors").DataTable().row($("#indoorBody #"+indoor.pid)).remove().draw();
-				
-				
-				console.log(indoor);
-				addIndoorToTable(indoor);
-			},
-			error: function(data){
-				BootstrapDialog.show({
-					type: BootstrapDialog.TYPE_DANGER,
-					title: "Error!",
-					message: data.responseText
-				});
-			}
-				
-		});
-		
-		$("#assignRoomModal").modal("toggle");
-	});
-	
-	
+//	$("#addCategoryForm").submit(function(e){
+//		e.preventDefault();
+//		
+//		$.ajax({
+//			url: $(this).attr("action"),
+//			type: $(this).attr("method"),
+//			data: $(this).serialize(),
+//			success: function(category){
+//				BootstrapDialog.show({
+//					title: "Success!",
+//					message: "category added successfully!"
+//				});
+//				
+//				addCategoryToTable(category);
+//			},
+//			error: function(err){
+//				BootstrapDialog.show({
+//					type: BootstrapDialog.TYPE_DANGER,
+//					title: "Error!",
+//					message: err.responseText
+//				});
+//			}
+//		});
+//		
+//		$("#addCategoryModal").modal("toggle");
+//	})
+//	
+//	
+//	//Update Category Form Submission
+//	$("#updateCategoryForm").submit(function(e){
+//		e.preventDefault();
+//		
+//		$.ajax({
+//			url: $(this).attr("action"),
+//			type: $(this).attr("method"),
+//			data: $(this).serialize(),
+//			success: function(category){
+//				BootstrapDialog.show({
+//					title: "Success!",
+//					message: "category updated successfully!"
+//				});
+//				
+//				$("#tblCategories").DataTable().row($("#catBody #"+category.catid)).remove().draw();
+//				addCategoryToTable(category);
+//			},
+//			error: function(err){
+//				BootstrapDialog.show({
+//					type: BootstrapDialog.TYPE_DANGER,
+//					title: "Error!",
+//					message: err.responseText
+//				});
+//			}
+//		});
+//		
+//		$("#updateCategoryModal").modal("toggle");
+//	})
+//	
+//	
+//	$("table").dataTable();
+//	
+//	
+//	//Room Assignment
+//	$("#assignRoomForm").submit(function(e){
+//		e.preventDefault();
+//		
+//		$.ajax({
+//			url: $(this).attr("action"),
+//			data: $(this).serialize(),
+//			type: "PUT",
+//			success: function(indoor){
+//				BootstrapDialog.show({
+//					title: "Success!",
+//					message: "room assigned successfully!"
+//				});
+//				
+//				//$("#indoorBody #"+indoor.pid).addClass("deleteMe");
+//				$("#displayIndoors").DataTable().row($("#indoorBody #"+indoor.pid)).remove().draw();
+//				
+//				
+//				console.log(indoor);
+//				addIndoorToTable(indoor);
+//			},
+//			error: function(data){
+//				BootstrapDialog.show({
+//					type: BootstrapDialog.TYPE_DANGER,
+//					title: "Error!",
+//					message: data.responseText
+//				});
+//			}
+//				
+//		});
+//		
+//		$("#assignRoomModal").modal("toggle");
+//	});
+//	
+//	
+//	$.ajax({
+//		url: "../services/nurse/all",
+//		type: "GET",
+//		success: function(nurses){
+//			nurses.forEach(function(nurse){
+//				$("#roomForm select[name=nurseId]").append("<option value='"+nurse.nid+"' >"+nurse.employee.firstname+" "+nurse.employee.lastname+"</option>");
+//				$("#updateRoomForm select[name=nurseId]").append("<option value='"+nurse.nid+"' >"+nurse.employee.firstname+" "+nurse.employee.lastname+"</option>");
+//			});
+//		},
+//		error: function(data){
+//			
+//		}
+//	});
+
+}) 
+
+function editDoc(eid){
 	$.ajax({
-		url: "../services/nurse/all",
 		type: "GET",
-		success: function(nurses){
-			nurses.forEach(function(nurse){
-				$("#roomForm select[name=nurseId]").append("<option value='"+nurse.nid+"' >"+nurse.employee.firstname+" "+nurse.employee.lastname+"</option>");
-				$("#updateRoomForm select[name=nurseId]").append("<option value='"+nurse.nid+"' >"+nurse.employee.firstname+" "+nurse.employee.lastname+"</option>");
-			});
+		url: "../Process?action=getDoc&id="+eid,
+		//contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		success: function(data){ 
+			alert(eid);
+			editDocForm(eid, data);
 		},
-		error: function(data){
-			
+		error: function(err){
+			console.log("editDoc errer" + err);
 		}
 	});
+}
+
+function editDocForm(eid,docObj){
+
+	$("#editDocModal form").attr("action","../Process?action=editDoc&id="+eid);
 	
-})
+	$("#editDocModal form input[name=name]").val(docObj.name);
+	$("#editDocModal form input[name=username]").val(docObj.username);
+	$("#editDocModal form input[name=password]").val(docObj.password);
+	$("#editDocModal form select[name=catid]").val(docObj.catid);
+	$("#editDocModal form input[name=birth]").val(docObj.birth);
+	$("#editDocModal form input[name=salary]").val(docObj.salary);
+	$("#editDocModal form input[name=phone]").val(docObj.phone);
+	if(docObj.gender=="male")
+		$("#editDocModal form input[value=male]").prop("checked", true);
+	else
+		$("#editDocModal form input[value=female]").prop("checked",true);
+	
+	$("#editDocModal").modal("toggle");
+}
+
 
 
 function assignRoom(ipid){

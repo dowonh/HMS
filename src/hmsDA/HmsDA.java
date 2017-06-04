@@ -490,7 +490,7 @@ public class HmsDA {
 				patient.setPhone(set.getString("phone"));
 				patient.setBirth(set.getString("birth"));
 				patient.setReservation_day(set.getString("reservation_day"));
-				patient.setName(set.getString("reservation_time"));
+				patient.setReservation_time(set.getString("reservation_time"));
 				patient.setEid(set.getInt("employee_eid"));
 				patient.setEmployee(getDoctor(set.getInt("employee_eid")));
 				

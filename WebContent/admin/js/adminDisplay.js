@@ -170,6 +170,7 @@ $(function(){
 		url: "../services/patient/all",
 		type: "GET",
 		success: function(data){
+			console.log(data);
 			data.forEach(function(patient){
 
 				var index = $("#displayPatients").dataTable().fnAddData([
@@ -181,7 +182,6 @@ $(function(){
 								                                          patient.reservation_day,
 								                                          patient.reservation_time,
 								                                          ]);
-				
 				var row = $("#displayPatients").dataTable().fnGetNodes(index);
 				$(row).attr("id",patient.pid);
 			});

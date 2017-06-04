@@ -63,27 +63,33 @@ public class PatientServices {
 //		}
 //	}
 //	
-//	@POST
-//	@Path("patient")
-//	@Produces("application/json")
-//	public String addPatient(@FormParam("fullname") String name,
-//			@FormParam("catid") int catid,
-//			@FormParam("dob") String dob,
-//			@FormParam("gender") String gender){
-//		
-//		Patient patient = new Patient();
-//		patient.setCatid(catid);
-//		patient.setDob(dob);
-//		patient.setName(name);
-//		patient.setGender(gender);
-//		
-//		try {
-//			return hms.addPatient(patient);
-//		} catch (SQLException e) {
-//			Response.serverError();
-//			return e.getMessage();
-//		}
-//		
-//		
-//	}
+	@POST
+	@Path("patient")
+	@Produces("application/json")
+	public String addPatient(@FormParam("name") String name,
+			@FormParam("gender") String gender,
+			@FormParam("dob") String dob,
+			@FormParam("phone") String phone,
+			@FormParam("eid") int eid,
+			@FormParam("reservation_date") String reservation_date,
+			@FormParam("reservation_time") String reservation_time){
+		
+		Patient patient = new Patient();
+		patient.setName(name);
+		patient.setGender(gender);
+		patient.setBirth(dob);
+		patient.setPhone(phone);
+		patient.setEid(eid);
+		patient.setReservation_day(reservation_date);
+		patient.setReservation_time(reservation_time);
+		
+		try {
+			return hms.addPatient(patient);
+		} catch (SQLException e) {
+			Response.serverError();
+			return e.getMessage();
+		}
+		
+		
+	}
 }

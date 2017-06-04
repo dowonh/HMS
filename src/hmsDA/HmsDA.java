@@ -31,6 +31,7 @@ public class HmsDA {
 		}		
 	}
 	 
+
 //	public void connect() {
 //		try {
 //			//��񿬰�
@@ -57,7 +58,7 @@ public class HmsDA {
 //		}
 //	}
 	
-	// 간호사 페이지 부분
+	// 간호사 페이지 부분 
 	public ArrayList<Room> getRoomList(){
 		//connect();
 		ArrayList<Room> roomList = new ArrayList<Room>();
@@ -109,7 +110,8 @@ public class HmsDA {
 		return medGoodList;
 	}
 	
-	//관리자 페이지 부분
+ 
+	//관리자 페이지 부분 
 	public ArrayList<Employee> getDoctorList(){
 		
 		ArrayList<Employee> docList = new ArrayList<Employee>();
@@ -180,9 +182,10 @@ public class HmsDA {
 		}
 		return catList;
 	}
+ 
 	
 	public int getCategoryID(String str) throws SQLException{
-		
+ 		
 		int ret = -1;
 		try{ 
 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM category WHERE name=?");
@@ -281,6 +284,7 @@ public class HmsDA {
 		return emp;
 	}
 	
+
 	public void deleteEmployee(int eid) throws SQLException{
 		
 		try{ 
@@ -556,6 +560,37 @@ public class HmsDA {
 		}
 		
 	}
+ 
+	// 나옹나옹
+	public Patient addPatient(Patient p) throws SQLException{
+		 
+		try{
+			PreparedStatement stmt = con.prepareStatement("INSERT INTO patient(name,gender,birth,phone,employee_eid,reservation_day,reservation_time) "
+					+ "VALUES(?,?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1,p.getName());
+			stmt.setString(2,p.getGender());
+			stmt.setString(3,p.getBirth());
+			stmt.setString(4,p.getPhone());
+			stmt.setInt(5, p.getEid());
+			stmt.setString(6, p.getReservation_day());
+			stmt.setString(7, p.getReservation_time());
+			stmt.executeUpdate();
+			
+			ResultSet keys = stmt.getGeneratedKeys();
+			int pid = 0;
+			if(keys!=null && keys.next()) pid = keys.getInt(1);
+			p.setPid(pid);
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		} finally {
+		 
+		}
+		
+		return p;
+	}
+	
+	 
 	/*
 	public Employee getEmployee(int eid){
 		Employee emp = new Employee();
@@ -1054,9 +1089,25 @@ public class HmsDA {
 	}
 
 
+<<<<<<< HEAD
+	public Category addCategory(Category cat) throws SQLException {
+		
+		PreparedStatement stmt = con.prepareStatement("INSERT INTO category SET name=?",Statement.RETURN_GENERATED_KEYS);
+		stmt.setString(1, cat.getName());
+		
+		int catid=0;
+		stmt.executeUpdate();
+		ResultSet keys = stmt.getGeneratedKeys();
+		if(keys!=null && keys.next()) catid=keys.getInt(1);
+		
+		cat.setCatid(catid);
+		return cat;
+	}
+=======
 	
 
 
+>>>>>>> 54b6a58fcdd37003a7a8a7535ee2dbf4b9f0be1a
 
 
 

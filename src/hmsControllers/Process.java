@@ -36,7 +36,7 @@ public class Process extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-	
+	 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response){
 		try {
@@ -53,13 +53,13 @@ public class Process extends HttpServlet {
 			if(request.getParameter("action")!=null) {
 				if(request.getParameter("action").equals("addDoc")){
 					addDoc(request,response);
-				} else if(request.getParameter("action").equals("addNurse")){
+
+				} else if(request.getParameter("action").equals("addNurse"))
 					addNurse(request,response);
-				} else if(request.getParameter("action").equals("addRoom")){
+				else if(request.getParameter("action").equals("addRoom"))
 					addRoom(request,response);
-				}
-//				else if(request.getParameter("action").equals("addPatient"))
-//					addPatient(request,response);
+				else if(request.getParameter("action").equals("addPatient"))
+					addPatient(request,response);
 				else if(request.getParameter("id")!=null){
 //					else if(request.getParameter("action").equals("deletePatient"))
 //						deletePatient(request,response);
@@ -104,9 +104,11 @@ public class Process extends HttpServlet {
 			ex.printStackTrace();
 		}
 	}
+ 
 	//---------------------------
 	// 어드민 닥터부분
 	//---------------------------
+ 
 	private void addDoc(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
 		
 		int catid = Integer.parseInt(request.getParameter("catid"));
@@ -163,6 +165,7 @@ public class Process extends HttpServlet {
 	    response.setCharacterEncoding("UTF8"); // this line solves the problem
 		response.getWriter().print(emp.toJson());
 	}
+ 
 	public void deleteEmployee(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
 	
 		int eid = Integer.parseInt(request.getParameter("id"));
@@ -270,7 +273,31 @@ public class Process extends HttpServlet {
 		int rid = Integer.parseInt(request.getParameter("id"));
 		hms.deleteRoom(rid);
 	}
-
+	
+	//예약시스템쪽
+	public void addPatient(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
+		String name = request.getParameter("name");
+		System.out.println(name);
+		String gender = request.getParameter("gender");
+		String dob = request.getParameter("dob");
+		String phone = request.getParameter("phone"); 
+		//int eid = Integer.parseInt(request.getParameter("doctor"));
+		int eid = 1;
+		String reservation_date = request.getParameter("reservation_date");
+		String reservation_time = request.getParameter("reservation_time");
+		
+		Patient p = new Patient();
+		p.setName(name);
+		p.setGender(gender);
+		p.setPhone(phone);
+		p.setBirth(dob);
+		p.setEid(eid);
+		p.setReservation_day(reservation_date);
+		p.setReservation_time(reservation_time);
+		
+		
+		hms.addPatient(p);
+	}
 
 //	
 //	public void addPatient(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
@@ -296,14 +323,6 @@ public class Process extends HttpServlet {
 //
 //	}
 //	
-
-//	
-
-//	
-
-//	
-
-//	
-
+ 
 
 }

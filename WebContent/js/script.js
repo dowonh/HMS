@@ -153,62 +153,13 @@ $(document).ready(function(){
 			});
 	
 	
-	$("#roomForm").submit(function(e){
-		e.preventDefault();
-		
-		
-		$.ajax({
-			type: $(this).attr("method"),
-			url: $(this).attr("action"),
-			data: $(this).serialize(),
-			success: function(data){
-				addRoomToTable(data);
-				$(".roomMsg").removeClass("alert-danger");
-				$(".roomMsg").addClass("alert-success").html("<strong>Success</strong>: Record Added!");
-			},
-			error: function(xml,status,errorThrown){
-				$(".roomMsg").removeClass("alert-success");
-				$(".roomMsg").addClass("alert-danger").html("<strong>Error</strong>: "+xml.responseText);
-			}
-			
-		});
-		
-		
-		$("#addRoomModal").modal("toggle"); //this line is awesome!!
-		
-	});
-	
-	
-	$("#updateRoomForm").submit(function(e){
-		e.preventDefault();
-		
-		
-		$.ajax({
-			type: $(this).attr("method"),
-			url: $(this).attr("action"),
-			data: $(this).serialize(),
-			success: function(room){
-				$(".roomMsg").removeClass("alert-danger");
-				$(".roomMsg").addClass("alert-success").html("<strong>Success</strong>: Record Updation Success!");
 
-				$("#displayRooms").DataTable().row($("#roomBody #"+room.rid)).remove().draw();
-				addRoomToTable(room);
-			},
-			error: function(xml,status,errorThrown){
-				$(".roomMsg").removeClass("alert-success");
-				$(".roomMsg").addClass("alert-danger").html("<strong>Error</strong>: "+xml.responseText);
-			}
-			
-		});
-		
-		
-		$("#editRoomModal").modal("toggle"); //this line is awesome!!
-		
-	});
+	
 
+	//의사관련
 	$("#docUpdateForm").submit(function(e){
 		e.preventDefault();
-		alert($(this).serialize());
+		
 		if($("#docUpdateForm .dob").val() == ''){
 			alert('Date of birth cannot be empty');
 			return;
@@ -235,12 +186,59 @@ $(document).ready(function(){
 		
 	});
 
+	//---------------------------------
+	// 방관련
+	//---------------------------------
+	$("#roomForm").submit(function(e){
+		e.preventDefault();
+		
+		$.ajax({
+			type: $(this).attr("method"),
+			url: $(this).attr("action"),
+			data: $(this).serialize(),
+			success: function(data){
+				addRoomToTable(data);
+				$(".roomMsg").removeClass("alert-danger");
+				$(".roomMsg").addClass("alert-success").html("<strong>Success</strong>: Record Added!");
+			},
+			error: function(xml,status,errorThrown){
+				$(".roomMsg").removeClass("alert-success");
+				$(".roomMsg").addClass("alert-danger").html("<strong>Error</strong>: "+xml.responseText);
+			}
+			
+		});
+			
+		$("#addRoomModal").modal("toggle"); //this line is awesome!!
+		
+	});
 	
+	$("#updateRoomForm").submit(function(e){
+		e.preventDefault();
+		
+		$.ajax({
+			type: $(this).attr("method"),
+			url: $(this).attr("action"),
+			data: $(this).serialize(),
+			success: function(room){
+				$(".roomMsg").removeClass("alert-danger");
+				$(".roomMsg").addClass("alert-success").html("<strong>Success</strong>: Record Updation Success!");
+
+				$("#displayRooms").DataTable().row($("#roomBody #"+room.rid)).remove().draw();
+				addRoomToTable(room);
+			},
+			error: function(xml,status,errorThrown){
+				$(".roomMsg").removeClass("alert-success");
+				$(".roomMsg").addClass("alert-danger").html("<strong>Error</strong>: "+xml.responseText);
+			}
+			
+		});
+		
+		$("#editRoomModal").modal("toggle"); //this line is awesome!!
+	});
 });
 
-
 function addDocToTable(doctor){
-	alert("addDocTotable");
+	
 	var index = $("#displayDoctors").dataTable().fnAddData([
 										doctor.username,
 									    doctor.passwd,
@@ -254,7 +252,39 @@ function addDocToTable(doctor){
 					                 ]);
 	var row = $("#displayDoctors").dataTable().fnGetNodes(index);
 	$(row).attr("id",doctor.eid);
-	location.reload(true);
+}
+
+function editDoc(eid){
+	$.ajax({
+		type: "GET",
+		url: "../Process?action=getDoc&id="+eid,
+		//contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		success: function(data){ 
+			editDocForm(eid, data);
+		},
+		error: function(err){
+			console.log("editDoc errer" + err);
+		}
+	});
+}
+
+function editDocForm(eid,docObj){
+
+	$("#editDocModal form").attr("action","../Process?action=editDoc&id="+eid);
+	
+	$("#editDocModal form input[name=name]").val(docObj.name);
+	$("#editDocModal form input[name=username]").val(docObj.username);
+	$("#editDocModal form input[name=password]").val(docObj.password);
+	$("#editDocModal form select[name=catid]").val(docObj.catid);
+	$("#editDocModal form input[name=birth]").val(docObj.birth);
+	$("#editDocModal form input[name=salary]").val(docObj.salary);
+	$("#editDocModal form input[name=phone]").val(docObj.phone);
+	if(docObj.gender=="male")
+		$("#editDocModal form input[value=male]").prop("checked", true);
+	else
+		$("#editDocModal form input[value=female]").prop("checked",true);
+	
+	$("#editDocModal").modal("toggle");
 }
 
 function empDelete(id,type){
@@ -299,37 +329,6 @@ function addNurseToTable(nurse){
 	var row = $("#displayNurses").dataTable().fnGetNodes(index);
 	$(row).attr("id",nurse.employee.user.uid);
 	//$(".deleteMe").remove();
-}
-
-
-
-
-
-
-function  roomDelete(rid){
-	bootbox.confirm("Are you sure?",function(sure){
-		if(sure)
-			roomDeleteConfirm(rid);
-	}).find(".modal-body").css({"height": "50px"})
-}
-
-function roomDeleteConfirm(rid){
-	
-	//alert("gonna delete.");
-	
-	
-	$.ajax({
-		type: "GET",
-		url: "../Process?action=deleteRoom&id="+rid,
-		success: function(){
-			$(".roomMsg").addClass("alert-success").html("<strong>Success</strong>: Record Deleted Success!");
-			//$("#roomBody #"+rid).remove();
-			$("#displayRooms").DataTable().row($("#roomBody #"+rid)).remove().draw();
-		},
-		error: function(xml){
-			$(".roomMsg").addClass("alert-danger").html("<strong>Error</strong>: "+xml.responseText);
-		}
-	});
 }
 
 function  patientDelete(pid){
@@ -389,6 +388,21 @@ function editNurseForm(nid,nurse){
 	$("#editNurseModal").modal("toggle");
 }
 
+/////////////////////////////////////
+// 방 관련부분
+//////////////////////////////////////
+function addRoomToTable(room){
+	var index = $("#displayRooms").dataTable().fnAddData([
+				                                          room.room_number,
+				                                          room.totalbeds,
+				                                          room.availablebeds,
+				                                          "<a onClick='roomDelete("+room.rid+")' href='#'  >Delete</a> / <a href='#' onclick='editRoom("+room.rid+")'>Edit</a>"
+				                                          ]);
+	
+	var row = $("#displayRooms").dataTable().fnGetNodes(index);
+	$(row).attr("id",room.rid);
+	//$(".deleteMe").remove();
+}
 
 function editRoom(rid){
 	$.ajax({
@@ -408,22 +422,87 @@ function editRoomForm(rid,room){
 	$("#editRoomModal form").attr("action","../Process?action=editRoom&id="+rid);
 	
 	$("#editRoomModal form input[name=totalbeds]").val(room.totalbeds);
-	$("#editRoomModal form select[name=nurseId]").val(room.nid);
-	
+
 	$("#editRoomModal").modal("toggle");
 }
 
+function  roomDelete(rid){
+	bootbox.confirm("Are you sure?",function(sure){
+		if(sure)
+			roomDeleteConfirm(rid);
+	}).find(".modal-body").css({"height": "50px"})
+}
 
-function addRoomToTable(room){
-	var index = $("#displayRooms").dataTable().fnAddData([
-				                                          room.rid,
-				                                          room.totalbeds,
-				                                          room.nurse.employee.firstname+" "+room.nurse.employee.lastname,
-				                                          room.nurse.employee.phone,
-				                                          "<a onClick='roomDelete("+room.rid+")' href='#'  >Delete</a> / <a href='#' onclick='editRoom("+room.rid+")'>Edit</a>"
-				                                          ]);
+function roomDeleteConfirm(rid){
 	
-	var row = $("#displayRooms").dataTable().fnGetNodes(index);
-	$(row).attr("id",room.rid);
-	//$(".deleteMe").remove();
+	$.ajax({
+		type: "GET",
+		url: "../Process?action=deleteRoom&id="+rid,
+		success: function(){
+			$(".roomMsg").addClass("alert-success").html("<strong>Success</strong>: Record Deleted Success!");
+			//$("#roomBody #"+rid).remove();
+			$("#displayRooms").DataTable().row($("#roomBody #"+rid)).remove().draw();
+		},
+		error: function(xml){
+			$(".roomMsg").addClass("alert-danger").html("<strong>Error</strong>: "+xml.responseText);
+		}
+	});
+}
+/////////////////////////////////////
+//카테고리 관련 부분
+//////////////////////////////////////
+function addCategoryToTable(category){
+	var index = $("#tblCategories").dataTable().fnAddData([
+	                                                       category.catid,
+	                                                       category.name,
+	                                                       "<a href='#' onclick='updateCategory("+category.catid+")'>Update</a> / <a href='#' onclick='deleteCategory("+category.catid+")'>Delete</a> "
+	                                                       ]);
+	var row = $("#tblCategories").dataTable().fnGetNodes(index);
+	$(row).attr("id",category.catid);
+}
+
+function updateCategory(catid){
+	
+	$("#updateCategoryForm").attr("action","../services/category/"+catid);
+	
+	$.ajax({
+		url: "../services/category/"+catid,
+		type: "PUT",
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		success: function(category){
+			$("#updateCategoryForm input[name=catName]").val(category.name);
+		},
+		error: function(err){
+			console.log(err.responseText);
+		}
+	})
+	
+	$("#updateCategoryModal").modal("toggle");
+}
+
+
+function deleteCategory(catid){
+	bootbox.confirm("Are you sure?",function(sure){
+		if(sure){
+			$.ajax({
+				url: "../services/category/"+catid,
+				type: "DELETE",
+				success: function(result){
+					BootstrapDialog.show({
+						title: "Success!",
+						message: "Category deleted successfully!"
+					});
+					
+					$("#tblCategories").DataTable().row($("#catBody #"+catid)).remove().draw();
+				},
+				error: function(data){
+					BootstrapDialog.show({
+						type: BootstrapDialog.TYPE_DANGER,
+						title: "Error!",
+						message: data.responseText,
+					});
+				}
+			});
+		}
+	}).find(".modal-body").css("height","50px");
 }

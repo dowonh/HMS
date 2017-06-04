@@ -85,27 +85,6 @@ public class HmsDA {
 		
 		return roomList;
 	}
-
-
-	public Room getRoom(int rid) throws SQLException{
-		//connect();
-		Room room = new Room();
-		
-		try{
-			ResultSet result = con.createStatement().executeQuery("SELECT * FROM room = "+rid);
-			System.out.println(result);
-			if(!result.next()) return null;
-			room.setRid(result.getInt("rid"));
-			room.setRoom_number(result.getInt("room_number"));
-			room.setTotalbeds(result.getInt("totalbeds"));
-			room.setAvailablebeds(result.getInt("availablebeds"));
-		} catch(SQLException e){
-			e.printStackTrace();
-		} finally {
-			//disconnect();
-		}
-		return room;
-	}
 	
 	public ArrayList<MedicineGoods> getMedicineGoodsList() throws SQLException{
 		//connect();
@@ -207,9 +186,10 @@ public class HmsDA {
 		}
 		return catList;
 	}
-	//관리자 페이지 - 의사 추가
+	//---------------------------
+	// 어드민 방 의사부분
+	//---------------------------
 	public int addDoctor(Employee employee)throws SQLException{
-		
 		
 		int did=0;
 		//connect();
@@ -305,7 +285,72 @@ public class HmsDA {
 		}
 		return;
 	}
-	//어드민 카테고리 부분
+	//---------------------------
+	// 어드민 방 정보 부분
+	//---------------------------
+	public int addRoom(Room room) throws SQLException{
+		int rid=0;
+		try{ 
+			PreparedStatement stmt = con.prepareStatement("INSERT INTO room(room_number,totalbeds,availablebeds) VALUES(?,?,?) ", Statement.RETURN_GENERATED_KEYS);
+			stmt.setInt(1, room.getRoom_number());
+			stmt.setInt(2, room.getTotalbeds());
+			stmt.setInt(3, room.getTotalbeds());
+			stmt.executeUpdate();
+			
+			ResultSet keys = stmt.getGeneratedKeys();
+			if(keys!=null && keys.next()) rid = keys.getInt(1);
+		} catch(SQLException e){
+			e.printStackTrace();
+		} finally {
+			//disconnect();
+		}
+		return rid;
+	}
+	//간호사 부분에서도 사용하고 어드민에서도 사용함
+	public Room getRoom(int rid) throws SQLException{
+		Room room = new Room();
+		try{
+			ResultSet set = con.createStatement().executeQuery("SELECT * FROM room WHERE rid="+rid);
+			
+			if(!set.next()) return null;
+			room.setRid(set.getInt("rid"));
+			room.setRoom_number(set.getInt("room_number"));
+			room.setTotalbeds(set.getInt("totalbeds"));
+			room.setAvailablebeds(set.getInt("availablebeds"));
+		}catch(SQLException e){
+			e.printStackTrace();
+		} finally { 
+		}
+
+		return room;
+	}
+	
+	public void updateRoom(Room room) throws SQLException{
+		try{
+			PreparedStatement stmt = con.prepareStatement("UPDATE room set totalbeds=? WHERE rid=?");
+			stmt.setInt(1, room.getTotalbeds());
+			stmt.setInt(2, room.getRid());
+			
+			stmt.execute();
+		}catch(SQLException e){		
+			e.printStackTrace();		
+		} finally {
+		}
+	}
+	
+	public void deleteRoom(int rid) throws SQLException{
+		try{
+			PreparedStatement stmt = con.prepareStatement("DELETE FROM room WHERE rid=?");
+			stmt.setInt(1, rid);
+			stmt.execute();
+		} catch(SQLException e){
+			e.printStackTrace();
+		} finally {
+		}
+	}
+	//---------------------------
+	// 어드민 카테고리부분
+	//---------------------------
 	public Category addCategory(Category cat) throws SQLException {
 		//connect();
 		int catid=0;
@@ -425,18 +470,7 @@ public class HmsDA {
 		}
 		return patient;
 	}
-	public Room getRoom(int rid) throws SQLException{
-		Room room = new Room();
-		ResultSet set = con.createStatement().executeQuery("SELECT * FROM room WHERE rid="+rid);
-		
-		if(!set.next()) return null;
-		room.setRid(set.getInt("rid"));
-		room.setTotalBeds(set.getInt("totalbeds"));
-		room.setNid(set.getInt("nid"));
-		room.setAvailableBeds(set.getInt("availablebeds"));
-		room.setNurse(getNurse(room.getNid()));
-		return room;
-	}
+
 	
 	public Nurse getNurse(int nid) throws SQLException{
 		Nurse nurse = new Nurse();
@@ -747,13 +781,7 @@ public class HmsDA {
 		return uid;
 	}
 	
-	public void deleteRoom(int rid) throws SQLException{
-		
-		PreparedStatement stmt = con.prepareStatement("DELETE FROM room WHERE rid=?");
-		stmt.setInt(1, rid);
-		stmt.execute();
-		
-	}
+
 	
 	public void deletePatient(int pid) throws SQLException{
 		
@@ -766,21 +794,7 @@ public class HmsDA {
 
 	
 	
-	public int addRoom(Room room) throws SQLException{
-		
-		int rid=0;
-		PreparedStatement stmt = con.prepareStatement("INSERT INTO room(totalbeds,nid,availablebeds) VALUES(?,?,?) ", Statement.RETURN_GENERATED_KEYS);
-		stmt.setInt(1, room.getTotalbeds());
-		stmt.setInt(2, room.getNid());
-		stmt.setInt(3,room.getTotalbeds());
-		stmt.executeUpdate();
-		
-		ResultSet keys = stmt.getGeneratedKeys();
-		if(keys!=null && keys.next()) rid = keys.getInt(1);
 
-		return rid;
-		
-	}
 	
 	public Patient addPatient(Patient p) throws SQLException{
 		
@@ -821,16 +835,7 @@ public class HmsDA {
 		stmt.execute();
 	}
 	
-	public void updateRoom(Room room) throws SQLException{
-		
-		PreparedStatement stmt = con.prepareStatement("UPDATE room set totalbeds=?, nid=? WHERE rid=?");
-		
-		stmt.setInt(1, room.getTotalbeds());
-		stmt.setInt(2, room.getNid());
-		stmt.setInt(3, room.getRid());
-		
-		stmt.execute();
-	}
+
 	
 	public ArrayList<Room> getNurseRooms(int nid) throws SQLException{
 		PreparedStatement stmt = con.prepareStatement("SELECT * FROM room WHERE nid=?");

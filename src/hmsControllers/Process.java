@@ -55,15 +55,12 @@ public class Process extends HttpServlet {
 					addDoc(request,response);
 				} //else if(request.getParameter("action").equals("addNurse"))
 //					addNurse(request,response);
-//				else if(request.getParameter("action").equals("addRoom"))
-//					addRoom(request,response);
+				else if(request.getParameter("action").equals("addRoom")){
+					addRoom(request,response);
+				}
 //				else if(request.getParameter("action").equals("addPatient"))
 //					addPatient(request,response);
 				else if(request.getParameter("id")!=null){
-//					
-
-//					else if(request.getParameter("action").equals("deleteRoom"))
-//						deleteRoom(request,response);
 //					else if(request.getParameter("action").equals("deletePatient"))
 //						deletePatient(request,response);
 //
@@ -73,14 +70,17 @@ public class Process extends HttpServlet {
 						updateDoc(request,response);
 					else if(request.getParameter("action").equals("deleteEmp"))
 						deleteEmployee(request,response);
+					else if(request.getParameter("action").equals("getRoom"))
+						getRoom(request,response);
+					else if(request.getParameter("action").equals("editRoom"))
+						updateRoom(request,response);
+					else if(request.getParameter("action").equals("deleteRoom"))
+						deleteRoom(request,response);
 //					else if(request.getParameter("action").equals("getNurse"))
 //						getNurse(request,response);
 //					else if(request.getParameter("action").equals("editNurse"))
 //						updateNurse(request,response);
-//					else if(request.getParameter("action").equals("getRoom"))
-//						getRoom(request,response);
-//					else if(request.getParameter("action").equals("editRoom"))
-//						updateRoom(request,response);
+
 //					else
 //						request.getRequestDispatcher("index.jsp").forward(request, response);
 				}else{
@@ -104,7 +104,9 @@ public class Process extends HttpServlet {
 			ex.printStackTrace();
 		}
 	}
-	//�쓽�궗 異붽��븯�뒗 遺�遺� - 愿�由ъ옄 �럹�씠吏�
+	//---------------------------
+	// 어드민 닥터부분
+	//---------------------------
 	private void addDoc(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
 		
 		int catid = Integer.parseInt(request.getParameter("catid"));
@@ -152,7 +154,6 @@ public class Process extends HttpServlet {
 //		response.getWriter().print(employee.toJson());
 	}
   
-	 
 	public void getDoc(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
 		int eid = Integer.parseInt(request.getParameter("id"));
 
@@ -167,16 +168,49 @@ public class Process extends HttpServlet {
 		int eid = Integer.parseInt(request.getParameter("id"));
 		hms.deleteEmployee(eid);
 	}
+	//---------------------------
+	// 어드민 방 정보 부분
+	//---------------------------
+	public void addRoom(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
+		
+		int room_number = Integer.parseInt(request.getParameter("room_number"));
+		int totalbeds = Integer.parseInt(request.getParameter("totalbeds"));
+		
+		Room room = new Room();
+		room.setRoom_number(room_number);
+		room.setTotalbeds(totalbeds);
+		room.setAvailablebeds(totalbeds);
+		hms.addRoom(room);
+		
+		response.setContentType("application/json");
+		response.getWriter().print(room.toJson());
+	}
+	public void getRoom(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
+		int rid = Integer.parseInt(request.getParameter("id"));
 	
-//	public void getRoom(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
-//		int rid = Integer.parseInt(request.getParameter("id"));
-//		
-//		Room room = hms.getRoom(rid);
-//		
-//		response.setContentType("application/json");
-//		response.getWriter().print(room.toJson());
-//		
-//	}
+		Room room = hms.getRoom(rid);
+	
+		response.setContentType("application/json");
+		response.getWriter().print(room.toJson());
+	
+	}
+	public void updateRoom(HttpServletRequest request, HttpServletResponse response) throws IOException, NumberFormatException, SQLException{
+	
+		int rid = Integer.parseInt(request.getParameter("id"));
+
+		Room room = hms.getRoom(rid);
+		room.setTotalbeds(Integer.parseInt(request.getParameter("totalbeds")));
+		
+		hms.updateRoom(room);
+		
+		response.setContentType("application/json");
+		response.getWriter().print(room.toJson());
+	}
+	public void deleteRoom(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
+		int rid = Integer.parseInt(request.getParameter("id"));
+		hms.deleteRoom(rid);
+	}
+
 //	
 //	
 //	public void updateNurse(HttpServletRequest request, HttpServletResponse response) throws IOException, NumberFormatException, SQLException{
@@ -251,47 +285,13 @@ public class Process extends HttpServlet {
 //
 //	}
 //	
-//	public void deleteRoom(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
-//		int rid = Integer.parseInt(request.getParameter("id"));
-//		hms.deleteRoom(rid);
-//		
-//	}
+
 //	
 
 //	
-//public void updateRoom(HttpServletRequest request, HttpServletResponse response) throws IOException, NumberFormatException, SQLException{
-//		
-//		Room room;
-//		room = hms.getRoom(Integer.parseInt(request.getParameter("id")));
-//		room.setNid(Integer.parseInt(request.getParameter("nurseId")));
-//		room.setNurse(hms.getNurse(room.getNid()));
-//		room.setTotalBeds(Integer.parseInt(request.getParameter("totalbeds")));
-//		
-//		hms.updateRoom(room);
-//		
-//		response.setContentType("application/json");
-//		response.getWriter().print(room.toJson());
-//		
-//		System.out.print("room updated."+room.getRid()+room.getNurse().getEmployee().getFirstname());
-//		
-//	}
+
 //	
-//	public void addRoom(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
-//
-//		int nid = Integer.parseInt(request.getParameter("nurseId"));
-//		int totalbeds = Integer.parseInt(request.getParameter("totalbeds"));
-//		
-//		Room room = new Room();
-//		room.setNid(nid);
-//		room.setTotalBeds(totalbeds);
-//		Nurse nurse = hms.getNurse(room.getNid());
-//		room.setNurse(nurse);
-//		room.setRid(hms.addRoom(room));
-//		
-//		
-//		response.setContentType("application/json");
-//		response.getWriter().print(room.toJson());
-//	}
+
 //	
 //	public void addNurse(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
 //		

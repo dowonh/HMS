@@ -162,11 +162,21 @@ $(function(){
 function showRoom(rid){
 	$("#showRoomModal").modal("toggle");
 	
+	var table = $('#showRooms').DataTable();
+
+	if ( table.data().count() != 0) {
+		table.clear().draw();
+	}
+
+	//alert($("#showRooms").dataTable().data().count() );
+	//if ($("#showRooms").dataTable().row().indexes() == 0)
+	//$("#showRooms").dataTable().clear().draw();
 	//For Indoors
 	$.ajax({
 		url: "../services/indoor/"+rid,
 		type: "GET",
 		success: function(data){
+			
 			data.forEach(function(indoor){
 				addIndoorToTable(indoor);
 			});
@@ -175,31 +185,23 @@ function showRoom(rid){
 			
 		}
 	});
-	
-	//size setting
-	//$("#assignRoomModal .modal-body").css("height","100px");
-	//$("#assignRoomModal .modal-content").css("width","300px");
-	
+ 	
 }
 function addIndoorToTable(indoor){
-//	var rid="-",nurseName="-",link="<a href='#' onclick='assignRoom("+indoor.ipid+")'>Assign Room</a>";
-//	if(indoor.rid) {
-//		rid = indoor.rid
-//		link = "";
-//	}
+ 
 //	
 //	if(indoor.room) nurseName  = indoor.room.nurse.employee.firstname;
-	
+
 	var index = $("#showRooms").dataTable().fnAddData([
 					                                   indoor.name,
 					                                   indoor.gender,
 					                                   indoor.birth,
 					                                   indoor.door_start_day,
 						                               indoor.employee.name,
-						                               	]);
+						                             ]);
 	
-	//var row = $("#showRooms").dataTable().fnGetNodes(index);
-	//$(row).attr("id",indoor.pid);
+	var row = $("#showRooms").dataTable().fnGetNodes(index);
+	$(row).attr("id",indoor.room_rid);
 	//$(".deleteMe").remove();
 }
 function assignRoom(ipid){

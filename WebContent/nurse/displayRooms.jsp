@@ -29,9 +29,7 @@
 	</div>
 	<!-- show Room Modal -->
 	<div id="showRoomModal" class="modal fade" role="dialog">
-	.modal-content {
-    width: 400px;
-}		<div class="modal-content">
+		<div class="modal-content">
 			<div class="modal-dialog">
 				<table class="table table-hover table-bordered" id="showRooms">
 					<thead>

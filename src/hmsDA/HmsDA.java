@@ -124,9 +124,9 @@ public class HmsDA {
 				pat.setPhone(set.getString("phone"));
 				pat.setBirth(set.getString("birth"));
 				pat.setDoor_start_day(set.getString("door_start_day"));
-				
 				pat.setRid(set.getInt("room_rid"));
-				pat.setEmployee(getDoctor(rid));
+				
+				pat.setEmployee(getDoctor(set.getInt("employee_eid")));
 
 				indoorList.add(pat);
 			}

@@ -67,7 +67,7 @@
 	                <div class="row">
 	                    <div class="col-lg-12">
 	                       <!--  <h1>Welcome Dr.   </h1> -->
-	                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><<</a>
+	                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"></a>
 	                    </div>
 	                </div>
 	            </div>

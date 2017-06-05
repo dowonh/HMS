@@ -16,7 +16,8 @@ public class Patient implements Serializable {
 	private String door;
 	private int eid;
 	private int rid;
- 
+	private Employee employee;
+	
 	public Patient(){}
 	
 	public String toJson(){
@@ -103,6 +104,12 @@ public class Patient implements Serializable {
 		this.rid = rid;
 	}
 	
- 
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
 	
 }

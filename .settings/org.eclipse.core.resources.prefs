@@ -1,6 +1,11 @@
 eclipse.preferences.version=1
 encoding//WebContent/index.jsp=UTF-8
-encoding//WebContent/reservation.jsp=UTF-8
-encoding//WebContent/reservationCheck.jsp=UTF-8
+encoding//WebContent/reservation/reservation.jsp=UTF-8
+encoding//WebContent/reservation/reservationCheck.jsp=UTF-8
 encoding//WebContent/reservationMenu.jsp=UTF-8
 encoding//src/hmsControllers/HmsFactory.java=UTF-8
+encoding//src/hmsControllers/Process.java=UTF-8
+<<<<<<< HEAD
+encoding//src/hmsDA/HmsDA.java=UTF-8
+=======
+>>>>>>> 54b6a58fcdd37003a7a8a7535ee2dbf4b9f0be1a

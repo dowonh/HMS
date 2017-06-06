@@ -16,7 +16,9 @@ public class Patient implements Serializable {
 	private String door;
 	private int eid;
 	private int rid;
- 
+	private Employee employee;
+	private Category category;
+	
 	public Patient(){}
 	
 	public String toJson(){
@@ -102,7 +104,23 @@ public class Patient implements Serializable {
 	public void setRid(int rid) {
 		this.rid = rid;
 	}
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 	
- 
+	
 	
 }

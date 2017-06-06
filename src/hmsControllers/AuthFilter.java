@@ -28,7 +28,8 @@ public class AuthFilter implements Filter{
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 		
-		if(req.getRequestURI().contains("services/category/all"))
+		//if(req.getRequestURI().contains("services/category/all"))
+		if(req.getRequestURI().contains("services/"))
 			next.doFilter(request, response);
 		else if(req.getSession().getAttribute("user")==null)
 			res.sendRedirect(req.getContextPath()+"/index.jsp");

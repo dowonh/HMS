@@ -54,7 +54,10 @@ public class HmsFactory {
 	
 	public String getCategoriesJson() throws SQLException {
 		
-		return g.toJson(hms.getCategories());
+		ArrayList<Category> catList = hms.getCategories();
+		return g.toJson(catList);
+		
+		//return g.toJson(hms.getCategories());
 	}
 	//간호사 관련 가져오기
 	public String getNursesJson(){
@@ -76,7 +79,20 @@ public class HmsFactory {
 	public void deleteCategory(int catid) throws SQLException {
 		hms.deleteCategory(catid);
 	}
-
+	
+	public String getDepartmentJson() throws SQLException {
+		
+		ArrayList<Category> catList = hms.getDepartment();
+		return g.toJson(catList);
+	}
+	
+	public String getDoctorJson(int did) throws SQLException{
+		
+		ArrayList<Employee> docList = hms.getSelectDoctor(did);
+		return g.toJson(docList);
+		
+	}
+	
 
 	  /*public ArrayList<Room> getRooms(){
 		return hms.getRoomList();
@@ -100,14 +116,7 @@ public class HmsFactory {
 	
 
 	
-	public String getDoctorJson(int did) throws SQLException{
-		
-		doctornote doc;
-		doc = hms.getDoctor(did);
-		
-		return g.toJson(doc);
-		
-	}
+	
 	
 	public String getNurseJson(int nid) throws SQLException{
 		Nurse nurse;

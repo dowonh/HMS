@@ -18,6 +18,8 @@ import javax.ws.rs.core.Response;
 public class PatientServices {
 
 	HmsFactory hms = new HmsFactory();
+
+	
 //	
 //	@GET
 //	@Path("patient/doctor/{uid}")

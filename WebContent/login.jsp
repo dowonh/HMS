@@ -31,7 +31,7 @@ try{
 	stmt.setString(1, user);
 	stmt.setString(2, pass);
 	System.out.println(user+" "+pass);
-	 ResultSet rs = stmt.executeQuery();
+	ResultSet rs = stmt.executeQuery();
 	if(rs.next()){
 		String type = rs.getString("type");
 		int eid = rs.getInt("eid");

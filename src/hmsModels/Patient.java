@@ -14,9 +14,12 @@ public class Patient implements Serializable {
 	private String reservation_day;
 	private String reservation_time;
 	private String door;
+	private String door_start_day;
+	private String door_end_day;
 	private int eid;
 	private int rid;
- 
+	private Employee employee;
+	
 	public Patient(){}
 	
 	public String toJson(){
@@ -86,6 +89,21 @@ public class Patient implements Serializable {
 	public void setDoor(String door) {
 		this.door = door;
 	}
+	public String getDoor_start_day() {
+		return door_start_day;
+	}
+
+	public void setDoor_start_day(String door_start_day) {
+		this.door_start_day = door_start_day;
+	}
+
+	public String getDoor_end_day() {
+		return door_end_day;
+	}
+
+	public void setDoor_end_day(String door_end_day) {
+		this.door_end_day = door_end_day;
+	}
 
 	public int getEid() {
 		return eid;
@@ -103,6 +121,12 @@ public class Patient implements Serializable {
 		this.rid = rid;
 	}
 	
- 
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
 	
 }

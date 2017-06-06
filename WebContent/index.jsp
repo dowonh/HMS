@@ -551,7 +551,7 @@ td {
 							<h4>
 								<strong>예약 안내</strong>
 							</h4>
-							<a href="register.html" class="btn btn-primary">Learn More</a>
+							<a href="reservation/reservation.jsp" class="btn btn-primary">Learn More</a>
 						</div>
 					</div>
 					<div class="col-md-3 col-sm-6">
@@ -563,7 +563,7 @@ td {
 							<h4>
 								<strong>예약 조회</strong>
 							</h4>
-							<a href="#" class="btn btn-primary">Learn More</a>
+							<a href="reservation/reservationCheck.jsp" class="btn btn-primary">Learn More</a>
 						</div>
 					</div>
 					<div class="col-md-3 col-sm-6">
@@ -575,7 +575,7 @@ td {
 							<h4>
 								<strong>결과 조회</strong>
 							</h4>
-							<a href="#" class="btn btn-primary">Learn More</a>
+							<a href="reservation/resultCheck.jsp" class="btn btn-primary">Learn More</a>
 						</div>
 					</div>
 					<div class="col-md-3 col-sm-6">
@@ -587,7 +587,7 @@ td {
 							<h4>
 								<strong>증명서 발급</strong>
 							</h4>
-							<a href="#" class="btn btn-primary">Learn More</a>
+							<a href="reservation/certificatateIssue.jsp" class="btn btn-primary">Learn More</a>
 						</div>
 					</div>
 				</div>

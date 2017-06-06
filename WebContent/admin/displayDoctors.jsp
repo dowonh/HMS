@@ -11,8 +11,9 @@
 .modal-content {
 	width: 400px;
 }
+
 .modal-body {
-    height: 150px;
+	height: 150px;
 }
 </style>
 </head>
@@ -53,8 +54,9 @@
 						<div class="modal-body">
 							<div class="form-group">
 								<div class="col-lg-6">
-						  			<input type="text" class="form-control" name="username" placeholder="Username"  required/>
-						  		</div>
+									<input type="text" class="form-control" name="username"
+										placeholder="Username" required />
+								</div>
 								<div class="col-lg-6">
 									<input type="password" class="form-control" name="password"
 										placeholder="Password" required />
@@ -64,11 +66,11 @@
 										placeholder="Name" required />
 								</div>
 								<br />
-								 <div class="col-lg-6">
+								<div class="col-lg-6">
 									<input type="text" class="form-control" name="phone"
 										placeholder="Phone No." required />
 								</div>
-								<div class="col-lg-6">
+								<div class="col-lg-12">
 									<label for="radio">Select Gender</label><br>
 									<div class="radio">
 										<label><input type="radio" name="gender" value="male"
@@ -76,23 +78,22 @@
 											name="gender" value="female" /> Female</label>
 									</div>
 								</div>
-								<div class="col-lg-6">
+								<div class="col-lg-12">
 									<label>Specialization</label> <select class="form-control"
 										name="catid" id="specialization"></select>
 								</div>
-								<div class="col-lg-6">
+								<div class="col-lg-12">
 									<label>Birth</label><br> <input type="text" name="birth"
-										placeholder="Birth" readonly class="form-control dob"
+										placeholder="Birth" readonly class="form-control dob" required />
+								</div>
+								<div class="col-lg-12">
+									<label>Salary</label><br> <input type="number"
+										class="form-control" name="salary" placeholder="Salary"
 										required />
 								</div>
-								<br />
-								<div class="col-lg-6">
-									<input type="number" class="form-control" name="salary"
-										placeholder="Salary" required />
-								</div>
-
 							</div>
 						</div>
+						<br />
 						<div class="modal-footer">
 							<button type="submit" class="btn btn-success">Save
 								Record</button>
@@ -105,7 +106,7 @@
 		<!--Update Doctor Modal-->
 		<div id="editDocModal" class="modal fade" role="dialog">
 			<div class="modal-dialog">
-				<form method="POST" id="docUpdateForm" >
+				<form method="POST" id="docUpdateForm">
 					<!-- Modal content-->
 					<div class="modal-content">
 						<div class="modal-header">
@@ -118,8 +119,9 @@
 										placeholder="Name" required />
 								</div>
 								<div class="col-lg-6">
-						  			<input type="text" class="form-control" name="username" placeholder="Username"  required/>
-						  		</div>
+									<input type="text" class="form-control" name="username"
+										placeholder="Username" required />
+								</div>
 								<div class="col-lg-6">
 									<input type="password" class="form-control" name="password"
 										placeholder="Password" required />
@@ -139,8 +141,7 @@
 								</div>
 								<div class="col-lg-6">
 									<label>Birth</label><br> <input type="text" name="birth"
-										placeholder="Birth" readonly class="form-control dob"
-										required />
+										placeholder="Birth" readonly class="form-control dob" required />
 								</div>
 								<br />
 								<div class="col-lg-6">

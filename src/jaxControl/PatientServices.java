@@ -31,12 +31,12 @@ public class PatientServices {
 //		}
 //	}
 	
-//	@GET
-//	@Path("patient/all")
-//	@Produces("application/json")
-//	public String getPatientsJson(){
-//		return hms.getPatientsJson();
-//	}
+	@GET
+	@Path("patient/all")
+	@Produces("application/json")
+	public String getPatientsJson(){
+		return hms.getPatientsJson();
+	}
 //	
 //	@GET
 //	@Path("patient/{pid}")
@@ -66,16 +66,22 @@ public class PatientServices {
 //	@POST
 //	@Path("patient")
 //	@Produces("application/json")
-//	public String addPatient(@FormParam("fullname") String name,
-//			@FormParam("catid") int catid,
+//	public String addPatient(@FormParam("name") String name,
+//			@FormParam("gender") String gender,
 //			@FormParam("dob") String dob,
-//			@FormParam("gender") String gender){
+//			@FormParam("phone") String phone,
+//			@FormParam("eid") int eid,
+//			@FormParam("reservation_date") String reservation_date,
+//			@FormParam("reservation_time") String reservation_time){
 //		
 //		Patient patient = new Patient();
-//		patient.setCatid(catid);
-//		patient.setDob(dob);
 //		patient.setName(name);
 //		patient.setGender(gender);
+//		patient.setBirth(dob);
+//		patient.setPhone(phone);
+//		patient.setEid(eid);
+//		patient.setReservation_day(reservation_date);
+//		patient.setReservation_time(reservation_time);
 //		
 //		try {
 //			return hms.addPatient(patient);

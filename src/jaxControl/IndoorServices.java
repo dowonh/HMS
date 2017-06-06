@@ -18,25 +18,25 @@ import javax.ws.rs.core.Response;
 public class IndoorServices {
 
 	HmsFactory hms = new HmsFactory();
-//	
+	
 //	@GET
 //	@Path("indoor/all")
 //	@Produces("application/json")
 //	public String getIndoorsJson(){
 //		return hms.getIndoorsJson();
 //	}
-//	@GET
-//	@Path("indoor/{ipid}")
-//	@Produces("application/json")
-//	public String getIndoorJson(@PathParam("ipid") int ipid){
-//		try {
-//			return hms.getIndoorJson(ipid);
-//			
-//		} catch (SQLException e) {
-//			Response.serverError();
-//			return e.getMessage();
-//		}
-//	}
+	@GET
+	@Path("indoor/{rid}")
+	@Produces("application/json")
+	public String getIndoorJson(@PathParam("rid") int rid){
+		try {
+			return hms.getIndoorsJson(rid);
+			
+		} catch (SQLException e) {
+			Response.serverError();
+			return e.getMessage();
+		}
+	}
 //	
 //	
 //	//room assignment to indoors

@@ -26,7 +26,7 @@ public class HmsFactory {
 		return g.toJson(obj);
 	}
 	
-	// ��ȣ�� �κ� - ������
+	//간호사가 사용
 	public String getRoomsJson(){
 		ArrayList<Room> roomList = hms.getRoomList();
 		
@@ -46,7 +46,7 @@ public class HmsFactory {
 		
 		return g.toJson(medList);
 	}
-	//���� ������ �κ�
+	//어드민페이지
 	public String getDoctorsJson(){
 		ArrayList<Employee> docList = hms.getDoctorList();
 		return g.toJson(docList);
@@ -56,7 +56,46 @@ public class HmsFactory {
 		
 		return g.toJson(hms.getCategories());
 	}
-	
+	//간호사 관련 가져오기
+	public String getNursesJson(){
+		ArrayList<Employee> nurseList = hms.getNurseList();
+		
+		return g.toJson(nurseList);
+	}
+	// 카테고리 관련부분
+	public String addCategory(Category cat) throws SQLException {
+		
+		return hms.addCategory(cat).toJson();
+	}
+	public String updateCategory(Category cat) throws SQLException {
+		return hms.updateCategory(cat).toJson();
+	}	
+//	public String getCategory(int catid) throws SQLException {
+//		return hms.getCategory(catid).toJson();
+//	}
+	public void deleteCategory(int catid) throws SQLException {
+		hms.deleteCategory(catid);
+	}
+	//환자 관련
+	public String getPatientsJson(){
+		ArrayList<Patient> patientList = hms.getPatientList();
+		
+		return g.toJson(patientList);
+	}
+	//입원 관련
+	public String getIndoorsJson(int rid) throws SQLException{
+		ArrayList<Patient> indoorList = hms.getIndoorList(rid);
+		
+		return g.toJson(indoorList);
+	}
+//	public String getIndoorJson(int rid) throws SQLException{
+//		
+//		ArrayList<Patient> indoorPatientList = hms.getIndoor(rid);
+//		
+//		return g.toJson(indoorPatientList);
+//	}
+
+
 	  /*public ArrayList<Room> getRooms(){
 		return hms.getRoomList();
 	}
@@ -77,11 +116,7 @@ public class HmsFactory {
 	}
 
 	
-	public String getNursesJson(){
-		ArrayList<Nurse> nurseList = hms.getNurseList();
-		
-		return g.toJson(nurseList);
-	}
+
 	
 	public String getDoctorJson(int did) throws SQLException{
 		
@@ -101,11 +136,7 @@ public class HmsFactory {
 			
 	}
 	
-	public String getPatientsJson(){
-		ArrayList<Patient> patientList = hms.getPatientList();
-		
-		return g.toJson(patientList);
-	}
+
 	
 	public String getPatientJson(int pid) throws SQLException{
 		
@@ -121,19 +152,9 @@ public class HmsFactory {
 	
 
 	
-	public String getIndoorsJson(){
-		ArrayList<Indoor> indoorList = hms.getIndoorList();
-		
-		return g.toJson(indoorList);
-	}
+
 	
-	public String getIndoorJson(int ipid) throws SQLException{
-		
-		Indoor indoor;
-		indoor = hms.getIndoor(ipid);
-		
-		return g.toJson(indoor);
-	}
+
 	
 	public String getNurseRoomsJson(int nid) throws SQLException{
 		ArrayList<Room> roomList = hms.getNurseRooms(nid);
@@ -252,25 +273,16 @@ public class HmsFactory {
 		
 		hms.removeMedicine(mid);
 	}
-
-
-
+ 
 	public String addCategory(Category cat) throws SQLException {
 		
 		return hms.addCategory(cat).toJson();
 	}
+ 
 
-	public String getCategory(int catid) throws SQLException {
-		return hms.getCategory(catid).toJson();
-	}
 
-	public String updateCategory(Category cat) throws SQLException {
-		return hms.updateCategory(cat).toJson();
-	}
 
-	public void deleteCategory(int catid) throws SQLException {
-		hms.deleteCategory(catid);
-	}
+
 
 	public String addPatient(Patient patient) throws SQLException {
 		return hms.addPatient(patient).toJson();

@@ -59,7 +59,6 @@
 			<li><a data-toggle="tab" href="#nurses">Nurses</a><li>
 			<li><a data-toggle="tab" href="#patients">Patients</a></li>
 			<li><a data-toggle="tab" href="#rooms">Rooms</a><li>
-			<li><a data-toggle="tab" href="#indoors">Indoor Patients</a><li>
 			<li><a data-toggle="tab" href="#categories">Categories</a><li>
 		</ul>
 		
@@ -68,7 +67,6 @@
 			<%@ include file="displayNurses.jsp" %>
 			<%@ include file="displayPatients.jsp" %>
 			<%@ include file="displayRooms.jsp" %>
-			<%@ include file="displayIndoors.jsp" %>
 			<%@ include file="displayCategories.jsp" %>
 		</div>
 </div>

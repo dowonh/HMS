@@ -161,6 +161,8 @@ td {
 	</ul>
 </nav> -->
 
+
+
 	<!-- Navigation -->
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 	<div class="container">
@@ -207,21 +209,21 @@ td {
 
 		<div class="carousel-inner" role="listbox">
 			<div class="item active">
-				<img src="img/slide1.jpg" />
+				<img src="https://i0.wp.com/wrldesign.com/files/projects/full/hillcrest2280v2reeves.jpg" />
 			</div>
 
 			<div class="item">
-				<img src="img/slide2.jpg" />
+				<img src="https://www.urmc.rochester.edu/MediaLibraries/URMCMedia/childrens-hospital/giving/images/gch-slider/giving-2016-phaseii.jpg" />
 			</div>
 
 			<div class="item">
-				<img src="img/slide3.jpg" />
+				<img src="https://ak6.picdn.net/shutterstock/videos/12255656/thumb/1.jpg" />
 			</div>
 			<div class="item">
 				<img src="img/slide4.jpg" />
 			</div>
 			<div class="item">
-				<img src="img/slide5.jpg" />
+				<img src="http://www.performacide.com/cache/com_zoo/images/06hospital_262522d88ff2113852ce974a323df3a9.jpg" />
 			</div>
 		</div>
 	</div>
@@ -243,7 +245,7 @@ td {
 		<div class="row text-center">
 			<div class="col-md-4">
 				<span class="fa-stack fa-4x"> <img
-					src="http://activeorthoweb.com/wp-content/uploads/knee-icon2.png"
+					src="http://www.punejointreplacement.com/wp-content/uploads/2016/10/orthopedics-icon.png"
 					alt="" width="200" height="200">
 				</span>
 				<h4 class="service-heading">정형외과</h4>
@@ -694,7 +696,7 @@ td {
 								required /> Male</label> <label><input type="radio"
 								name="gender" value="female" /> Female</label>
 						</div>
-						-->
+						
 						<input type="submit" name="signup"
 							class="signup signupmodal-submit" value="Register">
 					</form>

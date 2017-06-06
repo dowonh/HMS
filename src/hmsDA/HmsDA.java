@@ -1087,9 +1087,7 @@ public class HmsDA {
 		stmt.execute();
 		
 	}
-
-
-<<<<<<< HEAD
+ 
 	public Category addCategory(Category cat) throws SQLException {
 		
 		PreparedStatement stmt = con.prepareStatement("INSERT INTO category SET name=?",Statement.RETURN_GENERATED_KEYS);
@@ -1103,11 +1101,7 @@ public class HmsDA {
 		cat.setCatid(catid);
 		return cat;
 	}
-=======
-	
-
-
->>>>>>> 54b6a58fcdd37003a7a8a7535ee2dbf4b9f0be1a
+ 
 
 
 

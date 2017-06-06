@@ -87,6 +87,33 @@ public class HmsDA {
 		return roomList;
 	}
 	
+	public ArrayList<Room> getRoomRemainList(){
+		//connect();
+		ArrayList<Room> roomList = new ArrayList<Room>();
+
+		try{
+			Statement stmt = con.createStatement();
+			
+			ResultSet result = stmt.executeQuery("SELECT * FROM room where availablebeds != 0");
+ 
+			while(result.next()){
+				
+				Room room = new Room();
+				room.setRid(result.getInt("rid"));
+				room.setRoom_number(result.getInt("room_number"));
+				room.setTotalbeds(result.getInt("totalbeds"));
+				room.setAvailablebeds(result.getInt("availablebeds"));
+				
+				roomList.add(room);
+			}
+		} catch(SQLException e){
+			e.printStackTrace();
+		} finally {
+		//	disconnect();
+		}
+		
+		return roomList;
+	}
 	public ArrayList<MedicineGoods> getMedicineGoodsList() throws SQLException{
 		ArrayList<MedicineGoods> medGoodList = new ArrayList<MedicineGoods>();
 		try{
@@ -513,19 +540,30 @@ public class HmsDA {
 			ResultSet set = stmt.executeQuery("SELECT * FROM patient");
 			
 			while(set.next()){
+				String string_reservation_day = " ";
+				String string_door_start_day = " ";
+				String string_door_end_day = " ";
+				if( set.getString("reservation_day") != null) string_reservation_day = set.getString("reservation_day");
+				if( set.getString("door_start_day") != null) string_door_start_day = set.getString("door_start_day");
+				if( set.getString("door_end_day") != null) string_door_end_day = set.getString("door_end_day");
+				
 				Patient patient = new Patient();
 				patient.setPid(set.getInt("pid"));
 				patient.setName(set.getString("name"));
 				patient.setGender(set.getString("gender"));
 				patient.setPhone(set.getString("phone"));
 				patient.setBirth(set.getString("birth"));
-				patient.setReservation_day(set.getString("reservation_day"));
+				patient.setReservation_day(string_reservation_day);
 				patient.setReservation_time(set.getString("reservation_time"));
+				patient.setDoor(set.getString("door"));
+				patient.setDoor_start_day( string_door_start_day);
+				patient.setDoor_end_day(string_door_end_day); 
 				patient.setEid(set.getInt("employee_eid"));
+				patient.setRid(set.getInt("room_rid"));
 				patient.setEmployee(getDoctor(set.getInt("employee_eid")));
 				
 			 	patientList.add(patient);
-			}
+			} 
 		}
 		catch(SQLException ex){
 			ex.printStackTrace();
@@ -616,7 +654,114 @@ public class HmsDA {
 		return p;
 	}
 	
-	 
+	public void decreaseBed(int rid) throws SQLException {
+		try{
+			PreparedStatement stmt = con.prepareStatement("SELECT * FROM room WHERE rid=?");
+			stmt.setInt(1, rid);
+			ResultSet set = stmt.executeQuery();
+			
+			int availablebeds = 0;
+			
+			if(set.next()) availablebeds = set.getInt("availablebeds");
+			
+			availablebeds--;
+			
+			stmt = con.prepareStatement("UPDATE room SET availablebeds=? WHERE rid=?");
+			stmt.setInt(1, availablebeds);
+			stmt.setInt(2, rid);
+			stmt.execute();
+		}catch(SQLException e){
+			e.printStackTrace();
+		} finally {
+		 
+		}
+
+		
+	} 
+	public void updateIndoorPatient(int pid,int rid) throws SQLException{
+		try{
+			PreparedStatement stmt = con.prepareStatement("UPDATE patient SET door = 'YES', door_start_day= curdate(), room_rid=? WHERE pid=?");
+			
+			stmt.setInt(1, rid);
+			stmt.setInt(2, pid); 
+			stmt.execute();
+		}catch(SQLException e){
+			e.printStackTrace();
+		} finally {
+		 
+		}
+
+	}
+	
+	public Patient getPatient(int pid) throws SQLException{
+
+		ResultSet set = con.createStatement().executeQuery("SELECT * FROM patient WHERE pid="+pid);
+		
+		if(!set.next()) return null;
+		String string_reservation_day = " ";
+		String string_door_start_day = " ";
+		String string_door_end_day = " ";
+		if( set.getString("reservation_day") != null) string_reservation_day = set.getString("reservation_day");
+		if( set.getString("door_start_day") != null) string_door_start_day = set.getString("door_start_day");
+		if( set.getString("door_end_day") != null) string_door_end_day = set.getString("door_end_day");
+		
+		Patient patient = new Patient();
+		patient.setPid(set.getInt("pid"));
+		patient.setName(set.getString("name"));
+		patient.setGender(set.getString("gender"));
+		patient.setPhone(set.getString("phone"));
+		patient.setBirth(set.getString("birth"));
+		patient.setReservation_day(string_reservation_day);
+		patient.setReservation_time(set.getString("reservation_time"));
+		patient.setDoor(set.getString("door"));
+		patient.setDoor_start_day( string_door_start_day);
+		patient.setDoor_end_day(string_door_end_day); 
+		patient.setEid(set.getInt("employee_eid"));
+		patient.setRid(set.getInt("room_rid"));
+		patient.setEmployee(getDoctor(set.getInt("employee_eid")));
+
+		return patient;
+	}
+	
+	public void outRoom(int pid, int rid) throws SQLException{
+		
+		try{
+			PreparedStatement stmt = con.prepareStatement("SELECT * FROM room WHERE rid=?");
+			stmt.setInt(1, rid);
+			ResultSet set = stmt.executeQuery();
+			
+			int availablebeds = 0;
+			String room_number = null;
+			Patient p = getPatient(pid);
+			
+			if(set.next()) {
+				availablebeds = set.getInt("availablebeds");
+				room_number = set.getString("room_number");
+			}
+			
+			availablebeds++; 
+			stmt = con.prepareStatement("UPDATE room SET availablebeds=? WHERE rid=?");
+			stmt.setInt(1, availablebeds);
+			stmt.setInt(2, rid);
+			stmt.execute();
+			
+			stmt = con.prepareStatement("UPDATE patient SET door = 'NO', door_start_day= null, room_rid= null WHERE pid=?");
+			stmt.setInt(1, pid);
+			stmt.execute();
+			
+			stmt = con.prepareStatement("INSERT INTO indoors(room_number, door_start_day, door_end_day, patient_pid) "
+					+ "VALUES(?, ?, curdate(), ?)",Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1,room_number);
+			stmt.setString(2,p.getDoor_start_day());
+			stmt.setInt(3,pid);
+ 
+			stmt.executeUpdate();
+		}catch(SQLException e){
+			e.printStackTrace();
+		} finally {
+		}
+	}
+	
 	/*
 	public Employee getEmployee(int eid){
 		Employee emp = new Employee();
@@ -661,43 +806,9 @@ public class HmsDA {
 	
 
 	
-	public Patient getPatient(int pid) throws SQLException{
-		Patient patient = null;
-		ResultSet set = con.createStatement().executeQuery("SELECT * FROM patient WHERE pid="+pid);
-		while(set.next()){
-			patient = new Patient();
-			patient.setPid(set.getInt("pid"));
-			patient.setName(set.getString("name"));
-			patient.setGender(set.getString("gender"));
-			patient.setDob(set.getString("dob"));
-			patient.setType(set.getString("type"));
-			patient.setCatid(set.getInt("catid"));
-			patient.setDid(set.getInt("did"));
-			
-			patient.setCategory(getCategory(patient.getCatid()));
-			
-			if(patient.getDid()==0){
-				patient.setDoctor(null);
-			}
-			else
-			{
-				patient.setDoctor(getDoctor(patient.getDid()));
-			}
-		}
-		return patient;
-	}
-
 	
 
-	
-	
-	
 
-	
-
-	
-	
-	
 
 	
 	public ArrayList<Prescription> getPrescriptionList() throws SQLException{
@@ -868,14 +979,7 @@ public class HmsDA {
 	
 
 	
-	public void deletePatient(int pid) throws SQLException{
-		
-		PreparedStatement stmt = con.prepareStatement("DELETE FROM patient WHERE pid=?");
-		stmt.setInt(1, pid);
-		stmt.execute();
-		
-	}
-	
+
 
 	
 	
@@ -898,15 +1002,6 @@ public class HmsDA {
 		return p;
 	}
 	
-	public void updateUser(User user) throws SQLException{
-		PreparedStatement stmt = con.prepareStatement("UPDATE users SET username=?, password=?, type=? WHERE uid=?");
-		stmt.setString(1, user.getUsername());
-		stmt.setString(2, user.getPassword());
-		stmt.setString(3, user.getType());
-		stmt.setInt(4, user.getUid());
-		stmt.execute();
-	}
-
 
 	
 
@@ -1023,14 +1118,7 @@ public class HmsDA {
 		stmt.execute();
 	}
 
-	public void updateIndoorRid(int ipid, int rid) throws SQLException {
-		
-		PreparedStatement stmt = con.prepareStatement("UPDATE indoor SET rid=? WHERE ipid=?");
-		stmt.setInt(1, rid);
-		stmt.setInt(2, ipid);
-		stmt.execute();
-		
-	}
+ 
 
 	public void updatePatient(Patient p) throws SQLException {
 		
@@ -1099,21 +1187,5 @@ public class HmsDA {
 
 
 
-	public void decreaseBed(int rid) throws SQLException {
-		PreparedStatement stmt = con.prepareStatement("SELECT * FROM room WHERE rid=?");
-		stmt.setInt(1, rid);
-		ResultSet set = stmt.executeQuery();
-		
-		int availablebeds=0;
-		
-		if(set.next()) availablebeds = set.getInt("availablebeds");
-		
-		availablebeds--;
-		
-		stmt = con.prepareStatement("UPDATE room SET availablebeds=? WHERE rid=?");
-		stmt.setInt(1, availablebeds);
-		stmt.setInt(2, rid);
-		stmt.execute();
-		
-	} */
+*/
 }

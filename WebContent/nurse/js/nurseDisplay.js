@@ -52,8 +52,7 @@ $(function(){
 	$.ajax({
 		url: "../services/patient/all",
 		type: "GET",
-		success: function(data){
-			console.log(data);
+		success: function(data){ 
 			data.forEach(function(patient){
 
 				var index = $("#displayPatients").dataTable().fnAddData([
@@ -64,6 +63,10 @@ $(function(){
 								                                          patient.employee.name,
 								                                          patient.reservation_day,
 								                                          patient.reservation_time,
+								                                          patient.door,
+								                                          patient.door_start_day,
+								                                          "<a onClick='assignRoom("+patient.pid+","+patient.rid+")' href='#'>입원하기</a>",
+								                                          "<a onClick='outRoom("+patient.pid+","+patient.rid+")' href='#'>퇴원하기</a>"
 								                                          ]);
 				var row = $("#displayPatients").dataTable().fnGetNodes(index);
 				$(row).attr("id",patient.pid);
@@ -105,59 +108,70 @@ $(function(){
 	
 
  
-//	//Room Assignment
-//	$("#assignRoomForm").submit(function(e){
-//		e.preventDefault();
-//		
-//		$.ajax({
-//			url: $(this).attr("action"),
-//			data: $(this).serialize(),
-//			type: "PUT",
-//			success: function(indoor){
-//				BootstrapDialog.show({
-//					title: "Success!",
-//					message: "room assigned successfully!"
-//				});
-//				
-//				//$("#indoorBody #"+indoor.pid).addClass("deleteMe");
-//				$("#displayIndoors").DataTable().row($("#indoorBody #"+indoor.pid)).remove().draw();
-//				
-//				
-//				console.log(indoor);
-//				addIndoorToTable(indoor);
-//			},
-//			error: function(data){
-//				BootstrapDialog.show({
-//					type: BootstrapDialog.TYPE_DANGER,
-//					title: "Error!",
-//					message: data.responseText
-//				});
-//			}
-//				
-//		});
-//		
-//		$("#assignRoomModal").modal("toggle");
-//	});
-//	
-//	
-//	$.ajax({
-//		url: "../services/nurse/all",
-//		type: "GET",
-//		success: function(nurses){
-//			nurses.forEach(function(nurse){
-//				$("#roomForm select[name=nurseId]").append("<option value='"+nurse.nid+"' >"+nurse.employee.firstname+" "+nurse.employee.lastname+"</option>");
-//				$("#updateRoomForm select[name=nurseId]").append("<option value='"+nurse.nid+"' >"+nurse.employee.firstname+" "+nurse.employee.lastname+"</option>");
-//			});
-//		},
-//		error: function(data){
-//			
-//		}
-//	});
+ 	//Room Assignment
+	$("#assignRoomForm").submit(function(e){
+		e.preventDefault(); 
+		$.ajax({
+			url: $(this).attr("action"),
+			data: $(this).serialize(),
+			type: "PUT",
+			success: function(patient){
+				BootstrapDialog.show({
+					title: "Success!",
+					message: "room assigned successfully!"
+				}); 
+				//$("#indoorBody #"+indoor.pid).addClass("deleteMe");
+				$("#displayPatients").DataTable().row($("#patientBody #"+patient.pid)).remove().draw();
 
-//	
+				addPatientToTable(patient);
+			},
+			error: function(data){
+				BootstrapDialog.show({
+					type: BootstrapDialog.TYPE_DANGER,
+					title: "Error!",
+					message: data.responseText
+				});
+			}
+				
+		});
+		
+		$("#assignRoomModal").modal("toggle");
+	});
+ 
+	$.ajax({
+		url: "../services/room/remainAll",
+		type: "GET",
+		success: function(rooms){
+			rooms.forEach(function(rooms){
+				$("#assignRoomForm select[name=rid]").append("<option value='"+rooms.rid+"' >"+rooms.room_number+"</option>");
+			});
+		},
+		error: function(data){
+			
+		}
+	});
 
+ 
 	$("table").dataTable();
 })
+function addPatientToTable(patient){
+ 
+	var index = $("#displayPatients").dataTable().fnAddData([
+        patient.name,
+        patient.birth,
+        patient.gender,
+        patient.phone,
+        patient.employee.name,
+        patient.reservation_day,
+        patient.reservation_time,
+        patient.door,
+        patient.door_start_day,
+        "<a onClick='assignRoom("+patient.pid+","+patient.rid+")' href='#'>입원하기</a>",
+        "<a onClick='outRoom("+patient.pid+","+patient.rid+")' href='#'>퇴원하기</a>"
+        ]);
+	var row = $("#displayPatients").dataTable().fnGetNodes(index);
+	$(row).attr("id",patient.pid);
+}
 
 function showRoom(rid){
 	$("#showRoomModal").modal("toggle");
@@ -167,10 +181,7 @@ function showRoom(rid){
 	if ( table.data().count() != 0) {
 		table.clear().draw();
 	}
-
-	//alert($("#showRooms").dataTable().data().count() );
-	//if ($("#showRooms").dataTable().row().indexes() == 0)
-	//$("#showRooms").dataTable().clear().draw();
+ 
 	//For Indoors
 	$.ajax({
 		url: "../services/indoor/"+rid,
@@ -189,9 +200,6 @@ function showRoom(rid){
 }
 function addIndoorToTable(indoor){
  
-//	
-//	if(indoor.room) nurseName  = indoor.room.nurse.employee.firstname;
-
 	var index = $("#showRooms").dataTable().fnAddData([
 					                                   indoor.name,
 					                                   indoor.gender,
@@ -204,16 +212,49 @@ function addIndoorToTable(indoor){
 	$(row).attr("id",indoor.room_rid);
 	//$(".deleteMe").remove();
 }
-function assignRoom(ipid){
-	$("#assignRoomModal").modal("toggle");
-	$("#assignRoomForm").attr("action","../services/indoor/"+ipid+"/room");
-	
-	
-	//size setting
-	$("#assignRoomModal .modal-body").css("height","100px");
-	$("#assignRoomModal .modal-content").css("width","300px");
-	
+
+function assignRoom(pid, rid){
+	if ( rid == 0 ){
+		$("#assignRoomModal").modal("toggle");
+		$("#assignRoomForm").attr("action","../services/indoor/"+pid);
+		
+		//size setting
+		$("#assignRoomModal .modal-body").css("height","100px");
+		$("#assignRoomModal .modal-content").css("width","300px");
+	}else{
+		alert("입원한 환자입니다.");
+	}
 }
 
 
+function outRoom(pid, rid){
+	if(rid != 0){
+		bootbox.confirm("Are you sure?",function(sure){
+			if(sure)
+				petientsOutRoomConfirm(pid, rid);
+		}).find(".modal-body").css({"height": "50px"})
+	}else{
+		alert("입원한적이 없습니다.");
+	}
+
+}
+
+function petientsOutRoomConfirm(pid, rid){
+	$.ajax({
+		type: "GET",
+		url: "../Process?action=outRoom&pid="+pid+"&rid="+rid,
+		  async: false,
+		success: function(patient){
+ 
+			$(".patientMsg").addClass("alert-success").html("<strong>Success</strong>: 퇴원처리 되었습니다!");
+ 
+			//$("#patientBody #"+pid).remove();
+			$("#displayPatients").DataTable().row($("#patientBody #"+pid)).remove().draw();
+			addPatientToTable(patient);
+		},
+		error: function(xml){
+			$(".docMsg").addClass("alert-danger").html("<strong>Error</strong>: "+xml.responseText);
+		}
+	});
+}
 

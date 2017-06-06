@@ -40,19 +40,17 @@ public class IndoorServices {
 //	
 //	
 //	//room assignment to indoors
-//	@PUT
-//	@Path("indoor/{ipid}/room")
-//	@Produces("application/json")
-//	public String updateIndoorRid(@PathParam("ipid") int ipid, @FormParam("rid") int rid){
-//		try {
-//			
-//			
-//			return hms.updateIndoorRid(ipid,rid);
-//			
-//		} catch (SQLException e) {
-//			Response.serverError();
-//			e.printStackTrace();
-//			return e.getMessage();
-//		}
-//	}
+	@PUT
+	@Path("indoor/{pid}")
+	@Produces("application/json")
+	public String updateIndoorRid(@PathParam("pid") int pid, @FormParam("rid") int rid){
+		try {
+			return hms.updateIndoorRid(pid,rid);
+			
+		} catch (SQLException e) {
+			Response.serverError();
+			e.printStackTrace();
+			return e.getMessage();
+		}
+	}
 }

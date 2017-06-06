@@ -170,7 +170,6 @@ $(function(){
 		url: "../services/patient/all",
 		type: "GET",
 		success: function(data){
-			console.log(data);
 			data.forEach(function(patient){
 
 				var index = $("#displayPatients").dataTable().fnAddData([

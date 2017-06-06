@@ -42,8 +42,7 @@
 
 <body>
 
-	<jsp:include page="registerMenu.jsp"></jsp:include>
-
+	
 		<div id="page-wrapper">
 
 			<div class="container-fluid">

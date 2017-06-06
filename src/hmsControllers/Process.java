@@ -53,17 +53,15 @@ public class Process extends HttpServlet {
 			if(request.getParameter("action")!=null) {
 				if(request.getParameter("action").equals("addDoc")){
 					addDoc(request,response);
-
 				} else if(request.getParameter("action").equals("addNurse"))
 					addNurse(request,response);
 				else if(request.getParameter("action").equals("addRoom"))
 					addRoom(request,response);
 				else if(request.getParameter("action").equals("addPatient"))
 					addPatient(request,response);
+				else if(request.getParameter("action").equals("outRoom"))
+					outRoom(request,response);
 				else if(request.getParameter("id")!=null){
-//					else if(request.getParameter("action").equals("deletePatient"))
-//						deletePatient(request,response);
-//
 					if(request.getParameter("action").equals("getDoc"))
 						getDoc(request,response);
 					else if(request.getParameter("action").equals("editDoc"))
@@ -295,10 +293,20 @@ public class Process extends HttpServlet {
 		p.setReservation_day(reservation_date);
 		p.setReservation_time(reservation_time);
 		
-		
 		hms.addPatient(p);
 	}
+	public void outRoom(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
+		
+		int pid = Integer.parseInt(request.getParameter("pid"));
+		int rid = Integer.parseInt(request.getParameter("rid"));
+ 
+		hms.outRoom(pid, rid);
 
+		response.setCharacterEncoding("UTF8"); // this line solves the problem
+		response.setContentType("application/json");
+		response.getWriter().print(hms.getPatient(pid).toJson());
+	} 
+	
 //	
 //	public void addPatient(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
 //		String fullName = request.getParameter("fullname");
@@ -316,13 +324,7 @@ public class Process extends HttpServlet {
 //		
 //	}
 //	
-//	public void deletePatient(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
-//		
-//		int pid = Integer.parseInt(request.getParameter("id"));
-//		hms.deletePatient(pid);
-//
-//	}
-//	
+
  
 
 }

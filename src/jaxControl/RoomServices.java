@@ -23,6 +23,13 @@ public class RoomServices {
 	}
 	
 	@GET
+	@Path("room/remainAll")
+	@Produces("application/json")
+	public String getRoomsRemainJson(){
+		return hms.getRoomsRemainJson();
+	}
+	
+	@GET
 	@Path("room/{rid}")
 	@Produces("application/json")
 	public String getRoomJson(@PathParam("rid") int rid){

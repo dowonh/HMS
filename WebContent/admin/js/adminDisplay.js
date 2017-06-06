@@ -95,6 +95,7 @@ $(function(){
 	//---------------------------
 	// 어드민 카테고리관련
 	//---------------------------
+	
 	$.ajax({
 		url: "../services/category/all",
 		type: "GET",
@@ -107,6 +108,7 @@ $(function(){
 			console.log(error.responseText);
 		}
 	});
+	
 	//Add Category Form Submission
 	$("#addCategoryForm").submit(function(e){
 		e.preventDefault();
@@ -134,6 +136,7 @@ $(function(){
 		
 		$("#addCategoryModal").modal("toggle");
 	});
+	
 	//Update Category Form Submission
 	$("#updateCategoryForm").submit(function(e){
 		e.preventDefault();

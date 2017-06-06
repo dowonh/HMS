@@ -51,13 +51,13 @@
                     </a>
                 </li>
 	
-				<li><a href="reservation/reservation.jsp"><i class="fa fa-glide-g"
+				<li><a href="./reservation.jsp"><i class="fa fa-glide-g"
 						aria-hidden="true"></i> 예약 안내</a></li>
-				<li class="active"><a href="reservation/reservationCheck.jsp"><i
+				<li class="active"><a href="./reservationCheck.jsp"><i
 						class="fa fa-list-alt" aria-hidden="true"></i> 예약 조회</a></li>
-				<li><a href="reservation/resultCheck.jsp"><i class="fa fa-paperclip"
+				<li><a href="./resultCheck.jsp"><i class="fa fa-paperclip"
 						aria-hidden="true"></i> 결과 조회</a></li>
-				<li><a href="reservation/certificateIssue.jsp"><i class="fa fa-print"
+				<li><a href="./certificateIssue.jsp"><i class="fa fa-print"
 						aria-hidden="true"></i> 증명서 발급</a></li>
 			</ul>
 		</div>

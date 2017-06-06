@@ -13,12 +13,15 @@ import hmsModels.Room;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
 /**
  * Servlet implementation class EditEmployee
  */
@@ -26,7 +29,7 @@ import javax.servlet.http.HttpServletResponse;
 public class Process extends HttpServlet {
 	
 	HmsDA hms = new HmsDA();
-	
+	private static Gson g = new Gson();
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response){
 		try {
@@ -61,6 +64,8 @@ public class Process extends HttpServlet {
 					addPatient(request,response);
 				else if(request.getParameter("action").equals("outRoom"))
 					outRoom(request,response);
+				else if(request.getParameter("action").equals("reservationCheck"))
+					reservationCheck(request,response);
 				else if(request.getParameter("id")!=null){
 					if(request.getParameter("action").equals("getDoc"))
 						getDoc(request,response);
@@ -78,7 +83,6 @@ public class Process extends HttpServlet {
 						getNurse(request,response);
 					else if(request.getParameter("action").equals("editNurse"))
 						updateNurse(request,response);
-
 //					else
 //						request.getRequestDispatcher("index.jsp").forward(request, response);
 				}else{
@@ -274,13 +278,15 @@ public class Process extends HttpServlet {
 	
 	//예약시스템쪽
 	public void addPatient(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
+		
+		request.setCharacterEncoding("utf-8");
+		
 		String name = request.getParameter("name");
 		System.out.println(name);
 		String gender = request.getParameter("gender");
 		String dob = request.getParameter("dob");
 		String phone = request.getParameter("phone"); 
-		//int eid = Integer.parseInt(request.getParameter("doctor"));
-		int eid = 1;
+		int eid = Integer.parseInt(request.getParameter("doctor"));
 		String reservation_date = request.getParameter("reservation_date");
 		String reservation_time = request.getParameter("reservation_time");
 		
@@ -301,11 +307,29 @@ public class Process extends HttpServlet {
 		int rid = Integer.parseInt(request.getParameter("rid"));
  
 		hms.outRoom(pid, rid);
+   
+	}
+	
+	//예약시스템쪽
+	public void reservationCheck(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
+		
+		System.out.println("넘어오냐?");
+		
+		request.setCharacterEncoding("utf-8");
+			
+		String name = request.getParameter("name");
+		String phone = request.getParameter("phone"); 
 
+		Patient p = new Patient();
+		p.setName(name);			
+		p.setPhone(phone);
+	
+		ArrayList<Patient> patientInfo = hms.reservationCheck(p);
 		response.setCharacterEncoding("UTF8"); // this line solves the problem
 		response.setContentType("application/json");
-		response.getWriter().print(hms.getPatient(pid).toJson());
-	} 
+		response.getWriter().print(g.toJson(patientInfo));
+	}
+ 
 	
 //	
 //	public void addPatient(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{

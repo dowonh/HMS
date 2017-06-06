@@ -82,6 +82,19 @@ public class HmsFactory {
 		
 		return g.toJson(patientList);
 	}
+	//입원 관련
+	public String getIndoorsJson(int rid) throws SQLException{
+		ArrayList<Patient> indoorList = hms.getIndoorList(rid);
+		
+		return g.toJson(indoorList);
+	}
+//	public String getIndoorJson(int rid) throws SQLException{
+//		
+//		ArrayList<Patient> indoorPatientList = hms.getIndoor(rid);
+//		
+//		return g.toJson(indoorPatientList);
+//	}
+
 
 	  /*public ArrayList<Room> getRooms(){
 		return hms.getRoomList();
@@ -139,19 +152,9 @@ public class HmsFactory {
 	
 
 	
-	public String getIndoorsJson(){
-		ArrayList<Indoor> indoorList = hms.getIndoorList();
-		
-		return g.toJson(indoorList);
-	}
+
 	
-	public String getIndoorJson(int ipid) throws SQLException{
-		
-		Indoor indoor;
-		indoor = hms.getIndoor(ipid);
-		
-		return g.toJson(indoor);
-	}
+
 	
 	public String getNurseRoomsJson(int nid) throws SQLException{
 		ArrayList<Room> roomList = hms.getNurseRooms(nid);

@@ -25,12 +25,11 @@
 		<ul class="nav nav-tabs">
 			<li class="active"><a data-toggle="tab" href="#rooms">입원실 관리</a></li>
 			<li><a data-toggle="tab" href="#medicine">의료물품 관리</a></li>
-			<li><a data-toggle="tab" href="#myPatients">My Patients</a></li>
+			<li><a data-toggle="tab" href="#patients">My Patients</a></li>
 		</ul>
 		
 		<div class="tab-content">
 			<%@ include file="displayRooms.jsp" %>
-
 			<%@ include file="displayMedicine.jsp" %>
 			<%@ include file="displayPatients.jsp" %>
 		</div>

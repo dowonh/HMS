@@ -110,7 +110,33 @@ public class HmsDA {
 		return medGoodList;
 	}
 	
- 
+	public ArrayList<Patient> getIndoorList(int rid){
+		ArrayList<Patient> indoorList = new ArrayList<Patient>();
+		
+		try{
+			Statement stmt = con.createStatement();
+			ResultSet set = stmt.executeQuery("SELECT * FROM patient where room_rid="+rid);
+			while(set.next()){
+				Patient pat = new Patient();
+				
+				pat.setName(set.getString("name"));
+				pat.setGender(set.getString("gender"));
+				pat.setPhone(set.getString("phone"));
+				pat.setBirth(set.getString("birth"));
+				pat.setDoor_start_day(set.getString("door_start_day"));
+				pat.setRid(set.getInt("room_rid"));
+				
+				pat.setEmployee(getDoctor(set.getInt("employee_eid")));
+
+				indoorList.add(pat);
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return indoorList;
+	}
+	
 	//관리자 페이지 부분 
 	public ArrayList<Employee> getDoctorList(){
 		
@@ -670,39 +696,7 @@ public class HmsDA {
 	
 
 	
-	public ArrayList<Indoor> getIndoorList(){
-		ArrayList<Indoor> indoorList = new ArrayList<Indoor>();
-		
-		try{
-			Statement stmt = con.createStatement();
-			ResultSet set = stmt.executeQuery("SELECT * FROM indoor");
-			while(set.next()){
-				Indoor indoor = new Indoor();
-				
-				indoor.setIpid(set.getInt("ipid"));
-				indoor.setDisease(set.getString("disease"));
-				indoor.setPid(set.getInt("pid"));
-				indoor.setRid(set.getInt("rid"));
-				indoor.setStatus(set.getString("status"));
-				indoor.setPatient(getPatient(indoor.getPid()));
-				
-				if(indoor.getRid()==0){
-					indoor.setRoom(null);
-				}
-				else
-				{
-					indoor.setRoom(getRoom(indoor.getRid()));
-				}
-				
-				indoorList.add(indoor);
-				
-			}
-		}
-		catch(SQLException e){
-			e.printStackTrace();
-		}
-		return indoorList;
-	}
+	
 	
 
 	

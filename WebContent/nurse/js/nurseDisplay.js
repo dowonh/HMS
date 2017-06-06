@@ -13,7 +13,7 @@ $(function(){
 				                                                  room.totalbeds,
 				                                                  room.availablebeds,
 				                                                  (parseInt(room.totalbeds) - parseInt(room.availablebeds)),
-				                                                  "<a href=../services/room/"+ room.rid +">SHOW</a>"
+				                                                  "<a onClick=showRoom("+room.rid+")>SHOW</a>"
 				                                                  ]);
 				var row = $("#tblRooms").dataTable().fnGetNodes(index);
 				$(row).attr("id",room.rid);
@@ -48,6 +48,32 @@ $(function(){
 			$(".medicineMsg").addClass("alert-danger").html("<strong>Error: </strong> "+data.responseText);
 		}
 	});
+	
+	$.ajax({
+		url: "../services/patient/all",
+		type: "GET",
+		success: function(data){
+			console.log(data);
+			data.forEach(function(patient){
+
+				var index = $("#displayPatients").dataTable().fnAddData([
+								                                          patient.name,
+								                                          patient.birth,
+								                                          patient.gender,
+								                                          patient.phone,
+								                                          patient.employee.name,
+								                                          patient.reservation_day,
+								                                          patient.reservation_time,
+								                                          ]);
+				var row = $("#displayPatients").dataTable().fnGetNodes(index);
+				$(row).attr("id",patient.pid);
+			});
+		},
+		error: function(data){
+			
+		}
+	});
+	
 	/*
 	
 	$.ajax({
@@ -77,5 +103,117 @@ $(function(){
 	});
 	*/
 	
+
+ 
+//	//Room Assignment
+//	$("#assignRoomForm").submit(function(e){
+//		e.preventDefault();
+//		
+//		$.ajax({
+//			url: $(this).attr("action"),
+//			data: $(this).serialize(),
+//			type: "PUT",
+//			success: function(indoor){
+//				BootstrapDialog.show({
+//					title: "Success!",
+//					message: "room assigned successfully!"
+//				});
+//				
+//				//$("#indoorBody #"+indoor.pid).addClass("deleteMe");
+//				$("#displayIndoors").DataTable().row($("#indoorBody #"+indoor.pid)).remove().draw();
+//				
+//				
+//				console.log(indoor);
+//				addIndoorToTable(indoor);
+//			},
+//			error: function(data){
+//				BootstrapDialog.show({
+//					type: BootstrapDialog.TYPE_DANGER,
+//					title: "Error!",
+//					message: data.responseText
+//				});
+//			}
+//				
+//		});
+//		
+//		$("#assignRoomModal").modal("toggle");
+//	});
+//	
+//	
+//	$.ajax({
+//		url: "../services/nurse/all",
+//		type: "GET",
+//		success: function(nurses){
+//			nurses.forEach(function(nurse){
+//				$("#roomForm select[name=nurseId]").append("<option value='"+nurse.nid+"' >"+nurse.employee.firstname+" "+nurse.employee.lastname+"</option>");
+//				$("#updateRoomForm select[name=nurseId]").append("<option value='"+nurse.nid+"' >"+nurse.employee.firstname+" "+nurse.employee.lastname+"</option>");
+//			});
+//		},
+//		error: function(data){
+//			
+//		}
+//	});
+
+//	
+
 	$("table").dataTable();
 })
+
+function showRoom(rid){
+	$("#showRoomModal").modal("toggle");
+	
+	var table = $('#showRooms').DataTable();
+
+	if ( table.data().count() != 0) {
+		table.clear().draw();
+	}
+
+	//alert($("#showRooms").dataTable().data().count() );
+	//if ($("#showRooms").dataTable().row().indexes() == 0)
+	//$("#showRooms").dataTable().clear().draw();
+	//For Indoors
+	$.ajax({
+		url: "../services/indoor/"+rid,
+		type: "GET",
+		success: function(data){
+			
+			data.forEach(function(indoor){
+				addIndoorToTable(indoor);
+			});
+		},
+		error: function(data){
+			
+		}
+	});
+ 	
+}
+function addIndoorToTable(indoor){
+ 
+//	
+//	if(indoor.room) nurseName  = indoor.room.nurse.employee.firstname;
+
+	var index = $("#showRooms").dataTable().fnAddData([
+					                                   indoor.name,
+					                                   indoor.gender,
+					                                   indoor.birth,
+					                                   indoor.door_start_day,
+						                               indoor.employee.name,
+						                             ]);
+	
+	var row = $("#showRooms").dataTable().fnGetNodes(index);
+	$(row).attr("id",indoor.room_rid);
+	//$(".deleteMe").remove();
+}
+function assignRoom(ipid){
+	$("#assignRoomModal").modal("toggle");
+	$("#assignRoomForm").attr("action","../services/indoor/"+ipid+"/room");
+	
+	
+	//size setting
+	$("#assignRoomModal .modal-body").css("height","100px");
+	$("#assignRoomModal .modal-content").css("width","300px");
+	
+}
+
+
+

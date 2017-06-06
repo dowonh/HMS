@@ -165,148 +165,35 @@ $(function(){
 		
 		$("#updateCategoryModal").modal("toggle");
 	});
-//	//For Nurses
+	
+	//---------------------------
+	// 어드민 환자 관련 
+	//---------------------------
+	$.ajax({
+		url: "../services/patient/all",
+		type: "GET",
+		success: function(data){
+			console.log(data);
+			data.forEach(function(patient){
 
+				var index = $("#displayPatients").dataTable().fnAddData([
+								                                          patient.name,
+								                                          patient.birth,
+								                                          patient.gender,
+								                                          patient.phone,
+								                                          patient.employee.name,
+								                                          patient.reservation_day,
+								                                          patient.reservation_time,
+								                                          ]);
+				var row = $("#displayPatients").dataTable().fnGetNodes(index);
+				$(row).attr("id",patient.pid);
+			});
+		},
+		error: function(data){
+			
+		}
+	});
  
-//	
-//	//For Indoors
-//	$.ajax({
-//		url: "../services/indoor/all",
-//		type: "GET",
-//		success: function(data){
-//			data.forEach(function(indoor){
-//				
-//				addIndoorToTable(indoor);
-//			});
-//		},
-//		error: function(data){
-//			
-//		}
-//	});
-//	
-//	
-//	//For Patients
-//	$.ajax({
-//		url: "../services/patient/all",
-//		type: "GET",
-//		success: function(data){
-//			
-//			data.forEach(function(patient){
-//				var type,docName;
-//				if(patient.type) type = patient.type;
-//				else type="-";
-//				
-//				if(patient.doctor) docName = patient.doctor.employee.firstname;
-//				else docName = "-";
-//				
-//				
-//				var index = $("#displayPatients").dataTable().fnAddData([
-//								                                          patient.name,
-//								                                          patient.dob,
-//								                                          patient.gender,
-//									                                      type,
-//									                                      docName,
-//								                                          "<td><a onClick='patientDelete("+patient.pid+")' href='#'>Remove</a></td>"
-//								                                          ]);
-//				
-//				var row = $("#displayPatients").dataTable().fnGetNodes(index);
-//				$(row).attr("id",patient.pid);
-//				
-//				
-//			});
-//		},
-//		error: function(data){
-//			
-//		}
-//	});
-//	
- 
-//	$("table").dataTable();
-//	
-//	
-//	//Room Assignment
-//	$("#assignRoomForm").submit(function(e){
-//		e.preventDefault();
-//		
-//		$.ajax({
-//			url: $(this).attr("action"),
-//			data: $(this).serialize(),
-//			type: "PUT",
-//			success: function(indoor){
-//				BootstrapDialog.show({
-//					title: "Success!",
-//					message: "room assigned successfully!"
-//				});
-//				
-//				//$("#indoorBody #"+indoor.pid).addClass("deleteMe");
-//				$("#displayIndoors").DataTable().row($("#indoorBody #"+indoor.pid)).remove().draw();
-//				
-//				
-//				console.log(indoor);
-//				addIndoorToTable(indoor);
-//			},
-//			error: function(data){
-//				BootstrapDialog.show({
-//					type: BootstrapDialog.TYPE_DANGER,
-//					title: "Error!",
-//					message: data.responseText
-//				});
-//			}
-//				
-//		});
-//		
-//		$("#assignRoomModal").modal("toggle");
-//	});
-//	
-//	
-//	$.ajax({
-//		url: "../services/nurse/all",
-//		type: "GET",
-//		success: function(nurses){
-//			nurses.forEach(function(nurse){
-//				$("#roomForm select[name=nurseId]").append("<option value='"+nurse.nid+"' >"+nurse.employee.firstname+" "+nurse.employee.lastname+"</option>");
-//				$("#updateRoomForm select[name=nurseId]").append("<option value='"+nurse.nid+"' >"+nurse.employee.firstname+" "+nurse.employee.lastname+"</option>");
-//			});
-//		},
-//		error: function(data){
-//			
-//		}
-//	});
-
+	$("table").dataTable();
 })  
-
-function assignRoom(ipid){
-	$("#assignRoomModal").modal("toggle");
-	$("#assignRoomForm").attr("action","../services/indoor/"+ipid+"/room");
-	
-	
-	//size setting
-	$("#assignRoomModal .modal-body").css("height","100px");
-	$("#assignRoomModal .modal-content").css("width","300px");
-	
-}
-
-function addIndoorToTable(indoor){
-	var rid="-",nurseName="-",link="<a href='#' onclick='assignRoom("+indoor.ipid+")'>Assign Room</a>";
-	if(indoor.rid) {
-		rid = indoor.rid
-		link = "";
-	}
-	
-	if(indoor.room) nurseName  = indoor.room.nurse.employee.firstname;
-	
-	var index = $("#displayIndoors").dataTable().fnAddData([
-					                                          indoor.patient.name,
-					                                          indoor.patient.gender,
-					                                          indoor.disease,
-					                                          indoor.status,
-						                                      rid,
-						                                      nurseName,
-						                                      link
-					                                          ]);
-	
-	var row = $("#displayIndoors").dataTable().fnGetNodes(index);
-	$(row).attr("id",indoor.pid);
-	//$(".deleteMe").remove();
-}
 

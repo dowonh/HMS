@@ -107,10 +107,38 @@ public class HmsDA {
 
 		return medGoodList;
 	}
+ 
+	
+	public ArrayList<Patient> getIndoorList(int rid){
+		ArrayList<Patient> indoorList = new ArrayList<Patient>();
+		
+		try{
+			Statement stmt = con.createStatement();
+			ResultSet set = stmt.executeQuery("SELECT * FROM patient where room_rid="+rid);
+			while(set.next()){
+				Patient pat = new Patient();
+				
+				pat.setName(set.getString("name"));
+				pat.setGender(set.getString("gender"));
+				pat.setPhone(set.getString("phone"));
+				pat.setBirth(set.getString("birth"));
+				pat.setDoor_start_day(set.getString("door_start_day"));
+				pat.setRid(set.getInt("room_rid"));
+				
+				pat.setEmployee(getDoctor(set.getInt("employee_eid")));
 
-	// 관리자 페이지 부분
-	public ArrayList<Employee> getDoctorList() {
-
+				indoorList.add(pat);
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return indoorList;
+	}
+	
+	//관리자 페이지 부분 
+	public ArrayList<Employee> getDoctorList(){
+ 
 		ArrayList<Employee> docList = new ArrayList<Employee>();
 
 		try {
@@ -488,8 +516,40 @@ public class HmsDA {
 		} finally {
 		}
 	}
-
-	// ---------------------------
+ 
+	//---------------------------
+	// 어드민 환자관련
+	//---------------------------
+	public ArrayList<Patient> getPatientList(){
+		
+		ArrayList<Patient> patientList = new ArrayList<Patient>();
+		
+		try{
+			Statement stmt = con.createStatement();
+			ResultSet set = stmt.executeQuery("SELECT * FROM patient");
+			
+			while(set.next()){
+				Patient patient = new Patient();
+				patient.setPid(set.getInt("pid"));
+				patient.setName(set.getString("name"));
+				patient.setGender(set.getString("gender"));
+				patient.setPhone(set.getString("phone"));
+				patient.setBirth(set.getString("birth"));
+				patient.setReservation_day(set.getString("reservation_day"));
+				patient.setReservation_time(set.getString("reservation_time"));
+				patient.setEid(set.getInt("employee_eid"));
+				patient.setEmployee(getDoctor(set.getInt("employee_eid")));
+				
+			 	patientList.add(patient);
+			}
+		}
+		catch(SQLException ex){
+			ex.printStackTrace();
+		}
+		return patientList;
+	}
+ 
+	//---------------------------
 	// 어드민 카테고리부분
 	// ---------------------------
 	public Category addCategory(Category cat) throws SQLException {
@@ -601,6 +661,7 @@ public class HmsDA {
 		return catList;
 	}
 
+ 
 	public ArrayList<Employee> getSelectDoctor(int did) throws SQLException {
 
 		ArrayList<Employee> docList = new ArrayList<Employee>();
@@ -634,6 +695,7 @@ public class HmsDA {
 
 		return docList;
 	}
+
 
 	// 나옹나옹
 	public ArrayList<Patient> reservationCheck(Patient p) throws SQLException {
@@ -669,10 +731,16 @@ public class HmsDA {
 		} finally {
 
 		}
-		System.out.println(patientList);
-		
 		return patientList;
 	}
+	public void removeMedicine(int mid) throws SQLException {
+		
+		PreparedStatement stmt = con.prepareStatement("DELETE FROM medicine WHERE mid=?");
+		stmt.setInt(1, mid);
+		stmt.execute();
+		
+	}
+  
 
 	/*
 	 * public Employee getEmployee(int eid){ Employee emp = new Employee(); try{

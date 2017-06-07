@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
-    <%@ include file="connection.jsp" %>
+    pageEncoding="UTF-8" errorPage="error.jsp?errorType=db" %>
+    <%@ page import="java.sql.*" %>
 
 
 <%
@@ -25,7 +24,10 @@ String userType = (String)session.getAttribute("type");
 
 String user = request.getParameter("user");
 String pass = request.getParameter("pass");
- 
+
+Class.forName("com.mysql.jdbc.Driver");
+Connection con = DriverManager.getConnection("jdbc:mysql://loveljhs2.iptime.org:3306/hms","root","test");
+
 try{
 	PreparedStatement stmt = con.prepareStatement("select * from employee where username=? and passwd=?");
 	stmt.setString(1, user);

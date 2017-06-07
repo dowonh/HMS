@@ -52,48 +52,46 @@ public class Process extends HttpServlet {
 		}
 	}
 
-	public void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		try {
-
-			if (request.getParameter("action") != null) {
-				if (request.getParameter("action").equals("addDoc")) {
-					addDoc(request, response);
-
-				} else if (request.getParameter("action").equals("addNurse"))
-					addNurse(request, response);
-				else if (request.getParameter("action").equals("addRoom"))
-					addRoom(request, response);
-				else if (request.getParameter("action").equals("addPatient"))
-					addPatient(request, response);
-				else if (request.getParameter("action").equals("reservationCheck"))
-					reservationCheck(request, response);
+	
+	public void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		try{
+			
+			if(request.getParameter("action")!=null) {
+				if(request.getParameter("action").equals("addDoc")){
+					addDoc(request,response);
+				} else if(request.getParameter("action").equals("addNurse"))
+					addNurse(request,response);
+				else if(request.getParameter("action").equals("addRoom"))
+					addRoom(request,response);
+				else if(request.getParameter("action").equals("addPatient"))
+					addPatient(request,response);
+				else if(request.getParameter("action").equals("outRoom"))
+					outRoom(request,response);
+				else if(request.getParameter("action").equals("reservationCheck"))
+					reservationCheck(request,response);
 				else if (request.getParameter("action").equals("indoorCheck"))
 					indoorCheck(request, response);
-				else if (request.getParameter("id") != null) {
-					// else
-					// if(request.getParameter("action").equals("deletePatient"))
-					// deletePatient(request,response);
-					//
-					if (request.getParameter("action").equals("getDoc"))
-						getDoc(request, response);
-					else if (request.getParameter("action").equals("editDoc"))
-						updateDoc(request, response);
-					else if (request.getParameter("action").equals("deleteEmp"))
-						deleteEmployee(request, response);
-					else if (request.getParameter("action").equals("getRoom"))
-						getRoom(request, response);
-					else if (request.getParameter("action").equals("editRoom"))
-						updateRoom(request, response);
-					else if (request.getParameter("action").equals("deleteRoom"))
-						deleteRoom(request, response);
-					else if (request.getParameter("action").equals("getNurse"))
-						getNurse(request, response);
-					else if (request.getParameter("action").equals("editNurse"))
-						updateNurse(request, response);
-					// else
-					// request.getRequestDispatcher("index.jsp").forward(request,
-					// response);
-				} else {
+				else if(request.getParameter("id")!=null){
+					if(request.getParameter("action").equals("getDoc"))
+						getDoc(request,response);
+					else if(request.getParameter("action").equals("editDoc"))
+						updateDoc(request,response);
+					else if(request.getParameter("action").equals("deleteEmp"))
+						deleteEmployee(request,response);
+					else if(request.getParameter("action").equals("getRoom"))
+						getRoom(request,response);
+					else if(request.getParameter("action").equals("editRoom"))
+						updateRoom(request,response);
+					else if(request.getParameter("action").equals("deleteRoom"))
+						deleteRoom(request,response);
+					else if(request.getParameter("action").equals("getNurse"))
+						getNurse(request,response);
+					else if(request.getParameter("action").equals("editNurse"))
+						updateNurse(request,response);
+//					else
+//						request.getRequestDispatcher("index.jsp").forward(request, response);
+				}else{
+ 
 					request.getRequestDispatcher("index.jsp").forward(request, response);
 				}
 			} else {
@@ -313,13 +311,25 @@ public class Process extends HttpServlet {
 		p.setEid(eid);
 		p.setReservation_day(reservation_date);
 		p.setReservation_time(reservation_time);
+ 
 
 		hms.addPatient(p);
 	}
 
-	// 예약시스템쪽
-	public void reservationCheck(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, SQLException {
+ 
+	public void outRoom(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
+		
+		int pid = Integer.parseInt(request.getParameter("pid"));
+		int rid = Integer.parseInt(request.getParameter("rid"));
+ 
+		hms.outRoom(pid, rid);
+   
+	}
+	
+	//예약시스템쪽
+	public void reservationCheck(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
+		
+		System.out.println("넘어오냐?");
 
 		request.setCharacterEncoding("utf-8");
 
@@ -335,6 +345,7 @@ public class Process extends HttpServlet {
 		response.setContentType("application/json");
 		response.getWriter().print(g.toJson(patientInfo));
 	}
+ 
 
 	// 예약시스템쪽
 	public void indoorCheck(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
@@ -382,5 +393,26 @@ public class Process extends HttpServlet {
 	//
 	// }
 	//
+ 
+	
+//	
+//	public void addPatient(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
+//		String fullName = request.getParameter("fullname");
+//		String gender = request.getParameter("gender");
+//		String dob = request.getParameter("dob");
+//		int catid = Integer.parseInt(request.getParameter("catid"));
+//		
+//		Patient p = new Patient();
+//		p.setName(fullName);
+//		p.setGender(gender);
+//		p.setDob(dob);
+//		p.setCatid(catid);
+//		
+//		hms.addPatient(p);
+//		
+//	}
+//	
+
+  
 
 }

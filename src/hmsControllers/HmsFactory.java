@@ -7,7 +7,7 @@ import com.google.gson.Gson;
 
 import hmsDA.HmsDA;
 import hmsModels.Category;
-import hmsModels.doctornote;
+import hmsModels.Doctornote;
 import hmsModels.Employee;
 import hmsModels.Medicine;
 import hmsModels.MedicineGoods;
@@ -126,6 +126,7 @@ public class HmsFactory {
 		else
 			return "Beds not available in the selected room.";
 	}
+	
 //	public String getIndoorJson(int rid) throws SQLException{
 //		
 //		ArrayList<Patient> indoorPatientList = hms.getIndoor(rid);

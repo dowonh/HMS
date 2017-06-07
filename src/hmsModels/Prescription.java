@@ -8,9 +8,13 @@ public class Prescription implements Serializable {
 	
 	private int prid;
 	private String mname;
-	private int day;
-	private int number;
-	private int dnid;
+	private int how_long;
+	private int day_dose;
+	private int once_dose;
+	private int doctornote_dnid;
+	Patient patient;
+	Indoor indoor;
+	Doctornote doctornote;
 
 	public Prescription(){}
 	
@@ -34,28 +38,64 @@ public class Prescription implements Serializable {
 		this.mname = mname;
 	}
 
-	public int getDay() {
-		return day;
+	public int getHow_long() {
+		return how_long;
 	}
 
-	public void setDay(int day) {
-		this.day = day;
+	public void setHow_long(int how_long) {
+		this.how_long = how_long;
 	}
 
-	public int getNumber() {
-		return number;
+	public int getDay_dose() {
+		return day_dose;
 	}
 
-	public void setNumber(int number) {
-		this.number = number;
+	public void setDay_dose(int day_dose) {
+		this.day_dose = day_dose;
 	}
 
-	public int getDnid() {
-		return dnid;
+	public int getOnce_dose() {
+		return once_dose;
 	}
 
-	public void setDnid(int dnid) {
-		this.dnid = dnid;
+	public void setOnce_dose(int once_dose) {
+		this.once_dose = once_dose;
 	}
+
+	public int getDoctornote_dnid() {
+		return doctornote_dnid;
+	}
+
+	public void setDoctornote_dnid(int doctornote_dnid) {
+		this.doctornote_dnid = doctornote_dnid;
+	}
+
+	
+	public Patient getPatient() {
+		return patient;
+	}
+
+	public void setPatient(Patient patient) {
+		this.patient = patient;
+	}
+
+	
+	public Indoor getIndoor() {
+		return indoor;
+	}
+
+	public void setIndoor(Indoor indoor) {
+		this.indoor = indoor;
+	}
+
+	public Doctornote getDoctornote() {
+		return doctornote;
+	}
+
+	public void setDoctornote(Doctornote doctornote) {
+		this.doctornote = doctornote;
+	}
+
+	
  
 }

@@ -2,7 +2,8 @@ package hmsControllers;
 
 import hmsDA.HmsDA;
 import hmsModels.Category;
-import hmsModels.doctornote;
+import hmsModels.Certificate;
+import hmsModels.Doctornote;
 import hmsModels.Employee;
 import hmsModels.Indoor;
 import hmsModels.Medicine;
@@ -71,6 +72,10 @@ public class Process extends HttpServlet {
 					reservationCheck(request,response);
 				else if (request.getParameter("action").equals("indoorCheck"))
 					indoorCheck(request, response);
+				else if (request.getParameter("action").equals("medicineCheck"))
+					medicineCheck(request, response);
+				else if (request.getParameter("action").equals("Certificate"))
+					Certificate(request, response);
 				else if(request.getParameter("id")!=null){
 					if(request.getParameter("action").equals("getDoc"))
 						getDoc(request,response);
@@ -295,7 +300,6 @@ public class Process extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 
 		String name = request.getParameter("name");
-		System.out.println(name);
 		String gender = request.getParameter("gender");
 		String dob = request.getParameter("dob");
 		String phone = request.getParameter("phone");
@@ -328,9 +332,7 @@ public class Process extends HttpServlet {
 	
 	//예약시스템쪽
 	public void reservationCheck(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
-		
-		System.out.println("넘어오냐?");
-
+	
 		request.setCharacterEncoding("utf-8");
 
 		String name = request.getParameter("name");
@@ -350,8 +352,6 @@ public class Process extends HttpServlet {
 	// 예약시스템쪽
 	public void indoorCheck(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
 
-		
-
 		request.setCharacterEncoding("utf-8");
 
 		String name = request.getParameter("name");
@@ -366,7 +366,40 @@ public class Process extends HttpServlet {
 		response.setContentType("application/json");
 		response.getWriter().print(g.toJson(patientIndoorInfo));
 	}
+	
+	public void medicineCheck(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
 
+		request.setCharacterEncoding("utf-8");
+
+		String name = request.getParameter("name");
+		String phone = request.getParameter("phone");
+
+		Patient p = new Patient();
+		p.setName(name);
+		p.setPhone(phone);
+
+		ArrayList<Prescription> patientPrescriptionInfo = hms.medicineCheck(p);
+		response.setCharacterEncoding("UTF8"); // this line solves the problem
+		response.setContentType("application/json");
+		response.getWriter().print(g.toJson(patientPrescriptionInfo));
+	}
+	
+	public void Certificate(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
+
+		request.setCharacterEncoding("utf-8");
+
+		String name = request.getParameter("name");
+		String phone = request.getParameter("phone");
+
+		Patient p = new Patient();
+		p.setName(name);
+		p.setPhone(phone);
+
+		Certificate certificate = hms.Certificate(p);
+		response.setCharacterEncoding("UTF8"); // this line solves the problem
+		response.setContentType("application/json");
+		response.getWriter().print(g.toJson(certificate));
+	}
 	//
 	// public void addPatient(HttpServletRequest request, HttpServletResponse
 	// response) throws IOException, SQLException{

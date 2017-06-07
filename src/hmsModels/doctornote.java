@@ -4,15 +4,17 @@ import hmsControllers.HmsFactory;
 
 import java.io.Serializable;
 
-public class doctornote implements Serializable {
+public class Doctornote implements Serializable {
 
-	
 	private int dnid;
 	private String symptom;
+	private String diease;
 	private String note;
 	private String day;
+	private String patient_pid;
+	Patient patient;
 	
-	public doctornote(){}
+	public Doctornote(){}
 
 	public String toJson(){
 		return HmsFactory.toJson(this);
@@ -34,6 +36,14 @@ public class doctornote implements Serializable {
 		this.symptom = symptom;
 	}
 
+	public String getDiease() {
+		return diease;
+	}
+
+	public void setDiease(String diease) {
+		this.diease = diease;
+	}
+
 	public String getNote() {
 		return note;
 	}
@@ -48,6 +58,22 @@ public class doctornote implements Serializable {
 
 	public void setDay(String day) {
 		this.day = day;
+	}
+
+	public String getPatient_pid() {
+		return patient_pid;
+	}
+
+	public void setPatient_pid(String patient_pid) {
+		this.patient_pid = patient_pid;
+	}
+
+	public Patient getPatient() {
+		return patient;
+	}
+
+	public void setPatient(Patient patient) {
+		this.patient = patient;
 	}
 	
 }

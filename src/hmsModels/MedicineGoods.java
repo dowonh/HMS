@@ -5,7 +5,6 @@ import hmsControllers.HmsFactory;
 import java.io.Serializable;
 
 public class MedicineGoods implements Serializable {
-
 	
 	private int id;
 	private String name;

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,14 +17,14 @@
 
 <!-- Custom CSS -->
 <link href="../css/simple-sidebar.css" rel="stylesheet">
-	
+
 <!-- Custom Fonts -->
 <link href="../fn/css/font-awesome.min.css" rel="stylesheet"
 	type="text/css">
-	
+
 <!-- Javascript Includes -->
-	<script src="../js/jquery-1.11.3.min.js"></script>
-	<script src="../js/bootstrap.min.js"></script>
+<script src="../js/jquery-1.11.3.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
 <style>
 input#register-input.form-control {
 	width: inherit !important;
@@ -49,12 +49,8 @@ input#register-input.form-control {
 		<div id="sidebar-wrapper">
 
 			<ul class="sidebar-nav">
-				<li class="sidebar-brand">
-                    <a href="../index.jsp">
-                        HMS
-                    </a>
-                </li>
-	
+				<li class="sidebar-brand"><a href="../index.jsp"> HMS </a></li>
+
 				<li><a href="./reservation.jsp"><i class="fa fa-glide-g"
 						aria-hidden="true"></i> 예약 안내</a></li>
 				<li class="active"><a href="./reservationCheck.jsp"><i
@@ -75,18 +71,22 @@ input#register-input.form-control {
 				<div class="row">
 					<div class="col-lg-12">
 						<h1 class="page-header">
-							결과 조회 <small>예약 및 조회</small>
+							증명서 발급
 						</h1>
 						<ol class="breadcrumb">
-							<li class="active">내원일자와 약처방 기록을 제공합니다.</li>
-						</ol>
+                            <li class="active">
+                                	각종 증명서를 발급받을 수 있습니다.
+                            </li>
+                        </ol>
 					</div>
 				</div>
 				<!-- /.row -->
-				
-				
+
 				<div class="container">
-							<form method="post" action="../Process?action=medicineCheck" id="MedicineCheckForm">
+					<div class="col-lg-6 col-md-6">
+
+						<div class="container">
+							<form method="post" action="../Process?action=Certificate" id="NoteCertificateForm">
 								<div class="row">
 									<div class="form-group row">
 										<label for="name-input" class="col-2 col-form-label">이름</label>
@@ -107,35 +107,34 @@ input#register-input.form-control {
 									<div class="form-group row">
 										<div class="offset-2 col-10" style="margin-left: auto;">
 											<button type="submit" class="btn btn-primary">
-												약처방 조회 <i class="fa fa-arrow-circle-right"></i>
+												진단서 발급 <i class="fa fa-arrow-circle-right"></i>
 											</button>
 										</div>
 									</div>
 								</div>
 							</form>
 						</div>
-				
-	
-				<div class="contanier">
-					<h4>약처방 조회</h4>
-					<table class="table table-bordered" id="tblMedicineCheck">
-						<thead>
-							<tr>
-								<th>번호</th>
-								<th>처방 날짜</th>
-								<th>이름</th>
-								<th>진료과</th>
-								<th>의사</th>
-								<th>약</th>
-								<th>1회 투여량</th>
-								<th>1회 투여횟수</th>
-								<th>총 투약일수</th>
-							</tr>
-						</thead>
-						<tbody id="medicineCheckBody">
-						</tbody>
-					</table>
+						
+						<div class="contanier">
+							<h4>납입증명서 조회</h4>
+							<table class="table table-bordered" id="tblNoteCertificate">
+								<thead>
+									<tr>
+										<th>환자명</th>
+										<th>성별</th>
+										<th>생년월일</th>
+										<th>진료내용</th>
+										<th>진료일자</th>
+										<th>용도</th>
+									</tr>
+								</thead>
+								<tbody id="noteCertificateBody">
+								</tbody>
+							</table>
+						</div>
+					</div>
 				</div>
+				<!-- container -->
 
 			</div>
 			<!-- /.container-fluid -->
@@ -146,13 +145,13 @@ input#register-input.form-control {
 
 	<!-- jQuery -->
 	<script src="../js/jquery.js"></script>
-	
+
 	<!-- Bootstrap Core JavaScript -->
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="./js/patientDisplay.js"></script>
 	<script src="../js/dataTables.bootstrap.min.js"></script>
 	<script src="../js/jquery.dataTables.min.js"></script>
-
 </body>
 
 </html>
+

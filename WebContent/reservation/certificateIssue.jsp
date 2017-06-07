@@ -85,7 +85,7 @@
 							<div class="panel-body">
 								입퇴원확인서
 								<div class="text-right">
-									<a href="./indoorCheck.jsp">입퇴원 증명서 발급 <i
+									<a href="./doorCertificate.jsp">입퇴원 증명서 발급 <i
 										class="fa fa-arrow-circle-right"></i></a>
 								</div>
 							</div>
@@ -101,7 +101,7 @@
 							<div class="panel-body">
 								진료비 납입증명서
 								<div class="text-right">
-									<a href="./medicineCheck.jsp">납입증명서 발급 <i
+									<a href="./billCertificate.jsp">납입증명서 발급 <i
 										class="fa fa-arrow-circle-right"></i></a>
 								</div>
 							</div>
@@ -117,7 +117,7 @@
 							<div class="panel-body">
 								진단서
 								<div class="text-right">
-									<a href="./medicineCheck.jsp">진단서 발급 <i
+									<a href="./noteCertificate.jsp">진단서 발급 <i
 										class="fa fa-arrow-circle-right"></i></a>
 								</div>
 							</div>

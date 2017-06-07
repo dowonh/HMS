@@ -18,18 +18,18 @@ import javax.ws.rs.core.Response;
 public class PatientServices {
 
 	HmsFactory hms = new HmsFactory();
-//	
-//	@GET
-//	@Path("patient/doctor/{uid}")
-//	@Produces("application/json")
-//	public String getDocPatientsJson(@PathParam("uid") int uid){
-//		try {
-//			return hms.getDocPatientsJson(uid);
-//		} catch (SQLException e) {
-//			Response.serverError();
-//			return e.getMessage();
-//		}
-//	}
+	
+	@GET
+	@Path("patient/doctor")
+	@Produces("application/json")
+	public String getDocPatientsJson(){
+		try {
+			return hms.getDocPatientsJson();
+		} catch (SQLException e) {
+			Response.serverError();
+			return e.getMessage();
+		}
+	}
 	
 	@GET
 	@Path("patient/all")

@@ -615,8 +615,38 @@ public class HmsDA {
 		
 		return p;
 	}
+	//의사 - 환자보기 도원
+	public ArrayList<Patient> getDocPatientsList() throws SQLException{
+		ArrayList<Patient> patientList = new ArrayList<Patient>();
+		
+		try{
+			Statement stmt = con.createStatement();
+			ResultSet set = stmt.executeQuery("select * from patient where reservation_day = curdate()");
+			
+			while(set.next()){
+				Patient patient = new Patient();
+				
+				patient.setPid(set.getInt("pid"));
+				patient.setName(set.getString("name"));
+				patient.setGender(set.getString("gender"));
+				patient.setPhone(set.getString("phone"));
+				patient.setBirth(set.getString("birth"));
+				patient.setReservation_day(set.getString("reservation_day"));
+				patient.setReservation_time(set.getString("reservation_time"));
+				patient.setEid(set.getInt("employee_eid"));
+				patient.setEmployee(getDoctor(set.getInt("employee_eid")));
+				
+			 	patientList.add(patient);
+			}
+		}
+		catch(SQLException ex){
+			ex.printStackTrace();
+		}
+		
+		return patientList;
+		
+	} 
 	
-	 
 	/*
 	public Employee getEmployee(int eid){
 		Employee emp = new Employee();
@@ -755,24 +785,7 @@ public class HmsDA {
 		
 	}
 	
-	public ArrayList<Patient> getDocPatientsList(int uid) throws SQLException{
-		
-		int eid = getEidByUid(uid);
-		
-		PreparedStatement stmt = con.prepareStatement("SELECT * FROM doctor WHERE eid=?");
-		stmt.setInt(1, eid);
-		ResultSet set = stmt.executeQuery();
-		if(!set.next()) return null;
-		
-		int catid = set.getInt("catid");
-		
-		stmt = con.prepareStatement("SELECT * FROM patient WHERE catid=?");
-		stmt.setInt(1, catid);
-		set = stmt.executeQuery();
-		
-		return getPatientByCatid(catid);
-		
-	}
+	
 	
 	public ArrayList<Prescription> getDocPresList(int uid) throws SQLException{
 		

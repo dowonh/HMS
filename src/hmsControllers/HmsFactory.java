@@ -88,6 +88,13 @@ public class HmsFactory {
 		
 		return g.toJson(indoorList);
 	}
+	
+	public String getDocPatientsJson() throws SQLException{
+		ArrayList<Patient> patList = hms.getDocPatientsList();
+		
+		return g.toJson(patList);
+	}
+	
 //	public String getIndoorJson(int rid) throws SQLException{
 //		
 //		ArrayList<Patient> indoorPatientList = hms.getIndoor(rid);
@@ -186,11 +193,7 @@ public class HmsFactory {
 		return hms.getPrescription(prid).toJson();
 	}
 	
-	public String getDocPatientsJson(int uid) throws SQLException{
-		ArrayList<Patient> patList = hms.getDocPatientsList(uid);
-		
-		return g.toJson(patList);
-	}
+
 	
 	public String getDocPresJson(int uid) throws SQLException{
 		ArrayList<Prescription> presList = hms.getDocPresList(uid);

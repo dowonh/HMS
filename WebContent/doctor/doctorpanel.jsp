@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%
-	  /*  String username = (String)session.getAttribute("user");
+	    String username = (String)session.getAttribute("user");
 		String userType = (String)session.getAttribute("type");
-		if(!(username!=null && userType.equals("doctor")))
+		if(!(username!=null && userType.equals("doctor")) )
 			response.sendRedirect("../index.jsp");	
-		*/	
+		
     %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 

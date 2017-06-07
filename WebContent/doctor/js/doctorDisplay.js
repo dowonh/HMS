@@ -4,7 +4,7 @@ $(function(){
 	
 	//For My Patients
 	$.ajax({
-		url: "../services/patient/doctor/"+uid,
+		url: "../services/patient/doctor",
 		type: "GET",
 		success: function(data){
 			data.forEach(function(patient){
@@ -19,6 +19,17 @@ $(function(){
 		}
 	});
 	
+	//클릭이벤트
+	$(document).ready(function() {
+	    var table = $('#displayPatients').DataTable();
+	     
+	    $('#displayPatients tbody').on('click', 'tr', function () {
+	       var data = table.row( this ).data();
+
+	       alert( 'You clicked on ' + data[0] + '\'s row' );
+	       //$("#pname").load("data[0]");
+	    } );
+	} );
 	
 	//For Displaying My Prescriptions
 	$.ajax({
@@ -341,25 +352,28 @@ function deletePres(prid){
 }
 
 function addPatientToTable(patient){
-	var type, link;
+//	var type, link;
+//	
+//	if(patient.type){
+//		type = patient.type;
+//		link = "<a href='#' onclick='viewPres("+patient.pid+")' >View</a> / <a href='#' onclick='addPres("+patient.pid+")' >Add</a>";
+//	}else{
+//		type = "-";
+//		link = "<a href='#' onclick='submitPres("+patient.pid+")' >Submit</a>";
+//	}
 	
-	if(patient.type){
-		type = patient.type;
-		link = "<a href='#' onclick='viewPres("+patient.pid+")' >View</a> / <a href='#' onclick='addPres("+patient.pid+")' >Add</a>";
-	}else{
-		type = "-";
-		link = "<a href='#' onclick='submitPres("+patient.pid+")' >Submit</a>";
-	}
-	
-	var index = $("#tblPatients").dataTable().fnAddData([
+	var index = $("#displayPatients").dataTable().fnAddData([
+													  patient.pid,
 	           	                                      patient.name,
-	        	                                      patient.dob,
+	        	                                      patient.birth,
 	        	                                      patient.gender,
-	        	                                      type,
-	        	                                      link
+	        	                                      patient.reservation_day,
+	        	                                      patient.reservation_time
 	        	                                      ]);
 	
-	var row = $("#tblPatients").dataTable().fnGetNodes(index);
+	var row = $("#displayPatients").dataTable().fnGetNodes(index);
 	$(row).attr("id",patient.pid);
 	//$(".deleteMe").remove();
 }
+
+

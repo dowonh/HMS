@@ -30,6 +30,11 @@
 	<script src="../js/jquery-1.11.3.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
 
+<style>
+	input#register-input.form-control{
+		width: inherit !important;
+	}
+</style>
 
 </head>
 

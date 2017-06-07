@@ -8,6 +8,7 @@ import hmsModels.MedicineGoods;
 import hmsModels.Patient;
 import hmsModels.Prescription;
 import hmsModels.Room;
+import hmsModels.Indoor;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -107,38 +108,36 @@ public class HmsDA {
 
 		return medGoodList;
 	}
- 
-	
-	public ArrayList<Patient> getIndoorList(int rid){
+
+	public ArrayList<Patient> getIndoorList(int rid) {
 		ArrayList<Patient> indoorList = new ArrayList<Patient>();
-		
-		try{
+
+		try {
 			Statement stmt = con.createStatement();
-			ResultSet set = stmt.executeQuery("SELECT * FROM patient where room_rid="+rid);
-			while(set.next()){
+			ResultSet set = stmt.executeQuery("SELECT * FROM patient where room_rid=" + rid);
+			while (set.next()) {
 				Patient pat = new Patient();
-				
+
 				pat.setName(set.getString("name"));
 				pat.setGender(set.getString("gender"));
 				pat.setPhone(set.getString("phone"));
 				pat.setBirth(set.getString("birth"));
 				pat.setDoor_start_day(set.getString("door_start_day"));
 				pat.setRid(set.getInt("room_rid"));
-				
+
 				pat.setEmployee(getDoctor(set.getInt("employee_eid")));
 
 				indoorList.add(pat);
 			}
-		}
-		catch(SQLException e){
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return indoorList;
 	}
-	
-	//관리자 페이지 부분 
-	public ArrayList<Employee> getDoctorList(){
- 
+
+	// 관리자 페이지 부분
+	public ArrayList<Employee> getDoctorList() {
+
 		ArrayList<Employee> docList = new ArrayList<Employee>();
 
 		try {
@@ -516,19 +515,19 @@ public class HmsDA {
 		} finally {
 		}
 	}
- 
-	//---------------------------
+
+	// ---------------------------
 	// 어드민 환자관련
-	//---------------------------
-	public ArrayList<Patient> getPatientList(){
-		
+	// ---------------------------
+	public ArrayList<Patient> getPatientList() {
+
 		ArrayList<Patient> patientList = new ArrayList<Patient>();
-		
-		try{
+
+		try {
 			Statement stmt = con.createStatement();
 			ResultSet set = stmt.executeQuery("SELECT * FROM patient");
-			
-			while(set.next()){
+
+			while (set.next()) {
 				Patient patient = new Patient();
 				patient.setPid(set.getInt("pid"));
 				patient.setName(set.getString("name"));
@@ -539,17 +538,16 @@ public class HmsDA {
 				patient.setReservation_time(set.getString("reservation_time"));
 				patient.setEid(set.getInt("employee_eid"));
 				patient.setEmployee(getDoctor(set.getInt("employee_eid")));
-				
-			 	patientList.add(patient);
+
+				patientList.add(patient);
 			}
-		}
-		catch(SQLException ex){
+		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
 		return patientList;
 	}
- 
-	//---------------------------
+
+	// ---------------------------
 	// 어드민 카테고리부분
 	// ---------------------------
 	public Category addCategory(Category cat) throws SQLException {
@@ -661,7 +659,6 @@ public class HmsDA {
 		return catList;
 	}
 
- 
 	public ArrayList<Employee> getSelectDoctor(int did) throws SQLException {
 
 		ArrayList<Employee> docList = new ArrayList<Employee>();
@@ -696,21 +693,19 @@ public class HmsDA {
 		return docList;
 	}
 
-
 	// 나옹나옹
 	public ArrayList<Patient> reservationCheck(Patient p) throws SQLException {
 		ArrayList<Patient> patientList = new ArrayList<Patient>();
 
 		try {
-			
-			PreparedStatement stmt = con.prepareStatement(
-					"select * from patient where name=? and phone=?");
-			
+
+			PreparedStatement stmt = con.prepareStatement("select * from patient where name=? and phone=?");
+
 			stmt.setString(1, p.getName());
 			stmt.setString(2, p.getPhone());
 			ResultSet set = stmt.executeQuery();
-			
-			while(set.next()){
+
+			while (set.next()) {
 				Patient patient = new Patient();
 				patient.setPid(set.getInt("pid"));
 				patient.setName(set.getString("name"));
@@ -722,10 +717,9 @@ public class HmsDA {
 				patient.setEid(set.getInt("employee_eid"));
 				patient.setEmployee(getDoctor(set.getInt("employee_eid")));
 				patient.setCategory(getCategory(getDoctor(set.getInt("employee_eid")).getCatid()));
-			 	patientList.add(patient);
+				patientList.add(patient);
 			}
-			
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -733,14 +727,91 @@ public class HmsDA {
 		}
 		return patientList;
 	}
-	public void removeMedicine(int mid) throws SQLException {
+
+	// 나옹나옹
+	public Indoor indoorCheck(Patient p) throws SQLException {
+		Patient patient = new Patient();
+		System.out.println("HmsDA - indoorCheck");
+		try {
+
+			PreparedStatement stmt = con.prepareStatement("select * from patient where name=? and phone=? and door = 'YES'");
+
+			stmt.setString(1, p.getName());
+			stmt.setString(2, p.getPhone());
+			ResultSet set = stmt.executeQuery();
+
+			while (set.next()) {
+				patient.setPid(set.getInt("pid"));
+				patient.setName(set.getString("name"));
+				patient.setGender(set.getString("gender"));
+				patient.setPhone(set.getString("phone"));
+				patient.setBirth(set.getString("birth"));
+				patient.setReservation_day(set.getString("reservation_day"));
+				patient.setReservation_time(set.getString("reservation_time"));
+				patient.setEid(set.getInt("employee_eid"));
+				patient.setEmployee(getDoctor(set.getInt("employee_eid")));
+				patient.setCategory(getCategory(getDoctor(set.getInt("employee_eid")).getCatid()));
+				//patientList.add(patient);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+		}
+		System.out.println(patient);
+		return getIndoor(patient);
+	}
+	
+	public Indoor getIndoor(Patient p) {
+		Indoor indoor = new Indoor();
+		System.out.println(p.getPid());
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet set = stmt.executeQuery("SELECT * FROM indoors where patient_pid=" + p.getPid());
+			while (set.next()) {
+				
+				indoor.setPatient(getPatient(set.getInt("patient_pid")));
+				indoor.setDoor_start_day(set.getString("door_start_day"));;
+				indoor.setDoor_end_day(set.getString("door_end_day"));;
+				indoor.setRoom_number(set.getInt("room_number"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println(indoor.getPatient().getName());
+		System.out.println(indoor.getDoor_start_day());
+		System.out.println(indoor.getDoor_end_day());
+		System.out.println(indoor.getRoom_number());
 		
+		return indoor;
+	}
+	
+	public Patient getPatient(int pid) throws SQLException {
+		Patient patient = new Patient();
+		ResultSet set = con.createStatement().executeQuery("SELECT * FROM patient WHERE pid=" + pid);
+		while (set.next()) {
+
+			patient.setPid(set.getInt("pid"));
+			patient.setName(set.getString("name"));
+			patient.setGender(set.getString("gender"));
+			patient.setPhone(set.getString("phone"));
+			patient.setBirth(set.getString("birth"));
+			patient.setReservation_day(set.getString("reservation_day"));
+			patient.setReservation_time(set.getString("reservation_time"));
+			patient.setEid(set.getInt("employee_eid"));
+			patient.setEmployee(getDoctor(set.getInt("employee_eid")));
+		}
+		return patient;
+	}
+
+	public void removeMedicine(int mid) throws SQLException {
+
 		PreparedStatement stmt = con.prepareStatement("DELETE FROM medicine WHERE mid=?");
 		stmt.setInt(1, mid);
 		stmt.execute();
-		
+
 	}
-  
 
 	/*
 	 * public Employee getEmployee(int eid){ Employee emp = new Employee(); try{

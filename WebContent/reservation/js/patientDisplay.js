@@ -77,10 +77,11 @@ $(function(){
 			type: $(this).attr("method"),
 			data: $(this).serialize(),
 			success: function(data){
-				
+
 				var num = 1;
 				
 				data.forEach(function(patient){
+					
 					var index = $("#tblReservationCheck").dataTable().fnAddData([
 															num,
 															patient.reservation_day,
@@ -98,10 +99,54 @@ $(function(){
 				
 			},
 			error: function(err){
-			}
-		
-		});
+			}		
+		});	
+	});
 	
+	$('#tblIndoorCheck').dataTable({
+        retrieve: true, searching: false, paging: false, bInfo: false   
+     //bFilter: false, bInfo: false
+	});
+	$('#tblIndoorCheck').find('tbody').empty();
+	
+	$("#IndoorCheckForm").submit(function(e){
+		e.preventDefault();
+		
+		var table = $('#tblIndoorCheck').DataTable();
+
+		if ( table.data().count() != 0) {
+		    table.clear().draw();
+		}
+		
+		
+		$.ajax({
+			url: $(this).attr("action"),
+			type: $(this).attr("method"),
+			data: $(this).serialize(),
+			success: function(data){
+				//alert(data);
+				var num = 1;
+				
+				//data.forEach(function(indoor){
+
+					var index = $("#tblIndoorCheck").dataTable().fnAddData([
+															num,
+															data.patient.name,
+															data.room_number,
+															data.door_start_day,
+															data.door_end_day			
+					                                         ]);
+					
+					var row = $("#tblIndoorCheck").dataTable().fnGetNodes(index);
+					$(row).attr("id",indoor.patient_pid);
+					num = num + 1;
+					
+				//});
+				
+			},
+			error: function(err){
+			}		
+		});	
 	});
 	
 	

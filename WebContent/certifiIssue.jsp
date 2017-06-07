@@ -66,8 +66,8 @@ th, td {
 
 <body>
 
-
-	<div id="page-wrapper">
+ 
+		<div id="page-wrapper"> 
 
 		<div class="container-fluid">
 

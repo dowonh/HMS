@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,15 +17,19 @@
 
 <!-- Custom CSS -->
 <link href="../css/simple-sidebar.css" rel="stylesheet">
-	
+
 <!-- Custom Fonts -->
 <link href="../fn/css/font-awesome.min.css" rel="stylesheet"
 	type="text/css">
-	
-<!-- Javascript Includes -->
-	<script src="../js/jquery-1.11.3.min.js"></script>
-	<script src="../js/bootstrap.min.js"></script>
 
+<!-- Javascript Includes -->
+<script src="../js/jquery-1.11.3.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<style>
+input#register-input.form-control {
+	width: inherit !important;
+}
+</style>
 
 </head>
 
@@ -45,19 +49,15 @@
 		<div id="sidebar-wrapper">
 
 			<ul class="sidebar-nav">
-				<li class="sidebar-brand">
-                    <a href="../index.jsp">
-                        HMS
-                    </a>
-                </li>
-	
-				<li><a href="reservation/reservation.jsp"><i class="fa fa-glide-g"
+				<li class="sidebar-brand"><a href="../index.jsp"> HMS </a></li>
+
+				<li><a href="./reservation.jsp"><i class="fa fa-glide-g"
 						aria-hidden="true"></i> 예약 안내</a></li>
-				<li class="active"><a href="reservation/reservationCheck.jsp"><i
+				<li class="active"><a href="./reservationCheck.jsp"><i
 						class="fa fa-list-alt" aria-hidden="true"></i> 예약 조회</a></li>
-				<li><a href="reservation/resultCheck.jsp"><i class="fa fa-paperclip"
+				<li><a href="./resultCheck.jsp"><i class="fa fa-paperclip"
 						aria-hidden="true"></i> 결과 조회</a></li>
-				<li><a href="reservation/certificateIssue.jsp"><i class="fa fa-print"
+				<li><a href="./certificateIssue.jsp"><i class="fa fa-print"
 						aria-hidden="true"></i> 증명서 발급</a></li>
 			</ul>
 		</div>
@@ -79,34 +79,59 @@
 					</div>
 				</div>
 				<!-- /.row -->
-	
-	
-				<div class="contanier">
-					<h4>내원일자 조회</h4>
-					<table class="table table-bordered">
-						<thead>
-							<tr>
-								<th>번호</th>
-								<th>내원 날짜</th>
-								<th>이름</th>
-								<th>진료과</th>
-								<th>의사</th>
-								<th>병실</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>1</td>
-								<td>2017-06-03</td>
-								<td>정나영</td>
-								<td>진료과1</td>
-								<td>의사1</td>
-								<td>203호</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
 
+				<div class="container">
+					<div class="col-lg-6 col-md-6">
+
+						<div class="container">
+							<form method="post" action="../Process?action=indoorCheck" id="IndoorCheckForm">
+								<div class="row">
+									<div class="form-group row">
+										<label for="name-input" class="col-2 col-form-label">이름</label>
+										<div class="col-6">
+											<input class="form-control" type="text" id="register-input"
+												name="name">
+										</div>
+									</div>
+
+									<div class="form-group row">
+										<label for="phone-input" class="col-2 col-form-label">전화번호
+											('-' 없이 입력해 주세요.)</label>
+										<div class="col-6">
+											<input class="form-control" type="text" id="register-input"
+												name="phone">
+										</div>
+									</div>
+									<div class="form-group row">
+										<div class="offset-2 col-10" style="margin-left: auto;">
+											<button type="submit" class="btn btn-primary">
+												내원일자 조회 <i class="fa fa-arrow-circle-right"></i>
+											</button>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+
+						<div class="contanier">
+							<h4>내원일자 내역</h4>
+							<p>입원환자 정보를 볼 수 있습니다.</p>
+							<table class="table table-bordered" id="tblIndoorCheck">
+								<thead>
+									<tr>
+										<th>번호</th>
+										<th>이름</th>
+										<th>병실</th>
+										<th>내원 날짜</th>
+										<th>퇴원 날짜</th>
+									</tr>
+								</thead>
+								<tbody id="indoorCheckBody">
+							</table>
+						</div>
+					</div>
+				</div>
+				<!-- container -->
 
 			</div>
 			<!-- /.container-fluid -->
@@ -120,7 +145,9 @@
 
 	<!-- Bootstrap Core JavaScript -->
 	<script src="../js/bootstrap.min.js"></script>
-
+	<script src="./js/patientDisplay.js"></script>
+	<script src="../js/dataTables.bootstrap.min.js"></script>
+	<script src="../js/jquery.dataTables.min.js"></script>
 </body>
 
 </html>

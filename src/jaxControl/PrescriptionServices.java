@@ -1,7 +1,6 @@
 package jaxControl;
 
 import hmsControllers.HmsFactory;
-import hmsModels.Indoor;
 import hmsModels.Prescription;
 
 import java.sql.SQLException;

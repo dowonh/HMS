@@ -25,7 +25,11 @@
 <!-- Javascript Includes -->
 	<script src="../js/jquery-1.11.3.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
-
+<style>
+input#register-input.form-control {
+	width: inherit !important;
+}
+</style>
 
 </head>
 
@@ -51,13 +55,13 @@
                     </a>
                 </li>
 	
-				<li><a href="reservation/reservation.jsp"><i class="fa fa-glide-g"
+				<li><a href="./reservation.jsp"><i class="fa fa-glide-g"
 						aria-hidden="true"></i> 예약 안내</a></li>
-				<li class="active"><a href="reservation/reservationCheck.jsp"><i
+				<li class="active"><a href="./reservationCheck.jsp"><i
 						class="fa fa-list-alt" aria-hidden="true"></i> 예약 조회</a></li>
-				<li><a href="reservation/resultCheck.jsp"><i class="fa fa-paperclip"
+				<li><a href="./resultCheck.jsp"><i class="fa fa-paperclip"
 						aria-hidden="true"></i> 결과 조회</a></li>
-				<li><a href="reservation/certificateIssue.jsp"><i class="fa fa-print"
+				<li><a href="./certificateIssue.jsp"><i class="fa fa-print"
 						aria-hidden="true"></i> 증명서 발급</a></li>
 			</ul>
 		</div>
@@ -79,7 +83,38 @@
 					</div>
 				</div>
 				<!-- /.row -->
-	
+				
+				
+				<div class="container">
+							<form method="post" action="../Process?action=indoorCheck" id="MedicineCheckForm">
+								<div class="row">
+									<div class="form-group row">
+										<label for="name-input" class="col-2 col-form-label">이름</label>
+										<div class="col-6">
+											<input class="form-control" type="text" id="register-input"
+												name="name">
+										</div>
+									</div>
+
+									<div class="form-group row">
+										<label for="phone-input" class="col-2 col-form-label">전화번호
+											('-' 없이 입력해 주세요.)</label>
+										<div class="col-6">
+											<input class="form-control" type="text" id="register-input"
+												name="phone">
+										</div>
+									</div>
+									<div class="form-group row">
+										<div class="offset-2 col-10" style="margin-left: auto;">
+											<button type="submit" class="btn btn-primary">
+												약처방 조회 <i class="fa fa-arrow-circle-right"></i>
+											</button>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+				
 	
 				<div class="contanier">
 					<h4>약처방 조회</h4>
@@ -97,18 +132,7 @@
 								<th>총 투약일수</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-								<td>1</td>
-								<td>2017-06-03</td>
-								<td>정나영</td>
-								<td>진료과1</td>
-								<td>의사1</td>
-								<td>암브로콜시럽</td>
-								<td>1.5</td>
-								<td>2</td>
-								<td>3</td>
-							</tr>
+						<tbody id="medicineCheckBody">
 						</tbody>
 					</table>
 				</div>

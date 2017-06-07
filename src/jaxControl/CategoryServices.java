@@ -31,6 +31,18 @@ public class CategoryServices {
 			return e.getMessage();
 		}
 	}
+	
+	@GET
+	@Path("category/department")
+	@Produces("application/json")
+	public String getDepartmentJson(){
+		try {
+			return hms.getDepartmentJson();
+		} catch (SQLException e) {
+			Response.serverError();
+			return e.getMessage();
+		}
+	}
 		
 	@POST
 	@Path("category")
@@ -89,5 +101,4 @@ public class CategoryServices {
 			return e.getMessage();
 		}
 	}
-	
 }

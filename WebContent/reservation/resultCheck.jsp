@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -20,14 +21,14 @@
 
 <!-- Custom CSS -->
 <link href="../css/simple-sidebar.css" rel="stylesheet">
-	
+
 <!-- Custom Fonts -->
 <link href="../fn/css/font-awesome.min.css" rel="stylesheet"
 	type="text/css">
-	
+
 <!-- Javascript Includes -->
-	<script src="../js/jquery-1.11.3.min.js"></script>
-	<script src="../js/bootstrap.min.js"></script>
+<script src="../js/jquery-1.11.3.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
 
 
 </head>
@@ -40,12 +41,8 @@
 		<div id="sidebar-wrapper">
 
 			<ul class="sidebar-nav">
-				<li class="sidebar-brand">
-                    <a href="../index.jsp">
-                        HMS
-                    </a>
-                </li>
-	
+				<li class="sidebar-brand"><a href="../index.jsp"> HMS </a></li>
+
 				<li><a href="./reservation.jsp"><i class="fa fa-glide-g"
 						aria-hidden="true"></i> 예약 안내</a></li>
 				<li class="active"><a href="./reservationCheck.jsp"><i
@@ -69,10 +66,8 @@
 							결과 조회 <small>예약 및 조회</small>
 						</h1>
 						<ol class="breadcrumb">
-                            <li class="active">
-                                	내원일자와 약처방 기록을 제공합니다.
-                            </li>
-                        </ol>
+							<li class="active">내원일자와 약처방 기록을 제공합니다.</li>
+						</ol>
 					</div>
 				</div>
 				<!-- /.row -->
@@ -81,9 +76,7 @@
 					<div class="col-lg-4">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h3 class="panel-title">
-									내원일자 조회
-								</h3>
+								<h3 class="panel-title">내원일자 조회</h3>
 							</div>
 							<div class="panel-body">
 								내원하셨던 기록을 제공합니다.
@@ -97,9 +90,7 @@
 					<div class="col-lg-4">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h3 class="panel-title">
-									약처방
-								</h3>
+								<h3 class="panel-title">약처방</h3>
 							</div>
 							<div class="panel-body">
 								진료시 받은 약처방 기록을 제공합니다.
@@ -110,7 +101,7 @@
 							</div>
 						</div>
 					</div>
-					
+
 				</div>
 				<!-- /.row -->
 			</div>

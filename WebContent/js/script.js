@@ -146,7 +146,6 @@ $(document).ready(function(){
 			url: $(this).attr("action"),
 			data: $(this).serialize(),
 			success: function(nurse){
-				console.log(nurse);
 				$(".nurseMsg").removeClass("alert-danger").addClass("alert-success").html("<strong>Success</strong>: Record Added!");
 				$("#displayNurses").DataTable().row($("#nurseBody #"+nurse.eid)).remove().draw();
 				addNurseToTable(nurse);

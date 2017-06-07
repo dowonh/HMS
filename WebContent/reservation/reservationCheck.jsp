@@ -30,6 +30,11 @@
 	<script src="../js/jquery-1.11.3.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
 
+<style>
+	input#register-input.form-control{
+		width: inherit !important;
+	}
+</style>
 
 </head>
 
@@ -89,7 +94,7 @@
 						</div>
 
 						<div class="container">
-							<form method="post" action="./treatReservationCheck.jsp">
+							<form method="post" action="../Process?action=reservationCheck" id="ReservationCheckForm">
 								<div class="row">
 									<div class="form-group row">
 										<label for="name-input" class="col-2 col-form-label">이름</label>
@@ -117,6 +122,24 @@
 								</div>
 							</form>
 						</div>
+						
+						<div class="contanier">
+							<h4>진료예약 내역</h4>
+								<p>예약 취소가 가능합니다.</p>
+								<table class="table table-bordered" id="tblReservationCheck">
+									<thead>
+										<tr>
+											<th>번호</th>
+											<th>예약 날짜</th>
+											<th>이름</th>
+											<th>진료과</th>
+											<th>의사</th>
+											<th>예약 시간</th>
+										</tr>
+									</thead>
+									<tbody id="reservationCheckBody">
+								</table>
+							</div>
 					</div>
 				</div>
 				<!-- container -->
@@ -132,7 +155,10 @@
 
 	<!-- Bootstrap Core JavaScript -->
 	<script src="../js/bootstrap.min.js"></script>
-
+	<script src="./js/patientDisplay.js"></script>
+	<script src="../js/dataTables.bootstrap.min.js"></script>
+	<script src="../js/jquery.dataTables.min.js"></script>
+	
 </body>
 
 </html>

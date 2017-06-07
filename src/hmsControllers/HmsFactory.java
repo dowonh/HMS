@@ -32,7 +32,11 @@ public class HmsFactory {
 		
 		return g.toJson(roomList);
 	}
-	
+	public String getRoomsRemainJson(){
+		ArrayList<Room> roomList = hms.getRoomRemainList();
+		
+		return g.toJson(roomList);
+	}
 	public String getRoomJson(int rid) throws SQLException{
 		
 		Room room;
@@ -54,7 +58,10 @@ public class HmsFactory {
 	
 	public String getCategoriesJson() throws SQLException {
 		
-		return g.toJson(hms.getCategories());
+		ArrayList<Category> catList = hms.getCategories();
+		return g.toJson(catList);
+		
+		//return g.toJson(hms.getCategories());
 	}
 	//간호사 관련 가져오기
 	public String getNursesJson(){
@@ -76,12 +83,28 @@ public class HmsFactory {
 	public void deleteCategory(int catid) throws SQLException {
 		hms.deleteCategory(catid);
 	}
+ 
+	
+	public String getDepartmentJson() throws SQLException {
+		
+		ArrayList<Category> catList = hms.getDepartment();
+		return g.toJson(catList);
+	}
+	
+	public String getDoctorJson(int did) throws SQLException{
+		
+		ArrayList<Employee> docList = hms.getSelectDoctor(did);
+		return g.toJson(docList);
+		
+	}
+ 
 	//환자 관련
 	public String getPatientsJson(){
 		ArrayList<Patient> patientList = hms.getPatientList();
 		
 		return g.toJson(patientList);
 	}
+	
 	//입원 관련
 	public String getIndoorsJson(int rid) throws SQLException{
 		ArrayList<Patient> indoorList = hms.getIndoorList(rid);
@@ -89,19 +112,36 @@ public class HmsFactory {
 		return g.toJson(indoorList);
 	}
 	
+ 
 	public String getDocPatientsJson() throws SQLException{
 		ArrayList<Patient> patList = hms.getDocPatientsList();
 		
 		return g.toJson(patList);
 	}
 	
+ 
+	public String updateIndoorRid(int pid, int rid) throws SQLException {
+		
+		Room room = hms.getRoom(rid);
+		if(room.getAvailablebeds() > 0){
+			
+			hms.decreaseBed(rid);
+ 
+			hms.updateIndoorPatient(pid, rid);
+			
+			return g.toJson(hms.getPatient(pid));
+		}
+		else
+			return "Beds not available in the selected room.";
+	}
+ 
 //	public String getIndoorJson(int rid) throws SQLException{
 //		
 //		ArrayList<Patient> indoorPatientList = hms.getIndoor(rid);
 //		
 //		return g.toJson(indoorPatientList);
 //	}
-
+ 
 
 	  /*public ArrayList<Room> getRooms(){
 		return hms.getRoomList();
@@ -125,14 +165,7 @@ public class HmsFactory {
 	
 
 	
-	public String getDoctorJson(int did) throws SQLException{
-		
-		doctornote doc;
-		doc = hms.getDoctor(did);
-		
-		return g.toJson(doc);
-		
-	}
+	
 	
 	public String getNurseJson(int nid) throws SQLException{
 		Nurse nurse;
@@ -239,22 +272,7 @@ public class HmsFactory {
 		hms.updatePatient(p);
 	}
 
-	public String updateIndoorRid(int ipid, int rid) throws SQLException {
-		
-		Room room = hms.getRoom(rid);
-		if(room.getAvailableBeds()>0){
-			
-			hms.decreaseBed(rid);
-			
-			hms.updateIndoorRid(ipid,rid);
-			room.setAvailableBeds(room.getAvailableBeds()-1);
-			hms.updateRoom(room);
-			
-			return hms.getIndoor(ipid).toJson();
-		}
-		else
-			return "Beds not available in the selected room.";
-	}
+
 
 	public String addMedicne(Medicine med) throws SQLException {
 		

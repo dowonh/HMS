@@ -13,6 +13,7 @@
 <script src="../js/jquery-ui.min.js"></script>
 <script src="../js/bootbox.min.js"></script>
 <script src="js/nurseDisplay.js"></script>
+<script src="../js/bootstrap-dialog.js"></script>
 
 <style>
 	.dataTables_filter{

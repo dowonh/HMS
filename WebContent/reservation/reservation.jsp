@@ -1,8 +1,10 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<html lang="en">
+<html>
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -21,11 +23,28 @@
 	type="text/css">
 
 <!-- Javascript Includes -->
+
 <script src="../js/jquery-1.11.3.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
+
 </head>
 
+<style>
+	input#register-input.form-control{
+		width: inherit !important;
+	}
+	
+	#selectDepartment.form-control{
+		width: inherit !important;
+	}
+	#selectDoctor.form-control{
+		width: inherit !important;
+	}
+</style>
+
 <body>
+
+
 
 	<div id="wrapper">
 
@@ -111,7 +130,9 @@
 				<div class="modal-body">
 					<div class="container">
 						<form method="post" action="../Process?action=addPatient"
-							name='form'>
+							name='form' id='addPatientForm'>
+							<div class="row">
+							<div class="col-lg-6">
 							<div class="form-group row">
 								<label for="example-date-input" class="col-2 col-form-label">이름</label>
 								<div class="col-6">
@@ -143,29 +164,25 @@
 										name="phone">
 								</div>
 							</div>
+							</div>
 							<br>
+							<div class="col-lg-6">
 							<div class="form-group row">
 								<label for="inputEmail3" class="col-2 col-form-label">진료과
 									선택</label>
 								<div class="col-10">
-									<select name="department" id="department"
-										onchange="getList(value)">
+								
+								<select name="department" class="form-control" id="selectDepartment">
 										<option value="default">----진료과 선택----</option>
-										<%
-											for (int i = 1; i <= 3; i++) {
-										%>
-										<option value="<%=i%>">진료과<%=i%></option>
-										<%
-											}
-										%>
-									</select>
+										</select>
+								
 								</div>
 							</div>
 							<div class="form-group row">
 								<label for="inputEmail3" class="col-2 col-form-label">의사
 									선택</label>
 								<div class="col-10">
-									<select name="doctor" id="doctor">
+									<select name="doctor" class="form-control" id="selectDoctor">
 										<option value="default">----의사 선택----</option>
 									</select>
 								</div>
@@ -186,7 +203,8 @@
 										id="register-input" name="reservation_time">
 								</div>
 							</div>
-
+							</div>
+							</div>
 							<div class="form-group row">
 								<div class="offset-sm-2 col-sm-10" style="margin-left: auto;">
 									<button type="submit" class="btn btn-primary">예약하기</button>
@@ -194,6 +212,7 @@
 							</div>
 						</form>
 					</div>
+					
 				</div>
 
 				<div class="modal-footer">
@@ -209,31 +228,8 @@
 
 	<!-- Bootstrap Core JavaScript -->
 	<script src="../js/bootstrap.min.js"></script>
+	<script src="./js/patientDisplay.js"></script>
 
-
-	<script type="text/javascript">
-		function getList(val) {
-			if (val == "1") {
-				num = new Array("----의사 선택----", "의사1", "의사2", "의사3");
-				vnum = new Array("----의사 선택----", "1", "2", "3");
-			} else if (val == "2") {
-				num = new Array("----의사 선택----", "의사4", "의사5", "의사6");
-				vnum = new Array("----의사 선택----", "4", "5", "6");
-			} else if (val == "3") {
-				num = new Array("----의사 선택----", "의사7", "의사8", "의사9");
-				vnum = new Array("----의사 선택----", "7", "8", "9");
-			}
-			//두번째에 들은 셀렉트 박스 초기화
-			for (i = 0; i < form.doctor.length; i++) {
-				form.doctor.options[i] = null;
-			}
-
-			//두번째값 넣어주기(Option함수 이용)
-			for (i = 0; i < num.length; i++) {
-				form.doctor.options[i] = new Option(num[i], vnum[i]);
-			}
-		}
-	</script>
 </body>
 
 </html>

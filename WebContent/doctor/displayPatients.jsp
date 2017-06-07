@@ -11,7 +11,7 @@
 
 <title>예약 및 조회</title>
 <style>
-#viewPresModal div.modal-body {
+/* #viewPresModal div.modal-body {
 	height: 200px;
 }
 
@@ -25,7 +25,7 @@
 
 #presAddForm .modal-body {
 	height: 200px;
-}
+} */
 
 table {
 	border-collapse: collapse;
@@ -125,16 +125,17 @@ th, td {
 									</h3>
 								</div>
 								<div class="panel-body">
-								Full Name :  <br>
-								Gender :  <br> 
-								Phone : <br>
+								Full Name :  <input type="text" id="fullname" value="" /><br>
 								Birth : <input type="text" id="birth" value="" /> <br>
-								Reservation day : <input type="text" id="pname" value="name" /><br>
-								Reservation time : <input type="text" id="name" value="" /><br>
-								Door : <input type="text" id="name" value="" /><br>
-								Door start day : <input type="text" id="name" value="" /><br>
-								Door end day : <br>
-								Room : <input type="text" id="name" value="" /><br>
+								Gender : <input type="text" id="gender" value="" /> <br> 								
+								Reservation day : <input type="text" id="rday" value="" /><br>
+								Reservation time : <input type="text" id="rtime" value="" /><br>
+								Phone : <input type="text" id="phone" value="" /><br>
+				
+								Door : <input type="text" id="door" value="" /><br>
+								Door start day : <input type="text" id="doorstart" value="" /><br>
+								Door end day : <input type="text" id="doorend" value="" /><br>
+								Room : <input type="text" id="room" value="" /><br>
 								
 									<!-- <div class="list-group">
 										<a class="list-group-item"> 
@@ -170,8 +171,7 @@ th, td {
 							
 							<div>
 							<label >증상</label> 
-								<input type="text" class="form-control" name="disease"
-									placeholder="Note" />
+								<input type="text" class="form-control" placeholder="Note" />
 							</div>
 							<br>
 							<div>
@@ -225,7 +225,7 @@ th, td {
 								</p>
 							</div>
 							<p align=right>
-								<button type="submit" class="btn btn-success">Add
+								<button  class="btn btn-success">Add
 									Prescription</button>
 							<div class="patientMsg"></div>
 						</form>

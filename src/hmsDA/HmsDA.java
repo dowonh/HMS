@@ -1,7 +1,7 @@
 package hmsDA;
 
 import hmsModels.Category;
-import hmsModels.doctornote;
+import hmsModels.Doctornote;
 import hmsModels.Employee;
 import hmsModels.Medicine;
 import hmsModels.MedicineGoods;
@@ -684,6 +684,41 @@ public class HmsDA {
 
 	//의사 - 환자보기 도원
 	public ArrayList<Patient> getDocPatientsList() throws SQLException{
+		ArrayList<Patient> patientList = new ArrayList<Patient>();
+		
+		try{
+			Statement stmt = con.createStatement();
+			ResultSet set = stmt.executeQuery("select * from patient where reservation_day = curdate()");
+			
+			while(set.next()){
+				Patient patient = new Patient();
+				
+				patient.setPid(set.getInt("pid"));
+				patient.setName(set.getString("name"));
+				patient.setGender(set.getString("gender"));
+				patient.setPhone(set.getString("phone"));
+				patient.setBirth(set.getString("birth"));
+				patient.setReservation_day(set.getString("reservation_day"));
+				patient.setReservation_time(set.getString("reservation_time"));
+				patient.setDoor_start_day(set.getString("door_start_day"));
+				patient.setDoor_end_day(set.getString("door_end_day"));		
+				patient.setDoor(set.getString("door"));	
+				patient.setEid(set.getInt("employee_eid"));
+				patient.setRid(set.getInt("room_rid"));
+				patient.setEmployee(getDoctor(set.getInt("employee_eid")));
+				
+			 	patientList.add(patient);
+			}
+		}
+		catch(SQLException ex){
+			ex.printStackTrace();
+		}
+		
+		return patientList;
+		
+	} 
+	//의사 - 환자 개인보기 도원
+	public ArrayList<Patient> getDocPatientsList(int pid) throws SQLException{
 		ArrayList<Patient> patientList = new ArrayList<Patient>();
 		
 		try{

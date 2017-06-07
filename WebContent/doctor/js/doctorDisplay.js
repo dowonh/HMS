@@ -19,15 +19,52 @@ $(function(){
 		}
 	});
 	
+	/*$.ajax({
+		url: "../services/patient/doctor"+pid,
+		type: "GET",
+		success: function(data){
+			data.forEach(function(patient){
+				
+				addPatientToTableALL(patient);
+				
+			});
+		},
+		error: function(data){
+			$(".roomMsg").removeClass("alert-success")
+			$(".roomMsg").addClass("alert-danger").html("<strong>Error: </strong> "+data.responseText);
+		}
+	});*/
+	
+	
+	
 	//클릭이벤트
 	$(document).ready(function() {
 	    var table = $('#displayPatients').DataTable();
 	     
 	    $('#displayPatients tbody').on('click', 'tr', function () {
 	       var data = table.row( this ).data();
-
-	       alert( 'You clicked on ' + data[0] + '\'s row' );
-	       //$("#pname").load("data[0]");
+	       var n = document.getElementById("fullname");
+	       var b = document.getElementById("birth");
+	       var g = document.getElementById("gender");
+	       var rd = document.getElementById("rday");
+	       var rt = document.getElementById("rtime");
+	       var p = document.getElementById("phone");
+	       var d = document.getElementById("door");
+	       var ds = document.getElementById("doorstart");
+	       var de = document.getElementById("doorend");
+	       var r = document.getElementById("room");
+				n.value = data[1];
+				b.value = data[2];
+				g.value = data[3];
+				rd.value = data[4];
+				rt.value = data[5];
+				p.value = data[6];
+				d.value = data[7];
+				ds.value = data[8];
+				de.value = data[9];
+				r.value = data[10];				
+	       
+	       
 	    } );
 	} );
 	
@@ -368,10 +405,16 @@ function addPatientToTable(patient){
 	        	                                      patient.birth,
 	        	                                      patient.gender,
 	        	                                      patient.reservation_day,
-	        	                                      patient.reservation_time
+	        	                                      patient.reservation_time,
+	        	                                      patient.phone,
+												      patient.door,
+												      patient.door_start_day,
+												      patient.door_end_day,
+												      patient.rid,
 	        	                                      ]);
 	
 	var row = $("#displayPatients").dataTable().fnGetNodes(index);
+	
 	$(row).attr("id",patient.pid);
 	//$(".deleteMe").remove();
 }

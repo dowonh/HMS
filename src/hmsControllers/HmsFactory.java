@@ -7,7 +7,7 @@ import com.google.gson.Gson;
 
 import hmsDA.HmsDA;
 import hmsModels.Category;
-import hmsModels.doctornote;
+import hmsModels.Doctornote;
 import hmsModels.Employee;
 import hmsModels.Medicine;
 import hmsModels.MedicineGoods;
@@ -91,12 +91,12 @@ public class HmsFactory {
 		return g.toJson(catList);
 	}
 	
-	public String getDoctorJson(int did) throws SQLException{
-		
-		ArrayList<Employee> docList = hms.getSelectDoctor(did);
-		return g.toJson(docList);
-		
-	}
+//	public String getDoctorJson(int did) throws SQLException{
+//		
+//		ArrayList<Employee> docList = hms.getSelectDoctor(did);
+//		return g.toJson(docList);
+//		
+//	}
  
 	//환자 관련
 	public String getPatientsJson(){
@@ -119,6 +119,11 @@ public class HmsFactory {
 		return g.toJson(patList);
 	}
 	
+	public String getDocPatientsJson(int pid) throws SQLException{
+		ArrayList<Patient> patList = hms.getDocPatientsList(pid);
+		
+		return g.toJson(patList);
+	}
  
 	public String updateIndoorRid(int pid, int rid) throws SQLException {
 		

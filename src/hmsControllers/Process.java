@@ -2,7 +2,7 @@ package hmsControllers;
 
 import hmsDA.HmsDA;
 import hmsModels.Category;
-import hmsModels.doctornote;
+import hmsModels.Doctornote;
 import hmsModels.Employee;
 import hmsModels.Indoor;
 import hmsModels.Medicine;

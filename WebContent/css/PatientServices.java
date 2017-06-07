@@ -19,17 +19,17 @@ public class PatientServices {
 
 	HmsFactory hms = new HmsFactory();
 
-//	@GET
-//	@Path("patient/doctor/{pid}")
-//	@Produces("application/json")
-//	public String getDocPatientsJson(@PathParam("pid") int pid){
-//		try {
-//			return hms.getDocPatientsJson(pid);
-//		} catch (SQLException e) {
-//			Response.serverError();
-//			return e.getMessage();
-//		}
-//	}
+	@GET
+	@Path("patient/doctor/{pid}")
+	@Produces("application/json")
+	public String getDocPatientsJson(@PathParam("pid") int pid){
+		try {
+			return hms.getDocPatientsJson(pid);
+		} catch (SQLException e) {
+			Response.serverError();
+			return e.getMessage();
+		}
+	}
 	
 	@GET
 	@Path("patient/all")

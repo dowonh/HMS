@@ -175,18 +175,15 @@ th, td {
 							</div>
 							<br>
 							<div>
-								<label for="medicineselect">약 처방</label> <select
-									class="form-control" id="typeselect">
+								<label for="medicineselect">약 처방</label> 
+								<select
+									class="form-control" id="typeselect" name="typeselect">
 									<option value="typeselect">Medicine Type</option>
-									<option>소화기관용</option>
-									<option>순환계용</option>
-									<option>호흡기관용</option>
+									
 
-								</select> <select class="form-control" id="nameselect">
+								</select> <select class="form-control" id="nameselect" name="nameselect">
 									<option value="nameselect">Medicine Name</option>
-									<option>록프렌정</option>
-									<option>포시릴정</option>
-									<option>카니움정</option>
+									
 								</select>
 								
 								<p align=right>
@@ -200,10 +197,10 @@ th, td {
 									<!-- <button onclick="add_row()" id="addrow">선택</button>
 					<button onclick="delete_row()" id="deleterow">삭제</button><br> -->
 					<br>
-									<button onclick="add_row()"
-										class="btn btn-success">추가</button>
-									<button onclick="delete_row()"
-										class="btn btn-success">삭제</button>
+									<button onclick="add_row()" type="button"
+										class="btn ">추가</button>
+									<button onclick="delete_row()" type="button"
+										class="btn ">삭제</button>
 								</p>
 								<br> <label>Content</label>
 

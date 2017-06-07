@@ -22,7 +22,7 @@ public class MedicineServices {
 	@GET
 	@Path("medicine/all")
 	@Produces("application/json")
-	public String getMedicinesJson(){
+	public String getMedicinesGoodsJson(){
 		try {
 			return hms.getMedicinesGoodsJson();
 		} catch (SQLException e) {
@@ -30,8 +30,62 @@ public class MedicineServices {
 			return e.getMessage();
 		}
 	}
-
 	
+	@GET
+	@Path("medicine/{mid}")
+	@Produces("application/json")
+	public String getMedicine(@PathParam("mid") int mid){
+		try {
+			return hms.getMedicine(mid);
+			
+		} catch (SQLException e) {
+			Response.serverError();
+			e.printStackTrace();
+			return e.getMessage();
+		}
+	}
+	
+	@GET
+	@Path("medicine/doctor/{mtype}")
+	@Produces("application/json")
+	public String getMedicineJson(@PathParam("mtype") String mtype){
+		try {
+			return hms.getMedicinetypeJson(mtype);
+			
+		} catch (SQLException e) {
+			Response.serverError();
+			e.printStackTrace();
+			return e.getMessage();
+		}
+	}
+	
+	@GET
+	@Path("medicine/doctor")
+	@Produces("application/json")
+	public String getMedicineJson(){
+		try {
+			return hms.getMedicineJson();
+			
+		} catch (SQLException e) {
+			Response.serverError();
+			e.printStackTrace();
+			return e.getMessage();
+		}
+	}
+
+/*	@GET
+	@Path("medicine/all")
+	@Produces("application/json")
+	public String getMedicineJson(){
+		try {
+			return hms.getMedicineJson();
+			
+		} catch (SQLException e) {
+			Response.serverError();
+			e.printStackTrace();
+			return e.getMessage();
+		}
+	}
 	/*@POST
 	@Path("medicine")
 	@Produces("application/json")

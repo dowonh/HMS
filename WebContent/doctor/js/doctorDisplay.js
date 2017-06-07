@@ -85,18 +85,38 @@ $(function(){
 		}
 	});
 	
-	
+	   
+	   
+	$('#typeselect').change(function(){
+	       $.ajax({
+	          url : "../services/medicine/doctor/" + $('#typeselect').val(),
+	            type : "GET",     
+	            success : function(medicine) {
+	      
+	                 $("#myform select[name=nameselect] option").remove();
+	                 medicine.forEach(function(med){
+	                 $("#myform select[name=nameselect]").append("<option value=" + med.name + ">" +med.name + "</option>");
+	              });
+	            },
+	            error:function(request,status,error){
+	             
+	              }
+	        });
+	      
+	   });
+
 	//For Medicines
 	$.ajax({
-		url: "../services/medicine/all",
+		url: "../services/medicine/doctor",
 		type: "GET",
-		success: function(meds){
-			meds.forEach(function(med){
-				$("#addPresForm .form-group div select.med").append("<option value="+med.mid+" >"+med.name+"</option>");
+		success: function(medicine){
+			medicine.forEach(function(med){
+				
+				$("#myform select[name=typeselect]").append("<option value=" + med.type+" >"+ med.type + "</option>");
 			})
 		},
-		error: function(er){
-			console.log(er);
+		error: function(){
+			
 		}
 	});
 	

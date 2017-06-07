@@ -4,7 +4,7 @@ $(function(){
 	
 	//For My Patients
 	$.ajax({
-		url: "../services/patient/doctor/"+uid,
+		url: "../services/patient/doctor",
 		type: "GET",
 		success: function(data){
 			data.forEach(function(patient){
@@ -19,6 +19,54 @@ $(function(){
 		}
 	});
 	
+	/*$.ajax({
+		url: "../services/patient/doctor"+pid,
+		type: "GET",
+		success: function(data){
+			data.forEach(function(patient){
+				
+				addPatientToTableALL(patient);
+				
+			});
+		},
+		error: function(data){
+			$(".roomMsg").removeClass("alert-success")
+			$(".roomMsg").addClass("alert-danger").html("<strong>Error: </strong> "+data.responseText);
+		}
+	});*/
+	
+	
+	
+	//클릭이벤트
+	$(document).ready(function() {
+	    var table = $('#displayPatients').DataTable();
+	     
+	    $('#displayPatients tbody').on('click', 'tr', function () {
+	       var data = table.row( this ).data();
+	       var n = document.getElementById("fullname");
+	       var b = document.getElementById("birth");
+	       var g = document.getElementById("gender");
+	       var rd = document.getElementById("rday");
+	       var rt = document.getElementById("rtime");
+	       var p = document.getElementById("phone");
+	       var d = document.getElementById("door");
+	       var ds = document.getElementById("doorstart");
+	       var de = document.getElementById("doorend");
+	       var r = document.getElementById("room");
+				n.value = data[1];
+				b.value = data[2];
+				g.value = data[3];
+				rd.value = data[4];
+				rt.value = data[5];
+				p.value = data[6];
+				d.value = data[7];
+				ds.value = data[8];
+				de.value = data[9];
+				r.value = data[10];				
+	       
+	       
+	    } );
+	} );
 	
 	//For Displaying My Prescriptions
 	$.ajax({
@@ -37,18 +85,38 @@ $(function(){
 		}
 	});
 	
-	
+	   
+	   
+	$('#typeselect').change(function(){
+	       $.ajax({
+	          url : "../services/medicine/doctor/" + $('#typeselect').val(),
+	            type : "GET",     
+	            success : function(medicine) {
+	      
+	                 $("#myform select[name=nameselect] option").remove();
+	                 medicine.forEach(function(med){
+	                 $("#myform select[name=nameselect]").append("<option value=" + med.name + ">" +med.name + "</option>");
+	              });
+	            },
+	            error:function(request,status,error){
+	             
+	              }
+	        });
+	      
+	   });
+
 	//For Medicines
 	$.ajax({
-		url: "../services/medicine/all",
+		url: "../services/medicine/doctor",
 		type: "GET",
-		success: function(meds){
-			meds.forEach(function(med){
-				$("#addPresForm .form-group div select.med").append("<option value="+med.mid+" >"+med.name+"</option>");
+		success: function(medicine){
+			medicine.forEach(function(med){
+				
+				$("#myform select[name=typeselect]").append("<option value=" + med.type+" >"+ med.type + "</option>");
 			})
 		},
-		error: function(er){
-			console.log(er);
+		error: function(){
+			
 		}
 	});
 	
@@ -341,25 +409,34 @@ function deletePres(prid){
 }
 
 function addPatientToTable(patient){
-	var type, link;
+//	var type, link;
+//	
+//	if(patient.type){
+//		type = patient.type;
+//		link = "<a href='#' onclick='viewPres("+patient.pid+")' >View</a> / <a href='#' onclick='addPres("+patient.pid+")' >Add</a>";
+//	}else{
+//		type = "-";
+//		link = "<a href='#' onclick='submitPres("+patient.pid+")' >Submit</a>";
+//	}
 	
-	if(patient.type){
-		type = patient.type;
-		link = "<a href='#' onclick='viewPres("+patient.pid+")' >View</a> / <a href='#' onclick='addPres("+patient.pid+")' >Add</a>";
-	}else{
-		type = "-";
-		link = "<a href='#' onclick='submitPres("+patient.pid+")' >Submit</a>";
-	}
-	
-	var index = $("#tblPatients").dataTable().fnAddData([
+	var index = $("#displayPatients").dataTable().fnAddData([
+													  patient.pid,
 	           	                                      patient.name,
-	        	                                      patient.dob,
+	        	                                      patient.birth,
 	        	                                      patient.gender,
-	        	                                      type,
-	        	                                      link
+	        	                                      patient.reservation_day,
+	        	                                      patient.reservation_time,
+	        	                                      patient.phone,
+												      patient.door,
+												      patient.door_start_day,
+												      patient.door_end_day,
+												      patient.rid,
 	        	                                      ]);
 	
-	var row = $("#tblPatients").dataTable().fnGetNodes(index);
+	var row = $("#displayPatients").dataTable().fnGetNodes(index);
+	
 	$(row).attr("id",patient.pid);
 	//$(".deleteMe").remove();
 }
+
+

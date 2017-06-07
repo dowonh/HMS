@@ -5,7 +5,7 @@ import hmsControllers.HmsFactory;
 import java.io.Serializable;
 
 public class Prescription implements Serializable {
-	
+ 
 	private int prid;
 	private String mname;
 	private int how_long;
@@ -95,7 +95,5 @@ public class Prescription implements Serializable {
 	public void setDoctornote(Doctornote doctornote) {
 		this.doctornote = doctornote;
 	}
-
-	
  
 }

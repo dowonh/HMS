@@ -63,7 +63,7 @@ div {
 				<div class="d-flex flex-column w-75">
 				<div class="d-flex flex-row">
 				<div class="p-2 w-25">환자명</div>
-				<div class="p-2 w-75">정나영</div>	
+				<div class="p-2 w-75" id="patient-name"></div>	
 				</div>
 				<div class="d-flex flex-row">
 				<div class="p-2 w-25">생년월일</div>

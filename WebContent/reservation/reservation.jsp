@@ -152,7 +152,7 @@
 							<div class="form-group row">
 								<label for="example-date-input" class="col-2 col-form-label">생년월일</label>
 								<div class="col-6">
-									<input class="form-control" type="date" value="2017-05-16"
+									<input class="form-control" type="date" value="1950-01-11"
 										id="register-input" name="dob">
 								</div>
 							</div>
@@ -191,7 +191,7 @@
 								<label for="example-date-input" class="col-2 col-form-label">예약
 									날짜 선택</label>
 								<div class="col-6">
-									<input class="form-control" type="date" value="2017-05-16"
+									<input class="form-control" type="date" value="2017-06-09"
 										id="register-input" name="reservation_date">
 								</div>
 							</div>

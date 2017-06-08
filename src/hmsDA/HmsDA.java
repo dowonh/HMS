@@ -611,8 +611,6 @@ public class HmsDA {
 					string_reservation_day = set.getString("reservation_day");
 				if (set.getString("door_start_day") != null)
 					string_door_start_day = set.getString("door_start_day");
-				if (set.getString("door_end_day") != null)
-					string_door_end_day = set.getString("door_end_day");
 
 				Patient patient = new Patient();
 				patient.setPid(set.getInt("pid"));
@@ -729,23 +727,28 @@ public class HmsDA {
 	// 의사 - 환자보기 도원
 	public ArrayList<Patient> getDocPatientsList() throws SQLException {
 		ArrayList<Patient> patientList = new ArrayList<Patient>();
-
+		String String_door_start_day ="";
+		String String_reservation_day ="";
 		try {
 			Statement stmt = con.createStatement();
-			ResultSet set = stmt.executeQuery("select * from patient where reservation_day = curdate()");
+			ResultSet set = stmt.executeQuery("select * from patient where reservation_day = curdate() order by reservation_time desc");
 
 			while (set.next()) {
 				Patient patient = new Patient();
-
+				
+				if (set.getString("reservation_day") != null)
+					String_reservation_day = set.getString("reservation_day");
+				if (set.getString("door_start_day") != null)
+					String_door_start_day = set.getString("door_start_day");
+				
 				patient.setPid(set.getInt("pid"));
 				patient.setName(set.getString("name"));
 				patient.setGender(set.getString("gender"));
 				patient.setPhone(set.getString("phone"));
 				patient.setBirth(set.getString("birth"));
-				patient.setReservation_day(set.getString("reservation_day"));
+				patient.setReservation_day(String_reservation_day);
 				patient.setReservation_time(set.getString("reservation_time"));
-				patient.setDoor_start_day(set.getString("door_start_day"));
-				patient.setDoor_end_day(set.getString("door_end_day"));
+				patient.setDoor_start_day(String_door_start_day);
 				patient.setDoor(set.getString("door"));
 				patient.setEid(set.getInt("employee_eid"));
 				patient.setRid(set.getInt("room_rid"));
@@ -754,45 +757,12 @@ public class HmsDA {
 				patientList.add(patient);
 			}
 		} catch (SQLException ex) {
-			ex.printStackTrace();
+			ex.printStackTrace(); 
 		}
 
 		return patientList;
 	}
-
-	// //의사 - 환자 개인보기 도원
-	// public ArrayList<Patient> getDocPatientsList(int pid) throws
-	// SQLException{
-	// ArrayList<Patient> patientList = new ArrayList<Patient>();
-	//
-	// try{
-	// Statement stmt = con.createStatement();
-	// ResultSet set = stmt.executeQuery("select * from patient where
-	// reservation_day = curdate()");
-	//
-	// while(set.next()){
-	// Patient patient = new Patient();
-	//
-	// patient.setPid(set.getInt("pid"));
-	// patient.setName(set.getString("name"));
-	// patient.setGender(set.getString("gender"));
-	// patient.setPhone(set.getString("phone"));
-	// patient.setBirth(set.getString("birth"));
-	// patient.setReservation_day(set.getString("reservation_day"));
-	// patient.setReservation_time(set.getString("reservation_time"));
-	// patient.setEid(set.getInt("employee_eid"));
-	// patient.setEmployee(getDoctor(set.getInt("employee_eid")));
-	//
-	// patientList.add(patient);
-	// }
-	// }
-	// catch(SQLException ex){
-	// ex.printStackTrace();
-	// }
-	//
-	// return patientList;
-	//
-	// }
+ 
 	// 나옹나옹
 	public ArrayList<Category> getDepartment() throws SQLException {
 		// connect();

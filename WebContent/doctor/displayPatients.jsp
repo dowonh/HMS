@@ -26,6 +26,7 @@
 #presAddForm .modal-body {
 	height: 200px;
 } */
+ 
 table {
 	border-collapse: collapse;
 	width: 650px;
@@ -105,24 +106,23 @@ th, td {
 									</h3>
 								</div>
 								<div class="panel-body">
-									Full Name : <input type="text" name="fullname" id="fullname" value="" style='border:none'/><br>
-									Birth : <input type="text" id="birth" value="" style='border:none'/> <br>
-									Gender : <input type="text" id="gender" value="" style='border:none'/> <br>
-									Reservation day : <input type="text" id="rday" value="" style='border:none'/><br>
-									Reservation time : <input type="text" id="rtime" value="" style='border:none'/><br>
-									Phone : <input type="text" id="phone" value="" style='border:none'/><br>
-
-									Door : <input type="text" id="door" value="" style='border:none'/><br> Door
-									start day : <input type="text" id="doorstart" value="" style='border:none'/><br>
-									Door end day : <input type="text" id="doorend" value="" style='border:none'/><br>
-									Room : <input type="text" id="room" value="" style='border:none'/><br>
+									이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름  &nbsp;:&nbsp; <input type="text" name="fullname" id="fullname" value="" style='border:none'/><br>
+									생년월일 &nbsp;:&nbsp; <input type="text" id="birth" value="" style='border:none'/> <br>
+									성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;별&nbsp; :&nbsp; <input type="text" id="gender" value="" style='border:none'/> <br>
+									예약&nbsp;날짜&nbsp; :&nbsp; <input type="text" id="rday" value="" style='border:none'/><br>
+									예약&nbsp;시간&nbsp;:&nbsp; <input type="text" id="rtime" value="" style='border:none'/><br>
+									연&nbsp;&nbsp;락&nbsp;&nbsp;처 &nbsp;: &nbsp;<input type="text" id="phone" value="" style='border:none'/><br>
+									입실&nbsp;여부 &nbsp;:&nbsp; <input type="text" id="door" value="" style='border:none'/><br>
+									입실시작일 : <input type="text" id="doorstart" value="" style='border:none'/><br>
+					
+									입실 방번호: <input type="text" id="room" value="" style='border:none'/><br>
 									<input type="hidden" name="pid" id="pid" /> 
 								</div>
 							</div>
 
 
 							<div>
-								<label>증상</label> <input name="symptom" type="text" class="form-control"
+								<label>증상</label> <input id="symptom" name="symptom" type="text" class="form-control"
 									placeholder="symptom" />
 							</div>
 							<br>
@@ -163,7 +163,7 @@ th, td {
 							<div>
 								<br> <label for="pres">Opinion</label>
 								<p>
-									<textarea name="note" id="note" cols="90" rows="5"> </textarea>
+									<textarea id="note" name="note" id="note" cols="90" rows="5"> </textarea>
 								</p>
 							</div>
 							<p align=right>

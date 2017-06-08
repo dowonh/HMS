@@ -60,23 +60,25 @@ public class Process extends HttpServlet {
 			if(request.getParameter("action")!=null) {
 				if(request.getParameter("action").equals("addDoc")){
 					addDoc(request,response);
-				} else if(request.getParameter("action").equals("addNurse"))
+				} else if(request.getParameter("action").equals("addNurse")){
 					addNurse(request,response);
-				else if(request.getParameter("action").equals("addRoom"))
+				}else if(request.getParameter("action").equals("addRoom")){
 					addRoom(request,response);
-				else if(request.getParameter("action").equals("addPatient"))
+				}else if(request.getParameter("action").equals("addPatient")){
 					addPatient(request,response);
-				else if(request.getParameter("action").equals("outRoom"))
+				}else if(request.getParameter("action").equals("outRoom")){
 					outRoom(request,response);
-				else if(request.getParameter("action").equals("reservationCheck"))
+				}else if(request.getParameter("action").equals("reservationCheck")){
 					reservationCheck(request,response);
-				else if (request.getParameter("action").equals("indoorCheck"))
+				}else if (request.getParameter("action").equals("indoorCheck")){
 					indoorCheck(request, response);
-				else if (request.getParameter("action").equals("medicineCheck"))
+				}else if (request.getParameter("action").equals("medicineCheck")){
 					medicineCheck(request, response);
-				else if (request.getParameter("action").equals("Certificate"))
+				}else if (request.getParameter("action").equals("Certificate")){
 					Certificate(request, response);
-				else if(request.getParameter("id")!=null){
+				}else if (request.getParameter("action").equals("addPrescrip")){
+					addPrescrip(request, response);
+				}else if(request.getParameter("id")!=null){
 					if(request.getParameter("action").equals("getDoc"))
 						getDoc(request,response);
 					else if(request.getParameter("action").equals("editDoc"))
@@ -93,8 +95,8 @@ public class Process extends HttpServlet {
 						getNurse(request,response);
 					else if(request.getParameter("action").equals("editNurse"))
 						updateNurse(request,response);
-//					else
-//						request.getRequestDispatcher("index.jsp").forward(request, response);
+					else
+						request.getRequestDispatcher("index.jsp").forward(request, response);
 				}else{
  
 					request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -400,6 +402,47 @@ public class Process extends HttpServlet {
 		response.setContentType("application/json");
 		response.getWriter().print(g.toJson(certificate));
 	}
+	
+	
+	public void addPrescrip(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
+
+		request.setCharacterEncoding("utf-8");
+		System.out.println("들어오는지확인");
+		int pid = Integer.parseInt(request.getParameter("pid"));
+		//증상
+		String symptom = request.getParameter("symptom");
+		String diease = request.getParameter("diease");
+		//소견
+		String note = request.getParameter("note");
+ 
+		int tableRow = Integer.parseInt(request.getParameter("row"));
+ 
+		System.out.println(request.getParameter("row"));
+		Doctornote dn = new Doctornote();
+		dn.setSymptom(symptom);
+		dn.setDiease(diease);
+		dn.setNote(note);
+		dn.setPatient_pid(pid);
+		
+		int dnid = hms.addDoctornote(dn);
+		System.out.println(dnid);
+		System.out.println("테이블로우 "+ tableRow);
+		for(int i = 1; i <= tableRow; ++i){
+			Prescription p = new Prescription();
+			p.setMname(request.getParameter("mname"+i));
+			p.setHow_long(Integer.parseInt(request.getParameter("long"+i)));		
+			p.setDay_dose(Integer.parseInt(request.getParameter("day"+i)));		
+			p.setOnce_dose(Integer.parseInt(request.getParameter("once"+i)));		
+			p.setDoctornote_dnid(dnid);
+			hms.addPrescr(p);
+		}
+		//zCertificate certificate = hms.Certificate(p);
+//		response.setCharacterEncoding("UTF8"); // this line solves the problem
+//		response.setContentType("application/json");
+//		response.getWriter().print(g.toJson());
+	}
+	
+	
 	//
 	// public void addPatient(HttpServletRequest request, HttpServletResponse
 	// response) throws IOException, SQLException{

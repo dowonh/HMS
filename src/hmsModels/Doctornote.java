@@ -11,7 +11,7 @@ public class Doctornote implements Serializable {
    private String diease;
    private String note;
    private String day;
-   private String patient_pid;
+   private int patient_pid;
    Patient patient;
    
    public Doctornote(){}
@@ -60,11 +60,11 @@ public class Doctornote implements Serializable {
       this.day = day;
    }
 
-   public String getPatient_pid() {
+   public int getPatient_pid() {
       return patient_pid;
    }
 
-   public void setPatient_pid(String patient_pid) {
+   public void setPatient_pid(int patient_pid) {
       this.patient_pid = patient_pid;
    }
 

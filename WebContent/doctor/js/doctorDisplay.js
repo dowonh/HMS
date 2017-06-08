@@ -34,7 +34,22 @@ $(function(){
 			$(".roomMsg").addClass("alert-danger").html("<strong>Error: </strong> "+data.responseText);
 		}
 	});*/
-	
+//	//For Displaying My Prescriptions
+//	$.ajax({
+//		url: "../services/prescription/doctor/"+uid,
+//		type: "GET",
+//		success: function(data){
+//			data.forEach(function(prescription){
+//				
+//				addPresToTable(prescription);
+//
+//			});
+//		},
+//		error: function(data){
+//			$(".roomMsg").removeClass("alert-success")
+//			$(".roomMsg").addClass("alert-danger").html("<strong>Error: </strong> "+data.responseText);
+//		}
+//	});
 	
 	
 	//클릭이벤트
@@ -42,7 +57,10 @@ $(function(){
 	    var table = $('#displayPatients').DataTable();
 	     
 	    $('#displayPatients tbody').on('click', 'tr', function () {
+		       
 	       var data = table.row( this ).data();
+
+	       var pid = document.getElementById("pid");
 	       var n = document.getElementById("fullname");
 	       var b = document.getElementById("birth");
 	       var g = document.getElementById("gender");
@@ -53,66 +71,29 @@ $(function(){
 	       var ds = document.getElementById("doorstart");
 	       var de = document.getElementById("doorend");
 	       var r = document.getElementById("room");
-				n.value = data[1];
-				b.value = data[2];
-				g.value = data[3];
-				rd.value = data[4];
-				rt.value = data[5];
-				p.value = data[6];
-				d.value = data[7];
-				ds.value = data[8];
-				de.value = data[9];
-				r.value = data[10];				
-	       
-	       
+
+	       pid.value = data[0];
+	       n.value = data[1];
+	       b.value = data[2];
+	       g.value = data[3];
+	       rd.value = data[4];
+	       rt.value = data[5];
+	       p.value = data[6];
+	       d.value = data[7];
+	       ds.value = data[8];
+	       de.value = data[9];
+	       r.value = data[10];				
 	    } );
 	} );
 	
-	//For Displaying My Prescriptions
-	$.ajax({
-		url: "../services/prescription/doctor/"+uid,
-		type: "GET",
-		success: function(data){
-			data.forEach(function(prescription){
-				
-				addPresToTable(prescription);
-
-			});
-		},
-		error: function(data){
-			$(".roomMsg").removeClass("alert-success")
-			$(".roomMsg").addClass("alert-danger").html("<strong>Error: </strong> "+data.responseText);
-		}
-	});
-	
-	   
-	   
-	$('#typeselect').change(function(){
-	       $.ajax({
-	          url : "../services/medicine/doctor/" + $('#typeselect').val(),
-	            type : "GET",     
-	            success : function(medicine) {
-	      
-	                 $("#myform select[name=nameselect] option").remove();
-	                 medicine.forEach(function(med){
-	                 $("#myform select[name=nameselect]").append("<option value=" + med.name + ">" +med.name + "</option>");
-	              });
-	            },
-	            error:function(request,status,error){
-	             
-	              }
-	        });
-	      
-	   });
-
-	//For Medicines
+	//약처방 리스트 출력하는부분
 	$.ajax({
 		url: "../services/medicine/doctor",
 		type: "GET",
 		success: function(medicine){
 			medicine.forEach(function(med){
 				
-				$("#myform select[name=typeselect]").append("<option value=" + med.type+" >"+ med.type + "</option>");
+				$("#myPrescriptionForm select[name=typeselect]").append("<option value=" + med.type+" >"+ med.type + "</option>");
 			})
 		},
 		error: function(){
@@ -120,33 +101,47 @@ $(function(){
 		}
 	});
 	
+	$('#typeselect').change(function(){
 	
+		$.ajax({
+			url : "../services/medicine/doctor/" + $('#typeselect').val(),
+			type : "GET",     
+	            success : function(medicine) {
+	      
+	                 $("#myPrescriptionForm select[name=nameselect] option").remove();
+	                 medicine.forEach(function(med){
+	                 $("#myPrescriptionForm select[name=nameselect]").append("<option value=" + med.name + ">" +med.name + "</option>");
+	              });
+	            },
+	            error:function(request,status,error){
+	             
+	              }
+	        });
+	      
+	});
 	$("table").dataTable();
 	
 	
 	//Submit Prescription Form
-	$("#presSubmitForm").submit(function(e){
+	$("#myPrescriptionForm").submit(function(e){
 		
 		e.preventDefault();
-		
+		if($("#pid").val() == ''){
+			alert("환자를 클릭해주세요");
+			return;
+		}
+		var my_tbody = document.getElementById('my-tbody');
+		var index = my_tbody.rows.length;
+ 
 		$.ajax({
 			type: $(this).attr("method"),
 			url: $(this).attr("action"),
-			data: $(this).serialize(),
+			data: $(this).serialize() + "&row="+index,
 			success: function(pres){
 				BootstrapDialog.show({
 					title: "Success",
 					message: "Prescription Added Success!."
 				});
-				
-				
-				//$("#patientBody #"+pres[0].pid).addClass("deleteMe");
-				$("#tblPatients").DataTable().row($("#patientBody #"+pres[0].pid)).remove().draw();
-				
-				addPatientToTable(pres[0].patient);
-				
-				addPresToTable(pres);
-				
 			},
 			error: function(xml,status,errorThrown){
 				BootstrapDialog.show({
@@ -154,82 +149,58 @@ $(function(){
 					message: xml.responseText
 				});
 			}
-			
 		});
 		
-		$("#submitPresModal").modal("toggle");
-		
 	})
+
+	$('#medicineTable').dataTable({
+		retrieve : true,
+		searching : false,
+		paging : false,
+		bInfo : false
+	//bFilter: false, bInfo: false
+	});
 	
-	
-	
-	//Add Prescription Form
-	$("#addPresForm").submit(function(e){
-		
-		e.preventDefault();
-		
-		$.ajax({
-			type: $(this).attr("method"),
-			url: $(this).attr("action"),
-			data: $(this).serialize(),
-			success: function(pres){
-				BootstrapDialog.show({
-					title: "Success",
-					message: "Prescription Added Success!."
-				});
-				
-				
-				addPresToTable(pres);
-				
-			},
-			error: function(xml,status,errorThrown){
-				BootstrapDialog.show({
-					title: "Error",
-					message: xml.responseText
-				});
-			}
-			
-		});
-		
-		$("#addPresModal").modal("toggle");
-		
-	})
-	
-	
-	
-	//Update Prescription Form
-	$("#presUpdateForm").submit(function(e){
-		e.preventDefault();
-		
-		$.ajax({
-			url: $(this).attr("action"),
-			type: "PUT",
-			data: $(this).serialize(),
-			success: function(pres){
-				BootstrapDialog.show({
-					title: "Success",
-					message: "Prescription Upated Success!."
-				});
-				
-				//$("#presBody #"+pres.prid).addClass("deleteMe");
-				$("#tblPrescriptions").DataTable().row($("#presBody #"+pres.prid)).remove().draw();
-				addPresToTable(pres);
-				
-			},
-			error: function(error){
-				BootstrapDialog.show({
-					title: "Failed",
-					message: error.responseText
-				});
-			}
-		});
-		$("#updatePresModal").modal("toggle");
-		
-	})
-	
-	
-	
+	$('#medicineTable').find('tbody').empty();
+
 });
+
+function add_row() {
+
+	var my_tbody = document.getElementById('my-tbody');
+	
+	var row = my_tbody.insertRow(my_tbody.rows.length); // 하단에 추가
+	var index = my_tbody.rows.length;
+	var nsel = document.getElementById("nameselect");
+	var tsel = document.getElementById("typeselect");
+	var amount = document.getElementById("amount").value;
+	var number = document.getElementById("number").value;
+	var count = document.getElementById("count").value;
+	if(nsel.value == "nameselect" || tsel.value == "typeselect" ||
+			amount =='' || 	number =='' ||	count =='') {
+		alert("제대로 입력해주시기 바랍니다.");
+	}else{
+		var cell1 = row.insertCell(0);
+		var cell2 = row.insertCell(1);
+		var cell3 = row.insertCell(2);
+		var cell4 = row.insertCell(3);
+		var cell5 = row.insertCell(4);
+		
+		cell1.innerHTML = "<input type='text' name='mtype"+ index+"' style='border:none' value='" + tsel.options[tsel.selectedIndex].value + "'>";
+		cell2.innerHTML = "<input type='text' name='mname"+ index+"' style='border:none' value='" + nsel.options[nsel.selectedIndex].value + "'>";
+		cell3.innerHTML = "<input type='text' name='once"+ index+"' style='border:none' value='" + amount + "'>";
+		cell4.innerHTML = "<input type='text' name='day"+ index+"' style='border:none' value='" + number  + "'>";
+		cell5.innerHTML = "<input type='text' name='long"+ index+"' style='border:none' value='" + count + "'>";
+	} 
+}
+
+function delete_row() {
+	var my_tbody = document.getElementById('my-tbody');
+	if (my_tbody.rows.length < 1)
+		return;
+	// my_tbody.deleteRow(0); // 상단부터 삭제
+	my_tbody.deleteRow(my_tbody.rows.length - 1); // 하단부터 삭제
+}
 
 
 function viewPres(pid){
@@ -380,45 +351,36 @@ function addPresToTable(data){
 }
 
 
-function deletePres(prid){
-	
-	bootbox.confirm("Are you sure?",function(sure){
-		if(sure){
-			$.ajax({
-				url: "../services/prescription/"+prid,
-				type: "DELETE",
-				success: function(result){
-					BootstrapDialog.show({
-						title: "Status",
-						message: "Message: "+result
-					});
-					
-					
-					$("#presBody #"+prid).remove();
-				},
-				error: function(data){
-					BootstrapDialog.show({
-						title: "Failed",
-						message: "Deletion Failed!"
-					});
-				}
-			});
-		}
-	}).find(".modal-body").css({"height": "50px"})
-	
-}
+//function deletePres(prid){
+//	
+//	bootbox.confirm("Are you sure?",function(sure){
+//		if(sure){
+//			$.ajax({
+//				url: "../services/prescription/"+prid,
+//				type: "DELETE",
+//				success: function(result){
+//					BootstrapDialog.show({
+//						title: "Status",
+//						message: "Message: "+result
+//					});
+//					
+//					
+//					$("#presBody #"+prid).remove();
+//				},
+//				error: function(data){
+//					BootstrapDialog.show({
+//						title: "Failed",
+//						message: "Deletion Failed!"
+//					});
+//				}
+//			});
+//		}
+//	}).find(".modal-body").css({"height": "50px"})
+//	
+//}
 
 function addPatientToTable(patient){
-//	var type, link;
-//	
-//	if(patient.type){
-//		type = patient.type;
-//		link = "<a href='#' onclick='viewPres("+patient.pid+")' >View</a> / <a href='#' onclick='addPres("+patient.pid+")' >Add</a>";
-//	}else{
-//		type = "-";
-//		link = "<a href='#' onclick='submitPres("+patient.pid+")' >Submit</a>";
-//	}
-	
+
 	var index = $("#displayPatients").dataTable().fnAddData([
 													  patient.pid,
 	           	                                      patient.name,
@@ -436,7 +398,7 @@ function addPatientToTable(patient){
 	var row = $("#displayPatients").dataTable().fnGetNodes(index);
 	
 	$(row).attr("id",patient.pid);
-	//$(".deleteMe").remove();
+
 }
 
 

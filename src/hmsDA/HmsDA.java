@@ -1232,4 +1232,61 @@ public class HmsDA {
 		return med;
 			
 	}
+	
+	public int addDoctornote(Doctornote dn) throws SQLException{
+		
+		int dnid = 0;
+		// connect();
+		try {
+			PreparedStatement stmt = con.prepareStatement(
+					"INSERT INTO doctornote(symptom, disease, note, day, patient_pid) "
+							+ "VALUES(?,?,?,now(),?)",
+					Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, dn.getSymptom());
+			stmt.setString(2, dn.getDiease());
+			stmt.setString(3, dn.getNote());
+			stmt.setInt(4, dn.getPatient_pid());
+ 
+
+			stmt.executeUpdate();
+			ResultSet keys = stmt.getGeneratedKeys();
+			if (keys != null && keys.next())
+				dnid = keys.getInt(1);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// disconnect();
+		}
+		return dnid;
+	}
+	
+	public void addPrescr(Prescription p) throws SQLException{
+		
+		int prid = 0;
+		// connect();
+		try {
+			PreparedStatement stmt = con.prepareStatement(
+					"INSERT INTO prescription(mname, how_long, day_dose, once_dose, doctornote_dnid) "
+							+ "VALUES(?,?,?,?,?)",
+					Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1,p.getMname());
+			stmt.setInt(2, p.getHow_long());		
+			stmt.setInt(3, p.getDay_dose());		
+			stmt.setInt(4, p.getOnce_dose());		
+			stmt.setInt(5, p.getDoctornote_dnid()); 
+
+
+			stmt.executeUpdate();
+			ResultSet keys = stmt.getGeneratedKeys();
+			if (keys != null && keys.next())
+				prid = keys.getInt(1);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// disconnect();
+		}
+		//return dnid;
+	}
 }

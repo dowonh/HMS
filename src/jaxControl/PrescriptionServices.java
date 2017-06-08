@@ -45,30 +45,42 @@ public class PrescriptionServices {
 		}
 	}
 	
-	@GET
-	@Path("prescription/doctor/{uid}")
+	@POST
+	@Path("addPrescription/{pid}")
 	@Produces("application/json")
-	public String getDocPresJson(@PathParam("uid") int uid){
+	public String getPrescriptionsJson(@PathParam("pid") int prid){
 		try {
-			return hms.getDocPresJson(uid);
+			return hms.getPrescriptionsJson(prid);
 		} catch (SQLException e) {
 			Response.serverError();
 			return e.getMessage();
 		}
 	}
 	
-	@GET
-	@Path("prescription/patient/{pid}")
-	@Produces("application/json")
-	public String getPatientPresJson(@PathParam("pid") int pid){
-		try {
-			return hms.getPatientPresJson(pid);
-		} catch (SQLException e) {
-			Response.serverError();
-			return e.getMessage();
-		}
-	}
-	
+//	@GET
+//	@Path("prescription/doctor/{uid}")
+//	@Produces("application/json")
+//	public String getDocPresJson(@PathParam("uid") int uid){
+//		try {
+//			return hms.getDocPresJson(uid);
+//		} catch (SQLException e) {
+//			Response.serverError();
+//			return e.getMessage();
+//		}
+//	}
+//	
+//	@GET
+//	@Path("prescription/patient/{pid}")
+//	@Produces("application/json")
+//	public String getPatientPresJson(@PathParam("pid") int pid){
+//		try {
+//			return hms.getPatientPresJson(pid);
+//		} catch (SQLException e) {
+//			Response.serverError();
+//			return e.getMessage();
+//		}
+//	}
+//	
 	
 	@POST
 	@Path("prescription/patient/{pid}")

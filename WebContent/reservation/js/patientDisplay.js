@@ -219,16 +219,25 @@ $(function(){
 				}
 				else{
 				//data.forEach(function(certificate){
-
+					var indoorID = certificate.indoor.id;
+					var indoorStart = certificate.indoor.door_start_day;
+					var indoorEnd = certificate.indoor.door_end_day;
+					var patientName = certificate.patient.name;
+					var patientBirth = certificate.patient.birth;
+					var noteDay = certificate.doctornote.day;
+					var categoty = certificate.patient.category.name;
+					var doctorName = certificate.patient.employee.name;
 					var index = $("#tblDoorCertificate").dataTable().fnAddData([
-															certificate.indoor.id,
-															certificate.indoor.door_start_day,
-															certificate.indoor.door_end_day,
-															certificate.patient.name,
-															certificate.patient.birth,
-															certificate.doctornote.day,
-															certificate.patient.category.name,
-															certificate.patient.employee.name
+															indoorID,
+															indoorStart,
+															indoorEnd,
+															patientName,
+															patientBirth,
+															noteDay,
+															categoty,
+															doctorName,
+															"<a href='Certificate.jsp?indoorID="+indoorID+"&indoorStart="+indoorStart+"&indoorEnd="+indoorEnd+"&patientName="+patientName+"&patientBirth="+patientBirth+"&noteDay="+noteDay+"" +
+																	"&categoty="+categoty+"&doctorName="+doctorName+"' target='_blank'><button>출력하기</button></a>"					                                        
 					                                         ]);
 					
 					var row = $("#tblDoorCertificate").dataTable().fnGetNodes(index);
@@ -266,13 +275,18 @@ $(function(){
 				}
 				else{
 				//data.forEach(function(certificate){
-
+					var pid = certificate.patient.pid;
+					var patientName = certificate.patient.name;
+					var noteDay = certificate.doctornote.day;
+					var billDate = certificate.bill.date;
+					var billPrice = certificate.bill.price;
 					var index = $("#tblBillCertificate").dataTable().fnAddData([
-															certificate.patient.pid,
-															certificate.patient.name,
-															certificate.doctornote.day,
-															certificate.bill.date,
-															certificate.bill.price
+															pid,
+															patientName,
+															noteDay,
+															billDate,
+															billPrice,
+															"<a href='Bill.jsp?pid="+pid+"&patientName="+patientName+"&noteDay="+noteDay+"&billDate="+billDate+"&billPrice="+billPrice+"' target='_blank'><button>출력하기</button></a>"
 					                                         ]);
 					
 					var row = $("#tblBillCertificate").dataTable().fnGetNodes(index);
@@ -305,20 +319,30 @@ $(function(){
 			type: $(this).attr("method"),
 			data: $(this).serialize(),
 			success: function(certificate){
-				var use = "제출용"
+				var name = certificate.patient.name;
 				if(certificate.patient.pid == null){
 					alert("진단 내역이 없습니다.");
 				}
 				else{
 				//data.forEach(function(certificate){
-
+					
+					var patientName = certificate.patient.name;
+					var gender = certificate.patient.gender;
+					var birth = certificate.patient.birth;
+					var symptom = certificate.doctornote.symptom;
+					var note = certificate.doctornote.note;
+					var day = certificate.doctornote.day;
+					var use = "제출용";
+						
 					var index = $("#tblNoteCertificate").dataTable().fnAddData([
-															certificate.patient.name,
-															certificate.patient.gender,
-															certificate.patient.birth,
-															certificate.doctornote.note,
-															certificate.doctornote.day,
-															use
+															patientName,
+															gender,
+															birth,
+															symptom,
+															note,
+															day,
+															use,
+															"<a href='medicalCertificate.jsp?patientName="+patientName+"&gender="+gender+"&symptom="+symptom+"&birth="+birth+"&note="+note+"&day="+day+"&use="+use+"' target='_blank'><button>출력하기</button></a>"
 					                                         ]);
 					
 					var row = $("#tblNoteCertificate").dataTable().fnGetNodes(index);

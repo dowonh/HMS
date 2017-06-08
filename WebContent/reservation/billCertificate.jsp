@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>예약 및 조회</title>
+<title>증명서 발급</title>
 
 <!-- Bootstrap Core CSS -->
 <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -34,14 +34,6 @@ input#register-input.form-control {
 </head>
 
 <body>
-
-	<%
-		request.setCharacterEncoding("euc-kr");
-	
-		String name = request.getParameter("name");
-		String phone = request.getParameter("phone");
-		
-	%>
 
 	<div id="wrapper">
 
@@ -71,7 +63,7 @@ input#register-input.form-control {
 				<div class="row">
 					<div class="col-lg-12">
 						<h1 class="page-header">
-							증명서 발급
+							증명서 발급 <small>납입증명서</small>
 						</h1>
 						<ol class="breadcrumb">
                             <li class="active">
@@ -125,6 +117,7 @@ input#register-input.form-control {
 										<th>진료일자</th>
 										<th>납입일자</th>
 										<th>수납금액</th>
+										<th>프린트</th>
 									</tr>
 								</thead>
 								<tbody id="billCertificateBody">

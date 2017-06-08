@@ -24,7 +24,7 @@
 	integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
 	crossorigin="anonymous"></script>
 
-<title>예약 및 조회</title>
+<title>증명서 발급</title>
 
 <!-- Custom Fonts -->
 <link href="../fn/css/font-awesome.min.css" rel="stylesheet"
@@ -38,54 +38,74 @@
 </head>
 
 <style>
-div {
+container, div.p-2 {
 	border: 1px solid black;
+	style="height:100%"
 }
 </style>
 
 <body>
 
-	<div class="container mt-5 pt-4 pb-5">
+	<%
+	
+	int indoorID = Integer.parseInt(request.getParameter("indoorID"));
+	String indoorStart = request.getParameter("indoorStart");
+	String indoorEnd = request.getParameter("indoorEnd");
+	String patientName = request.getParameter("patientName");
+	String patientBirth = request.getParameter("patientBirth");
+	String noteDay = request.getParameter("noteDay");
+	String categoty = request.getParameter("categoty");
+	String doctorName = request.getParameter("doctorName");
+	
+	%>
+
+	<div class="container mt-5 mb-5 pt-4 pb-5">
 		<h1 class=text-center>입퇴원 확인서</h1>
-		<div class="d-flex flex-column">
+		<div class="d-flex flex-column mt-5">
 			<div class="d-flex flex-row">
-				<div class="p-2 w-25">발급번호</div>
-				<div class="p-2">2</div>
+				<div class="p-2 w-25 h-100">발급번호</div>
+				<div class="p-2 w-100 h-100"><%=indoorID%></div>
 			</div>
 			<div class="d-flex flex-row">
 				<div class="p-2 w-25">입원일자</div>
-				<div class="p-2 w-25">2017-06-12</div>
+				<div class="p-2 w-25"><%=indoorStart%></div>
 				<div class="p-2 w-25">퇴원일자</div>
-				<div class="p-2 w-25">2017-06-18</div>
+				<div class="p-2 w-25"><%=indoorEnd%></div>
 			</div>
 			<div class="d-flex flex-row">
 				<div class="p-2 w-25">신청인</div>
 				<div class="d-flex flex-column w-75">
-				<div class="d-flex flex-row">
-				<div class="p-2 w-25">환자명</div>
-				<div class="p-2 w-75" id="patient-name"></div>	
-				</div>
-				<div class="d-flex flex-row">
-				<div class="p-2 w-25">생년월일</div>
-				<div class="p-2 w-75">1995-09-18</div>	
-				</div>
+					<div class="d-flex flex-row">
+						<div class="p-2 w-25">환자명</div>
+						<div class="p-2 w-75"><%=patientName%></div>
+					</div>
+					<div class="d-flex flex-row">
+						<div class="p-2 w-25">생년월일</div>
+						<div class="p-2 w-75"><%=patientBirth%></div>
+					</div>
 				</div>
 			</div>
 			<div class="d-flex flex-row">
-				<div class="p-2 w-100">입원내용</div>
+				<div class="p-2 w-100 text-center">입원내용</div>
 			</div>
 			<div class="d-flex flex-row">
-				<div class="d-flex flex-column w-25">
-				<div class="p-2">진료일자</div>
-				<div class="p-2">2017-06-08</div>
+				<div class="d-flex flex-column w-50">
+					<div class="p-2 text-center">진료일자</div>
+					<div class="p-2 text-center"><%=noteDay%></div>
 				</div>
-			 <div class="d-flex flex-column w-25">
-				<div class="p-2">진료과</div>
-				<div class="p-2">가정의학과</div>
+				<div class="d-flex flex-column w-50">
+					<div class="p-2 text-center">진료과</div>
+					<div class="p-2 text-center"><%=categoty%></div>
 				</div>
-				<div class="d-flex flex-column w-25">
-				<div class="p-2">의사명</div>
-				<div class="p-2">이정현</div>
+				<div class="d-flex flex-column w-50">
+					<div class="p-2 text-center">의사명</div>
+					<div class="p-2 text-center"><%=doctorName%></div>
+				</div>
+			</div>
+			<div class="d-flex flex-row" style="height:300px">
+				<div class="p-2 w-100">
+					<div class="p-5 w-100 text-center align-self-center">위와 같이 입·퇴원을 확인함.</div>
+					<div class="p-5 w-100 text-center align-self-center">전북대학교 병원</div>
 				</div>
 			</div>
 		</div>

@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>예약 및 조회</title>
+<title>결과 조회</title>
 
 <!-- Bootstrap Core CSS -->
 <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -71,7 +71,7 @@ input#register-input.form-control {
 				<div class="row">
 					<div class="col-lg-12">
 						<h1 class="page-header">
-							결과 조회 <small>예약 및 조회</small>
+							결과 조회 <small>내원일자 내역</small>
 						</h1>
 						<ol class="breadcrumb">
 							<li class="active">내원일자와 약처방 기록을 제공합니다.</li>

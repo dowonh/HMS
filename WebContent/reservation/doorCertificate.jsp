@@ -71,7 +71,7 @@ input#register-input.form-control {
 				<div class="row">
 					<div class="col-lg-12">
 						<h1 class="page-header">
-							증명서 발급
+							증명서 발급 <small>입퇴원 증명서</small>
 						</h1>
 						<ol class="breadcrumb">
                             <li class="active">
@@ -106,7 +106,7 @@ input#register-input.form-control {
 									</div>
 									<div class="form-group row">
 										<div class="offset-2 col-10" style="margin-left: auto;">
-											<button type="submit" class="btn btn-primary">
+											<button type="submit" class="btn btn-primary" id="submitBtn">
 												입퇴원 증명서 발급 <i class="fa fa-arrow-circle-right"></i>
 											</button>
 										</div>
@@ -128,6 +128,7 @@ input#register-input.form-control {
 										<th>진료일자</th>
 										<th>진료과</th>
 										<th>의사</th>
+										<th>프린트</th>
 									</tr>
 								</thead>
 								<tbody id="doorCertificateBody">

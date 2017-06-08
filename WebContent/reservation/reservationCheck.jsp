@@ -125,7 +125,6 @@
 						
 						<div class="contanier">
 							<h4>진료예약 내역</h4>
-								<p>예약 취소가 가능합니다.</p>
 								<table class="table table-bordered" id="tblReservationCheck">
 									<thead>
 										<tr>

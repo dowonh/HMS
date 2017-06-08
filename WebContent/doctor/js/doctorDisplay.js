@@ -82,7 +82,15 @@ $(function(){
 	       d.value = data[7];
 	       ds.value = data[8];
 	       de.value = data[9];
-	       r.value = data[10];				
+	       r.value = data[10];		
+	       
+			var my_tbody = document.getElementById('my-tbody');
+			var index = my_tbody.rows.length;
+			for(var i = 0; i<index; ++i){
+				delete_row();
+			}
+			document.getElementById("symptom").value = '';
+			document.getElementById("note").value = '';
 	    } );
 	} );
 	
@@ -186,11 +194,11 @@ function add_row() {
 		var cell4 = row.insertCell(3);
 		var cell5 = row.insertCell(4);
 		
-		cell1.innerHTML = "<input type='text' name='mtype"+ index+"' style='border:none' value='" + tsel.options[tsel.selectedIndex].value + "'>";
-		cell2.innerHTML = "<input type='text' name='mname"+ index+"' style='border:none' value='" + nsel.options[nsel.selectedIndex].value + "'>";
-		cell3.innerHTML = "<input type='text' name='once"+ index+"' style='border:none' value='" + amount + "'>";
-		cell4.innerHTML = "<input type='text' name='day"+ index+"' style='border:none' value='" + number  + "'>";
-		cell5.innerHTML = "<input type='text' name='long"+ index+"' style='border:none' value='" + count + "'>";
+		cell1.innerHTML = "<input type='text' name='mtype"+ index+"' style='border:none; width:100px;' value='" + tsel.options[tsel.selectedIndex].value + "'>";
+		cell2.innerHTML = "<input type='text' name='mname"+ index+"' style='border:none; width:100px;' value='" + nsel.options[nsel.selectedIndex].value + "'>";
+		cell3.innerHTML = "<input type='text' name='once"+ index+"' style='border:none; width:100px;' value='" + amount + "'>";
+		cell4.innerHTML = "<input type='text' name='day"+ index+"' style='border:none; width:100px;' value='" + number  + "'>";
+		cell5.innerHTML = "<input type='text' name='long"+ index+"' style='border:none; width:100px;' value='" + count + "'>";
 	} 
 }
 
@@ -390,8 +398,7 @@ function addPatientToTable(patient){
 	        	                                      patient.reservation_time,
 	        	                                      patient.phone,
 												      patient.door,
-												      patient.door_start_day,
-												      patient.door_end_day,
+												      patient.door_start_day, 
 												      patient.rid,
 	        	                                      ]);
 	

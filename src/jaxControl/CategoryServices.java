@@ -48,8 +48,7 @@ public class CategoryServices {
 	@Path("category")
 	@Produces("application/json")
 	public String addCategory(@FormParam("catName") String name){
-		try {
-			
+		try {		
 			Category cat = new Category();
 			cat.setName(name);
 			

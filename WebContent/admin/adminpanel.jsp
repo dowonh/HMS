@@ -19,7 +19,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin Panel</title>
+    <title>관리자 페이지</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/simple-sidebar.css" rel="stylesheet">
     <script src="../js/jquery-1.11.3.min.js" type="text/javascript"></script>
@@ -36,14 +36,14 @@
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
                     <a href="#">
-                        Admin Menu
+                        	관리자 페이지
                     </a>
                 </li>
                 <li>
-                    <a href="adminpanel.jsp?page=dashboard">Dashboard</a>
+                    <a href="adminpanel.jsp?page=dashboard">대시보드</a>
                 </li>
                 <li>
-                    <a href="adminpanel.jsp?page=usermgmt">Manage Users</a>
+                    <a href="adminpanel.jsp?page=usermgmt">직원 관리</a>
                 </li>
                 <li>
                     <a href="../logout.jsp">Logout</a>
@@ -61,7 +61,8 @@
 	            <div class="container-fluid">
 	                <div class="row">
 	                    <div class="col-lg-12">
-	                        <h1>Welcome to Admin Panel.</h1>
+	                        <h1>관리자 페이지입니다.</h1>
+	                        <h1>좋은 하루 보내세요!</h1>
 	                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><<</a>
 	                    </div>
 	                </div>
@@ -74,7 +75,7 @@
 	            <div class="container-fluid">
 	                <div class="row">
 	                    <div class="col-lg-12">
-	                        <h1>Manage Users</h1>
+	                        <h1>직원 관리</h1>
 	                        <%@ include file="displayData.jsp" %>
 	                    </div>
 	                </div>
@@ -82,7 +83,6 @@
 	        </div>
         <% } %>
         <!-- /#page-content-wrapper -->
-
     </div>
     
 

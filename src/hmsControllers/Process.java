@@ -206,7 +206,7 @@ public class Process extends HttpServlet {
 		employee.setType("nurse");
 		employee.setCatid(cid);
 		int nid = hms.addNurse(employee);
-
+		response.setCharacterEncoding("UTF8"); // this line solves the problem
 		response.setContentType("application/json");
 		response.getWriter().print(employee.toJson());
 
@@ -364,6 +364,7 @@ public class Process extends HttpServlet {
 		p.setPhone(phone);
 
 		Indoor patientIndoorInfo = hms.indoorCheck(p);
+		System.out.println(patientIndoorInfo);
 		response.setCharacterEncoding("UTF8"); // this line solves the problem
 		response.setContentType("application/json");
 		response.getWriter().print(g.toJson(patientIndoorInfo));

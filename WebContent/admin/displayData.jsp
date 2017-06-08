@@ -55,11 +55,11 @@
 <body>
 <div id="page-content-wrapper">
 		<ul class="nav nav-tabs">
-			<li class="active"><a data-toggle="tab" href="#doctors">Doctors</a></li>
-			<li><a data-toggle="tab" href="#nurses">Nurses</a><li>
-			<li><a data-toggle="tab" href="#patients">Patients</a></li>
-			<li><a data-toggle="tab" href="#rooms">Rooms</a><li>
-			<li><a data-toggle="tab" href="#categories">Categories</a><li>
+			<li class="active"><a data-toggle="tab" href="#doctors">의사</a></li>
+			<li><a data-toggle="tab" href="#nurses">간호사</a><li>
+			<li><a data-toggle="tab" href="#patients">환자</a></li>
+			<li><a data-toggle="tab" href="#rooms">병실</a><li>
+			<li><a data-toggle="tab" href="#categories">카테고리</a><li>
 		</ul>
 		
 		<div class="tab-content">

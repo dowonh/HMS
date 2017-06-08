@@ -19,7 +19,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Nurse Panel</title>
+    <title>간호사 페이지</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -41,14 +41,14 @@
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
                     <a href="#">
-                        Nurse Menu
+                        간호사 페이지
                     </a>
                 </li>
                 <li>
-                    <a href="nursepanel.jsp?page=dashboard">Dashboard</a>
+                    <a href="nursepanel.jsp?page=dashboard">대시보드</a>
                 </li>
                 <li>
-                    <a href="nursepanel.jsp?page=duties">My Duties</a>
+                    <a href="nursepanel.jsp?page=duties">병원 관리</a>
                 </li>
                 <li>
                     <a href="../logout.jsp">Logout</a>
@@ -66,7 +66,8 @@
 	            <div class="container-fluid">
 	                <div class="row">
 	                    <div class="col-lg-12">
-	                        <h1>Welcome Miss. <%= username %>.</h1>
+	                        <h1>안녕하세요. 간호사님.</h1>
+	                        <h1>좋은 하루 되세요!</h1>
 	                    </div>
 	                </div>
 	            </div>
@@ -78,7 +79,7 @@
 	            <div class="container-fluid">
 	                <div class="row">
 	                    <div class="col-lg-12">
-	                        <h1>Room & Duties</h1>
+	                        <h1>병원 관리</h1>
 	                        <%@ include file="displayData.jsp" %>
 	                    </div>
 	                </div>

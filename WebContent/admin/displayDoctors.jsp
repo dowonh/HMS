@@ -19,25 +19,25 @@
 </head>
 <body>
 	<div id="doctors" class="tab-pane fade in active">
-		<h3>Doctors' Record</h3>
+		<h3>의사 목록</h3>
 		<table class="table table-hover table-bordered" id="displayDoctors">
 			<thead>
 				<tr>
-					<th>ID</th>
-					<th>Password</th>
-					<th>Name</th>
-					<th>Gender</th>
-					<th>Birth</th>
-					<th>Phone No</th>
-					<th>Salary</th>
-					<th>Specialization</th>
-					<th>Action</th>
+					<th>아이디</th>
+					<th>비밀번호</th>
+					<th>이름</th>
+					<th>성별</th>
+					<th>생년월일</th>
+					<th>휴대폰 번호</th>
+					<th>월급</th>
+					<th>전문</th>
+					<th>삭제 / 편집</th>
 				</tr>
 			</thead>
 			<tbody id="docBody"></tbody>
 		</table>
 		<button type="button" class="btn btn-success" data-toggle="modal"
-			data-target="#addDocModal">Add Doctor</button>
+			data-target="#addDocModal">의사 추가</button>
 		<div class="docMsg"></div>
 
 
@@ -49,7 +49,7 @@
 					<!-- Modal content-->
 					<div class="modal-content">
 						<div class="modal-header">
-							<h4 class="modal-title">Enter Doctor's Detail</h4>
+							<h4 class="modal-title">의사 추가</h4>
 						</div>
 						<div class="modal-body">
 							<div class="form-group">
@@ -71,7 +71,7 @@
 										placeholder="Phone No." required />
 								</div>
 								<div class="col-lg-12">
-									<label for="radio">Select Gender</label><br>
+									<label for="radio">성별</label><br>
 									<div class="radio">
 										<label><input type="radio" name="gender" value="male"
 											required /> Male</label> <label><input type="radio"
@@ -79,15 +79,15 @@
 									</div>
 								</div>
 								<div class="col-lg-12">
-									<label>Specialization</label> <select class="form-control"
+									<label>전문</label> <select class="form-control"
 										name="catid" id="specialization"></select>
 								</div>
 								<div class="col-lg-12">
-									<label>Birth</label><br> <input type="text" name="birth"
+									<label>생년월일</label><br> <input type="text" name="birth"
 										placeholder="Birth" readonly class="form-control dob" required />
 								</div>
 								<div class="col-lg-12">
-									<label>Salary</label><br> <input type="number"
+									<label>월급</label><br> <input type="number"
 										class="form-control" name="salary" placeholder="Salary"
 										required />
 								</div>
@@ -95,8 +95,7 @@
 						</div>
 						<br />
 						<div class="modal-footer">
-							<button type="submit" class="btn btn-success">Save
-								Record</button>
+							<button type="submit" class="btn btn-success">저장하기</button>
 						</div>
 					</div>
 				</form>
@@ -110,7 +109,7 @@
 					<!-- Modal content-->
 					<div class="modal-content">
 						<div class="modal-header">
-							<h4 class="modal-title">Update Doctor's Detail</h4>
+							<h4 class="modal-title">의사 정보 변경</h4>
 						</div>
 						<div class="modal-body">
 							<div class="form-group">
@@ -128,7 +127,7 @@
 								</div>
 								<br />
 								<div class="col-lg-12">
-									<label for="radio">Select Gender</label><br>
+									<label for="radio">성별</label><br>
 									<div class="radio">
 										<label><input type="radio" name="gender" value="male"
 											required /> Male</label> <label><input type="radio"
@@ -136,11 +135,11 @@
 									</div>
 								</div>
 								<div class="col-lg-6">
-									<label>Specialization</label> <select class="form-control"
+									<label>전문</label> <select class="form-control"
 										name="catid" id="specialization"></select>
 								</div>
 								<div class="col-lg-6">
-									<label>Birth</label><br> <input type="text" name="birth"
+									<label>생년월일</label><br> <input type="text" name="birth"
 										placeholder="Birth" readonly class="form-control dob" required />
 								</div>
 								<br />
@@ -155,8 +154,7 @@
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="submit" class="btn btn-success">Update
-								Record</button>
+							<button type="submit" class="btn btn-success">변경하기</button>
 						</div>
 					</div>
 				</form>

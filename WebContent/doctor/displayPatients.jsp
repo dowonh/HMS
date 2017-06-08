@@ -9,7 +9,7 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<title>예약 및 조회</title>
+<title>의사 페이지</title>
 <style>
 /* #viewPresModal div.modal-body {
 	height: 200px;
@@ -61,7 +61,7 @@ th, td {
 			<!-- Page Heading -->
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Patients List</h1>
+					<h1 class="page-header">환자 목록</h1>
 					<ol class="breadcrumb">
 						<li class="active">
 							<i class="fa fa-dashboard"></i> 당일 예약된 환자의목록입니다.
@@ -81,12 +81,12 @@ th, td {
 											id="displayPatients">
 											<thead>
 												<tr>
-													<th>pid</th>
-													<th>Full Name</th>
-													<th>Date of Birth</th>
-													<th>Gender</th>
-													<th>Reservation Day</th>
-													<th>Reservation Time</th>
+													<th>환자등록번호</th>
+													<th>환자명</th>
+													<th>생년월일</th>
+													<th>성별</th>
+													<th>예약 날짜</th>
+													<th>예약 시간</th>
 												</tr>
 											</thead>
 											<tbody id="patientBody">
@@ -102,7 +102,7 @@ th, td {
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h3 class="panel-title">
-										<i class="fa fa-clock-o fa-fw"></i> patient detail
+										<i class="fa fa-clock-o fa-fw"></i> 환자 정보
 									</h3>
 								</div>
 								<div class="panel-body">
@@ -129,11 +129,11 @@ th, td {
 							<div>
 								<label for="medicineselect">약 처방</label> <select
 									class="form-control" id="typeselect" name="typeselect">
-									<option value="typeselect">Medicine Type</option>
+									<option value="typeselect">약 종류</option>
 
 
 								</select> <select class="form-control" id="nameselect" name="nameselect">
-									<option value="nameselect">Medicine Name</option>
+									<option value="nameselect">약 이름</option>
 
 								</select>
 
@@ -147,7 +147,7 @@ th, td {
 									<button onclick="add_row()" type="button" class="btn ">추가</button>
 									<button onclick="delete_row()" type="button" class="btn ">삭제</button>
 								</p>
-								<br> <label>Content</label>
+								<br> <label>내용</label>
 
 								<table name='medicineTable' id='medicineTable'>
 									<thead>
@@ -161,13 +161,13 @@ th, td {
 								</table>
 							</div>
 							<div>
-								<br> <label for="pres">Opinion</label>
+								<br> <label for="pres">소견</label>
 								<p>
 									<textarea id="note" name="note" id="note" cols="90" rows="5"> </textarea>
 								</p>
 							</div>
 							<p align=right>
-								<button type ="summit" class="btn btn-success">Add Prescription</button>
+								<button type ="summit" class="btn btn-success">등록하기</button>
 							<div class="patientMsg"></div>
 						</form>
 					</div>

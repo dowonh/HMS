@@ -11,15 +11,15 @@
 </head>
 <body>
 	<div id="rooms" class="tab-pane fade in active">
-		<h3>Room Infomation</h3>
+		<h3>입원실 정보</h3>
 		<table class="table table-hover table-bordered" id="tblRooms">
 			<thead>
 				<tr>
-					<th>Room No</th>
-					<th>Total Beds</th>
-					<th>Available Beds</th>
-					<th>No of Patients</th>
-					<th>SHOW ROOM</th>
+					<th>병실 번호</th>
+					<th>전체 침대 개수</th>
+					<th>남은 침대 개수</th>
+					<th>입원 환자 수</th>
+					<th>입원실 보기</th>
 				</tr>
 			</thead>
 			<tbody id="roomBody">
@@ -34,9 +34,9 @@
 				<table class="table table-hover table-bordered" id="showRooms">
 					<thead>
 						<tr>
-							<th>Patient Name</th>
-							<th>Gender</th>
-							<th>Birth</th>
+							<th>환자명</th>
+							<th>성별</th>
+							<th>생년월일</th>
 							<th>입원날짜</th>
 							<th>담당의사</th>
 						</tr>

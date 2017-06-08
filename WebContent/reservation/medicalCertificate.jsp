@@ -38,8 +38,9 @@
 </head>
 
 <style>
-div {
+container, div.p-2 {
 	border: 1px solid black;
+	style="height:100%"
 }
 </style>
 
@@ -90,10 +91,12 @@ div {
 				<div class="p-2 w-25">용도</div>
 				<div class="p-2 w-25"><%=use%></div>					
 			</div>
-			<div class="d-flex flex-row" style="height: 300px;">
-				<div class="p-2 w-100">위와 같이 진단함</div>
+			<div class="d-flex flex-row" style="height:300px">
+				<div class="p-2 w-100">
+					<div class="p-5 w-100 text-center align-self-center">위와 같이 진단함.</div>
+					<div class="p-5 w-100 text-center align-self-center">전북대학교 병원</div>
+				</div>
 			</div>
-			
 		</div>
 	</div>
 

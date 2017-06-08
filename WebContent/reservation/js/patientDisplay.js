@@ -46,7 +46,8 @@ $(function(){
 		url: "../services/category/department",
 		type: "GET",
 		success: function(categories){
-		   	categories.forEach(function(category){				
+			categories.forEach(function(category){
+		   		
 				$("#addPatientForm select[name=department]").append("<option value="+category.catid+">"+category.name + "</option>");
 			});
 		},
@@ -116,24 +117,26 @@ $(function(){
 		if ( table.data().count() != 0) {
 		    table.clear().draw();
 		}
-		
-		
+			
 		$.ajax({
 			url: $(this).attr("action"),
 			type: $(this).attr("method"),
 			data: $(this).serialize(),
-			success: function(data){
-				//alert(data);
+			success: function(indoor){
 				var num = 1;
-				
+				if(indoor == null){
+					alert("내원한 기록이 없습니다.");
+					return;
+				}
+
 				//data.forEach(function(indoor){
 
 					var index = $("#tblIndoorCheck").dataTable().fnAddData([
 															num,
-															data.patient.name,
-															data.room_number,
-															data.door_start_day,
-															data.door_end_day			
+															indoor.patient.name,
+															indoor.room_number,
+															indoor.door_start_day,
+															indoor.door_end_day			
 					                                         ]);
 					
 					var row = $("#tblIndoorCheck").dataTable().fnGetNodes(index);

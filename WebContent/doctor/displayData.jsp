@@ -44,7 +44,7 @@
 <body id="<%= session.getAttribute("uid") %>" >
 <div id="page-content-wrapper">
 		<ul class="nav nav-tabs">
-			<li class="active"><a data-toggle="tab" href="#myPatients">View Patients</a></li>
+			<li class="active"><a data-toggle="tab" href="#myPatients">환자</a></li>
 		
 		</ul>
 		

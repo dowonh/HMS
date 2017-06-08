@@ -120,7 +120,6 @@ $(document).ready(function(){
 			url: $(this).attr("action"),
 			data: $(this).serialize(),
 			success: function(nurse){
-				console.log(nurse);
 				addNurseToTable(nurse);
 				$(".nurseMsg").addClass("alert-success").html("<strong>Success</strong>: Record Added!");
 			},

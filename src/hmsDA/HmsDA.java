@@ -33,32 +33,6 @@ public class HmsDA {
 		}
 	}
 
-	// public void connect() {
-	// try {
-	// //��񿬰�
-	// con = DriverManager.getConnection(JDBC_URL, USER, PASSWD);
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	// }
-	//
-	// public void disconnect() {
-	// if(stmt != null) {
-	// try {
-	// stmt.close();
-	// } catch (SQLException e) {
-	// e.printStackTrace();
-	// }
-	// }
-	// if(con != null) {
-	// try {
-	// con.close();
-	// } catch (SQLException e) {
-	// e.printStackTrace();
-	// }
-	// }
-	// }
-
 	// 간호사 페이지 부분
 	public ArrayList<Room> getRoomList() {
 		// connect();
@@ -606,7 +580,6 @@ public class HmsDA {
 
 				String string_reservation_day = " ";
 				String string_door_start_day = " ";
-				String string_door_end_day = " ";
 				if (set.getString("reservation_day") != null)
 					string_reservation_day = set.getString("reservation_day");
 				if (set.getString("door_start_day") != null)
@@ -622,7 +595,6 @@ public class HmsDA {
 				patient.setReservation_time(set.getString("reservation_time"));
 				patient.setDoor(set.getString("door"));
 				patient.setDoor_start_day(string_door_start_day);
-				patient.setDoor_end_day(string_door_end_day);
 				patient.setEid(set.getInt("employee_eid"));
 				patient.setRid(set.getInt("room_rid"));
 				patient.setEmployee(getDoctor(set.getInt("employee_eid")));
@@ -729,6 +701,8 @@ public class HmsDA {
 		ArrayList<Patient> patientList = new ArrayList<Patient>();
 		String String_door_start_day ="";
 		String String_reservation_day ="";
+		Indoor indoor = new Indoor();
+		int pid = 0;
 		try {
 			Statement stmt = con.createStatement();
 			ResultSet set = stmt.executeQuery("select * from patient where reservation_day = curdate() order by reservation_time desc");
@@ -740,6 +714,8 @@ public class HmsDA {
 					String_reservation_day = set.getString("reservation_day");
 				if (set.getString("door_start_day") != null)
 					String_door_start_day = set.getString("door_start_day");
+				pid = set.getInt("pid");
+				
 				
 				patient.setPid(set.getInt("pid"));
 				patient.setName(set.getString("name"));
@@ -753,7 +729,7 @@ public class HmsDA {
 				patient.setEid(set.getInt("employee_eid"));
 				patient.setRid(set.getInt("room_rid"));
 				patient.setEmployee(getDoctor(set.getInt("employee_eid")));
-
+				patient.setRoom(getRoom(set.getInt("room_rid")));
 				patientList.add(patient);
 			}
 		} catch (SQLException ex) {
@@ -852,40 +828,49 @@ public class HmsDA {
 		return patientList;
 	}
 
-	// 나옹나옹
+	// 나옹나옹 - 내원일자 조회
 	public Indoor indoorCheck(Patient p) throws SQLException {
+		Indoor indoor = new Indoor();
 		Patient patient = new Patient();
-
+		int pid = 0;
 		try {
 
 			PreparedStatement stmt = con
-					.prepareStatement("select * from patient where name=? and phone=? and door = 'YES'");
+					.prepareStatement("select * from patient where name=? and phone=?");
 
 			stmt.setString(1, p.getName());
 			stmt.setString(2, p.getPhone());
 			ResultSet set = stmt.executeQuery();
-
+			
 			while (set.next()) {
+				
 				patient.setPid(set.getInt("pid"));
 				patient.setName(set.getString("name"));
-				patient.setGender(set.getString("gender"));
-				patient.setPhone(set.getString("phone"));
-				patient.setBirth(set.getString("birth"));
-				patient.setReservation_day(set.getString("reservation_day"));
-				patient.setReservation_time(set.getString("reservation_time"));
-				patient.setEid(set.getInt("employee_eid"));
-				patient.setEmployee(getDoctor(set.getInt("employee_eid")));
-				patient.setCategory(getCategory(getDoctor(set.getInt("employee_eid")).getCatid()));
-				// patientList.add(patient);
+				pid = set.getInt("pid");
+				}
+			
+			stmt = con
+					.prepareStatement("select * from indoors where patient_pid="+pid);
+
+			set = stmt.executeQuery();
+			
+			while (set.next()) {
+
+				indoor.setRoom_number(set.getInt("room_number"));
+				indoor.setDoor_start_day(set.getString("door_start_day"));
+				indoor.setDoor_end_day(set.getString("door_end_day"));
+				
+				indoor.setPatient(patient);
 			}
+			
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 
 		}
-		System.out.println(patient);
-		return getIndoor(patient);
+		System.out.println("객체"+indoor);
+		return indoor;
 	}
 
 	public void decreaseBed(int rid) throws SQLException {
@@ -969,33 +954,6 @@ public class HmsDA {
 		}
 	}
 
-	// 나옹나옹 - 내원일자 조회
-	public Indoor getIndoor(Patient p) {
-		Indoor indoor = new Indoor();
-		System.out.println(p.getPid());
-		try {
-			Statement stmt = con.createStatement();
-			ResultSet set = stmt.executeQuery("SELECT * FROM indoors where patient_pid=" + p.getPid());
-			while (set.next()) {
-
-				indoor.setPatient(getPatient(set.getInt("patient_pid")));
-				indoor.setDoor_start_day(set.getString("door_start_day"));
-
-				indoor.setDoor_end_day(set.getString("door_end_day"));
-
-				indoor.setRoom_number(set.getInt("room_number"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		System.out.println(indoor.getPatient().getName());
-		System.out.println(indoor.getDoor_start_day());
-		System.out.println(indoor.getDoor_end_day());
-		System.out.println(indoor.getRoom_number());
-
-		return indoor;
-	}
-
 	public Patient getPatient(int pid) throws SQLException {
 
 		ResultSet set = con.createStatement().executeQuery("SELECT * FROM patient WHERE pid=" + pid);
@@ -1003,14 +961,12 @@ public class HmsDA {
 		if (!set.next())
 			return null;
 		String string_reservation_day = " ";
-		String string_door_start_day = " ";
-		String string_door_end_day = " ";
+		String string_door_start_day = " "; 
 		if (set.getString("reservation_day") != null)
 			string_reservation_day = set.getString("reservation_day");
 		if (set.getString("door_start_day") != null)
 			string_door_start_day = set.getString("door_start_day");
-		if (set.getString("door_end_day") != null)
-			string_door_end_day = set.getString("door_end_day");
+ 
 
 		Patient patient = new Patient();
 		patient.setPid(set.getInt("pid"));
@@ -1021,8 +977,7 @@ public class HmsDA {
 		patient.setReservation_day(string_reservation_day);
 		patient.setReservation_time(set.getString("reservation_time"));
 		patient.setDoor(set.getString("door"));
-		patient.setDoor_start_day(string_door_start_day);
-		patient.setDoor_end_day(string_door_end_day);
+		patient.setDoor_start_day(string_door_start_day); 
 		patient.setEid(set.getInt("employee_eid"));
 		patient.setRid(set.getInt("room_rid"));
 		patient.setEmployee(getDoctor(set.getInt("employee_eid")));

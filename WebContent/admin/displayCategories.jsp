@@ -21,24 +21,24 @@
 </head>
 <body>
 <div id="categories" class="tab-pane fade in">
-				<h3>Category</h3>
+				<h3>카테고리</h3>
 				<table class="table table-hover table-bordered" id="tblCategories">
 					<thead>
 						<tr>
 							<th>
-								Category No
+								카테고리 번호
 							</th>
 							<th>
-								Category Name
+								카테고리 이름 
 							</th>
 							<th>
-								Action
+								변경 / 삭제
 							</th>
 						</tr>
 					</thead>
 					<tbody id="catBody"></tbody>
 				</table>
-				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addCategoryModal">Add New Category</button>
+				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addCategoryModal">카테고리 추가</button>
 				
 				
 				<!-- Add Category Modal-->
@@ -48,7 +48,7 @@
 				    <!-- Modal content-->
 				    <div class="modal-content">
 				      <div class="modal-header">
-				        <h4 class="modal-title">Add Category</h4>
+				        <h4 class="modal-title">카테고리 추가</h4>
 				      </div>
 				      <div class="modal-body">
 						  <div class="form-group">
@@ -59,7 +59,7 @@
 						  
 				      </div>
 				      <div class="modal-footer">
-				        <button type="submit" class="btn btn-success">Add Record</button>
+				        <button type="submit" class="btn btn-success">추가하기</button>
 				      </div>
 				    </div>
 					</form>
@@ -76,7 +76,7 @@
 				    <!-- Modal content-->
 				    <div class="modal-content">
 				      <div class="modal-header">
-				        <h4 class="modal-title">Update Category</h4>
+				        <h4 class="modal-title">카테고리 변경</h4>
 				      </div>
 				      <div class="modal-body">
 						  <div class="form-group">
@@ -87,7 +87,7 @@
 						  
 				      </div>
 				      <div class="modal-footer">
-				        <button type="submit" class="btn btn-success">Update Record</button>
+				        <button type="submit" class="btn btn-success">변경하기</button>
 				      </div>
 				    </div>
 					</form>

@@ -38,8 +38,9 @@
 </head>
 
 <style>
-div {
+container, div.p-2 {
 	border: 1px solid black;
+	style="height:100%"
 }
 </style>
 
@@ -84,11 +85,18 @@ div {
 					</div>
 				</div>
 			</div>
-			<div class="d-flex flex-row justify-content-center" style="height: 200px;">
-				<div class="p-2 w-100">신청인 (인)</div>
+			
+			<div class="d-flex flex-row" style="height:300px;">
+				<div class="p-2 w-100">
+					<div class="p-5 w-100 text-center align-self-center">신청인 (인)</div>
+					<div class="p-5 w-100 text-center align-self-center"><%=billDate %></div>
+				</div>
 			</div>
-			<div class="d-flex flex-row" style="height: 300px;">
-				<div class="p-2 w-100">위와 같이 의료비를 납입하였음을 증명합니다.</div>
+			<div class="d-flex flex-row" style="height:300px">
+				<div class="p-2 w-100">
+					<div class="p-5 w-100 text-center align-self-center">위와 같이 의료비를 납입하였음을 증명합니다.</div>
+					<div class="p-5 w-100 text-center align-self-center">전북대학교 병원</div>
+				</div>
 			</div>
 		</div>
 	</div>

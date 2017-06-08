@@ -35,14 +35,6 @@ input#register-input.form-control {
 
 <body>
 
-	<%
-		request.setCharacterEncoding("euc-kr");
-	
-		String name = request.getParameter("name");
-		String phone = request.getParameter("phone");
-		
-	%>
-
 	<div id="wrapper">
 
 		<!-- Sidebar -->

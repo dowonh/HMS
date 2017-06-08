@@ -13,16 +13,16 @@
 		<thead>
 			<tr>
 				<th>
-					No
+					번호
 				</th>
 				<th>
-					Name
+					의료물품 이름
 				</th>
 				<th>
-					Price
+					가격
 				</th>
 				<th>
-					Count
+					수량
 				</th>
 			</tr>
 		</thead>

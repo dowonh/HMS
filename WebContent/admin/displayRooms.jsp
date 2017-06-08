@@ -19,20 +19,20 @@
 </head>
 <body>
 	<div id="rooms" class="tab-pane fade in">
-		<h3>Rooms' Record</h3>
+		<h3>병실 목록</h3>
 		<table class="table table-hover table-bordered" id="displayRooms">
 			<thead>
 				<tr>
-					<th>Room No</th>
-					<th>Total No of Beds</th>
-					<th>Available No of Beds</th>
-					<th>Action</th>
+					<th>병실 번호</th>
+					<th>전체 침대 개수</th>
+					<th>남은 침대 개수</th>
+					<th>삭제 / 편집</th>
 				</tr>
 			</thead>
 			<tbody id="roomBody"></tbody>
 		</table>
 		<button type="button" class="btn btn-success" data-toggle="modal"
-			data-target="#addRoomModal">Add Room</button>
+			data-target="#addRoomModal">병실 추가</button>
 		<div class="roomMsg"></div>
 
 
@@ -43,25 +43,24 @@
 					<!-- Modal content-->
 					<div class="modal-content">
 						<div class="modal-header">
-							<h4 class="modal-title">Enter Room Detail</h4>
+							<h4 class="modal-title">병실 정보 변경</h4>
 						</div>
 						<div class="modal-body">
 							<div class="form-group">
 								<div class="col-lg-12">
-									<label>Room Number</label> <input type="number"
+									<label>병실 번호</label> <input type="number"
 										class="form-control" name="room_number"
 										placeholder="Enter Room Number" required />
 								</div>
 								<div class="col-lg-12">
-									<label>Total Beds</label> <input type="number"
+									<label>전체 침대 개수</label> <input type="number"
 										class="form-control" name="totalbeds"
 										placeholder="Enter No of Beds" required />
 								</div>
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="submit" class="btn btn-success">Save
-								Record</button>
+							<button type="submit" class="btn btn-success">저장하기</button>
 						</div>
 					</div>
 				</form>

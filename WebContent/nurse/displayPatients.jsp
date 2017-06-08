@@ -8,17 +8,17 @@
 </head>
 <body>
 	<div id="patients" class="tab-pane fade in">
-		<h3>Patients' Record</h3>
+		<h3>환자 목록</h3>
 		<table class="table table-hover table-bordered" id="displayPatients">
 			<thead>
 				<tr>
-					<th>Name</th>
-					<th>Birth</th>
-					<th>Gender</th>
-					<th>phone</th>
-					<th>Doctor's Name</th>
-					<th>Reservation Day</th>
-					<th>Reservation Time</th>
+					<th>이름</th>
+					<th>생년월일</th>
+					<th>성별</th>
+					<th>휴대폰 번호</th>
+					<th>담당 의사</th>
+					<th>예약 날짜</th>
+					<th>예약 시간</th>
 					<th>입원 여부</th>
 	
 					<th>입원 날짜</th>

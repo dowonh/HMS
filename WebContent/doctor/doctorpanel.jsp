@@ -19,7 +19,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Doctor Panel</title>
+    <title>의사 페이지</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -41,14 +41,14 @@
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
                     <a href="#">
-                        Doctor Menu
+                        의사 페이지
                     </a>
                 </li>
                 <li>
-                    <a href="doctorpanel.jsp?page=dashboard">Dashboard</a>
+                    <a href="doctorpanel.jsp?page=dashboard">대시보드</a>
                 </li>
                 <li>
-                    <a href="doctorpanel.jsp?page=appointments">Appointments</a>
+                    <a href="doctorpanel.jsp?page=appointments">환자 진단/처방</a>
                 </li>
                 <li>
                     <a href="../logout.jsp">Logout</a>
@@ -66,6 +66,8 @@
 	            <div class="container-fluid">
 	                <div class="row">
 	                    <div class="col-lg-12">
+	                        <h1>안녕하세요. 의사선생님.</h1>
+	                        <h1>좋은 하루 되세요!</h1>
 	                    </div>
 	                </div>
 	            </div>

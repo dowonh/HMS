@@ -68,8 +68,7 @@ $(function(){
 	       var rt = document.getElementById("rtime");
 	       var p = document.getElementById("phone");
 	       var d = document.getElementById("door");
-	       var ds = document.getElementById("doorstart");
-	       var de = document.getElementById("doorend");
+	       var ds = document.getElementById("doorstart"); 
 	       var r = document.getElementById("room");
 
 	       pid.value = data[0];
@@ -80,9 +79,8 @@ $(function(){
 	       rt.value = data[5];
 	       p.value = data[6];
 	       d.value = data[7];
-	       ds.value = data[8];
-	       de.value = data[9];
-	       r.value = data[10];		
+	       ds.value = data[8]; 
+	       r.value = data[9];		
 	       
 			var my_tbody = document.getElementById('my-tbody');
 			var index = my_tbody.rows.length;
@@ -387,8 +385,7 @@ function addPresToTable(data){
 //	
 //}
 
-function addPatientToTable(patient){
-
+function addPatientToTable(patient){ 
 	var index = $("#displayPatients").dataTable().fnAddData([
 													  patient.pid,
 	           	                                      patient.name,
@@ -398,8 +395,8 @@ function addPatientToTable(patient){
 	        	                                      patient.reservation_time,
 	        	                                      patient.phone,
 												      patient.door,
-												      patient.door_start_day, 
-												      patient.rid,
+												      patient.door_start_day,
+												      patient.room.room_number
 	        	                                      ]);
 	
 	var row = $("#displayPatients").dataTable().fnGetNodes(index);

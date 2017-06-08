@@ -18,9 +18,9 @@ import com.google.gson.JsonElement;
 
 public class HmsDA {
 	private static final String JDBC_DRIVER = "org.gjt.mm.mysql.Driver";
-	private static final String JDBC_URL = "jdbc:mysql://loveljhs2.iptime.org:3306/hms?useUnicode=true&characterEncoding=UTF-8";
-	private static final String USER = "root";
-	private static final String PASSWD = "test";
+	private static final String JDBC_URL = "jdbc:mysql://right.jbnu.ac.kr:3306/A201114963?useUnicode=true&characterEncoding=UTF-8";
+	private static final String USER = "A201114963";
+	private static final String PASSWD = "A201114963";
 	private Connection con = null;
 	private Statement stmt = null;
 
